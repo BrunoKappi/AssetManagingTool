@@ -6,21 +6,18 @@ import { GoogleAuthProvider, signInWithPopup, sendPasswordResetEmail, FacebookAu
 import { DefaultLoggedUser } from "../../GlobalVars";
 
 onAuthStateChanged(auth, (currentUser) => {
-  ////console.log("AUTHCHANGED", currentUser ? currentUser : 'VAZIO');
+  console.log("AUTHCHANGED", currentUser ? currentUser : 'VAZIO');
   if (currentUser) {
     const user = {
       ...DefaultLoggedUser,
-      email: currentUser.email,
+      Email: currentUser.email,
       uid: currentUser.uid,
-      photoURL: currentUser.photoURL,
-      SidebarActive: true,
-      CurrentSidebarTab: 'Notas' 
+      CurrentSidebarTab: 'App'
     }
     store.dispatch(setLoggedUser(user))
   } else {
     store.dispatch(clearLoggedUser())
   }
-
 })
 
 export const mudarSenha = async (novaSenha) => {
@@ -36,8 +33,8 @@ export const register = async (email, senha) => {
   return createUserWithEmailAndPassword(auth, email, senha)
 };
 
-export const login = (email, senha) => {
-  return signInWithEmailAndPassword(auth, email, senha);
+export const LoginFirebase = (email, password) => {
+  return signInWithEmailAndPassword(auth, email, password);
 };
 
 export const logout = async () => {

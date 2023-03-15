@@ -3,7 +3,7 @@ export const DefaultLoggedUser = {
   Email: '',
   uid: '',
   SidebarActive: true, 
-  CurrentSidebarTab: "Home",
+  CurrentSidebarTab: "Login",
   Search: '',
   Name: '',
   Role: ''
@@ -13,7 +13,7 @@ export const DefaultLoggedUser = {
 
 
 
-
+ 
 
 
 

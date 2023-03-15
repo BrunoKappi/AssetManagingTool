@@ -1,5 +1,8 @@
-export const User = [
-    { Id: uuid(), AccessToken: '1234', Name: 'Betina Goldani', Email: 'betinagoldani@serranoautomacao.com.br', Role: "User", Role: "Admin" },
+import { uuidv4 as uuid } from "@firebase/util"
+
+
+export const Users = [
+    { Id: uuid(), AccessToken: '1234', Name: 'Betina Goldani', Email: 'betinagoldani@serranoautomacao.com.br', Role: "User" }, 
     { Id: uuid(), AccessToken: '1234', Name: 'Bruno Kappi', Email: 'brunokappi@serranoautomacao.com.br', Role: "User" },
     { Id: uuid(), AccessToken: '1234', Name: 'Cristiano Melo', Email: 'cristianomelo@serranoautomacao.com.br', Role: "User" },
     { Id: uuid(), AccessToken: '1234', Name: 'Demétrius Figueiredo', Email: 'demetriusfigueiredo@serranoautomacao.com.br', Role: "User" },
