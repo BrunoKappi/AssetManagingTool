@@ -1,89 +1,105 @@
-import React, { useState } from "react";
-import { LogarComGooglePopup, LoginUtil } from "../../Functions/Login";
-import { DefaultLoggedUser } from "../../GlobalVars";
+import React, { useState, useRef } from "react";
 import "./Login.css";
 import { useNavigate } from 'react-router-dom';
-import { setLoggedUser } from "../../Config/store/actions/LoggedUserActions";
-import store from "../../Config/store/store";
+import { HandleFirebaseEmailPasswordLogin, LoginSuccess, LoginUtil } from "./LoginUtils";
+import { Oval } from "react-loader-spinner";
+import SerranoLogo from '../../Images/SerranoLogo.png'
+import AssetSense from '../../Images/AssetSenseIconWhite.png'
+import { Link } from "react-router-dom";
+import LogoutHeader from "../LogoutHeader/LogoutHeader";
 
 function Login() {
-    const [Email, setEmail] = useState("");
-    const [Password, setPassword] = useState("");
+
+
+
+
     const [IsLogging, setIsLoggin] = useState(false);
+    const [Email, setEmail] = useState('');
     const [Erro, setErro] = useState('');
 
     const navigate = useNavigate();
 
-    const handleEmailChange = (event) => {
-        setEmail(event.target.value);
-    };
 
-    const handlePasswordChange = (event) => {
-        setPassword(event.target.value);
-    };
+    const PasswordRef = useRef()
+
+
+    //Event Email
+    const handleChangeEmail = (e) => {
+        const value = e.target.value
+        console.log(e.nativeEvent.inputType !== "deleteContentBackward")
+        if (value.includes("@") && !value.includes("@serranoautomacao") && e.nativeEvent.inputType !== "deleteContentBackward") {
+            const completEmail = value + "serranoautomacao.com.br"
+            setEmail(completEmail)
+        } else {
+            setEmail(value)
+        }
+    }
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        if (Email && Password) {
+        if (Email && PasswordRef.current.value) {
             setIsLoggin(true)
-            LoginUtil(Email.toLocaleLowerCase(), Password).then((message) => {
-                const user = {
-                    ...DefaultLoggedUser,
-                    Email: message.user.email,
-                    uid: message.user.uid
-                }
-                console.log(user)
-                store.dispatch(setLoggedUser(user))
+            LoginUtil(Email.toLocaleLowerCase(), PasswordRef.current.value).then((message) => {
+                LoginSuccess(message)
                 setIsLoggin(false)
                 navigate('/App')
-
-            }
-            ).catch((error) => {
-                console.log(error)
+            }).catch((error) => {
                 setIsLoggin(false)
-                setErro('Email ou Senha incorretos')
+                setErro(HandleFirebaseEmailPasswordLogin(error.toString()))
                 setTimeout(() => {
                     setErro('')
                 }, 3000);
-
-                //Firebase: Error (auth/user-not-found).
-                //Firebase: Error (auth/wrong-password).
-                //"auth/invalid-email": This error occurs when the provided email address is not valid.
-                //"auth/user-disabled": This error occurs when the user account has been disabled by an administrator.
-                //"auth/user-not-found": This error occurs when there is no user record corresponding to the provided email address.
-                //"auth/wrong-password": This error occurs when the provided password is incorrect.
-                //"auth/too-many-requests": This error occurs when the user has attempted to sign in too many times in a short period.
-                //"auth/network-request-failed": This error occurs when there is a problem with the network connection between the client and the Firebase project.
-                //"auth/internal-error": This error occurs when there is an unexpected error in the Firebase project.
             })
         }
     };
 
     return (
-        <div className="login-container">
-            <h2>Login</h2>
-            {Erro && <p className='Erro'>{Erro}</p>}
-            <form onSubmit={handleSubmit}>
-                <label htmlFor="Email">Email:</label>
-                <input
-                    type="Email"
-                    id="Email"
-                    value={Email}
-                    onChange={handleEmailChange}
-                />
-                <label htmlFor="Password">Senha:</label>
-                <input
-                    type="Password"
-                    id="Password"
-                    value={Password}
-                    onChange={handlePasswordChange}
-                />
-                <button type="submit">
-                    {IsLogging ? 'Logando' : 'Entrar'}
-                </button>
-            </form>
+        <div className="LoginContainer">
 
-        </div>
+            <LogoutHeader />
+
+
+            <form className="LoginForm" onSubmit={handleSubmit}>
+
+
+                <div className="LoginImageContainer">
+                    <img src={SerranoLogo}></img>
+                </div>
+                {Erro && <p className='Erro'>{Erro}</p>}
+                <div className="LoginFormGroup">
+                    <label>Email</label>
+                    <input placeholder="User@serranoautomacao.com.br" type="Email" value={Email} onChange={handleChangeEmail} />
+                </div>
+                <div className="LoginFormGroup">
+                    <label>Senha</label>
+                    <input ref={PasswordRef} type="Password" />
+                </div>
+                <div className="LoginFormGroup ForgetPasswordLink">
+                    <Link to={'/Forget'}>Esqueci minha senha</Link>
+                </div>
+                <div className="LoginFormGroup">
+                    <button className="LoginButton" type="submit">
+                        {IsLogging ? <Oval
+                            height={18}
+                            width={18}
+                            color="#FFFF"
+                            wrapperStyle={{}}
+                            wrapperClass="LoginSpinnerContainer"
+                            secondaryColor="#6e6e6e"
+                            strokeWidth={7}
+                            strokeWidthSecondary={7}
+                        /> : 'Entrar'}
+                    </button>
+                </div>
+            </form >
+
+
+
+
+
+
+
+        </div >
     );
 }
 

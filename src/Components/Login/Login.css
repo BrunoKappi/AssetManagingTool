@@ -1,87 +1,133 @@
-.login-container {
-    max-width: 400px;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: #fff;
-    border-radius: 5px;
-    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
-  }
-  
-  .login-container h2 {
-    margin-bottom: 20px;
-    text-align: center;
-  }
-  
-  .login-container label {
-    display: block;
-    margin-bottom: 5px;
-  }
-  
-  .login-container input {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 20px;
-    border-radius: 3px;
-    border: 1px solid #ddd;
-    box-shadow: inset 0px 1px 2px rgba(0, 0, 0, 0.1);
-  }
-  
-  .login-container button[type="submit"] {
-    display: block;
-    width: 100%;
-    padding: 10px;
-    border-radius: 3px;
-    border: none;
-    background-color: #007bff;
-    color: #fff;
-    font-size: 16px;
-    font-weight: bold;
-    cursor: pointer;
-  }
-  
+.LoginContainer {
+  width: 100%;
+  height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
 
 
-  
 
-.login-with-google-btn {
-  transition: background-color .3s, box-shadow .3s;
+.LoginForm {
+  display: flex;
+  flex-direction: column;
+  padding: 2rem 2rem;
+  width: 30%;
+  background: #FFFFFF;
+  box-shadow: 0px 187px 75px rgba(0, 0, 0, 0.01), 0px 105px 63px rgba(0, 0, 0, 0.05), 0px 47px 47px rgba(0, 0, 0, 0.09), 0px 12px 26px rgba(0, 0, 0, 0.1), 0px 0px 0px rgba(0, 0, 0, 0.1);
+  border-radius: 13px;
+}
 
-  padding: 12px 16px 12px 42px;
+.LoginImageContainer>img {
+  width: 20% !important;
+}
+
+.LoginImageContainer {
+  display: flex;
+  display: flex;
+  justify-content: center !important;
+  margin-bottom: 2.5rem;
+}
+
+.LoginFormGroup {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  margin-bottom: 1rem;
+}
+
+
+
+.ForgetPasswordLink>a {
+  text-decoration: none;
+  font-family: var(--Fonte);
+  color: var(--PrimaryBackGroundFaded);
+  font-size: .8rem;
+}
+
+.ForgetPasswordLink>a:hover {
+  color: var(--PrimaryBackground);
+  cursor: pointer;
+}
+
+.LoginFormGroup>input {
+  border-radius: .3rem;
   border: none;
-  border-radius: 3px;
-  box-shadow: 0 -1px 0 rgba(0, 0, 0, .04), 0 1px 1px rgba(0, 0, 0, .25);
-
-  color: #757575;
-  font-size: 14px;
-  font-weight: 500;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
-
-  background-image: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTgiIGhlaWdodD0iMTgiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGcgZmlsbD0ibm9uZSIgZmlsbC1ydWxlPSJldmVub2RkIj48cGF0aCBkPSJNMTcuNiA5LjJsLS4xLTEuOEg5djMuNGg0LjhDMTMuNiAxMiAxMyAxMyAxMiAxMy42djIuMmgzYTguOCA4LjggMCAwIDAgMi42LTYuNnoiIGZpbGw9IiM0Mjg1RjQiIGZpbGwtcnVsZT0ibm9uemVybyIvPjxwYXRoIGQ9Ik05IDE4YzIuNCAwIDQuNS0uOCA2LTIuMmwtMy0yLjJhNS40IDUuNCAwIDAgMS04LTIuOUgxVjEzYTkgOSAwIDAgMCA4IDV6IiBmaWxsPSIjMzRBODUzIiBmaWxsLXJ1bGU9Im5vbnplcm8iLz48cGF0aCBkPSJNNCAxMC43YTUuNCA1LjQgMCAwIDEgMC0zLjRWNUgxYTkgOSAwIDAgMCAwIDhsMy0yLjN6IiBmaWxsPSIjRkJCQzA1IiBmaWxsLXJ1bGU9Im5vbnplcm8iLz48cGF0aCBkPSJNOSAzLjZjMS4zIDAgMi41LjQgMy40IDEuM0wxNSAyLjNBOSA5IDAgMCAwIDEgNWwzIDIuNGE1LjQgNS40IDAgMCAxIDUtMy43eiIgZmlsbD0iI0VBNDMzNSIgZmlsbC1ydWxlPSJub256ZXJvIi8+PHBhdGggZD0iTTAgMGgxOHYxOEgweiIvPjwvZz48L3N2Zz4=);
-  background-color: white;
-  background-repeat: no-repeat;
-  background-position: 12px 11px;
-
-}
-
-.login-with-google-btn:hover {
-  box-shadow: 0 -1px 0 rgba(0, 0, 0, .04), 0 2px 4px rgba(0, 0, 0, .25);
-}
-
-.login-with-google-btn:active {
-  background-color: #eeeeee;
-}
-
-.login-with-google-btn:focus {
+  padding: .7rem .7rem;
+  font-family: var(--Fonte);
   outline: none;
-  box-shadow:
-      0 -1px 0 rgba(0, 0, 0, .04),
-      0 2px 4px rgba(0, 0, 0, .25),
-      0 0 0 3px #c8dafc;
+  -webkit-box-shadow: 7px 8px 10px -9px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 7px 8px 10px -9px rgba(0, 0, 0, 0.75);
+  box-shadow: 7px 8px 10px -9px rgba(0, 0, 0, 0.75);
+  border: 1px solid #e5e5e5;
+  font-size: .8rem;
 }
 
-.login-with-google-btn:disabled {
-  filter: grayscale(100%);
-  background-color: #ebebeb;
-  box-shadow: 0 -1px 0 rgba(0, 0, 0, .04), 0 1px 1px rgba(0, 0, 0, .25);
-  cursor: not-allowed;
+
+.LoginFormGroup>input:focus {
+  border: 1px solid transparent;
+  box-shadow: 0px 0px 0px 1px var(--Dark);
+}
+
+
+
+.LoginFormGroup>label {
+  font-family: var(--Fonte);
+  color: var(--Dark);
+}
+
+
+.Erro {
+  font-family: var(--Fonte);
+  color: #d9534f;
+  text-align: center;
+}
+
+.LoginButton {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  padding: .7rem 1rem;
+  border-radius: .3rem;
+  border: none;
+  background-color: var(--PrimaryBackground);
+  color: var(--PrimaryColor);
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  -webkit-box-shadow: 7px 8px 10px -9px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 7px 8px 10px -9px rgba(0, 0, 0, 0.75);
+  box-shadow: 7px 8px 10px -9px rgba(0, 0, 0, 0.75);
+
+}
+
+.LoginButton:hover {
+  background-color: var(--PrimaryBackGroundFaded);
+}
+
+.LoginButton>.LoginSpinnerContainer {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+
+
+
+
+@media (max-width: 1000px) {
+  .LoginForm {
+    width: 50%;
+    background-color: transparent;
+    box-shadow: none;
+  }
+}
+
+
+@media (max-width: 650px) {
+  .LoginForm {
+    width: 90%;
+    background-color: transparent;
+    box-shadow: none;
+  }
 }

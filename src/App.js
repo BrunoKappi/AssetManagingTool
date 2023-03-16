@@ -5,7 +5,9 @@ import { useEffect } from 'react';
 import { connect } from "react-redux";
 import Login from './Components/Login/Login'
 import { logout } from './Config/firebase/auth';
-
+import Forget from './Components/Forget/Forget';
+import NotFound from './Components/NotFound/NotFound';
+import Layout from './Components/Layout/Layout'
 
 function Acesso() {
   return <div>
@@ -13,10 +15,7 @@ function Acesso() {
     <button onClick={logout}>Logof</button>
   </div>;
 }
- 
-function NotFound() {
-  return <div>NotFound</div>;
-}
+
 
 
 
@@ -47,8 +46,11 @@ const App = (props) => {
     <div className="App">
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/App" element={<RequireAuth> <Acesso /> </RequireAuth>}>
+        <Route path="/Forget" element={<Forget />} />
+        <Route path="/App" element={<RequireAuth> <Layout /> </RequireAuth>}>
+          <Route path="/App/Teste" element={<RequireAuth> <Acesso /> </RequireAuth>} />
           <Route path="*" element={<RequireAuth> <NotFound /> </RequireAuth>} />
+
         </Route>
         <Route path="*" element={<NotFound />} />
       </Routes>

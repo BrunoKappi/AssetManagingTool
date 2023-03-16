@@ -25,7 +25,7 @@ export const mudarSenha = async (novaSenha) => {
 }
 
 
-export const resetarSenha = async (email) => {
+export const ResetFirebasePassword = async (email) => {
   return sendPasswordResetEmail(auth, email)
 };
 
