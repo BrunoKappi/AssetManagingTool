@@ -11,3 +11,12 @@
   --Dark: #161c2d;
   --Fonte: 'Kanit', 'Sans-serif'
 }
+
+
+.LoadingContainer {
+  width: 100%;
+  height: 100dvh;  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

@@ -1,15 +1,14 @@
 //Dependencias
-import React, { useState } from 'react'
+import React from 'react'
 import './NavBar.css'
-import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 //Icones
 import { RiInboxArchiveFill } from "react-icons/ri";
 import { MdDelete } from "react-icons/md";
-import { BsFillPersonFill, BsSearch } from "react-icons/bs";
+import { BsFillPersonFill } from "react-icons/bs";
 import { FaUserAlt } from "react-icons/fa";
 import { MdOutlineLogout } from "react-icons/md";
-import { GiCancel, GiHamburgerMenu } from "react-icons/gi";
+import {  GiHamburgerMenu } from "react-icons/gi";
 //Bootstrap
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
@@ -17,7 +16,8 @@ import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import Offcanvas from 'react-bootstrap/Offcanvas';
 //Images
-import Logo from '../../Images/AssetSenseIconWhite.png'
+import Logo from '../../Images/SerranoNomeBranco.png'
+import LogoBrancoSerrano from '../../Images/SerranoLogoBranco.png'
 //Tooltip
 import { Tooltip } from 'react-tippy';
 import 'react-tippy/dist/tippy.css'
@@ -26,11 +26,7 @@ import { logout } from '../../Config/firebase/auth';
 const NavBar = (props) => {
 
 
-    const [Search, setSearch] = useState('');
-
-    const handleSearchChange = (search) => {
-        setSearch(search)
-    }
+ 
 
     return (
         <div>
@@ -43,10 +39,9 @@ const NavBar = (props) => {
                     <Navbar.Brand>
 
                         <div className='LogoAndCollpse'>
-
                             <Tooltip title="Inicio" position="bottom" >
                                 <Link to="/App">
-                                    <img className="LogoNavBar" src={Logo} alt="" />
+                                    <img alt="Logo" className="LogoNavBar" src={Logo}  />
                                 </Link>
                             </Tooltip>
 
@@ -60,7 +55,7 @@ const NavBar = (props) => {
                             <Offcanvas.Title>
                                 <h1>
                                     <Link className='offCanvasBrand' to="/App">
-                                        <img className="LogoNavBar" src={Logo} alt="" />
+                                        <img alt="Logo"  className="LogoNavBar" src={Logo}  />
                                     </Link>
                                 </h1>
                             </Offcanvas.Title>
@@ -91,6 +86,9 @@ const NavBar = (props) => {
                                     </NavDropdown>
                                 </div>
 
+                                <div className='LastNavLogoIconContainer'>
+                                    <img alt="Logo" src={LogoBrancoSerrano} className='LastNavLogoIcon'></img>
+                                </div>
 
 
                                 <div id="SmDivNavBarID" className='SmDivNavBar'>

@@ -2,7 +2,6 @@ import React, { useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import './Forget.css'
 import { ResetarSenha } from './ForgetUtils'
-import AssetSense from '../../Images/AssetSenseIconWhite.png'
 import LogoutHeader from '../LogoutHeader/LogoutHeader'
 
 export default function Forget() {

@@ -5,7 +5,9 @@ const LoggedUser = (state = DefaultLoggedUser, action) => {
     switch (action.type) {
         case 'CLEAR_LOGGED':
             return {
-                email: '',
+                ...state,
+                ...DefaultLoggedUser,
+                Email: '',
                 uid: ''
             }
         case 'TOGGLE_SIDEBAR':
@@ -28,6 +30,11 @@ const LoggedUser = (state = DefaultLoggedUser, action) => {
             return {
                 ...state,
                 Search: ''
+            }
+        case 'CHECK_LOGIN':
+            return {
+                ...state,
+                CheckedLogin: true
             }
         case 'SET_LOGGED':
             return action.user

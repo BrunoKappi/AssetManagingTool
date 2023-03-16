@@ -2,18 +2,19 @@
 export const DefaultLoggedUser = {
   Email: '',
   uid: '',
-  SidebarActive: true, 
+  SidebarActive: true,
   CurrentSidebarTab: "Login",
   Search: '',
   Name: '',
-  Role: ''
-}; 
+  Role: '',
+  CheckedLogin: false
+};
 
  
 
 
 
- 
+
 
 
 

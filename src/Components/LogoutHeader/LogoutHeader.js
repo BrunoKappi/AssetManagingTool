@@ -8,7 +8,7 @@ export default function LogoutHeader() {
     return (
         <div className="LoginHeader">
             <Link to={'/'}>
-                <img src={AssetSense}>
+                <img alt="Logo" src={AssetSense}>
                 </img>
             </Link>
         </div>

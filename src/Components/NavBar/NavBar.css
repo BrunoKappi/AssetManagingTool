@@ -7,6 +7,9 @@
 
 .NavBar {
   background-color: var(--PrimaryBackground) !important;
+  -webkit-box-shadow: 6px 4px 33px -17px rgba(0, 0, 0, 1);
+  -moz-box-shadow: 6px 4px 33px -17px rgba(0, 0, 0, 1);
+  box-shadow: 6px 4px 33px -17px rgba(0, 0, 0, 1);
 }
 
 
@@ -279,9 +282,13 @@
   max-width: none !important;
 }
 
-
 .dropDownLink:hover {
-  background-color: RGBA(51, 51, 51, 0.24);
+  background-color: var(--PrimaryBackground);
+  color: white !important;
+}
+
+.dropDownLink:hover>svg {
+  color: white !important;
 }
 
 .IconeEscuro {
@@ -298,6 +305,15 @@
   text-decoration: none;
 }
 
+
+.LastNavLogoIconContainer {
+  height: 2rem;
+
+}
+
+.LastNavLogoIcon {
+  height: 100% !important;
+}
 
 .ProfileNavLinkTitle:hover {
   color: white;
@@ -339,9 +355,7 @@
   margin-right: 3px;
 }
 
-.dropDownLink:hover {
-  color: #333;
-}
+
 
 .UserPhoto {
   border-radius: 50%;

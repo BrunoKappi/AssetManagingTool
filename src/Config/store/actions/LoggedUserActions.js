@@ -21,6 +21,12 @@ export const ToggleSideBar = () => {
     })
 }
 
+export const SetCheckLogin = () => {
+    return ({
+        type: 'CHECK_LOGIN'
+    })
+}
+
 
 export const SetSidebarTag = (tab) => {
     return ({

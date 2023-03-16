@@ -1,7 +1,7 @@
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut, } from "firebase/auth";
 import { auth } from "./index";
 import store from '../store/store'
-import { setLoggedUser, clearLoggedUser } from '../store/actions/LoggedUserActions'
+import { setLoggedUser, clearLoggedUser, SetCheckLogin } from '../store/actions/LoggedUserActions'
 import { GoogleAuthProvider, signInWithPopup, sendPasswordResetEmail, FacebookAuthProvider, updatePassword } from "firebase/auth";
 import { DefaultLoggedUser } from "../../GlobalVars";
 
@@ -18,6 +18,12 @@ onAuthStateChanged(auth, (currentUser) => {
   } else {
     store.dispatch(clearLoggedUser())
   }
+
+  if (store.getState().LoggedUser.CheckedLogin === false)
+    setTimeout(() => {
+      store.dispatch(SetCheckLogin())
+    }, 1500);
+
 })
 
 export const mudarSenha = async (novaSenha) => {

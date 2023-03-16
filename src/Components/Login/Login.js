@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { HandleFirebaseEmailPasswordLogin, LoginSuccess, LoginUtil } from "./LoginUtils";
 import { Oval } from "react-loader-spinner";
 import SerranoLogo from '../../Images/SerranoLogo.png'
-import AssetSense from '../../Images/AssetSenseIconWhite.png'
+
 import { Link } from "react-router-dom";
 import LogoutHeader from "../LogoutHeader/LogoutHeader";
 
@@ -63,7 +63,7 @@ function Login() {
 
 
                 <div className="LoginImageContainer">
-                    <img src={SerranoLogo}></img>
+                    <img alt="Logo" src={SerranoLogo}></img>
                 </div>
                 {Erro && <p className='Erro'>{Erro}</p>}
                 <div className="LoginFormGroup">

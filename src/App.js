@@ -1,13 +1,12 @@
 import './App.css';
 import { Navigate, Route, Routes } from "react-router-dom";
-import store from './Config/store/store';
-import { useEffect } from 'react';
 import { connect } from "react-redux";
 import Login from './Components/Login/Login'
 import { logout } from './Config/firebase/auth';
 import Forget from './Components/Forget/Forget';
 import NotFound from './Components/NotFound/NotFound';
 import Layout from './Components/Layout/Layout'
+import { Oval } from "react-loader-spinner";
 
 function Acesso() {
   return <div>
@@ -34,11 +33,27 @@ const App = (props) => {
 
 
   const Home = () => {
-    if (props.LoggedUser.Email) {
-      return <Navigate to="/App" />;
+
+    if (props.LoggedUser.CheckedLogin) {
+      if (props.LoggedUser.Email) {
+        return <Navigate to="/App" />;
+      } else {
+        return <Login />;
+      }
     } else {
-      return <Login />;
+      return <div className='LoadingContainer'>
+        <Oval        
+          color="#2b5aa6"
+          wrapperStyle={{}}
+          wrapperClass="LoginSpinnerContainer"
+          secondaryColor="#2b5aa6cc"
+          strokeWidth={7}
+          strokeWidthSecondary={7}
+        />
+      </div>
     }
+
+
   };
 
 
