@@ -1,7 +1,12 @@
 import React from 'react'
+import './Ativos.css'
+
 
 export default function Ativos() {
   return (
-    <div>Ativos</div>
+    
+      <div className='AtivosContainer'>Ativos</div>
+
+    
   )
 }

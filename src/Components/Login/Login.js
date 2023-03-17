@@ -39,7 +39,7 @@ function Login() {
             LoginUtil(Email.toLocaleLowerCase(), PasswordRef.current.value).then((message) => {
                 LoginSuccess(message)
                 setIsLoggin(false)
-                navigate('/App')
+                navigate('/App/Dash')
             }).catch((error) => {
                 setIsLoggin(false)
                 setErro(HandleFirebaseEmailPasswordLogin(error.toString()))
@@ -64,12 +64,11 @@ function Login() {
                 </div>
                 {Erro && <p className='Erro'>{Erro}</p>}
                 <div className="LoginFormGroup">
-                    <label>Email</label>
-                    <input placeholder="User@serranoautomacao.com.br" type="Email" value={Email} onChange={handleChangeEmail} />
+
+                    <input placeholder="Email" type="Email" value={Email} onChange={handleChangeEmail} />
                 </div>
                 <div className="LoginFormGroup">
-                    <label>Senha</label>
-                    <input ref={PasswordRef} type="Password" />
+                    <input placeholder="Senha" ref={PasswordRef} type="Password" />
                 </div>
                 <div className="LoginFormGroup ForgetPasswordLink">
                     <Link to={'/Forget'}>Esqueci minha senha</Link>

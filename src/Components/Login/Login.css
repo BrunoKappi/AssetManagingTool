@@ -57,9 +57,7 @@
   padding: .7rem .7rem;
   font-family: var(--Fonte);
   outline: none;
-  -webkit-box-shadow: 7px 8px 10px -9px rgba(0, 0, 0, 0.75);
-  -moz-box-shadow: 7px 8px 10px -9px rgba(0, 0, 0, 0.75);
-  box-shadow: 7px 8px 10px -9px rgba(0, 0, 0, 0.75);
+  
   border: 1px solid #e5e5e5;
   font-size: .8rem;
 }
