@@ -14,7 +14,7 @@ export const Users = [
     { Id: uuid(), AccessToken: '1234', Name: 'Henrique Steigleder', Email: 'henriquesteigleder@serranoautomacao.com.br', Role: "User" },
     { Id: uuid(), AccessToken: '1234', Name: 'Júlia Kist', Email: 'juliakist@serranoautomacao.com.br', Role: "User" },
     { Id: uuid(), AccessToken: '1234', Name: 'Júlia Koch', Email: 'juliakoch@serranoautomacao.com.br', Role: "User" },
-    { Id: uuid(), AccessToken: '1234', Name: 'Julio ', Email: 'julioserrano@serranoautomacao.com.br', Role: "Admin" },
+    { Id: uuid(), AccessToken: '1234', Name: 'Julio Serrano', Email: 'julioserrano@serranoautomacao.com.br', Role: "Admin" },
     { Id: uuid(), AccessToken: '1234', Name: 'Karen Kist', Email: 'adm@serranoautomacao.com.br', Role: "User" },
     { Id: uuid(), AccessToken: '1234', Name: 'Lucas Ferreira', Email: 'lucasferreira@serranoautomacao.com.br', Role: "User" },
     { Id: uuid(), AccessToken: '1234', Name: 'Lucas Reis', Email: 'lucasreis@serranoautomacao.com.br', Role: "User" },
