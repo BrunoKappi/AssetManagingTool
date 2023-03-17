@@ -18,7 +18,8 @@ export const LoginSuccess = (message) => {
     const user = {
         ...DefaultLoggedUser,
         Email: message.user.email,
-        uid: message.user.uid
+        uid: message.user.uid,
+        CurrentSidebarTab: 'Dash'
     }
     store.dispatch(setLoggedUser(user))
 }

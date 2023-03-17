@@ -1,0 +1,94 @@
+.SidebarContainer {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 2rem;
+    width: 25%;
+    padding: 0;
+    padding-top: 5rem;
+}
+
+
+.SidebarList {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 0;
+
+
+}
+
+.SidebarItem {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem;
+    border: 1px solid var(--PrimaryBackGroundFaded2);
+    padding: .6rem 1.7rem;
+    border-top-right-radius: 1rem;
+    border-bottom-right-radius: 1rem;
+    color: var(--PrimaryBackground);
+    text-decoration: none;
+    font-family: var(--Fonte);
+    font-size: 1rem;
+    -webkit-box-shadow: 1px 2px 3px -1px rgba(43, 90, 166, 1);
+    -moz-box-shadow: 1px 2px 3px -1px rgba(43, 90, 166, 1);
+    box-shadow: 1px 2px 3px -1px rgba(43, 90, 166, 1);
+}
+
+.SidebarItem:hover {
+    background-color: var(--PrimaryBackground);
+    color: var(--PrimaryColor);
+}
+
+.SidebarItem.ActiveSidebar {
+    background-color: var(--PrimaryBackground);
+    color: var(--PrimaryColor);
+}
+
+.SidebarUserName {    
+    display: flex;
+    flex-wrap: wrap;
+    gap: .5rem;
+    justify-content: center;
+    align-items: center;
+}
+
+.SidebarUserName>p {
+    margin: 0;
+    font-family: var(--Fonte);
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: var(--Dark);
+}
+
+
+
+
+@media (max-width: 1000px) {
+    .SidebarContainer {
+        width: 35%;
+        
+    }
+
+    .SidebarItem {
+        font-size: .9rem;
+    }
+
+
+    .SidebarUserName>p {
+        font-size: 1.3rem;
+        font-weight: 500;
+
+    }
+}
+
+
+
+@media (max-width: 770px) {
+    .SidebarContainer {
+        display: none;
+    }
+}

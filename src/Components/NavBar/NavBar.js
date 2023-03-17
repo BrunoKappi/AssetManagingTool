@@ -2,13 +2,12 @@
 import React from 'react'
 import './NavBar.css'
 import { Link } from 'react-router-dom'
+import { connect } from 'react-redux'
 //Icones
-import { RiInboxArchiveFill } from "react-icons/ri";
-import { MdDelete } from "react-icons/md";
-import { BsFillPersonFill } from "react-icons/bs";
-import { FaUserAlt } from "react-icons/fa";
 import { MdOutlineLogout } from "react-icons/md";
-import {  GiHamburgerMenu } from "react-icons/gi";
+import { GiHamburgerMenu } from "react-icons/gi";
+import { HiUsers } from 'react-icons/hi';
+import { FaList, FaUserCog } from 'react-icons/fa';
 //Bootstrap
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
@@ -22,11 +21,12 @@ import LogoBrancoSerrano from '../../Images/SerranoLogoBranco.png'
 import { Tooltip } from 'react-tippy';
 import 'react-tippy/dist/tippy.css'
 import { logout } from '../../Config/firebase/auth';
+import { GetNavbarSidebarItemClass, SetTab } from '../Sidebar/SidebarUtils';
 
 const NavBar = (props) => {
 
 
- 
+
 
     return (
         <div>
@@ -37,25 +37,20 @@ const NavBar = (props) => {
                         <GiHamburgerMenu className='NavBarToggleIcon' />
                     </Navbar.Toggle>
                     <Navbar.Brand>
-
                         <div className='LogoAndCollpse'>
                             <Tooltip title="Inicio" position="bottom" >
                                 <Link to="/App">
-                                    <img alt="Logo" className="LogoNavBar" src={Logo}  />
+                                    <img alt="Logo" className="LogoNavBar" src={Logo} />
                                 </Link>
                             </Tooltip>
-
                         </div>
-
-
                     </Navbar.Brand>
-
                     <Navbar.Offcanvas id="sidebarOffCanvas" backdrop={true}>
                         <Offcanvas.Header closeButton closeVariant='white'>
                             <Offcanvas.Title>
                                 <h1>
                                     <Link className='offCanvasBrand' to="/App">
-                                        <img alt="Logo"  className="LogoNavBar" src={Logo}  />
+                                        <img alt="Logo" className="LogoNavBar" src={Logo} />
                                     </Link>
                                 </h1>
                             </Offcanvas.Title>
@@ -63,25 +58,23 @@ const NavBar = (props) => {
                         <Offcanvas.Body >
                             <Nav className="justify-content-end flex-grow-1 navBody ">
 
-
                                 <div className='navDiv'>
-                                    <NavDropdown title={
-                                        <span className='ProfileNavLinkTitle' >Nome Sobrenome</span>}>
+                                    <NavDropdown title={<span className='ProfileNavLinkTitle' >Bruno Kappi</span>}>
+                                        <Link className="dropDownLink" to="/App/Ativos">
+                                            <FaList />  Ativos
+                                        </Link>
+
+                                        <Link className="dropDownLink" to="/App/Users">
+                                            <HiUsers />  Usuarios
+                                        </Link>
+
                                         <Link className="dropDownLink" to="/App/Profile">
-                                            <BsFillPersonFill className='IconeEscuro' />  Meu Perfil
-                                        </Link>
-
-                                        <Link className="dropDownLink" to="/App/Arquivadas">
-                                            <RiInboxArchiveFill className='IconeEscuro' />  Arquivo
-                                        </Link>
-
-                                        <Link className="dropDownLink" to="/App/Deletadas">
-                                            <MdDelete className='IconeEscuro' />  Lixeira
+                                            <FaUserCog />  Meu Perfil
                                         </Link>
 
                                         <NavDropdown.Divider />
                                         <span href='/' className="dropDownLink" onClick={logout}>
-                                            <MdOutlineLogout className='IconeEscuro' /> Sair
+                                            <MdOutlineLogout /> Sair
                                         </span>
                                     </NavDropdown>
                                 </div>
@@ -90,44 +83,28 @@ const NavBar = (props) => {
                                     <img alt="Logo" src={LogoBrancoSerrano} className='LastNavLogoIcon'></img>
                                 </div>
 
-
-                                <div id="SmDivNavBarID" className='SmDivNavBar'>
-
-                                    <div className="SmSidebar">
-                                        <ul className='SmUl'>
-
-                                            <li>
-                                                <Link className='smNavLink ' to="/App/Profile" >
-                                                    <FaUserAlt />
-                                                    <span className="TextoLink">Meu Pefil</span>
-                                                </Link>
-                                            </li>
-
-                                            <li>
-                                                <Link className='smNavLink ' to="/App/Arquivadas" >
-                                                    <RiInboxArchiveFill />
-                                                    <span className="TextoLink">Arquivo</span>
-                                                </Link>
-                                            </li>
-
-                                            <li>
-                                                <Link className='smNavLink ' to="/App/Deletadas" >
-                                                    <MdDelete />
-                                                    <span className="TextoLink">Lixeira</span>
-                                                </Link>
-                                            </li>
-
-                                            <li className='LogouButtonNavSm'>
-                                                <a href='/' id='LogouButtonNavSm' className="LogouButtonNavSm" onClick={logout}>
-                                                    <MdOutlineLogout /> Sair
-                                                </a>
-                                            </li>
-
-
-
-                                        </ul>
-                                    </div>
+                                <div className='NavbarSidebarUserName'>
+                                    <p>Bruno</p>
+                                    <p>Kappi</p>
                                 </div>
+
+                                <ul className='NavBarListSidebar'>
+                                    <Link to="/App/Ativos" className={GetNavbarSidebarItemClass('Ativos', props.LoggedUser.CurrentSidebarTab)} onClick={e => SetTab('Ativos')}>
+                                        <FaList />
+                                        <span>Ativos</span>
+                                    </Link>
+                                    <Link to="/App/Users" className={GetNavbarSidebarItemClass('Users', props.LoggedUser.CurrentSidebarTab)} onClick={e => SetTab('Users')}>
+                                        <HiUsers />
+                                        <span>Usuarios</span>
+                                    </Link>
+                                    <Link to="/App/Profile" className={GetNavbarSidebarItemClass('Profile', props.LoggedUser.CurrentSidebarTab)} onClick={e => SetTab('Profile')}>
+                                        <FaUserCog />
+                                        <span>Meu Perfil</span>
+                                    </Link>
+
+                                </ul>
+
+
                             </Nav>
 
 
@@ -146,5 +123,11 @@ const NavBar = (props) => {
 }
 
 
-export default NavBar
+const ConnectedNavBar = connect((state) => {
+    return {
+        LoggedUser: state.LoggedUser
+    }
+})(NavBar)
+
+export default ConnectedNavBar
 

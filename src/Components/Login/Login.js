@@ -11,8 +11,6 @@ import LogoutHeader from "../LogoutHeader/LogoutHeader";
 function Login() {
 
 
-
-
     const [IsLogging, setIsLoggin] = useState(false);
     const [Email, setEmail] = useState('');
     const [Erro, setErro] = useState('');
@@ -26,7 +24,6 @@ function Login() {
     //Event Email
     const handleChangeEmail = (e) => {
         const value = e.target.value
-        console.log(e.nativeEvent.inputType !== "deleteContentBackward")
         if (value.includes("@") && !value.includes("@serranoautomacao") && e.nativeEvent.inputType !== "deleteContentBackward") {
             const completEmail = value + "serranoautomacao.com.br"
             setEmail(completEmail)
@@ -92,10 +89,6 @@ function Login() {
                     </button>
                 </div>
             </form >
-
-
-
-
 
 
 

@@ -1,23 +1,13 @@
 import './App.css';
 import { Navigate, Route, Routes } from "react-router-dom";
 import { connect } from "react-redux";
-import Login from './Components/Login/Login'
-import { logout } from './Config/firebase/auth';
 import Forget from './Components/Forget/Forget';
 import NotFound from './Components/NotFound/NotFound';
 import Layout from './Components/Layout/Layout'
-import { Oval } from "react-loader-spinner";
-
-function Acesso() {
-  return <div>
-    <div>Acesso</div>
-    <button onClick={logout}>Logof</button>
-  </div>;
-}
-
-
-
-
+import Home from './Home';
+import Ativos from './Components/Ativos/Ativos'
+import Users from './Components/Users/Users'
+import Profile from './Components/Profile/Profile'
 
 
 const App = (props) => {
@@ -27,45 +17,28 @@ const App = (props) => {
     if (props.LoggedUser.Email) {
       return children;
     } else {
-      return <Navigate to="/" />;
+      return <Navigate to="/" />; 
     }
   };
 
 
-  const Home = () => {
+  const TESTE = () => {
+    return <div>TESTE</div>
+  }
 
-    if (props.LoggedUser.CheckedLogin) {
-      if (props.LoggedUser.Email) {
-        return <Navigate to="/App" />;
-      } else {
-        return <Login />;
-      }
-    } else {
-      return <div className='LoadingContainer'>
-        <Oval        
-          color="#2b5aa6"
-          wrapperStyle={{}}
-          wrapperClass="LoginSpinnerContainer"
-          secondaryColor="#2b5aa6cc"
-          strokeWidth={7}
-          strokeWidthSecondary={7}
-        />
-      </div>
-    }
-
-
-  };
 
 
   return (
     <div className="App">
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<Home CheckedLogin={props.LoggedUser.CheckedLogin} Email={props.LoggedUser.Email} />} />
         <Route path="/Forget" element={<Forget />} />
         <Route path="/App" element={<RequireAuth> <Layout /> </RequireAuth>}>
-          <Route path="/App/Teste" element={<RequireAuth> <Acesso /> </RequireAuth>} />
+          <Route path="/App/Dash" element={<RequireAuth> <TESTE /> </RequireAuth>} />
+          <Route path="/App/Ativos" element={<RequireAuth> <Ativos /> </RequireAuth>} />
+          <Route path="/App/Profile" element={<RequireAuth> <Profile /> </RequireAuth>} />
+          <Route path="/App/Users" element={<RequireAuth> <Users /> </RequireAuth>} />
           <Route path="*" element={<RequireAuth> <NotFound /> </RequireAuth>} />
-
         </Route>
         <Route path="*" element={<NotFound />} />
       </Routes>

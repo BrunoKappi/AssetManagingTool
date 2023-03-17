@@ -291,9 +291,6 @@
   color: white !important;
 }
 
-.IconeEscuro {
-  color: #333;
-}
 
 .dropdown-toggle.nav-link {
   color: white !important;
@@ -308,7 +305,7 @@
 
 .LastNavLogoIconContainer {
   height: 2rem;
-
+  margin-right: 1.5rem;
 }
 
 .LastNavLogoIcon {
@@ -321,23 +318,7 @@
   text-decoration: none;
 }
 
-.LogouButtonNavSm {
-  display: none;
-  position: fixed;
-  bottom: 0;
-  font-family: var(--Fonte);
 
-}
-
-#LogouButtonNavSm {
-  display: none;
-  position: fixed;
-  bottom: 0;
-  font-family: var(--Fonte);
-  font-size: 25px;
-  font-weight: 800;
-
-}
 
 .offCanvasBrand {
   color: white;
@@ -356,16 +337,6 @@
 }
 
 
-
-.UserPhoto {
-  border-radius: 50%;
-}
-
-
-.SmDivNavBar {
-  display: none;
-}
-
 .part {
   width: 15px;
   height: 2px;
@@ -381,158 +352,93 @@
   align-items: center;
 }
 
-.Hamburguer {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  margin-right: 10px;
-  width: 30px;
-  height: 30px;
-  cursor: pointer;
-}
 
-.Hamburguer:hover {
-  background-color: gray;
-  border-radius: 50%;
 
-}
-
-.ulGrande li a:hover:not(.active) {
-  background-color: #111;
-}
 
 .active {
   background-color: #aa3604;
   cursor: pointer;
-
 }
 
 
-.Loading {
-  margin: 40px;
-}
 
-.BrandName {
-  flex-grow: 8;
-}
 
-.UserPhoto {
-  width: 10px;
-  margin: 0px;
-  padding: 0px;
-}
-
-.BodyNavSm {
+.NavBarListSidebar {
   display: none;
 }
 
 
-@media (max-width: 800px) {
-  #LogouButtonNavSm {
-    display: block;
-  }
-
-  .LogouButtonNavSm {
-    display: block;
-  }
+.NavbarSidebarUserName {
+  display: none;
 }
-
-
 
 @media (max-width: 750px) {
 
-
-  .SmDivNavBar {
-    display: flex;
-    flex-direction: column;
-    font-family: var(--Fonte);
-    position: relative;
+  .offcanvas-body {
+    padding: 0 !important;
   }
 
-
-  .Hamburguer {
+  .LastNavLogoIconContainer {
     display: none;
-  }
-
-
-
-  .SmDivNavBar a {
-    padding: 10px;
-    color: white;
-    text-decoration: none;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: flex-start;
-    font-family: var(--Fonte);
-    margin-top: 5px;
-    width: 100%;
-  }
-
-  .SmDivNavBar a .SmNavBarText {
-    flex-grow: 5;
-  }
-
-  .SmDivNavBar svg {
-    margin-right: 7px;
-  }
-
-  .SmDivNavBar ul {
-    list-style: none;
-    padding: 0px;
-    width: 100%;
-  }
-
-  .SmUl li {
-    display: flex;
-    align-items: flex-start;
-  }
-
-  .SmUl li a span {
-    font-family: var(--Fonte);
-    font-weight: 500;
-  }
-
-
-
-
-  .SmDivNavBar {
-    display: block;
   }
 
   .navDiv {
     display: none;
   }
 
-  .BrandName {
-    flex-grow: 8;
-  }
 
-
-  .BrandName h1 {
-    display: none;
-  }
-
-  .ulMenor {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    background-color: #333;
+  .NavBarListSidebar {
+    width: 100%;
+    list-style: none;
     display: flex;
-  }
-
-  .BrandNameMenor {
-    flex-grow: 8;
-  }
-
-
-  .BrandNameMenor h1 {
-    display: block;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 0;
+    padding-right: 2rem;
   }
 
 
+  .NavBarListSidebarItem {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem;
+    padding: .6rem .6rem;
+    border-top-right-radius: 1rem;
+    border-bottom-right-radius: 1rem;
+    color: var(--PrimaryColor);
+    text-decoration: none;
+    font-family: var(--Fonte);
+    font-size: 1rem;
+
+  }
+
+  .NavBarListSidebarItem:hover {
+    background-color: var(--PrimaryColor);
+    color: var(--PrimaryBackground);
+  }
+
+  .NavBarListSidebarItem.ActiveNavbarSidebar {
+    background-color: var(--PrimaryColor);
+    color: var(--PrimaryBackground);
+  }
+
+  .NavbarSidebarUserName {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .5rem;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 1rem;
+  }
+
+  .NavbarSidebarUserName>p {
+    margin: 0;
+    font-family: var(--Fonte);
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: white;
+  }
 
 
 

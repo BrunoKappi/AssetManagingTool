@@ -12,7 +12,7 @@ onAuthStateChanged(auth, (currentUser) => {
       ...DefaultLoggedUser,
       Email: currentUser.email,
       uid: currentUser.uid,
-      CurrentSidebarTab: 'App'
+      CurrentSidebarTab: 'Dash'
     }
     store.dispatch(setLoggedUser(user))
   } else {
