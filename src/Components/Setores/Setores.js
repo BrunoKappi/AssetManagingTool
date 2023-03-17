@@ -5,6 +5,7 @@ import ListGroup from 'react-bootstrap/ListGroup';
 import { v4 } from 'uuid';
 import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 import { Setores as SetoresList, DefaultSetor } from '../../Data/Items';
+import { Tooltip } from 'react-tippy';
 
 export default function Setores() {
 
@@ -39,7 +40,7 @@ export default function Setores() {
   const HandleSubmiAddItem = (e) => {
     e.preventDefault()
     const Find = ListaDeItens.find(Item => Item.Setor.toLocaleLowerCase() === NewItemList.toLocaleLowerCase())
-    if (!Find) {
+    if (!Find && NewItemList) {
       var ItensCopy = [...ListaDeItens]
       const NewItem = { ...DefaultSetor, Id: v4(), Setor: NewItemList }
       ItensCopy.push(NewItem)
@@ -97,23 +98,35 @@ export default function Setores() {
 
                                   {ItemListSelected === Item.Setor && EditingItem &&
                                     <form onSubmit={e => HandleSubmiChangeItemName(e, index, Item.Setor)}>
+
                                       <input maxLength={50} className='CustomGroupListInput' defaultValue={Item.Setor} id={Item.Setor} type="text" />
+
                                     </form>
                                   }
 
                                   {ItemListSelected === Item.Setor && !EditingItem &&
-                                    <button onClick={e => InitEditing(Item.Setor)}>
-                                      <MdModeEditOutline className='ItemEditIcon' />
-                                    </button>}
+                                    <Tooltip title="Editar Item" position="bottom" >
+                                      <button onClick={e => InitEditing(Item.Type)}>
+                                        <MdModeEditOutline className='ItemEditIcon' />
+                                      </button>
+                                    </Tooltip>
+                                  }
 
                                   {ItemListSelected === Item.Setor && EditingItem &&
-                                    <button onClick={e => EndEditing()}>
-                                      <MdCancel className='ItemEditIcon' />
-                                    </button>}
+                                    <Tooltip title="Cancelar" position="bottom" >
+                                      <button onClick={e => EndEditing()}>
+                                        <MdCancel className='ItemEditIcon' />
+                                      </button>
+                                    </Tooltip>
+                                  }
+
                                   {ItemListSelected === Item.Setor &&
-                                    <button onClick={e => HandleDeleteItem(index)}>
-                                      <MdDelete className='ItemEditIcon' />
-                                    </button>}
+                                    <Tooltip title="Excluir Item" position="bottom" >
+                                      <button onClick={e => HandleDeleteItem(index)}>
+                                        <MdDelete className='ItemEditIcon' />
+                                      </button>
+                                    </Tooltip>
+                                  }
 
 
                                 </span>
@@ -136,9 +149,11 @@ export default function Setores() {
             <span className='CustomGroupListItem' >
               <form onSubmit={HandleSubmiAddItem} className='CustomGroupListItem'>
                 <input maxLength={50} type="text" placeholder='Novo Item' value={NewItemList} onChange={e => setNewItemList(e.target.value)} />
-                <button>
-                  <MdAddCircle />
-                </button>
+                <Tooltip title="Adicionar Item" position="bottom" >
+                  <button>
+                    <MdAddCircle />
+                  </button>
+                </Tooltip>
               </form>
             </span>
           </ListGroup.Item>
@@ -150,6 +165,6 @@ export default function Setores() {
 
       </div>
 
-    </div>
+    </div >
   )
 }

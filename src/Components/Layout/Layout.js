@@ -17,6 +17,7 @@ const Layout = (props) => {
                     <Sidebar />
                     <Outlet />
                 </div>
+               
 
             </div >
 

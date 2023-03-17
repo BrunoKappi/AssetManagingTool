@@ -24,6 +24,7 @@ import { Tooltip } from 'react-tippy';
 import 'react-tippy/dist/tippy.css'
 import { logout } from '../../Config/firebase/auth';
 import { GetNavbarSidebarItemClass, SetTab } from '../Sidebar/SidebarUtils';
+import {  NotificationSucesso } from '../../NotificationUtils';
 
 
 const NavBar = (props) => {
@@ -31,8 +32,8 @@ const NavBar = (props) => {
     const Sair = () => {
         SetTab('Login')
         logout()
+        NotificationSucesso('Logoff', "Logoff feito com sucesso!")
     }
-
 
 
     return (

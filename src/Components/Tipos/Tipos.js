@@ -6,6 +6,9 @@ import ListGroup from 'react-bootstrap/ListGroup';
 import { v4 } from 'uuid';
 import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 import { DefaultItemType, ItemTypes } from '../../Data/Items';
+import {  NotificationAlerta, NotificationSucesso } from '../../NotificationUtils';
+import { Tooltip } from 'react-tippy';
+
 
 export default function Tipos() {
 
@@ -32,6 +35,7 @@ export default function Tipos() {
     console.log(document.getElementById(ID).value)
     setListaDeItens([...ItensCopy])
     EndEditing()
+    NotificationSucesso('Adição de Tipo', 'Item alterado com Sucesso!')
 
   }
 
@@ -39,12 +43,14 @@ export default function Tipos() {
   const HandleSubmiAddItem = (e) => {
     e.preventDefault()
     const Find = ListaDeItens.find(Item => Item.Type.toLocaleLowerCase() === NewItemList.toLocaleLowerCase())
-    if (!Find) {
+    if (!Find && NewItemList) {
       var ItensCopy = [...ListaDeItens]
       const NewItem = { ...DefaultItemType, Id: v4(), Type: NewItemList }
       ItensCopy.push(NewItem)
       setListaDeItens([...ItensCopy])
       setNewItemList('')
+      NotificationSucesso('Adição de Tipo', 'Tipo adicionado com sucesso!')
+
     }
     setNewItemList('')
 
@@ -55,6 +61,7 @@ export default function Tipos() {
     var ItensCopy = [...ListaDeItens]
     ItensCopy.splice(Index, 1);
     setListaDeItens([...ItensCopy])
+    NotificationAlerta('Exclusão', 'Tipo excluído!')
   }
 
 
@@ -82,6 +89,7 @@ export default function Tipos() {
             <Droppable droppableId={'Tipos'} key={'Tipos'}>
               {(provided) => {
                 return (
+
                   <div {...provided.droppableProps} ref={provided.innerRef}>
                     {ListaDeItens.map((Item, index) => {
                       return <Draggable key={Item.Id} draggableId={Item.Id} index={index} >
@@ -93,7 +101,9 @@ export default function Tipos() {
 
                                   {EditingItem && ItemListSelected !== Item.Type && <span onClick={e => { setEditingItem(false); }}> {Item.Type}</span>}
 
-                                  {!EditingItem && <span onDoubleClick={e => InitEditing(Item.Type)}> {Item.Type}</span>}
+                                  {!EditingItem && <span onDoubleClick={e => InitEditing(Item.Type)}> {Item.Type}</span>
+
+                                  }
 
                                   {ItemListSelected === Item.Type && EditingItem &&
                                     <form onSubmit={e => HandleSubmiChangeItemName(e, index, Item.Type)}>
@@ -102,18 +112,28 @@ export default function Tipos() {
                                   }
 
                                   {ItemListSelected === Item.Type && !EditingItem &&
-                                    <button onClick={e => InitEditing(Item.Type)}>
-                                      <MdModeEditOutline className='ItemEditIcon' />
-                                    </button>}
+
+                                    <Tooltip title="Editar Item" position="bottom" >
+                                      <button onClick={e => InitEditing(Item.Type)}>
+                                        <MdModeEditOutline className='ItemEditIcon' />
+                                      </button>
+                                    </Tooltip>
+                                  }
 
                                   {ItemListSelected === Item.Type && EditingItem &&
-                                    <button onClick={e => EndEditing()}>
-                                      <MdCancel className='ItemEditIcon' />
-                                    </button>}
+                                    <Tooltip title="Cancelar" position="bottom" >
+                                      <button onClick={e => EndEditing()}>
+                                        <MdCancel className='ItemEditIcon' />
+                                      </button>
+                                    </Tooltip>
+                                  }
                                   {ItemListSelected === Item.Type &&
-                                    <button onClick={e => HandleDeleteItem(index)}>
-                                      <MdDelete className='ItemEditIcon' />
-                                    </button>}
+                                    <Tooltip title="Excluir Item" position="bottom" >
+                                      <button onClick={e => HandleDeleteItem(index)}>
+                                        <MdDelete className='ItemEditIcon' />
+                                      </button>
+                                    </Tooltip>
+                                  }
 
 
                                 </span>
@@ -124,6 +144,7 @@ export default function Tipos() {
                       </Draggable>
                     })}
                   </div>
+
                 );
               }}
             </Droppable>
@@ -136,9 +157,13 @@ export default function Tipos() {
             <span className='CustomGroupListItem' >
               <form onSubmit={HandleSubmiAddItem} className='CustomGroupListItem'>
                 <input maxLength={50} type="text" placeholder='Novo Item' value={NewItemList} onChange={e => setNewItemList(e.target.value)} />
-                <button>
-                  <MdAddCircle />
-                </button>
+
+                <Tooltip title="Adicionar Item" position="bottom" >
+                  <button>
+                    <MdAddCircle />
+                  </button>
+                </Tooltip>
+
               </form>
             </span>
           </ListGroup.Item>

@@ -7,6 +7,7 @@ import SerranoLogo from '../../Images/SerranoLogo.png'
 
 import { Link } from "react-router-dom";
 import LogoutHeader from "../LogoutHeader/LogoutHeader";
+import { NotificationSucesso } from "../../NotificationUtils";
 
 function Login() {
 
@@ -32,13 +33,14 @@ function Login() {
         }
     }
 
-    const handleSubmit = (event) => {
+    const handleSubmit = (event) => { 
         event.preventDefault();
         if (Email && PasswordRef.current.value) {
             setIsLoggin(true)
             LoginUtil(Email.toLocaleLowerCase(), PasswordRef.current.value).then((message) => {
                 LoginSuccess(message)
                 setIsLoggin(false)
+                NotificationSucesso('Login', 'Login realizado com sucesso!')
                 navigate('/App/Dash')
             }).catch((error) => {
                 setIsLoggin(false)

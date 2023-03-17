@@ -10,6 +10,8 @@ import Users from './Components/Users/Users'
 import Profile from './Components/Profile/Profile'
 import Config from './Components/Config/Config'
 import Dashboard from './Components/Dashboard/Dashboard';
+import { ReactNotifications } from 'react-notifications-component'
+
 
 const App = (props) => {
 
@@ -29,6 +31,7 @@ const App = (props) => {
 
   return (
     <div className="App">
+      <ReactNotifications />
       <Routes>
         <Route path="/" element={<Home CheckedLogin={props.LoggedUser.CheckedLogin} Email={props.LoggedUser.Email} />} />
         <Route path="/Forget" element={<Forget />} />
