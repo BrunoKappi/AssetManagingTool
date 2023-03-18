@@ -24,7 +24,7 @@ export const clearAllUsuarios = () => {
     })
 }
 
-export const setUsuarios = (Usuarios) => {
+export const SetUsuarios = (Usuarios) => {
     return ({
         type: 'SET_USUARIOS',
         Usuarios

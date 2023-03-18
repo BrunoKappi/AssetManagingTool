@@ -9,7 +9,7 @@ export const addNotaAction = (novaNota = {}) => {
 }
 
 
-export const editNotaAction = (docID, editedNota = {}) => { 
+export const editNotaAction = (docID, editedNota = {}) => {
     return ({
         type: 'EDIT_NOTA',
         docID,
@@ -24,10 +24,11 @@ export const clearAllNotas = () => {
     })
 }
 
-export const setNotas = (Notas) => {
+export const SetTiposAtivos = (TiposAtivos) => {
+    
     return ({
-        type: 'SET_NOTAS',
-        Notas
+        type: 'SET_TIPOS_ATIVOS',
+        TiposAtivos
     })
 }
 

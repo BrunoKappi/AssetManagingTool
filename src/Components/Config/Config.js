@@ -29,8 +29,8 @@ export default function Config() {
           <Tipos />
           <Setores />
           <UserTypes />
-
         </Masonry>
+        
       </div>
 
     </div>

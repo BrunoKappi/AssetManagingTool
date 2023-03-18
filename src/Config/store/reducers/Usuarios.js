@@ -1,15 +1,6 @@
-import { uuidv4 } from "@firebase/util"
 
-const UsuariosPadrao = [
-    {
-        uid: uuidv4(),
-        email: 'brunokappidematos2@gmail.com',
-        nome: 'Bruno',
-        tipo: 'Solucionador'
-    }
-]
 
-const Usuarios = (state = UsuariosPadrao, action) => {
+const Usuarios = (state = [], action) => {
 
     switch (action.type) {
         case 'ADD_USUARIO':
@@ -19,7 +10,7 @@ const Usuarios = (state = UsuariosPadrao, action) => {
         case 'SET_USUARIOS':
             return action.Usuarios
         case 'EDIT_USUARIO':
-            return state.filter( usuario => {
+            return state.filter(usuario => {
                 return usuario.uid !== action.uid
             }).concat(action.EditedUser)
         default:
@@ -27,5 +18,5 @@ const Usuarios = (state = UsuariosPadrao, action) => {
     }
 }
 
-
+ 
 export default Usuarios

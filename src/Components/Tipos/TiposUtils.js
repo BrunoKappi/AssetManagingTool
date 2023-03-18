@@ -1,3 +1,6 @@
+import store from '../../Config/store/store'
+import { SetTiposAtivos } from '../../Config/store/actions/TiposAtivosActions'
+
 export async function GetTipos(gerarErro = false) {
     return new Promise((resolve, reject) => {
         setTimeout(() => {
@@ -22,6 +25,7 @@ export async function SaveTipos(Tipos, gerarErro = false) {
             } else {
                 console.log(Tipos)
                 localStorage.setItem('AssetSenseTipos', JSON.stringify(Tipos))
+                store.dispatch(SetTiposAtivos(Tipos))
                 resolve('Ok');
             }
         }, 500);

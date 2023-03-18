@@ -109,7 +109,7 @@ export default function Setores() {
 
           <ListGroup as="ul">
             <ListGroup.Item as="li" className='CustomGroupListTitle' >
-              Setores de Ativos
+              Setores da Empresa
             </ListGroup.Item>
             <DragDropContext onDragEnd={(result) => { HandleDrag(result) }}>
               <Droppable droppableId={'Setores'} key={'Setores'}>
@@ -202,3 +202,4 @@ export default function Setores() {
     </div >
   )
 }
+
