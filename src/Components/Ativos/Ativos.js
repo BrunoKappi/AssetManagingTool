@@ -3,17 +3,20 @@ import './Ativos.css'
 import Accordion from 'react-bootstrap/Accordion';
 import { GetAtivos } from './AtivosUtils';
 import Loading from '../LoadingForTabs/Loading';
+import TabTitle from '../TabTitle/TabTitle';
 
 export default function Ativos() {
 
   const [ListaDeAtivos, setListaDeAtivos] = useState([])
-
+  const [Loaded, setLoaded] = useState(false);
 
   useEffect(() => {
     GetAtivos().then((Lista) => {
       setListaDeAtivos(Lista)
+      setLoaded(true)
     }).catch(Erro => {
       console.error(Erro)
+      setLoaded(true)
     })
   }, [])
 
@@ -22,7 +25,9 @@ export default function Ativos() {
 
     <div className='AtivosContainer'>
 
-      {ListaDeAtivos.length !== 0 &&
+      <TabTitle Text="Lista de Ativos" />
+
+      {(ListaDeAtivos.length !== 0 || Loaded) &&
         <Accordion defaultActiveKey="0" flush>
           {ListaDeAtivos.map((Item, Index) => {
             return <Accordion.Item key={Item.Id} eventKey={Index}>
@@ -39,7 +44,7 @@ export default function Ativos() {
       }
 
 
-      {ListaDeAtivos.length === 0 &&
+      {ListaDeAtivos.length === 0 && !Loaded &&
         <Loading />
       }
 

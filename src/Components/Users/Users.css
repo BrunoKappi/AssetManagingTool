@@ -5,3 +5,7 @@
     max-height: 100%;
     overflow-y: scroll;
 }
+
+.UsersContainer::-webkit-scrollbar {
+    display: none;
+}

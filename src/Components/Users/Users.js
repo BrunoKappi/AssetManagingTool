@@ -1,17 +1,28 @@
 import React, { useState, useEffect } from 'react'
 import './Users.css'
 import Accordion from 'react-bootstrap/Accordion';
-import { Users as Usuarios } from '../../Data/User';
-import { GetUsers } from './UsersUtils';
+import { GetUsers, GetUsersTypes } from './UsersUtils';
 import Loading from '../LoadingForTabs/Loading';
+import TabTitle from '../TabTitle/TabTitle';
+import Select from 'react-select';
 
 export default function Users() {
   const [ListaDeUsuarios, setListaDeUsuarios] = useState([])
-
+  const [OptionsListTypes, setOptionsListTypes] = useState([])
+  const [Loaded, setLoaded] = useState(false);
+  const [selectedOption, ] = useState()
 
   useEffect(() => {
     GetUsers().then((Lista) => {
       setListaDeUsuarios(Lista)
+      setLoaded(true)
+    }).catch(Erro => {
+      console.error(Erro)
+      setLoaded(true)
+    })
+
+    GetUsersTypes().then((Lista) => {
+      setOptionsListTypes(Lista)
     }).catch(Erro => {
       console.error(Erro)
     })
@@ -20,9 +31,17 @@ export default function Users() {
   return (
     <div className='UsersContainer'>
 
-      {ListaDeUsuarios.length !== 0 &&
+      <TabTitle Text="Usuários" />
+
+      <Select
+        value={selectedOption}
+        options={OptionsListTypes}
+        placeholder="Tipo de Usuário"
+      />
+
+      {(ListaDeUsuarios.length !== 0 || Loaded) &&
         <Accordion defaultActiveKey="0" flush>
-          {Usuarios.map((Item, Index) => {
+          {ListaDeUsuarios.map((Item, Index) => {
             return <Accordion.Item key={Item.Id} eventKey={Index}>
               <Accordion.Header>{Item.Name}</Accordion.Header>
               <Accordion.Body>
@@ -36,7 +55,7 @@ export default function Users() {
       }
 
 
-      {ListaDeUsuarios.length === 0 &&
+      {ListaDeUsuarios.length === 0 && !Loaded &&
         <Loading />
       }
 

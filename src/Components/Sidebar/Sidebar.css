@@ -3,10 +3,10 @@
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    gap: 2rem;
+    gap: .5rem;
     width: 25%;
     padding: 0;
-    padding-top: 5rem;
+    padding-top: 1.5rem;
 }
 
 
@@ -33,9 +33,10 @@
     text-decoration: none;
     font-family: var(--Fonte);
     font-size: 1rem;
-    -webkit-box-shadow: 1px 2px 3px -1px rgba(43, 90, 166, 1);
-    -moz-box-shadow: 1px 2px 3px -1px rgba(43, 90, 166, 1);
-    box-shadow: 1px 2px 3px -1px rgba(43, 90, 166, 1);
+    -webkit-box-shadow: 1px 2px 3px -2px rgba(43, 90, 166, 1);
+    -moz-box-shadow: 1px 2px 3px -2px rgba(43, 90, 166, 1);
+    box-shadow: 1px 2px 3px -2px rgba(43, 90, 166, 1);
+
 }
 
 .SidebarItem:hover {
@@ -47,6 +48,18 @@
     background-color: var(--PrimaryBackground);
     color: var(--PrimaryColor);
 }
+ 
+.SidebarUserPhotoContainer{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.SidebarUserPhoto{
+    width: 40%;
+    border-radius: 50%;
+}
 
 .SidebarUserName {    
     display: flex;
@@ -54,12 +67,13 @@
     gap: .5rem;
     justify-content: center;
     align-items: center;
+    margin-bottom: 1rem;
 }
 
 .SidebarUserName>p {
     margin: 0;
     font-family: var(--Fonte);
-    font-size: 1.6rem;
+    font-size: 1.5rem;
     font-weight: 600;
     color: var(--Dark);
 }

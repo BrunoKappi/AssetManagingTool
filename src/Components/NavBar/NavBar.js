@@ -24,7 +24,8 @@ import { Tooltip } from 'react-tippy';
 import 'react-tippy/dist/tippy.css'
 import { logout } from '../../Config/firebase/auth';
 import { GetNavbarSidebarItemClass, SetTab } from '../Sidebar/SidebarUtils';
-import {  NotificationSucesso } from '../../NotificationUtils';
+import { NotificationSucesso } from '../../NotificationUtils';
+import User from '../../Images/User.png'
 
 
 const NavBar = (props) => {
@@ -37,7 +38,7 @@ const NavBar = (props) => {
 
 
     return (
-        <div>
+        <div className='NavBarContainer'>
 
             <Navbar className='NavBar' expand={'md'} id='navBarResponsive' >
                 <Container fluid bg='dark'>
@@ -100,6 +101,11 @@ const NavBar = (props) => {
 
                                 <div className='LastNavLogoIconContainer'>
                                     <img alt="Logo" src={LogoBrancoSerrano} className='LastNavLogoIcon'></img>
+                                </div>
+
+
+                                <div className='NavSidebarUserPhotoContainer'>
+                                    <img alt='User' className='NavSidebarUserPhoto' src={User}></img>
                                 </div>
 
                                 <div className='NavbarSidebarUserName'>

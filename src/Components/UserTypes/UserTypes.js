@@ -1,17 +1,17 @@
 import React, { useState, useEffect } from 'react'
-import './Tipos.css'
+import './UserTypes.css'
 //ICONES
 import { MdAddCircle, MdDelete, MdModeEditOutline, MdCancel } from "react-icons/md";
 import ListGroup from 'react-bootstrap/ListGroup';
 import { v4 } from 'uuid';
 import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
-import { DefaultItemType } from '../../Data/Items';
 import { NotificationAlerta, NotificationSucesso } from '../../NotificationUtils';
 import { Tooltip } from 'react-tippy';
-import { GetTipos, SaveTipos } from './TiposUtils';
+import { GetTipos, SaveTipos } from './UserTypesUtils';
 import Loading from '../LoadingForTabs/Loading'
+import { DefaultUserRole } from '../../Data/User';
 
-export default function Tipos() {
+export default function UserTypes() {
 
   const [ItemListSelected, setItemListSelected] = useState('');
   const [NewItemList, setNewItemList] = useState('');
@@ -41,26 +41,38 @@ export default function Tipos() {
   const HandleSubmiChangeItemName = (e, index, ID) => {
     e.preventDefault()
     var ItensCopy = [...ListaDeItens]
-    ItensCopy[index].Type = document.getElementById(ID).value
+    ItensCopy[index].Role = document.getElementById(ID).value
     SaveTipos(ItensCopy).then(() => {
       setListaDeItens([...ItensCopy])
       EndEditing()
       NotificationSucesso('Alteração', 'Item alterado com Sucesso!')
     })
-
   }
+
+
+  const HandleSubmiChangePermit = ( index) => {
+    
+    var ItensCopy = [...ListaDeItens]
+    ItensCopy[index].IsAdmin = !ItensCopy[index].IsAdmin 
+    SaveTipos(ItensCopy).then(() => {
+      setListaDeItens([...ItensCopy]) 
+      EndEditing()
+      NotificationSucesso('Alteração', 'Permissões alteradas com sucesso!')
+    })
+  }
+
 
 
   const HandleSubmiAddItem = (e) => {
     e.preventDefault()
-    const Find = ListaDeItens.find(Item => Item.Type.toLocaleLowerCase() === NewItemList.toLocaleLowerCase())
+    const Find = ListaDeItens.find(Item => Item.Role.toLocaleLowerCase() === NewItemList.toLocaleLowerCase())
     if (!Find && NewItemList) {
       var ItensCopy = [...ListaDeItens]
-      const NewItem = { ...DefaultItemType, Id: v4(), Type: NewItemList }
+      const NewItem = { ...DefaultUserRole, Id: v4(), Role: NewItemList }
       ItensCopy.push(NewItem)
 
 
-      SaveTipos(ItensCopy).then(() => {
+      SaveTipos(ItensCopy).then(() => { 
         setListaDeItens([...ItensCopy])
         setNewItemList('')
         NotificationSucesso('Adição de Tipo', 'Tipo adicionado com sucesso!')
@@ -110,7 +122,7 @@ export default function Tipos() {
 
           <ListGroup as="ul">
             <ListGroup.Item as="li" className='CustomGroupListTitle' >
-              Tipos de Ativos
+              Tipos de Usuários
             </ListGroup.Item>
             <DragDropContext onDragEnd={(result) => { HandleDrag(result) }}>
               <Droppable droppableId={'Tipos'} key={'Tipos'}>
@@ -123,47 +135,64 @@ export default function Tipos() {
                           {(DragProvided) => {
                             return (
                               <div ref={DragProvided.innerRef} {...DragProvided.draggableProps} {...DragProvided.dragHandleProps}>
-                                <ListGroup.Item key={Item.Type + v4()} action as="li">
-                                  <span className='CustomGroupListItem' onClick={e => { setItemListSelected(Item.Type); }}>
+                                <ListGroup.Item key={Item.Role + v4()} action as="li">
+                                  <div className='UserTypesRow'>
+                                    <Tooltip title="Permissões de Administrador" position="bottom" >
+                                      <label class="containerCheck">
+                                        <input checked={Item.IsAdmin} onChange={e => HandleSubmiChangePermit(index)} type="checkbox"></input>
+                                        <div class="checkmark"></div>
+                                      </label>
+                                    </Tooltip>
+                                    <span className='CustomGroupListItem' onClick={e => { setItemListSelected(Item.Role); }}>
 
-                                    {EditingItem && ItemListSelected !== Item.Type && <span onClick={e => { setEditingItem(false); }}> {Item.Type}</span>}
+                                      {EditingItem && ItemListSelected !== Item.Role && <span onClick={e => { setEditingItem(false); }}> {Item.Role}</span>}
 
-                                    {!EditingItem && <span onDoubleClick={e => InitEditing(Item.Type)}> {Item.Type}</span>
+                                      {!EditingItem && <span onDoubleClick={e => InitEditing(Item.Role)}> {Item.Role}</span>
 
-                                    }
-
-                                    {ItemListSelected === Item.Type && EditingItem &&
-                                      <form onSubmit={e => HandleSubmiChangeItemName(e, index, Item.Type)}>
-                                        <input maxLength={50} className='CustomGroupListInput' defaultValue={Item.Type} id={Item.Type} type="text" />
-                                      </form>
-                                    }
-
-                                    {ItemListSelected === Item.Type && !EditingItem &&
-
-                                      <Tooltip title="Editar Item" position="bottom" >
-                                        <button onClick={e => InitEditing(Item.Type)}>
-                                          <MdModeEditOutline className='ItemEditIcon' />
-                                        </button>
-                                      </Tooltip>
-                                    }
-
-                                    {ItemListSelected === Item.Type && EditingItem &&
-                                      <Tooltip title="Cancelar" position="bottom" >
-                                        <button onClick={e => EndEditing()}>
-                                          <MdCancel className='ItemEditIcon' />
-                                        </button>
-                                      </Tooltip>
-                                    }
-                                    {ItemListSelected === Item.Type &&
-                                      <Tooltip title="Excluir Item" position="bottom" >
-                                        <button onClick={e => HandleDeleteItem(index)}>
-                                          <MdDelete className='ItemEditIcon' />
-                                        </button>
-                                      </Tooltip>
-                                    }
+                                      }
 
 
-                                  </span>
+
+
+
+                                      {ItemListSelected === Item.Role && EditingItem &&
+                                        <>
+
+
+                                          <form className='AdminForm' onSubmit={e => HandleSubmiChangeItemName(e, index, Item.Role)}>
+                                            <input maxLength={50} className='CustomGroupListInput' defaultValue={Item.Role} id={Item.Role} type="text" />
+                                          </form>
+                                        </>
+
+                                      }
+
+                                      {ItemListSelected === Item.Role && !EditingItem &&
+
+                                        <Tooltip title="Editar Item" position="bottom" >
+                                          <button onClick={e => InitEditing(Item.Role)}>
+                                            <MdModeEditOutline className='ItemEditIcon' />
+                                          </button>
+                                        </Tooltip>
+                                      }
+
+                                      {ItemListSelected === Item.Role && EditingItem &&
+                                        <Tooltip title="Cancelar" position="bottom" >
+                                          <button onClick={e => EndEditing()}>
+                                            <MdCancel className='ItemEditIcon' />
+                                          </button>
+                                        </Tooltip>
+                                      }
+                                      {ItemListSelected === Item.Role &&
+                                        <Tooltip title="Excluir Item" position="bottom" >
+                                          <button onClick={e => HandleDeleteItem(index)}>
+                                            <MdDelete className='ItemEditIcon' />
+                                          </button>
+                                        </Tooltip>
+                                      }
+
+
+                                    </span>
+                                  </div>
                                 </ListGroup.Item>
                               </div>
                             )

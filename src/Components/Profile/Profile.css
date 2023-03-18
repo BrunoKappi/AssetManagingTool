@@ -5,3 +5,7 @@
     max-height: 100%;
     overflow-y: scroll;
 }
+
+.ProfileContainer::-webkit-scrollbar {
+    display: none;
+}

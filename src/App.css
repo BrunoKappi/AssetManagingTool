@@ -10,6 +10,7 @@
   --SecondaryBackground: rgba(212, 164, 24, .8);
   --SecondaryColor: #FFFF;
   --Dark: #161c2d;
+  --ColorDark: white;
   --Fonte: 'Kanit', 'Sans-serif'
 }
 
@@ -25,4 +26,9 @@
 .App {
   width: 100%;
   height: 100dvh;
+
+}
+
+body::-webkit-scrollbar {
+  display: none;
 }

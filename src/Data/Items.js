@@ -51,11 +51,14 @@ export const Items = [
     { Id: uuid(), StorageLocatiom: 'Armário da Integração', Item: 'Case HD externo 3.0', Type: 'Equipamento', Status: 'Disponivel', Records: [], Usage: 'Momentaneo' },
 ]
 
+//localStorage.setItem('AssetSenseAtivos', JSON.stringify(Items))
 
 export const ItemTypes = [
     { Id: uuid(), Type: 'Cabo' },
     { Id: uuid(), Type: 'Equipamento' }
 ]
+
+//localStorage.setItem('AssetSenseTipos', JSON.stringify(ItemTypes))
 
 export const DefaultItemType = { Id: uuid(), Type: '' }
 
@@ -66,6 +69,9 @@ export const Setores = [
     { Id: uuid(), Setor: 'Administrativo' },
     { Id: uuid(), Setor: 'RH' },
 ]
+
+//localStorage.setItem('AssetSenseSetores', JSON.stringify(Setores))
+
 
 export const DefaultSetor = { Id: uuid(), Setor: '' }
 

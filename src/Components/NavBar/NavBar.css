@@ -12,7 +12,25 @@
   box-shadow: 6px 4px 33px -17px rgba(0, 0, 0, 1);
 }
 
+.NavBarContainer{
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  width: 100vw;
+}
 
+
+.NavSidebarUserPhotoContainer{
+  width: 100%;
+  display: none;
+  align-items: center;
+  justify-content: center;
+}
+
+.NavSidebarUserPhoto{
+  width: 30%;
+  border-radius: 50%;
+}
 
 .navbar-toggler {
   border: none !important;
@@ -180,6 +198,10 @@
   height: 50% !important;
 }
 
+
+.offcanvas-body::-webkit-scrollbar {
+  display: none !important;
+}
 
 #sidebarOffCanvas {
   background-color: var(--PrimaryBackground);
@@ -373,6 +395,10 @@
 }
 
 @media (max-width: 750px) {
+
+  .NavSidebarUserPhotoContainer{
+    display: flex;
+  }
 
   .offcanvas-body {
     padding: 0 !important;

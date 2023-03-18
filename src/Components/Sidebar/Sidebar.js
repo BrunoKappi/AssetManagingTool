@@ -7,10 +7,16 @@ import { MdDashboard } from 'react-icons/md';
 import { Link } from 'react-router-dom';
 import { GetSidebarItemClass, SetTab } from './SidebarUtils';
 import { connect } from 'react-redux'
+import User from '../../Images/User.png'
 
-const Sidebar = (props) => {
+const Sidebar = (props) => {   
+
     return (
         <div className='SidebarContainer' >
+
+            <div className='SidebarUserPhotoContainer'>
+                <img alt='User' className='SidebarUserPhoto' src={User}></img>
+            </div>
 
             <div className='SidebarUserName'>
                 <p>Bruno</p>
