@@ -7,14 +7,13 @@ import SerranoLogo from '../../Images/SerranoLogo.png'
 
 import { Link } from "react-router-dom";
 import LogoutHeader from "../LogoutHeader/LogoutHeader";
-import { NotificationSucesso } from "../../NotificationUtils";
+import { NotificationSucesso, NotificationErro } from "../../NotificationUtils";
 
 function Login() {
 
 
     const [IsLogging, setIsLoggin] = useState(false);
     const [Email, setEmail] = useState('');
-    const [Erro, setErro] = useState('');
 
     const navigate = useNavigate();
 
@@ -33,7 +32,7 @@ function Login() {
         }
     }
 
-    const handleSubmit = (event) => { 
+    const handleSubmit = (event) => {
         event.preventDefault();
         if (Email && PasswordRef.current.value) {
             setIsLoggin(true)
@@ -43,11 +42,8 @@ function Login() {
                 NotificationSucesso('Login', 'Login realizado com sucesso!')
                 navigate('/App/Dash')
             }).catch((error) => {
-                setIsLoggin(false)
-                setErro(HandleFirebaseEmailPasswordLogin(error.toString()))
-                setTimeout(() => {
-                    setErro('')
-                }, 3000);
+                setIsLoggin(false)               
+                NotificationErro('Login', HandleFirebaseEmailPasswordLogin(error.toString()))                
             })
         }
     };
@@ -63,8 +59,7 @@ function Login() {
 
                 <div className="LoginImageContainer">
                     <img alt="Logo" src={SerranoLogo}></img>
-                </div>
-                {Erro && <p className='Erro'>{Erro}</p>}
+                </div>              
                 <div className="LoginFormGroup">
 
                     <input placeholder="Email" type="Email" value={Email} onChange={handleChangeEmail} />

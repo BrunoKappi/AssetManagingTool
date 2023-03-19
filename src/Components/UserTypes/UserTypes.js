@@ -212,7 +212,7 @@ export default function UserTypes() {
             <ListGroup.Item action as="li">
               <span className='CustomGroupListItem' >
                 <form onSubmit={HandleSubmiAddItem} className='CustomGroupListItem'>
-                  <input maxLength={50} type="text" placeholder='Novo Item' value={NewItemList} onChange={e => setNewItemList(e.target.value)} />
+                  <input maxLength={50} type="text" placeholder='Novo Tipo' value={NewItemList} onChange={e => setNewItemList(e.target.value)} />
 
                   <Tooltip title="Adicionar Item" position="bottom" >
                     <button>

@@ -1,5 +1,5 @@
 import { Store } from 'react-notifications-component';
-
+import 'animate.css/animate.min.css';
 
 const DefaultNotification = {
   title: "",
@@ -7,13 +7,13 @@ const DefaultNotification = {
   type: "success",
   insert: "bottom",
   container: "bottom-left",
-  animationIn: ["animate__animated", "animate__slideInRight"],
+  animationIn: ["animate__animated", "animate__zoomIn"],
   animationOut: ["animate__animated", "animate__fadeOut"],
   dismiss: {
     duration: 5000,
     onScreen: true
-  }
-
+  },
+  showIcon:true
 }
 
 
@@ -27,7 +27,7 @@ export const NotificationErro = (title, message) => {
 }
 
 export const NotificationAlerta = (title, message) => {
-  Store.addNotification({ ...DefaultNotification, title: title, message: message, type: "warning" });
+  Store.addNotification({ ...DefaultNotification, title: title, message: message, type: "war" });
 }
 
 export const NotificationInfo = (title, message) => {

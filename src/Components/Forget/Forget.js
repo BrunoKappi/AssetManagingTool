@@ -1,28 +1,21 @@
-import React, { useRef, useState } from 'react'
+import React, { useRef } from 'react'
 import { Link } from 'react-router-dom'
 import './Forget.css'
 import { ResetarSenha } from './ForgetUtils'
 import LogoutHeader from '../LogoutHeader/LogoutHeader'
+import { NotificationSucesso, NotificationErro } from "../../NotificationUtils";
 
 export default function Forget() {
 
     const Email = useRef()
-    const [Erro, setErro] = useState('')
-    const [Sucess, setSucess] = useState('')
 
     const handleSubmitForget = (e) => {
         e.preventDefault()
         if (!Email.current.value) return
         ResetarSenha(Email.current.value).then(() => {
-            setSucess('Email Enviado!')
-            setTimeout(() => {
-                setSucess('')
-            }, 3000);
+            NotificationSucesso('Email enviado', 'Verifique seu email!')
         }).catch((error) => {
-            setErro('Usuário não encontrado!')
-            setTimeout(() => {
-                setErro('')
-            }, 3000);
+            NotificationErro('Recuperação de Senha', 'Usuário não encontrado!')
         })
     }
 
@@ -44,8 +37,6 @@ export default function Forget() {
                     <div className="ForgetNote">
                         <label className="title">Recuperação de Senha</label>
                         <span className="subtitle">Um Email será enviado para você redefir sua senha</span>
-                        {Erro && <span className="erro">{Erro}</span>}
-                        {Sucess && <span className="sucesso">{Sucess}</span>}
                     </div>
                     <div className='InputContainerForget'>
                         <input ref={Email} placeholder="Digite seu Email" title="Digite seu Email" name="email" type="email" className="ForgetInput"></input>
