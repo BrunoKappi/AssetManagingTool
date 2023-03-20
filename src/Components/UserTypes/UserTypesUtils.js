@@ -27,7 +27,7 @@ export async function SaveTipos(Tipos, gerarErro = false) {
             if (gerarErro) {
                 reject(new Error('Erro ao obter dados'));
             } else {
-                console.log(Tipos)
+                //console.log(Tipos)
                 localStorage.setItem('AssetSenseUsersTypes', JSON.stringify(Tipos))
                 store.dispatch(SetTiposUsuarios(Tipos))
                 resolve('Ok'); 

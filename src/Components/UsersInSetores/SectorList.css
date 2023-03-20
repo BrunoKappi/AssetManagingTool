@@ -1,0 +1,111 @@
+.ShowOnlyCustomGroupList {
+    min-width: 300px !important;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+.ShowOnlyCustomGroupList span {
+    cursor: pointer;
+}
+
+
+.ShowOnlyCustomGroupList .list-group {
+    min-width: 300px !important;
+}
+
+.ShowOnlyCustomGroupListItem {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    cursor: pointer;
+}
+
+.ShowOnlyCustomGroupListItem span {
+    font-family: var(--Fonte);
+    font-size: 12px;
+}
+
+.ShowOnlyCustomGroupListItem>svg {
+    font-family: var(--Fonte);
+    font-size: .9rem;
+    margin-right: .3rem;
+    color: var(--PrimaryBackground);
+}
+
+
+.ShowOnlyCustomGroupListItem svg {
+    float: right;
+    margin-left: .6rem;
+}
+
+.ShowOnlyCustomGroupIcon {
+    font-family: var(--Fonte);
+    font-size: .9rem;
+    margin-right: .3rem;
+    color: var(--PrimaryBackground);
+}
+
+
+
+
+.ShowOnlyCustomGroupListItem input {
+    padding: 4px 12px;
+    border: none;
+    outline: none;
+    font-family: var(--Fonte);
+    color: var(--Dark);
+    font-size: 14px;
+    background-color: var(--FundoTransparente);
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+
+.ShowOnlyCustomGroupListItem span {
+    user-select: none;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.ShowOnlyCustomGroupListItem button {
+    border: none;
+    background-color: var(--FundoTransparente);
+    padding: 5px;
+}
+
+.ShowOnlyCustomGroupListItem form button svg {
+    color: var(--Dark) !important;
+}
+
+
+.ShowOnlyCustomGroupListInput {
+    padding: 0 !important;
+    margin: 0 !important;
+    font-family: var(--Fonte) !important;
+    font-size: 13px !important;
+    margin-right: 1rem !important;
+}
+
+.CategoriaEditIcon {
+    color: var(--Dark) !important;
+}
+
+.ShowOnlyCustomGroupListTitle {
+    font-family: var(--Fonte);
+    background-color: var(--PrimaryBackground) !important;
+    color: var(--PrimaryColor) !important;
+}
+
+
+.MarginBottom {
+    margin-bottom: 2.5rem;
+}

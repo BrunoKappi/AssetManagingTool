@@ -15,7 +15,7 @@ export async function GetSetores(gerarErro = false) {
         }, 500);
     });
 }
-
+ 
 
 export async function SaveSetores(Setores, gerarErro = false) {
     return new Promise((resolve, reject) => {
@@ -23,7 +23,7 @@ export async function SaveSetores(Setores, gerarErro = false) {
             if (gerarErro) {
                 reject(new Error('Erro ao obter dados'));
             } else {
-                console.log(Setores)
+                //console.log(Setores)
                 localStorage.setItem('AssetSenseSetores', JSON.stringify(Setores))
                 store.dispatch(SetSetores(Setores))
                 resolve('Ok');

@@ -32,7 +32,7 @@
     color: var(--PrimaryBackground);
     text-decoration: none;
     font-family: var(--Fonte);
-    font-size: 1rem;
+    font-size: .8rem;
     -webkit-box-shadow: 1px 2px 3px -2px rgba(43, 90, 166, 1);
     -moz-box-shadow: 1px 2px 3px -2px rgba(43, 90, 166, 1);
     box-shadow: 1px 2px 3px -2px rgba(43, 90, 166, 1);
@@ -48,23 +48,23 @@
     background-color: var(--PrimaryBackground);
     color: var(--PrimaryColor);
 }
- 
-.SidebarUserPhotoContainer{
+
+.SidebarUserPhotoContainer {
     width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.SidebarUserPhoto{
+.SidebarUserPhoto {
     width: 40%;
     border-radius: 50%;
-    -webkit-box-shadow: 3px 2px 7px 0px rgba(0,0,0,0.75);
-    -moz-box-shadow: 3px 2px 7px 0px rgba(0,0,0,0.75);
-    box-shadow: 3px 2px 7px 0px rgba(0,0,0,0.75);
+    -webkit-box-shadow: 3px 2px 7px 0px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 3px 2px 7px 0px rgba(0, 0, 0, 0.75);
+    box-shadow: 3px 2px 7px 0px rgba(0, 0, 0, 0.75);
 }
 
-.SidebarUserName {    
+.SidebarUserName {
     display: flex;
     flex-wrap: wrap;
     gap: .5rem;
@@ -88,7 +88,7 @@
 @media (max-width: 1000px) {
     .SidebarContainer {
         width: 35%;
-        
+
     }
 
     .SidebarItem {

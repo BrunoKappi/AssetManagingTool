@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { connect } from 'react-redux'
 import './UserTypes.css'
 //ICONES
 import { MdAddCircle, MdDelete, MdModeEditOutline, MdCancel } from "react-icons/md";
@@ -11,7 +12,7 @@ import { GetTipos, SaveTipos } from './UserTypesUtils';
 import Loading from '../LoadingForTabs/Loading'
 import { DefaultUserRole } from '../../Data/User';
 
-export default function UserTypes() {
+const UserTypes = (props) => {
 
   const [ItemListSelected, setItemListSelected] = useState('');
   const [NewItemList, setNewItemList] = useState('');
@@ -27,7 +28,7 @@ export default function UserTypes() {
       console.error(Erro)
       setLoaded(true)
     })
-  }, [])
+  }, [props.TiposUsuarios]) 
 
 
   const InitEditing = () => {
@@ -50,12 +51,12 @@ export default function UserTypes() {
   }
 
 
-  const HandleSubmiChangePermit = ( index) => {
-    
+  const HandleSubmiChangePermit = (index) => {
+
     var ItensCopy = [...ListaDeItens]
-    ItensCopy[index].IsAdmin = !ItensCopy[index].IsAdmin 
+    ItensCopy[index].IsAdmin = !ItensCopy[index].IsAdmin
     SaveTipos(ItensCopy).then(() => {
-      setListaDeItens([...ItensCopy]) 
+      setListaDeItens([...ItensCopy])
       EndEditing()
       NotificationSucesso('Alteração', 'Permissões alteradas com sucesso!')
     })
@@ -72,12 +73,14 @@ export default function UserTypes() {
       ItensCopy.push(NewItem)
 
 
-      SaveTipos(ItensCopy).then(() => { 
+      SaveTipos(ItensCopy).then(() => {
         setListaDeItens([...ItensCopy])
         setNewItemList('')
         NotificationSucesso('Adição de Tipo', 'Tipo adicionado com sucesso!')
       })
 
+    }else{
+      NotificationAlerta('Adição de Tipo', 'Este item já existe!')
     }
     setNewItemList('')
 
@@ -234,3 +237,12 @@ export default function UserTypes() {
     </div>
   )
 }
+
+
+const ConnectedUserTypes = connect((state) => {
+  return {
+    TiposUsuarios: state.TiposUsuarios
+  }
+})(UserTypes)
+
+export default ConnectedUserTypes

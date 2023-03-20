@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import './Tipos.css'
+import './CustomGroupListStyles.css'
+import { connect } from 'react-redux'
 //ICONES
 import { MdAddCircle, MdDelete, MdModeEditOutline, MdCancel } from "react-icons/md";
 import ListGroup from 'react-bootstrap/ListGroup';
@@ -8,16 +10,17 @@ import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 import { DefaultItemType } from '../../Data/Items';
 import { NotificationAlerta, NotificationSucesso } from '../../NotificationUtils';
 import { Tooltip } from 'react-tippy';
-import { GetTipos, SaveTipos } from './TiposUtils';
+import {  GetTipos, SaveTipos } from './TiposUtils';
 import Loading from '../LoadingForTabs/Loading'
 
-export default function Tipos() {
+const Tipos = (props) => {
 
   const [ItemListSelected, setItemListSelected] = useState('');
   const [NewItemList, setNewItemList] = useState('');
   const [Loaded, setLoaded] = useState(false);
   const [EditingItem, setEditingItem] = useState(false);
   const [ListaDeItens, setListaDeItens] = useState([]);
+
 
   useEffect(() => {
     GetTipos().then((Lista) => {
@@ -27,7 +30,7 @@ export default function Tipos() {
       console.error(Erro)
       setLoaded(true)
     })
-  }, [])
+  }, [props.TiposAtivos]) 
 
 
   const InitEditing = () => {
@@ -59,6 +62,7 @@ export default function Tipos() {
       const NewItem = { ...DefaultItemType, Id: v4(), Type: NewItemList }
       ItensCopy.push(NewItem)
 
+     
 
       SaveTipos(ItensCopy).then(() => {
         setListaDeItens([...ItensCopy])
@@ -66,6 +70,8 @@ export default function Tipos() {
         NotificationSucesso('Adição de Tipo', 'Tipo adicionado com sucesso!')
       })
 
+    }else{
+      NotificationAlerta('Adição de Tipo', 'Este item já existe!')
     }
     setNewItemList('')
 
@@ -205,3 +211,13 @@ export default function Tipos() {
     </div>
   )
 }
+
+
+
+const ConnectedTipos = connect((state) => {
+  return {
+      TiposAtivos: state.TiposAtivos
+  }
+})(Tipos)
+ 
+export default ConnectedTipos

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { connect } from 'react-redux'
 //ICONES
 import { MdAddCircle, MdDelete, MdModeEditOutline, MdCancel } from "react-icons/md";
 import ListGroup from 'react-bootstrap/ListGroup';
@@ -10,7 +11,7 @@ import { GetSetores, SaveSetores } from './SetoresUtils';
 import Loading from '../LoadingForTabs/Loading'
 import { NotificationAlerta, NotificationSucesso } from '../../NotificationUtils';
 
-export default function Setores() {
+const Setores = (props) => {
 
 
   const [ItemListSelected, setItemListSelected] = useState('');
@@ -27,7 +28,7 @@ export default function Setores() {
       console.error(Erro)
       setLoaded(true)
     })
-  }, [])
+  }, [props.Setores])
 
 
   const InitEditing = () => {
@@ -46,7 +47,7 @@ export default function Setores() {
     SaveSetores(ItensCopy).then(() => {
       setListaDeItens([...ItensCopy])
       EndEditing()
-      NotificationSucesso('Adição de Setor', 'Item alterado com Sucesso!')
+      NotificationSucesso('Edição', 'Item alterado com Sucesso!')
     })
 
   }
@@ -66,6 +67,8 @@ export default function Setores() {
         NotificationSucesso('Adição de Setor', 'Setor adicionado com sucesso!')
       })
 
+    }else{
+      NotificationAlerta('Adição de Setor', 'Este Setor já existe!')
     }
 
     setNewItemList('')
@@ -203,3 +206,11 @@ export default function Setores() {
   )
 }
 
+
+const ConnectedSetores = connect((state) => {
+  return {
+      Setores: state.Setores
+  }
+})(Setores)
+ 
+export default ConnectedSetores

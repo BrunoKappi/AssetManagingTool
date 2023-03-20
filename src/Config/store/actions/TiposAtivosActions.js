@@ -1,10 +1,10 @@
 
 
-export const addNotaAction = (novaNota = {}) => {
+export const AddTipoAtivo = (NovoAtivo = {}) => {
 
     return ({
-        type: 'ADD_NOTA',
-        novaNota
+        type: 'ADD_TIPO_ATIVO',
+        NovoAtivo
     })
 }
 
@@ -18,11 +18,6 @@ export const editNotaAction = (docID, editedNota = {}) => {
 }
 
 
-export const clearAllNotas = () => {
-    return ({
-        type: 'CLEAR_ALL'
-    })
-}
 
 export const SetTiposAtivos = (TiposAtivos) => {
     

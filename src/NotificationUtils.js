@@ -27,7 +27,7 @@ export const NotificationErro = (title, message) => {
 }
 
 export const NotificationAlerta = (title, message) => {
-  Store.addNotification({ ...DefaultNotification, title: title, message: message, type: "war" });
+  Store.addNotification({ ...DefaultNotification, title: title, message: message, type: "warning" });
 }
 
 export const NotificationInfo = (title, message) => {
