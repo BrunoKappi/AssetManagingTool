@@ -9,6 +9,7 @@ import Select from 'react-select';
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
 import UsersInSetores from '../UsersInSetores/UsersInSetores';
+import UsersInTypes from '../UsersInTypes/UsersInTypes';
 
 
 
@@ -74,7 +75,7 @@ export default function Users() {
           <UsersInSetores />
         </Tab>
         <Tab eventKey="Tipos" title="Tipos" >
-          Teste3
+          <UsersInTypes />
         </Tab>
       </Tabs>
 

@@ -1,0 +1,17 @@
+.nav-tabs .nav-link {
+
+    color: var(--PrimaryBackground) !important;
+    font-family: var(--Fonte) !important;
+
+}
+
+.nav-tabs {
+    border-bottom: 1px solid var(--PrimaryBackGroundFaded50) !important;
+}
+
+
+.nav-tabs .nav-link.active {
+    border-top: 1px solid var(--PrimaryBackGroundFaded50) !important;
+    border-right: 1px solid var(--PrimaryBackGroundFaded50) !important;
+    border-left: 1px solid var(--PrimaryBackGroundFaded50) !important;  
+}

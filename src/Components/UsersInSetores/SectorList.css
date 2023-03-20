@@ -46,7 +46,10 @@
     color: var(--PrimaryBackground);
 }
 
-
+.ShowOnlyCustomGroupListCheckbox {
+    color: var(--PrimaryColor);
+    cursor: pointer;
+}
 
 
 .ShowOnlyCustomGroupListItem input {
@@ -100,7 +103,11 @@
 }
 
 .ShowOnlyCustomGroupListTitle {
-    font-family: var(--Fonte);
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    font-family: var(--Fonte) !important;
     background-color: var(--PrimaryBackground) !important;
     color: var(--PrimaryColor) !important;
 }

@@ -1,12 +1,33 @@
 import './UsersInSetores.css'
+import { useState, useEffect } from 'react';
 import SectorList from './SectorList'
 import Masonry from "react-masonry-css";
 import { DragDropContext } from "react-beautiful-dnd";
 import { v4 } from 'uuid';
 import { connect } from 'react-redux'
 import { SaveUsers } from '../Users/UsersUtils';
+import SetorsNumbers from './SetorsNumbers';
 
 const UsersInSetores = (props) => {
+
+    const [Setores, setSetores] = useState([
+        ...props.Setores.map(element => {
+            var Users = props.Usuarios.filter(el => el.Sector.Id === element.Id).length
+            return { Id: element.Id, Setor: element.Setor, Qtd: Users }
+        })])
+
+
+
+
+
+    useEffect(() => {
+        setSetores([
+            ...props.Setores.map(element => {
+                var Users = props.Usuarios.filter(el => el.Sector.Id === element.Id).length
+                return { Id: element.Id, Setor: element.Setor, Qtd: Users }
+            })])
+    }, [props.Usuarios, props.Setores])
+
 
     const breakpointColumnsObj = {
         default: 3,
@@ -35,6 +56,9 @@ const UsersInSetores = (props) => {
     return (
         <DragDropContext onDragEnd={(result) => { HandleDrag(result) }}>
             <div className='UsersInSetoresContainers'>
+
+                <SetorsNumbers Setores={Setores} />
+
                 <Masonry breakpointCols={breakpointColumnsObj} className="my-masonry-grid" columnClassName="my-masonry-grid_column"   >
 
                     {props.Setores.map((Setor, Index) => {
