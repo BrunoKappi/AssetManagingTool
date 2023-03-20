@@ -5,13 +5,14 @@ import { MdAddCircle, MdDelete, MdModeEditOutline, MdCancel } from "react-icons/
 import ListGroup from 'react-bootstrap/ListGroup';
 import { v4 } from 'uuid';
 import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
-import { DefaultSetor } from '../../Data/Items';
+import { DefaultLocal } from '../../Data/Items';
 import { Tooltip } from 'react-tippy';
-import { GetSetores, SaveSetores } from './SetoresUtils';
+import { SaveLocaisArmazenamento } from './LocaisArmazenamentoUtils';
 import Loading from '../LoadingForTabs/Loading'
 import { NotificationAlerta, NotificationErro, NotificationSucesso } from '../../NotificationUtils';
+import { GetLocaisArmazenamento } from './LocaisArmazenamentoUtils';
 
-const Setores = (props) => {
+const LocaisArmazenamento = (props) => {
 
 
   const [ItemListSelected, setItemListSelected] = useState('');
@@ -21,14 +22,14 @@ const Setores = (props) => {
   const [ListaDeItens, setListaDeItens] = useState([]);
 
   useEffect(() => {
-    GetSetores().then((Lista) => {
+    GetLocaisArmazenamento().then((Lista) => {
       setListaDeItens(Lista)
       setLoaded(true)
     }).catch(Erro => {
       console.error(Erro)
       setLoaded(true)
     })
-  }, [props.Setores])
+  }, [props.LocaisArmazenamento])
 
 
   const InitEditing = () => {
@@ -42,9 +43,9 @@ const Setores = (props) => {
   const HandleSubmiChangeItemName = (e, index, ID) => {
     e.preventDefault()
     var ItensCopy = [...ListaDeItens]
-    ItensCopy[index].Setor = document.getElementById(ID).value
+    ItensCopy[index].Local = document.getElementById(ID).value
     console.log(document.getElementById(ID).value)
-    SaveSetores(ItensCopy).then(() => {
+    SaveLocaisArmazenamento(ItensCopy).then(() => {
       setListaDeItens([...ItensCopy])
       EndEditing()
       NotificationSucesso('Edição', 'Item alterado com Sucesso!')
@@ -55,20 +56,20 @@ const Setores = (props) => {
 
   const HandleSubmiAddItem = (e) => {
     e.preventDefault()
-    const Find = ListaDeItens.find(Item => Item.Setor.toLocaleLowerCase() === NewItemList.toLocaleLowerCase())
+    const Find = ListaDeItens.find(Item => Item.Local.toLocaleLowerCase() === NewItemList.toLocaleLowerCase())
     if (!Find && NewItemList) {
       var ItensCopy = [...ListaDeItens]
-      const NewItem = { ...DefaultSetor, Id: v4(), Setor: NewItemList }
+      const NewItem = { ...DefaultLocal, Id: v4(), Local: NewItemList }
       ItensCopy.push(NewItem)
 
-      SaveSetores(ItensCopy).then(() => {
+      SaveLocaisArmazenamento(ItensCopy).then(() => {
         setListaDeItens([...ItensCopy])
         setNewItemList('')
-        NotificationSucesso('Adição de Setor', 'Setor adicionado com sucesso!')
+        NotificationSucesso('Adição de Local', 'Local adicionado com sucesso!')
       })
 
     } else {
-      NotificationAlerta('Adição de Setor', 'Este Setor já existe!')
+      NotificationAlerta('Adição de Local', 'Este Local já existe!')
     }
 
     setNewItemList('')
@@ -80,14 +81,14 @@ const Setores = (props) => {
     var ItensCopy = [...ListaDeItens]
     ItensCopy.splice(Index, 1);
 
-    const UserInThisItem = props.Usuarios.find(User => User.Sector.Id === Id)
+    const AtivoInThisItem = props.Ativos.find(Ativo => Ativo.StorageLocation.Id === Id)
 
-    if (UserInThisItem) {
-      NotificationErro('Exclusão', 'Não é permitido excluir este item pois ainda há usuários associados a este Setor')
+    if (AtivoInThisItem) {
+      NotificationErro('Exclusão', 'Não é permitido excluir este item pois ainda há ativos associados a este Local')
     } else {
-      SaveSetores(ItensCopy).then(() => {
+      SaveLocaisArmazenamento(ItensCopy).then(() => {
         setListaDeItens([...ItensCopy])
-        NotificationAlerta('Exclusão', 'Setor excluído!')
+        NotificationAlerta('Exclusão', 'Local excluído!')
       })
     }
 
@@ -100,11 +101,11 @@ const Setores = (props) => {
     const IndexSource = Resultado.source.index;
     const IndexDestination = Resultado.destination.index;
     const copiedItems = [...ListaDeItens];
-    const [removed] = copiedItems.splice(IndexSource, 1);
+    const [removed] = copiedItems.splice(IndexSource, 1); 
     copiedItems.splice(IndexDestination, 0, removed);
 
 
-    SaveSetores(copiedItems).then(() => {
+    SaveLocaisArmazenamento(copiedItems).then(() => {
       setListaDeItens([...copiedItems])
     })
   }
@@ -120,10 +121,10 @@ const Setores = (props) => {
 
           <ListGroup as="ul">
             <ListGroup.Item as="li" className='CustomGroupListTitle' >
-              Setores da Empresa
+              Locais de Armazenamento
             </ListGroup.Item>
             <DragDropContext onDragEnd={(result) => { HandleDrag(result) }}>
-              <Droppable droppableId={'Setores'} key={'Setores'}>
+              <Droppable droppableId={'LocaisArmazenamento'} key={'LocaisArmazenamento'}>
                 {(provided) => {
                   return (
                     <div {...provided.droppableProps} ref={provided.innerRef}>
@@ -132,22 +133,22 @@ const Setores = (props) => {
                           {(DragProvided) => {
                             return (
                               <div ref={DragProvided.innerRef} {...DragProvided.draggableProps} {...DragProvided.dragHandleProps}>
-                                <ListGroup.Item key={Item.Setor + v4()} action as="li">
-                                  <span className='CustomGroupListItem' onClick={e => { setItemListSelected(Item.Setor); }}>
+                                <ListGroup.Item key={Item.Local + v4()} action as="li">
+                                  <span className='CustomGroupListItem' onClick={e => { setItemListSelected(Item.Local); }}>
 
-                                    {EditingItem && ItemListSelected !== Item.Setor && <span onClick={e => { setEditingItem(false); }}> {Item.Setor}</span>}
+                                    {EditingItem && ItemListSelected !== Item.Local && <span onClick={e => { setEditingItem(false); }}> {Item.Local}</span>}
 
-                                    {!EditingItem && <span onDoubleClick={e => InitEditing(Item.Setor)}> {Item.Setor}</span>}
+                                    {!EditingItem && <span onDoubleClick={e => InitEditing(Item.Local)}> {Item.Local}</span>}
 
-                                    {ItemListSelected === Item.Setor && EditingItem &&
-                                      <form onSubmit={e => HandleSubmiChangeItemName(e, index, Item.Setor)}>
+                                    {ItemListSelected === Item.Local && EditingItem &&
+                                      <form onSubmit={e => HandleSubmiChangeItemName(e, index, Item.Local)}>
 
-                                        <input maxLength={50} className='CustomGroupListInput' defaultValue={Item.Setor} id={Item.Setor} type="text" />
+                                        <input maxLength={50} className='CustomGroupListInput' defaultValue={Item.Local} id={Item.Local} type="text" />
 
                                       </form>
                                     }
 
-                                    {ItemListSelected === Item.Setor && !EditingItem &&
+                                    {ItemListSelected === Item.Local && !EditingItem &&
                                       <Tooltip title="Editar Item" position="bottom" >
                                         <button onClick={e => InitEditing(Item.Type)}>
                                           <MdModeEditOutline className='ItemEditIcon' />
@@ -155,7 +156,7 @@ const Setores = (props) => {
                                       </Tooltip>
                                     }
 
-                                    {ItemListSelected === Item.Setor && EditingItem &&
+                                    {ItemListSelected === Item.Local && EditingItem &&
                                       <Tooltip title="Cancelar" position="bottom" >
                                         <button onClick={e => EndEditing()}>
                                           <MdCancel className='ItemEditIcon' />
@@ -163,7 +164,7 @@ const Setores = (props) => {
                                       </Tooltip>
                                     }
 
-                                    {ItemListSelected === Item.Setor &&
+                                    {ItemListSelected === Item.Local &&
                                       <Tooltip title="Excluir Item" position="bottom" >
                                         <button onClick={e => HandleDeleteItem(index, Item.Id)}>
                                           <MdDelete className='ItemEditIcon' />
@@ -215,11 +216,12 @@ const Setores = (props) => {
 }
 
 
-const ConnectedSetores = connect((state) => {
+const ConnectedLocaisArmazenamento = connect((state) => {
   return {
-    Setores: state.Setores,
-    Usuarios: state.Usuarios
+    Usuarios: state.Usuarios,
+    LocaisArmazenamento: state.LocaisArmazenamento,
+    Ativos: state.Ativos
   }
-})(Setores)
+})(LocaisArmazenamento)
 
-export default ConnectedSetores
+export default ConnectedLocaisArmazenamento

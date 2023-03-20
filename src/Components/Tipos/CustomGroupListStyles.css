@@ -90,6 +90,6 @@
 
 .CustomGroupListTitle {
     font-family: var(--Fonte);
-    background-color: var(--PrimaryBackGroundFaded) !important;
+    background-color: var(--PrimaryBackground) !important;
     color: var(--PrimaryColor) !important;
 }

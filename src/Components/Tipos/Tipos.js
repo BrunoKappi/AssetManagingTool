@@ -8,9 +8,9 @@ import ListGroup from 'react-bootstrap/ListGroup';
 import { v4 } from 'uuid';
 import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 import { DefaultItemType } from '../../Data/Items';
-import { NotificationAlerta, NotificationSucesso } from '../../NotificationUtils';
+import { NotificationAlerta, NotificationErro, NotificationSucesso } from '../../NotificationUtils';
 import { Tooltip } from 'react-tippy';
-import {  GetTipos, SaveTipos } from './TiposUtils';
+import { GetTipos, SaveTipos } from './TiposUtils';
 import Loading from '../LoadingForTabs/Loading'
 
 const Tipos = (props) => {
@@ -30,7 +30,7 @@ const Tipos = (props) => {
       console.error(Erro)
       setLoaded(true)
     })
-  }, [props.TiposAtivos]) 
+  }, [props.TiposAtivos])
 
 
   const InitEditing = () => {
@@ -62,7 +62,7 @@ const Tipos = (props) => {
       const NewItem = { ...DefaultItemType, Id: v4(), Type: NewItemList }
       ItensCopy.push(NewItem)
 
-     
+
 
       SaveTipos(ItensCopy).then(() => {
         setListaDeItens([...ItensCopy])
@@ -70,7 +70,7 @@ const Tipos = (props) => {
         NotificationSucesso('Adição de Tipo', 'Tipo adicionado com sucesso!')
       })
 
-    }else{
+    } else {
       NotificationAlerta('Adição de Tipo', 'Este item já existe!')
     }
     setNewItemList('')
@@ -78,14 +78,22 @@ const Tipos = (props) => {
   }
 
 
-  const HandleDeleteItem = (Index) => {
+  const HandleDeleteItem = (Index, Id) => {
     var ItensCopy = [...ListaDeItens]
     ItensCopy.splice(Index, 1);
 
-    SaveTipos(ItensCopy).then(() => {
-      setListaDeItens([...ItensCopy])
-      NotificationAlerta('Exclusão', 'Tipo excluído!')
-    })
+    const AtivosInThisType = props.Ativos.find(Ativo => Ativo.Type.Id === Id)
+
+    if (AtivosInThisType) {
+      NotificationErro('Exclusão', 'Não é permitido excluir este item pois ainda há Ativos associados a este Tipo')
+    } else {
+      SaveTipos(ItensCopy).then(() => {
+        setListaDeItens([...ItensCopy])
+        NotificationAlerta('Exclusão', 'Tipo de Ativo excluído!')
+      })
+    }
+
+
 
   }
 
@@ -162,7 +170,7 @@ const Tipos = (props) => {
                                     }
                                     {ItemListSelected === Item.Type &&
                                       <Tooltip title="Excluir Item" position="bottom" >
-                                        <button onClick={e => HandleDeleteItem(index)}>
+                                        <button onClick={e => HandleDeleteItem(index, Item.Id)}>
                                           <MdDelete className='ItemEditIcon' />
                                         </button>
                                       </Tooltip>
@@ -216,8 +224,9 @@ const Tipos = (props) => {
 
 const ConnectedTipos = connect((state) => {
   return {
-      TiposAtivos: state.TiposAtivos
+    TiposAtivos: state.TiposAtivos,
+    Ativos: state.Ativos
   }
 })(Tipos)
- 
+
 export default ConnectedTipos

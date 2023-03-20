@@ -33,9 +33,9 @@ export default function Ativos() {
             return <Accordion.Item key={Item.Id} eventKey={Index}>
               <Accordion.Header>{Item.Item}</Accordion.Header>
               <Accordion.Body>
-                <p>{Item.StorageLocatiom}</p>
+                <p>{Item.StorageLocation.Id}</p>
                 <p>{Item.Status}</p>
-                <p>{Item.Type}</p>
+                <p>{Item.Type.Id}</p>
                 <p>{Item.Usage}</p>
               </Accordion.Body>
             </Accordion.Item>

@@ -52,7 +52,7 @@ export const Users = [
     { Id: uuid(), AccessToken: '1234', Name: 'Vera Lucia Santos', Email: 'verasantos@serranoautomacao.com.br', Type: { ...Funcionario }, Sector: { ...Integracao } },
 ]
 
-//localStorage.setItem('AssetSenseUsers', JSON.stringify(Users)) 
+localStorage.setItem('AssetSenseUsers', JSON.stringify(Users)) 
 
 export const UserRoles = [
     { Id: uuid(), Role: 'Funcionário', IsAdmin: false },

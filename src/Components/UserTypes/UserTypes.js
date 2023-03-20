@@ -6,7 +6,7 @@ import { MdAddCircle, MdDelete, MdModeEditOutline, MdCancel } from "react-icons/
 import ListGroup from 'react-bootstrap/ListGroup';
 import { v4 } from 'uuid';
 import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
-import { NotificationAlerta, NotificationSucesso } from '../../NotificationUtils';
+import { NotificationAlerta, NotificationErro, NotificationSucesso } from '../../NotificationUtils';
 import { Tooltip } from 'react-tippy';
 import { GetTipos, SaveTipos } from './UserTypesUtils';
 import Loading from '../LoadingForTabs/Loading'
@@ -28,7 +28,7 @@ const UserTypes = (props) => {
       console.error(Erro)
       setLoaded(true)
     })
-  }, [props.TiposUsuarios]) 
+  }, [props.TiposUsuarios])
 
 
   const InitEditing = () => {
@@ -79,7 +79,7 @@ const UserTypes = (props) => {
         NotificationSucesso('Adição de Tipo', 'Tipo adicionado com sucesso!')
       })
 
-    }else{
+    } else {
       NotificationAlerta('Adição de Tipo', 'Este item já existe!')
     }
     setNewItemList('')
@@ -87,14 +87,25 @@ const UserTypes = (props) => {
   }
 
 
-  const HandleDeleteItem = (Index) => {
+  const HandleDeleteItem = (Index, Id) => {
     var ItensCopy = [...ListaDeItens]
     ItensCopy.splice(Index, 1);
 
-    SaveTipos(ItensCopy).then(() => {
-      setListaDeItens([...ItensCopy])
-      NotificationAlerta('Exclusão', 'Tipo excluído!')
-    })
+    const UserInThisItem = props.Usuarios.find(User => User.Type.Id === Id)
+
+    if (UserInThisItem) {
+      NotificationErro('Exclusão', 'Não é permitido excluir este item pois ainda há usuários associados a este Tipo')
+    } else {
+      SaveTipos(ItensCopy).then(() => {
+        setListaDeItens([...ItensCopy])
+        NotificationAlerta('Exclusão', 'Tipo excluído!')
+      })
+    }
+
+    /* SaveTipos(ItensCopy).then(() => {
+       setListaDeItens([...ItensCopy])
+       NotificationAlerta('Exclusão', 'Tipo excluído!')
+     })*/
 
   }
 
@@ -187,7 +198,7 @@ const UserTypes = (props) => {
                                       }
                                       {ItemListSelected === Item.Role &&
                                         <Tooltip title="Excluir Item" position="bottom" >
-                                          <button onClick={e => HandleDeleteItem(index)}>
+                                          <button onClick={e => HandleDeleteItem(index, Item.Id)}>
                                             <MdDelete className='ItemEditIcon' />
                                           </button>
                                         </Tooltip>
@@ -241,7 +252,8 @@ const UserTypes = (props) => {
 
 const ConnectedUserTypes = connect((state) => {
   return {
-    TiposUsuarios: state.TiposUsuarios
+    TiposUsuarios: state.TiposUsuarios,
+    Usuarios: state.Usuarios
   }
 })(UserTypes)
 
