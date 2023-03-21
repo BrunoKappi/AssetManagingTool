@@ -1,10 +1,10 @@
-.CustomGroupList {    
+.CustomGroupList {
     margin-top: 1rem;
     margin-bottom: 1rem;
 }
 
 .CustomGroupList span {
-    cursor: pointer; 
+    cursor: pointer;
 }
 
 
@@ -67,9 +67,6 @@
     padding: 5px;
 }
 
-.CustomGroupListItem form button svg {
-    color: var(--Dark) !important;
-}
 
 
 .CustomGroupListInput {
@@ -88,9 +85,12 @@
     font-family: var(--Fonte);
     background-color: var(--PrimaryBackground) !important;
     color: var(--PrimaryColor) !important;
+    user-select: none;
 }
 
-
+.EditableCustomListIcon {
+    color: var(--PrimaryBackground) !important;
+}
 
 
 /* CHECKBOX */
@@ -126,7 +126,7 @@
 
 /* When the checkbox is checked, add a blue background */
 .containerCheck input:checked~.checkmark {
-    background-color:var(--PrimaryBackground)
+    background-color: var(--PrimaryBackground)
 }
 
 /* Create the checkmark/indicator (hidden when not checked) */

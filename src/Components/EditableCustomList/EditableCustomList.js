@@ -201,7 +201,7 @@ const EditableCustomList = (props) => {
 
                                         <Tooltip title="Editar Item" position="bottom" >
                                           <button onClick={e => InitEditing(Item.Value)}>
-                                            <MdModeEditOutline className='ItemEditIcon' />
+                                            <MdModeEditOutline className='EditableCustomListIcon' />
                                           </button>
                                         </Tooltip>
                                       }
@@ -209,14 +209,14 @@ const EditableCustomList = (props) => {
                                       {ItemListSelected === Item.Value && EditingItem &&
                                         <Tooltip title="Cancelar" position="bottom" >
                                           <button onClick={e => EndEditing()}>
-                                            <MdCancel className='ItemEditIcon' />
+                                            <MdCancel className='EditableCustomListIcon' />
                                           </button>
                                         </Tooltip>
                                       }
                                       {ItemListSelected === Item.Value &&
                                         <Tooltip title="Excluir Item" position="bottom" >
                                           <button onClick={e => HandleDeleteItem(index, Item.Id)}>
-                                            <MdDelete className='ItemEditIcon' />
+                                            <MdDelete className='EditableCustomListIcon' />
                                           </button>
                                         </Tooltip>
                                       }
@@ -246,8 +246,8 @@ const EditableCustomList = (props) => {
                   <input maxLength={50} type="text" placeholder='Novo Item' value={NewItemList} onChange={e => setNewItemList(e.target.value)} />
 
                   <Tooltip title="Adicionar Item" position="bottom" >
-                    <button>
-                      <MdAddCircle />
+                    <button className='EditableCustomListAddButton'>
+                      <MdAddCircle className='EditableCustomListIcon' />
                     </button>
                   </Tooltip>
 
