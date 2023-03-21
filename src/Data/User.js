@@ -1,15 +1,15 @@
 import { uuidv4 as uuid } from "@firebase/util"
 
-const Integracao = { Id: '76253482-c751-44ec-806c-5243826c8141' }
-const Projeto = { Id: '2c2a875b-0c23-4942-9e4b-f882e9852713' }
-const RH = { Id: '55b8f96d-4a70-4670-b5cc-3faa6d1c2e9f' }
-const Admin = { Id: '4a75ee49-1f2f-469a-9398-cbc710d17df5' }
+const Integracao = { Id: '0e13d17c-082e-400b-bf25-6ed0aaec5d57' }
+const Projeto = { Id: '9268f2f9-249f-433c-880a-7dcd0492a466' }
+const RH = { Id: 'ad01ba2f-aa9a-47a2-a771-1fee98ef54a5' }
+const Admin = { Id: 'ea05229e-658a-415a-bc23-62cebd0bbe96' }
 
 
-const Funcionario = { Id: '4062de42-2ba2-4c79-8312-3f6f96afbd1b' }
-const TipoAdmin = { Id: '35f712d7-40fa-4f7f-a3eb-68a233534549' }
+const Funcionario = { Id: 'c1bedd8c-e439-49a1-86ce-c927ee1973dc' }
+const TipoAdmin = { Id: 'c60f21df-606f-4440-9202-d7506bc3022c' }
 
- 
+
 export const Users = [
     { Id: uuid(), AccessToken: '1234', Name: 'Betina Goldani', Email: 'betinagoldani@serranoautomacao.com.br', Type: { ...TipoAdmin }, Sector: { ...Admin } },
     { Id: uuid(), AccessToken: '1234', Name: 'Bruno Kappi', Email: 'brunokappi@serranoautomacao.com.br', Type: { ...TipoAdmin }, Sector: { ...Integracao } },
@@ -52,13 +52,13 @@ export const Users = [
     { Id: uuid(), AccessToken: '1234', Name: 'Vera Lucia Santos', Email: 'verasantos@serranoautomacao.com.br', Type: { ...Funcionario }, Sector: { ...Integracao } },
 ]
 
-localStorage.setItem('AssetSenseUsers', JSON.stringify(Users)) 
+//localStorage.setItem('AssetSenseUsers', JSON.stringify(Users))
 
 export const UserRoles = [
-    { Id: uuid(), Role: 'Funcionário', IsAdmin: false },
-    { Id: uuid(), Role: 'Cliente', IsAdmin: false },
-    { Id: uuid(), Role: 'Administrador', IsAdmin: true },
-    { Id: uuid(), Role: 'Gerente', IsAdmin: true }
+    { Id: uuid(), Value: 'Funcionário', IsAdmin: false },
+    { Id: uuid(), Value: 'Cliente', IsAdmin: false },
+    { Id: uuid(), Value: 'Administrador', IsAdmin: true },
+    { Id: uuid(), Value: 'Gerente', IsAdmin: true }
 ]
 
 export const DefaultUserRole = { Id: '', Role: '', IsAdmin: false }

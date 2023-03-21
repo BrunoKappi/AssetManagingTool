@@ -6,7 +6,7 @@ export default function TypesNumbers(props) {
         <div className='TypeNumberContainer'>
             {props.Types.map(Type => {
                 return <div className='TypeNumberItem'>
-                    <span className='TypeNumberName'>{Type.Role}</span>
+                    <span className='TypeNumberName'>{Type.Value}</span>
                     <span className='TypeNumberQtd'>{Type.Qtd}</span>
                 </div>
             })}

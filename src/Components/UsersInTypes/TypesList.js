@@ -9,20 +9,21 @@ import { RiUser3Fill } from 'react-icons/ri';
 import { MdVerifiedUser } from 'react-icons/md';
 import { ImCheckboxUnchecked, ImCheckboxChecked } from 'react-icons/im';
 import { Tooltip } from 'react-tippy';
-import { SaveTipos } from '../UserTypes/UserTypesUtils';
 import { NotificationSucesso } from '../../NotificationUtils';
+import { SaveUserTipos } from '../EditableCustomList/EditableCustomListUtils';
 
 const TypesList = (props) => {
 
 
   const [ListaDeItens,] = useState([...props.Users.filter(User => User.Type.Id === props.TipoUsuario.Id)]);
 
+  console.log([...props.Users.filter(User => User.Type.Id === props.TipoUsuario.Id)])
 
   const HandleSubmiChangePermit = (Type) => {
     var ItensCopy = [...props.UserTypes]
     const IndexOfType = ItensCopy.indexOf(Type)
     ItensCopy[IndexOfType].IsAdmin = !ItensCopy[IndexOfType].IsAdmin
-    SaveTipos(ItensCopy).then(() => {
+    SaveUserTipos(ItensCopy).then(() => {
       NotificationSucesso('Alteração', 'Permissões alteradas com sucesso!')
     })
   }
@@ -34,7 +35,7 @@ const TypesList = (props) => {
 
         <ListGroup as="ul">
           <ListGroup.Item as="li" className='ShowOnlyCustomGroupListTitle' >
-            {props.TipoUsuario.Role}
+            {props.TipoUsuario.Value}
             <Tooltip title="Possui permissões de Administrador" position="bottom" >
               {props.TipoUsuario.IsAdmin ? <ImCheckboxChecked className='ShowOnlyCustomGroupListCheckbox' onClick={e => HandleSubmiChangePermit(props.TipoUsuario)} /> : <ImCheckboxUnchecked className='ShowOnlyCustomGroupListCheckbox' onClick={e => HandleSubmiChangePermit(props.TipoUsuario)} />}
             </Tooltip>

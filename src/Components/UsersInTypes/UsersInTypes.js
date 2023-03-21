@@ -24,7 +24,7 @@ const UsersInTypes = (props) => {
     const [TiposUsuarios, setTiposUsuarios] = useState([
         ...props.TiposUsuarios.map(element => {
             var Users = props.Usuarios.filter(el => el.Type.Id === element.Id).length
-            return { Id: element.Id, Role: element.Role, Qtd: Users }
+            return { Id: element.Id, Value: element.Value, Qtd: Users }
         })])
 
 
@@ -33,7 +33,7 @@ const UsersInTypes = (props) => {
         setTiposUsuarios([
             ...props.TiposUsuarios.map(element => {
                 var Users = props.Usuarios.filter(el => el.Type.Id === element.Id).length
-                return { Id: element.Id, Role: element.Role, Qtd: Users }
+                return { Id: element.Id, Value: element.Value, Qtd: Users }
             })])
     }, [props.Usuarios, props.TiposUsuarios])
 

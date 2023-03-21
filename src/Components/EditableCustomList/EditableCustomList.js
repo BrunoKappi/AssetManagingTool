@@ -1,18 +1,19 @@
 import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
-import './UserTypes.css'
+import './EditableCustomList.css'
 //ICONES
 import { MdAddCircle, MdDelete, MdModeEditOutline, MdCancel } from "react-icons/md";
 import ListGroup from 'react-bootstrap/ListGroup';
 import { v4 } from 'uuid';
 import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
+import { DefaultItemType } from '../../Data/Items';
 import { NotificationAlerta, NotificationErro, NotificationSucesso } from '../../NotificationUtils';
 import { Tooltip } from 'react-tippy';
-import { GetTipos, SaveTipos } from './UserTypesUtils';
+import { GetTipos, SaveTipos, GetSetores, SaveSetores, GetUserTipos, SaveUserTipos, GetLocaisArmazenamento, SaveLocaisArmazenamento } from './EditableCustomListUtils';
 import Loading from '../LoadingForTabs/Loading'
-import { DefaultUserRole } from '../../Data/User';
 
-const UserTypes = (props) => {
+
+const EditableCustomList = (props) => {
 
   const [ItemListSelected, setItemListSelected] = useState('');
   const [NewItemList, setNewItemList] = useState('');
@@ -20,93 +21,109 @@ const UserTypes = (props) => {
   const [EditingItem, setEditingItem] = useState(false);
   const [ListaDeItens, setListaDeItens] = useState([]);
 
+
   useEffect(() => {
-    GetTipos().then((Lista) => {
+    // Define um objeto de mapeamento que relaciona o nome do módulo/prop com a função get correspondente
+    const fetchFunctions = {
+      TiposAtivos: GetTipos,
+      Setores: GetSetores,
+      TiposUsuarios: GetUserTipos,
+      Locais: GetLocaisArmazenamento
+    };
+
+    // Procura a função get correspondente com base no nome do módulo/prop
+    const fetchFunction = fetchFunctions[props.Module] || (() => Promise.resolve());
+
+    // Executa a função get e atualiza o estado com o resultado
+    fetchFunction().then((Lista) => {
       setListaDeItens(Lista)
       setLoaded(true)
     }).catch(Erro => {
       console.error(Erro)
       setLoaded(true)
-    })
-  }, [props.TiposUsuarios])
+    });
+  }, [props.Module, props.TiposAtivos, props.Setores, props.TiposUsuarios, props.LocaisArmazenamento]);
 
 
-  const InitEditing = () => {
-    setEditingItem(true)
-  }
 
-  const EndEditing = () => {
-    setEditingItem(false)
-  }
+
+
+
+
+  const InitEditing = () => { setEditingItem(true) }
+  const EndEditing = () => { setEditingItem(false) }
+
+  const saveFunctions = {
+    "TiposAtivos": SaveTipos,
+    "Setores": SaveSetores,
+    "TiposUsuarios": SaveUserTipos,
+    "Locais": SaveLocaisArmazenamento,
+  };
 
   const HandleSubmiChangeItemName = (e, index, ID) => {
-    e.preventDefault()
-    var ItensCopy = [...ListaDeItens]
-    ItensCopy[index].Role = document.getElementById(ID).value
-    SaveTipos(ItensCopy).then(() => {
-      setListaDeItens([...ItensCopy])
-      EndEditing()
-      NotificationSucesso('Alteração', 'Item alterado com Sucesso!')
-    })
-  }
+    e.preventDefault();
+    var ItensCopy = [...ListaDeItens];
+    ItensCopy[index].Value = document.getElementById(ID).value;
 
-
-  const HandleSubmiChangePermit = (index) => {
-
-    var ItensCopy = [...ListaDeItens]
-    ItensCopy[index].IsAdmin = !ItensCopy[index].IsAdmin
-    SaveTipos(ItensCopy).then(() => {
-      setListaDeItens([...ItensCopy])
-      EndEditing()
-      NotificationSucesso('Alteração', 'Permissões alteradas com sucesso!')
-    })
-  }
-
-
+    const saveFunction = saveFunctions[props.Module];
+    if (saveFunction) {
+      saveFunction(ItensCopy).then(() => {
+        setListaDeItens([...ItensCopy]);
+        EndEditing();
+        NotificationSucesso('Alteração', 'Item alterado com Sucesso!');
+      });
+    }
+  };
 
   const HandleSubmiAddItem = (e) => {
     e.preventDefault()
-    const Find = ListaDeItens.find(Item => Item.Role.toLocaleLowerCase() === NewItemList.toLocaleLowerCase())
+    const Find = ListaDeItens.find(Item => Item.Value.toLocaleLowerCase() === NewItemList.toLocaleLowerCase())
+
     if (!Find && NewItemList) {
       var ItensCopy = [...ListaDeItens]
-      const NewItem = { ...DefaultUserRole, Id: v4(), Role: NewItemList }
+      const NewItem = { ...DefaultItemType, Id: v4(), Value: NewItemList }
       ItensCopy.push(NewItem)
 
-
-      SaveTipos(ItensCopy).then(() => {
-        setListaDeItens([...ItensCopy])
-        setNewItemList('')
-        NotificationSucesso('Adição de Tipo', 'Tipo adicionado com sucesso!')
-      })
+      //Chama a função de salvamento correta usando o objeto saveFunctions
+      const saveFunction = saveFunctions[props.Module];
+      if (saveFunction) {
+        saveFunction(ItensCopy).then(() => {
+          setListaDeItens([...ItensCopy])
+          setNewItemList('')
+        });
+      }
 
     } else {
       NotificationAlerta('Adição de Tipo', 'Este item já existe!')
     }
     setNewItemList('')
-
   }
 
 
   const HandleDeleteItem = (Index, Id) => {
     var ItensCopy = [...ListaDeItens]
-    ItensCopy.splice(Index, 1);
+    ItensCopy.splice(Index, 1)
 
-    const UserInThisItem = props.Usuarios.find(User => User.Type.Id === Id)
+    var Associated
 
-    if (UserInThisItem) {
-      NotificationErro('Exclusão', 'Não é permitido excluir este item pois ainda há usuários associados a este Tipo')
+    if (props.Module === "TiposAtivos")
+      Associated = props.Ativos.find(Ativo => Ativo.Type.Id === Id)
+    else if (props.Module === "Setores")
+      Associated = props.Usuarios.find(User => User.Sector.Id === Id)
+    else if (props.Module === "TiposUsuarios")
+      Associated = props.Usuarios.find(User => User.Type.Id === Id)
+    else if (props.Module === "Locais")
+      Associated = props.Ativos.find(Ativo => Ativo.StorageLocation.Id === Id)
+
+    const saveFunction = saveFunctions[props.Module]
+
+    if (Associated) {
+      NotificationErro('Exclusão', 'Não é possível excluir este item')
     } else {
-      SaveTipos(ItensCopy).then(() => {
+      saveFunction(ItensCopy).then(() => {
         setListaDeItens([...ItensCopy])
-        NotificationAlerta('Exclusão', 'Tipo excluído!')
       })
     }
-
-    /* SaveTipos(ItensCopy).then(() => {
-       setListaDeItens([...ItensCopy])
-       NotificationAlerta('Exclusão', 'Tipo excluído!')
-     })*/
-
   }
 
 
@@ -117,13 +134,24 @@ const UserTypes = (props) => {
     const copiedItems = [...ListaDeItens];
     const [removed] = copiedItems.splice(IndexSource, 1);
     copiedItems.splice(IndexDestination, 0, removed);
-
-
-    SaveTipos(copiedItems).then(() => {
+    const saveFunction = saveFunctions[props.Module]
+    saveFunction(copiedItems).then(() => {
       setListaDeItens([...copiedItems])
     })
-
   }
+
+
+
+  const HandleSubmiChangePermit = (index) => {
+    var ItensCopy = [...ListaDeItens]
+    ItensCopy[index].IsAdmin = !ItensCopy[index].IsAdmin
+    SaveUserTipos(ItensCopy).then(() => {
+      setListaDeItens([...ItensCopy])
+      EndEditing()
+      NotificationSucesso('Alteração', 'Permissões alteradas com sucesso!')
+    })
+  }
+
 
   return (
     <div>
@@ -136,67 +164,58 @@ const UserTypes = (props) => {
 
           <ListGroup as="ul">
             <ListGroup.Item as="li" className='CustomGroupListTitle' >
-              Tipos de Usuários
+              {props.Title}
             </ListGroup.Item>
             <DragDropContext onDragEnd={(result) => { HandleDrag(result) }}>
               <Droppable droppableId={'Tipos'} key={'Tipos'}>
                 {(provided) => {
                   return (
-
                     <div {...provided.droppableProps} ref={provided.innerRef}>
                       {ListaDeItens.map((Item, index) => {
                         return <Draggable key={Item.Id} draggableId={Item.Id} index={index} >
                           {(DragProvided) => {
                             return (
                               <div ref={DragProvided.innerRef} {...DragProvided.draggableProps} {...DragProvided.dragHandleProps}>
-                                <ListGroup.Item key={Item.Role + v4()} action as="li">
+                                <ListGroup.Item key={Item.Value + v4()} action as="li">
                                   <div className='UserTypesRow'>
-                                    <Tooltip title="Permissões de Administrador" position="bottom" >
+                                    {props.Module === "TiposUsuarios" && <Tooltip title="Permissões de Administrador" position="bottom" >
                                       <label class="containerCheck">
                                         <input checked={Item.IsAdmin} onChange={e => HandleSubmiChangePermit(index)} type="checkbox"></input>
                                         <div class="checkmark"></div>
                                       </label>
                                     </Tooltip>
-                                    <span className='CustomGroupListItem' onClick={e => { setItemListSelected(Item.Role); }}>
+                                    }
+                                    <span className='CustomGroupListItem' onClick={e => { setItemListSelected(Item.Value); }}>
 
-                                      {EditingItem && ItemListSelected !== Item.Role && <span onClick={e => { setEditingItem(false); }}> {Item.Role}</span>}
+                                      {EditingItem && ItemListSelected !== Item.Value && <span onClick={e => { setEditingItem(false); }}> {Item.Value}</span>}
 
-                                      {!EditingItem && <span onDoubleClick={e => InitEditing(Item.Role)}> {Item.Role}</span>
-
-                                      }
-
-
-
-
-
-                                      {ItemListSelected === Item.Role && EditingItem &&
-                                        <>
-
-
-                                          <form className='AdminForm' onSubmit={e => HandleSubmiChangeItemName(e, index, Item.Role)}>
-                                            <input maxLength={50} className='CustomGroupListInput' defaultValue={Item.Role} id={Item.Role} type="text" />
-                                          </form>
-                                        </>
+                                      {!EditingItem && <span onDoubleClick={e => InitEditing(Item.Value)}> {Item.Value}</span>
 
                                       }
 
-                                      {ItemListSelected === Item.Role && !EditingItem &&
+                                      {ItemListSelected === Item.Value && EditingItem &&
+                                        <form onSubmit={e => HandleSubmiChangeItemName(e, index, Item.Value)}>
+                                          <input maxLength={50} className='CustomGroupListInput' defaultValue={Item.Value} id={Item.Value} type="text" />
+                                        </form>
+                                      }
+
+                                      {ItemListSelected === Item.Value && !EditingItem &&
 
                                         <Tooltip title="Editar Item" position="bottom" >
-                                          <button onClick={e => InitEditing(Item.Role)}>
+                                          <button onClick={e => InitEditing(Item.Value)}>
                                             <MdModeEditOutline className='ItemEditIcon' />
                                           </button>
                                         </Tooltip>
                                       }
 
-                                      {ItemListSelected === Item.Role && EditingItem &&
+                                      {ItemListSelected === Item.Value && EditingItem &&
                                         <Tooltip title="Cancelar" position="bottom" >
                                           <button onClick={e => EndEditing()}>
                                             <MdCancel className='ItemEditIcon' />
                                           </button>
                                         </Tooltip>
                                       }
-                                      {ItemListSelected === Item.Role &&
+                                      {ItemListSelected === Item.Value &&
                                         <Tooltip title="Excluir Item" position="bottom" >
                                           <button onClick={e => HandleDeleteItem(index, Item.Id)}>
                                             <MdDelete className='ItemEditIcon' />
@@ -226,7 +245,7 @@ const UserTypes = (props) => {
             <ListGroup.Item action as="li">
               <span className='CustomGroupListItem' >
                 <form onSubmit={HandleSubmiAddItem} className='CustomGroupListItem'>
-                  <input maxLength={50} type="text" placeholder='Novo Tipo' value={NewItemList} onChange={e => setNewItemList(e.target.value)} />
+                  <input maxLength={50} type="text" placeholder='Novo Item' value={NewItemList} onChange={e => setNewItemList(e.target.value)} />
 
                   <Tooltip title="Adicionar Item" position="bottom" >
                     <button>
@@ -250,11 +269,16 @@ const UserTypes = (props) => {
 }
 
 
-const ConnectedUserTypes = connect((state) => {
+
+const ConnectedEditableCustomList = connect((state) => {
   return {
+    TiposAtivos: state.TiposAtivos,
     TiposUsuarios: state.TiposUsuarios,
+    Ativos: state.Ativos,
+    Setores: state.Setores,
+    LocaisArmazenamento: state.LocaisArmazenamento,
     Usuarios: state.Usuarios
   }
-})(UserTypes)
+})(EditableCustomList)
 
-export default ConnectedUserTypes
+export default ConnectedEditableCustomList

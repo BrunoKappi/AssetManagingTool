@@ -1,15 +1,13 @@
 import { v4 as uuid } from 'uuid';
 
-const DefaultAtivoType = { Id: '48b58dbe-a0ba-4c26-9597-ee0f0459e939' }
-const DefaultAtivoType2 = { Id: '3fa67f72-b829-40d8-8340-ae21c32648e5' }
-
+const DefaultAtivoType = { Id: '5c292f1a-1fc1-400b-b44c-ca0fa68458ad' }
+const DefaultAtivoType2 = { Id: '9bff9e15-f30d-4287-891b-565389906a35' }
 
 
 //LOCAIS
-
-const DefaultStorageLocation = { Id: '79c84f4e-345e-4596-9605-4e6c357c3385' }
-const DefaultStorageLocation1 = { Id: '4710e349-be76-42e7-ba24-cfb0dd8f7f7b' }
-const DefaultStorageLocation2 = { Id: '46971485-1e12-4a03-9fbf-c5a62ca4e756' }
+const DefaultStorageLocation = { Id: 'e82d2066-400b-4ce1-9b2e-03036ee39ab2' }
+const DefaultStorageLocation1 = { Id: 'bea3c1c6-9514-4920-8bab-fa6ef5863fc6' }
+const DefaultStorageLocation2 = { Id: '86cf98c9-69e0-46e0-b817-f718c61e26a4' }
 
 export const Items = [
     { Id: uuid(), StorageLocation: { ...DefaultStorageLocation1 }, Item: 'CONVERSOR USB SERIAL', Type: { ...DefaultAtivoType }, Status: 'Disponivel', Records: [], Usage: 'Momentaneo' },
@@ -61,23 +59,23 @@ export const Items = [
     { Id: uuid(), StorageLocation: { ...DefaultStorageLocation2 }, Item: 'Case HD externo 3.0', Type: { ...DefaultAtivoType2 }, Status: 'Disponivel', Records: [], Usage: 'Momentaneo' },
 ]
 
-//localStorage.setItem('AssetSenseAtivos', JSON.stringify(Items))
+localStorage.setItem('AssetSenseAtivos', JSON.stringify(Items))
 
 export const ItemTypes = [
-    { Id: uuid(), Type: 'Cabo' },
-    { Id: uuid(), Type: 'Equipamento' }
+    { Id: uuid(), Value: 'Cabo' },
+    { Id: uuid(), Value: 'Equipamento' }
 ]
 
 //localStorage.setItem('AssetSenseTipos', JSON.stringify(ItemTypes))
 
-export const DefaultItemType = { Id: uuid(), Type: '' }
+
 
 
 export const Setores = [
-    { Id: uuid(), Setor: 'Integração' },
-    { Id: uuid(), Setor: 'Projeto' },
-    { Id: uuid(), Setor: 'Administrativo' },
-    { Id: uuid(), Setor: 'RH' },
+    { Id: uuid(), Value: 'Integração' },
+    { Id: uuid(), Value: 'Projeto' },
+    { Id: uuid(), Value: 'Administrativo' },
+    { Id: uuid(), Value: 'RH' },
 ]
 
 //localStorage.setItem('AssetSenseSetores', JSON.stringify(Setores))
@@ -86,23 +84,18 @@ export const Setores = [
 
 
 export const LocaisDeArmazenamento = [
-    { Id: uuid(), Local: 'Armário da Integração' },
-    { Id: uuid(), Local: 'Armário Administrativo' },
-    { Id: uuid(), Local: 'Projeto' }
+    { Id: uuid(), Value: 'Armário da Integração' },
+    { Id: uuid(), Value: 'Armário Administrativo' },
+    { Id: uuid(), Value: 'Projeto' }
 ]
 
 //localStorage.setItem('AssetSenseLocaisArmazenamento', JSON.stringify(LocaisDeArmazenamento))
 
 
 
-
-
-
-
-
-
-export const DefaultSetor = { Id: uuid(), Setor: '' }
-export const DefaultLocal = { Id: uuid(), Local: '' }
+export const DefaultSetor = { Id: uuid(), Value: '' }
+export const DefaultLocal = { Id: uuid(), Value: '' } 
+export const DefaultItemType = { Id: uuid(), Value: '' }
 
 export const DefaultRecord = {
     Id: uuid(),

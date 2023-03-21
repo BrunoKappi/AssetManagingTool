@@ -12,7 +12,7 @@ import UsersInSetores from '../UsersInSetores/UsersInSetores';
 import UsersInTypes from '../UsersInTypes/UsersInTypes';
 
 
-
+ 
 
 export default function Users() {
   const [ListaDeUsuarios, setListaDeUsuarios] = useState([])
@@ -59,7 +59,7 @@ export default function Users() {
                   <Accordion.Body>
                     <p>{Item.Name}</p>
                     <p>{Item.Email}</p>
-                    <p>{Item.Type.Role}</p>
+                    <p>{Item.Type.value}</p>
                   </Accordion.Body>
                 </Accordion.Item>
               })}

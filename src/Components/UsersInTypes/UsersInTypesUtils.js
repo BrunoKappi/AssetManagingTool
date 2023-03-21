@@ -23,8 +23,8 @@ export async function GetUsersTypes(gerarErro = false) {
                 if (localStorage.getItem('AssetSenseUsersTypes')) {
                     const Types = JSON.parse(localStorage.getItem('AssetSenseUsersTypes')).map((role) => {
                         return {
-                            value: role.Role,
-                            label: role.Role,
+                            value: role.Value,
+                            label: role.Value,
                         };
                     });
                     Types.push({ value: 'Todos', label: 'Todos' })
@@ -79,7 +79,7 @@ export const DefaultTypesProps = {
 export const GetOptionsAndSeries = (Usuarios, TiposUsuarios) => {
     const Options = { ...DefaultTypesProps }
     const TiposUsuariosIds = [...TiposUsuarios.map(element => { return element.Id })]
-    const TiposUsuariosLabels = [...TiposUsuarios.map(element => { return element.Role })]
+    const TiposUsuariosLabels = [...TiposUsuarios.map(element => { return element.Value })]
     const TiposUsuariosQtd = [...TiposUsuarios.map(element => { return 0 })]
     var TiposUsuariosQtdCopy = [...TiposUsuariosQtd]
 

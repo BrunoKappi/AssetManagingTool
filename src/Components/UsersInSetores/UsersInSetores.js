@@ -13,7 +13,7 @@ const UsersInSetores = (props) => {
     const [Setores, setSetores] = useState([
         ...props.Setores.map(element => {
             var Users = props.Usuarios.filter(el => el.Sector.Id === element.Id).length
-            return { Id: element.Id, Setor: element.Setor, Qtd: Users }
+            return { Id: element.Id, Value: element.Value, Qtd: Users }
         })])
 
 
@@ -24,7 +24,7 @@ const UsersInSetores = (props) => {
         setSetores([
             ...props.Setores.map(element => {
                 var Users = props.Usuarios.filter(el => el.Sector.Id === element.Id).length
-                return { Id: element.Id, Setor: element.Setor, Qtd: Users }
+                return { Id: element.Id, Value: element.Value, Qtd: Users }
             })])
     }, [props.Usuarios, props.Setores])
 
@@ -64,7 +64,7 @@ const UsersInSetores = (props) => {
                     {props.Setores.map((Setor, Index) => {
                         return <SectorList key={v4()} Setor={Setor} Users={props.Usuarios} UserTypes={props.TiposUsuarios} />
                     })}
-
+ 
                 </Masonry>
             </div >
         </DragDropContext>

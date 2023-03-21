@@ -6,7 +6,7 @@ export default function SetorsNumbers(props) {
         <div className='SetorsNumberContainer'>
             {props.Setores.map(Type => {
                 return <div className='SetorsNumberItem'>
-                    <span className='SetorsNumberName'>{Type.Setor}</span>
+                    <span className='SetorsNumberName'>{Type.Value}</span>
                     <span className='SetorsNumberQtd'>{Type.Qtd}</span>
                 </div>
             })}
