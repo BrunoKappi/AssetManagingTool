@@ -39,7 +39,7 @@ const UsersInSetores = (props) => {
     const HandleDrag = (Resultado) => {
         console.log(Resultado)
         if (!Resultado.destination) return;
-        const SectorDestinationID = Resultado.destination.droppableId;
+        const SectorDestinationID = Resultado.destination.droppableId.split("/")[0];
         const UserId = Resultado.draggableId
 
         const User = props.Usuarios.find(U => U.Id === UserId)

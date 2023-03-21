@@ -1,32 +1,30 @@
-import './AtivosInTypes.css'
+import './AtivosInLocais.css'
 import { useState, useEffect } from 'react';
-import TypesList from './TypesList'
+import LocaisList from './LocaisList'
 import Masonry from "react-masonry-css";
 import { DragDropContext } from "react-beautiful-dnd";
 import { v4 } from 'uuid';
 import { connect } from 'react-redux'
-import SetorsNumbers from './TiposNumbers';
+import LocaisNumbers from './LocaisNumbers';
 import { SaveAtivos } from '../Ativos/AtivosUtils';
 
-const AtivosInTypes = (props) => {
+const AtivosInLocais = (props) => {
 
-    const [TiposAtivos, setTiposAtivos] = useState([
-        ...props.TiposAtivos.map(element => {
-            var AtivosQtd = props.Ativos.filter(el => el.Type.Id === element.Id).length
-            return { Id: element.Id, Value: element.Value, Qtd: AtivosQtd }
+    const [LocaisArmazenamento, setLocaisArmazenamento] = useState([
+        ...props.LocaisArmazenamento.map(element => {
+            var Qtd = props.Ativos.filter(el => el.StorageLocation.Id === element.Id).length
+            return { Id: element.Id, Value: element.Value, Qtd: Qtd }
         })])
 
 
 
-
-
     useEffect(() => {
-        setTiposAtivos([
-            ...props.TiposAtivos.map(element => {
-                var AtivosQtd = props.Ativos.filter(el => el.Type.Id === element.Id).length
-                return { Id: element.Id, Value: element.Value, Qtd: AtivosQtd }
+        setLocaisArmazenamento([
+            ...props.LocaisArmazenamento.map(element => {
+                var Qtd = props.Ativos.filter(el => el.StorageLocation.Id === element.Id).length
+                return { Id: element.Id, Value: element.Value, Qtd: Qtd }
             })])
-    }, [props.Ativos, props.TiposAtivos])
+    }, [props.Ativos, props.LocaisArmazenamento])
 
 
     const breakpointColumnsObj = {
@@ -45,7 +43,7 @@ const AtivosInTypes = (props) => {
 
         const Ativo = props.Ativos.find(U => U.Id === ItemId)
         const IndexOfAtivo = props.Ativos.indexOf(Ativo)
-        Ativo.Type.Id = TypeDestinationID
+        Ativo.StorageLocation.Id = TypeDestinationID
 
         const copiedItems = [...props.Ativos];
         copiedItems[IndexOfAtivo] = { ...Ativo }
@@ -55,14 +53,14 @@ const AtivosInTypes = (props) => {
 
     return (
         <DragDropContext onDragEnd={(result) => { HandleDrag(result) }}>
-            <div className='AtivosInTypesContainer'>
+            <div className='AtivosInLocaisContainer'>
 
-                <SetorsNumbers TiposAtivos={TiposAtivos} />
+                <LocaisNumbers LocaisArmazenamento={LocaisArmazenamento} />
 
                 <Masonry breakpointCols={breakpointColumnsObj} className="my-masonry-grid" columnClassName="my-masonry-grid_column"   >
 
-                    {props.TiposAtivos.map((TipoAtivo, Index) => {
-                        return <TypesList key={v4()} TipoAtivo={TipoAtivo} Ativos={props.Ativos}  />
+                    {props.LocaisArmazenamento.map((LocalArmazenamento, Index) => {
+                        return <LocaisList key={v4()} LocalArmazenamento={LocalArmazenamento} Ativos={props.Ativos} />
                     })}
 
                 </Masonry>
@@ -75,13 +73,14 @@ const AtivosInTypes = (props) => {
 
 
 
-const ConnectedAtivosInTypes = connect((state) => {
+const ConnectedAtivosInLocais = connect((state) => {
     return {
         Ativos: state.Ativos,
         Usuarios: state.Usuarios,
         TiposUsuarios: state.TiposUsuarios,
-        TiposAtivos: state.TiposAtivos
+        TiposAtivos: state.TiposAtivos,
+        LocaisArmazenamento: state.LocaisArmazenamento
     }
-})(AtivosInTypes)
+})(AtivosInLocais)
 
-export default ConnectedAtivosInTypes
+export default ConnectedAtivosInLocais

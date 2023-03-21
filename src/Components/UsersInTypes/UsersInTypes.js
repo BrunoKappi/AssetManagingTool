@@ -42,7 +42,7 @@ const UsersInTypes = (props) => {
 
     const HandleDrag = (Resultado) => {
         if (!Resultado.destination) return;
-        const TypeDestinationID = Resultado.destination.droppableId;
+        const TypeDestinationID = Resultado.destination.droppableId.split("/")[0];
         const UserId = Resultado.draggableId
         const User = props.Usuarios.find(U => U.Id === UserId)
         const IndexOfUser = props.Usuarios.indexOf(User)

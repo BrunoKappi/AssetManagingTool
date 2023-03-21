@@ -157,6 +157,10 @@ export const GetNotificationExistsMessageAdd = (Module) => {
 
 
 
+
+
+
+
 //////////// TIPOS ATIVOS //////////////////
 
 export async function GetTipos(gerarErro = false) {

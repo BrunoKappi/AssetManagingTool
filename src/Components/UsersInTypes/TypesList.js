@@ -7,17 +7,18 @@ import { v4 } from 'uuid';
 import { Draggable, Droppable } from "react-beautiful-dnd";
 import { RiUser3Fill } from 'react-icons/ri';
 import { MdVerifiedUser } from 'react-icons/md';
+import { FaUsersCog } from 'react-icons/fa';
 import { ImCheckboxUnchecked, ImCheckboxChecked } from 'react-icons/im';
 import { Tooltip } from 'react-tippy';
 import { NotificationSucesso } from '../../NotificationUtils';
 import { SaveUserTipos } from '../EditableCustomList/EditableCustomListUtils';
- 
-const TypesList = (props) => { 
+
+const TypesList = (props) => {
 
 
   const [ListaDeItens,] = useState([...props.Users.filter(User => User.Type.Id === props.TipoUsuario.Id)]);
 
-  console.log([...props.Users.filter(User => User.Type.Id === props.TipoUsuario.Id)])
+  //console.log([...props.Users.filter(User => User.Type.Id === props.TipoUsuario.Id)])
 
   const HandleSubmiChangePermit = (Type) => {
     var ItensCopy = [...props.UserTypes]
@@ -31,17 +32,19 @@ const TypesList = (props) => {
 
   return (
     <div>
-      <div className='ShowOnlyCustomGroupList'>
+      <div className='UserTypesShowOnlyCustomGroupList'>
 
         <ListGroup as="ul">
-          <ListGroup.Item as="li" className='ShowOnlyCustomGroupListTitle' >
-            {props.TipoUsuario.Value}
+          <ListGroup.Item as="li" className='UserTypesShowOnlyCustomGroupListTitle' >
+            <Tooltip title="Arraste e solte ítens nesta área" position="bottom" >
+              <span className='UserTypesShowOnlyCustomGroupListTitleSpan'> <FaUsersCog/> { props.TipoUsuario.Value }</span>
+            </Tooltip>
             <Tooltip title="Possui permissões de Administrador" position="bottom" >
-              {props.TipoUsuario.IsAdmin ? <ImCheckboxChecked className='ShowOnlyCustomGroupListCheckbox' onClick={e => HandleSubmiChangePermit(props.TipoUsuario)} /> : <ImCheckboxUnchecked className='ShowOnlyCustomGroupListCheckbox' onClick={e => HandleSubmiChangePermit(props.TipoUsuario)} />}
+              {props.TipoUsuario.IsAdmin ? <ImCheckboxChecked className='UserTypesShowOnlyCustomGroupListCheckbox' onClick={e => HandleSubmiChangePermit(props.TipoUsuario)} /> : <ImCheckboxUnchecked className='UserTypesShowOnlyCustomGroupListCheckbox' onClick={e => HandleSubmiChangePermit(props.TipoUsuario)} />}
             </Tooltip>
           </ListGroup.Item>
 
-          <Droppable droppableId={props.TipoUsuario.Id} key={props.TipoUsuario.Id}>
+          <Droppable droppableId={props.TipoUsuario.Id + '/' +  v4()} key={props.TipoUsuario.Id + '/' +  v4()}>
             {(provided, snapshot) => {
               return (
                 <div className={snapshot.isDraggingOver ? 'MarginBottom' : ''} {...provided.droppableProps} ref={provided.innerRef}>
@@ -53,14 +56,14 @@ const TypesList = (props) => {
                         return (
                           <div ref={DragProvided.innerRef} {...DragProvided.draggableProps} {...DragProvided.dragHandleProps}>
                             <ListGroup.Item key={Item.Name + v4()} >
-                              <span className='ShowOnlyCustomGroupListItem'>
+                              <span className='UserTypesShowOnlyCustomGroupListItem'>
                                 {IsAdmin ?
                                   <Tooltip title="Possui permissões de Administrador" position="bottom" >
-                                    <MdVerifiedUser className='ShowOnlyCustomGroupIcon' />
+                                    <MdVerifiedUser className='UserTypesShowOnlyCustomGroupIcon' />
                                   </Tooltip>
                                   :
                                   <Tooltip title="Não possui permissões de Administrador" position="bottom" >
-                                    <RiUser3Fill className='ShowOnlyCustomGroupIcon' />
+                                    <RiUser3Fill className='UserTypesShowOnlyCustomGroupIcon' />
                                   </Tooltip>
                                 }
                                 <span> {Item.Name}</span>
@@ -87,8 +90,8 @@ const TypesList = (props) => {
                   <div  {...provided.droppableProps} ref={provided.innerRef}>
 
                     <Tooltip title="Arraste e solte usuários nesta área" position="bottom" >
-                      <span className='ShowOnlyCustomGroupListItem'>
-                        <span className='ShowOnlyCustomGroupListItemSpan'>Nenhum Usuário</span>
+                      <span className='UserTypesShowOnlyCustomGroupListItem'>
+                        <span className='UserTypesShowOnlyCustomGroupListItemSpan'>Nenhum Usuário</span>
                       </span>
                     </Tooltip>
                   </div>

@@ -1,4 +1,4 @@
-.AtivosTypesNumbersContainer {
+.LocaisNumberContainer {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -8,11 +8,11 @@
     margin-bottom: 1rem;
 }
 
-.AtivosTypesNumbersItem:hover{
+.LocaisNumberItem:hover{
     transform: scale(1.1);    
 }
 
-.AtivosTypesNumbersItem {
+.LocaisNumberItem {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -23,7 +23,6 @@
     border-radius: .5rem;
     padding: .5rem;
     font-family: var(--Fonte);
-    flex-basis: 10%;
     -webkit-box-shadow: 2px 2px 5px 0px rgba(0,0,0,0.75);
     -moz-box-shadow: 2px 2px 5px 0px rgba(0,0,0,0.75);
     box-shadow: 2px 2px 5px 0px rgba(0,0,0,0.75);
@@ -31,7 +30,7 @@
 }
 
 
-.AtivosTypesNumbersQtd{
+.LocaisNumberQtd{
     font-size: 1.5em;
     font-weight: 600;
 }

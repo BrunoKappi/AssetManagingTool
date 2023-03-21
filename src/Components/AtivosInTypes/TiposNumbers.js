@@ -3,11 +3,11 @@ import './TiposNumbers.css'
 
 export default function TiposNumbers(props) {
     return (
-        <div className='SetorsNumberContainer'>
+        <div className='AtivosTypesNumbersContainer'>
             {props.TiposAtivos.map(Type => {
-                return <div className='SetorsNumberItem'>
-                    <span className='SetorsNumberName'>{Type.Value}</span>
-                    <span className='SetorsNumberQtd'>{Type.Qtd}</span>
+                return <div className='AtivosTypesNumbersItem'>
+                    <span className='AtivosTypesNumbersName'>{Type.Value}</span>
+                    <span className='AtivosTypesNumbersQtd'>{Type.Qtd}</span>
                 </div>
             })}
 

@@ -22,7 +22,7 @@ onAuthStateChanged(auth, (currentUser) => {
   if (store.getState().LoggedUser.CheckedLogin === false)
     setTimeout(() => {
       store.dispatch(SetCheckLogin())
-    }, 1500);
+    }, 5);
 
 })
 

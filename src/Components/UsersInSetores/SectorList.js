@@ -7,6 +7,7 @@ import { v4 } from 'uuid';
 import { Draggable, Droppable } from "react-beautiful-dnd";
 import { RiUser3Fill } from 'react-icons/ri';
 import { MdVerifiedUser } from 'react-icons/md';
+import { BsBuildingFillGear } from 'react-icons/bs';
 import { Tooltip } from 'react-tippy';
 
 const SectorList = (props) => {
@@ -14,48 +15,38 @@ const SectorList = (props) => {
 
   const [ListaDeItens,] = useState([...props.Users.filter(User => User.Sector.Id === props.Setor.Id)]);
 
-
-  /*
-  const HandleDrag = (Resultado) => {
-    if (!Resultado.destination) return;
-    const IndexSource = Resultado.source.index;
-    const IndexDestination = Resultado.destination.index;
-    const copiedItems = [...ListaDeItens];
-    const [removed] = copiedItems.splice(IndexSource, 1);
-    copiedItems.splice(IndexDestination, 0, removed);
-  }*/
-
   return (
     <div>
-      <div className='ShowOnlyCustomGroupList'>
+      <div className='SetoresShowOnlyCustomGroupList'>
 
 
 
         <ListGroup as="ul">
-          <ListGroup.Item as="li" className='ShowOnlyCustomGroupListTitle' >
-            {props.Setor.Value}
+          <ListGroup.Item as="li" className='SetoresShowOnlyCustomGroupListTitle' >
+            <Tooltip title="Arraste e solte ítens nesta área" position="bottom" >
+              <span className='SetoresShowOnlyCustomGroupListTitleSpan'> <BsBuildingFillGear /> {props.Setor.Value}</span>
+            </Tooltip>
           </ListGroup.Item>
 
-          <Droppable droppableId={props.Setor.Id} key={props.Setor.Id}>
+          <Droppable droppableId={props.Setor.Id + '/' + v4()} key={props.Setor.Id + '/' + v4()}>
             {(provided, snapshot) => {
               return (
                 <div className={snapshot.isDraggingOver ? 'MarginBottom' : ''} {...provided.droppableProps} ref={provided.innerRef}>
                   {ListaDeItens.sort((a, b) => a.Name.localeCompare(b.Name)).map((Item, index) => {
                     const IsAdmin = props.UserTypes.find(UserType => UserType.Id === Item.Type.Id).IsAdmin
-                    //console.log(IsAdmin)
                     return <Draggable action as="li" key={Item.Id} draggableId={Item.Id} index={index} >
-                      {(DragProvided) => {
+                      {(DragProvided, DraggableSnapshot) => {
                         return (
                           <div ref={DragProvided.innerRef} {...DragProvided.draggableProps} {...DragProvided.dragHandleProps}>
-                            <ListGroup.Item key={Item.Name + v4()} >
-                              <span className='ShowOnlyCustomGroupListItem'>
+                            <ListGroup.Item key={Item.Name + v4()} className={DraggableSnapshot.isDraggingOver ? 'Tilt' : ''}>
+                              <span className='SetoresShowOnlyCustomGroupListItem'>
                                 {IsAdmin ?
                                   <Tooltip title="Possui permissões de Administrador" position="bottom" >
-                                    <MdVerifiedUser className='ShowOnlyCustomGroupIcon' />
+                                    <MdVerifiedUser className='SetoresShowOnlyCustomGroupIcon' />
                                   </Tooltip>
                                   :
                                   <Tooltip title="Não possui permissões de Administrador" position="bottom" >
-                                    <RiUser3Fill className='ShowOnlyCustomGroupIcon' />
+                                    <RiUser3Fill className='SetoresShowOnlyCustomGroupIcon' />
                                   </Tooltip>
                                 }
                                 <span> {Item.Name}</span>
@@ -79,8 +70,8 @@ const SectorList = (props) => {
                 return (
                   <div  {...provided.droppableProps} ref={provided.innerRef}>
                     <Tooltip title="Arraste e solte usuários nesta área" position="bottom" >
-                      <span className='ShowOnlyCustomGroupListItem'>
-                        <span className='ShowOnlyCustomGroupListItemSpan'>Nenhum Usuário</span>
+                      <span className='SetoresShowOnlyCustomGroupListItem'>
+                        <span className='SetoresShowOnlyCustomGroupListItemSpan'>Nenhum Usuário</span>
                       </span>
                     </Tooltip>
                   </div>

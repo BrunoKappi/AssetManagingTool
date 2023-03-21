@@ -1,19 +1,19 @@
-.ShowOnlyCustomGroupList {
+.AtivosTypesShowOnlyCustomGroupList {
     min-width: 300px !important;
     margin-top: 1rem;
     margin-bottom: 1rem;
 }
 
-.ShowOnlyCustomGroupList span {
+.AtivosTypesShowOnlyCustomGroupList span {
     cursor: pointer;
 }
 
 
-.ShowOnlyCustomGroupList .list-group {
+.AtivosTypesShowOnlyCustomGroupList .list-group {
     min-width: 300px !important;
 }
 
-.ShowOnlyCustomGroupListItem {
+.AtivosTypesShowOnlyCustomGroupListItem {
     width: 100%;
     display: flex;
     align-items: center;
@@ -21,12 +21,12 @@
     cursor: pointer;
 }
 
-.ShowOnlyCustomGroupListItem span {
+.AtivosTypesShowOnlyCustomGroupListItem span {
     font-family: var(--Fonte);
     font-size: 12px;
 }
 
-.ShowOnlyCustomGroupListItem>svg {
+.AtivosTypesShowOnlyCustomGroupListItem>svg {
     font-family: var(--Fonte);
     font-size: .9rem;
     margin-right: .3rem;
@@ -34,25 +34,25 @@
 }
 
 
-.ShowOnlyCustomGroupListItem svg {
+.AtivosTypesShowOnlyCustomGroupListItem svg {
     float: right;
     margin-left: .6rem;
 }
 
-.ShowOnlyCustomGroupIcon {
+.AtivosTypesShowOnlyCustomGroupIcon {
     font-family: var(--Fonte);
     font-size: .9rem;
     margin-right: .3rem;
     color: var(--PrimaryBackground);
 }
 
-.ShowOnlyCustomGroupListCheckbox {
+.AtivosTypesShowOnlyCustomGroupListCheckbox {
     color: var(--PrimaryColor);
     cursor: pointer;
 }
 
 
-.ShowOnlyCustomGroupListItem input {
+.AtivosTypesShowOnlyCustomGroupListItem input {
     padding: 4px 12px;
     border: none;
     outline: none;
@@ -69,7 +69,7 @@
 }
 
 
-.ShowOnlyCustomGroupListItem span {
+.AtivosTypesShowOnlyCustomGroupListItem span {
     user-select: none;
     -webkit-touch-callout: none;
     -webkit-user-select: none;
@@ -79,18 +79,18 @@
     user-select: none;
 }
 
-.ShowOnlyCustomGroupListItem button {
+.AtivosTypesShowOnlyCustomGroupListItem button {
     border: none;
     background-color: var(--FundoTransparente);
     padding: 5px;
 }
 
-.ShowOnlyCustomGroupListItem form button svg {
+.AtivosTypesShowOnlyCustomGroupListItem form button svg {
     color: var(--Dark) !important;
 }
 
 
-.ShowOnlyCustomGroupListInput {
+.AtivosTypesShowOnlyCustomGroupListInput {
     padding: 0 !important;
     margin: 0 !important;
     font-family: var(--Fonte) !important;
@@ -102,7 +102,7 @@
     color: var(--Dark) !important;
 }
 
-.ShowOnlyCustomGroupListTitle {
+.AtivosTypesShowOnlyCustomGroupListTitle {
     display: flex !important;
     flex-direction: row !important;
     align-items: center !important;
@@ -110,6 +110,7 @@
     font-family: var(--Fonte) !important;
     background-color: var(--PrimaryBackground) !important;
     color: var(--PrimaryColor) !important;
+    user-select: none;
 }
 
 

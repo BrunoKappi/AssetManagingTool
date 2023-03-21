@@ -1,19 +1,19 @@
-.SetoresShowOnlyCustomGroupList {
+.AtivosLocaisShowOnlyCustomGroupList {
     min-width: 300px !important;
     margin-top: 1rem;
     margin-bottom: 1rem;
 }
 
-.SetoresShowOnlyCustomGroupList span {
+.AtivosLocaisShowOnlyCustomGroupList span {
     cursor: pointer;
 }
 
 
-.SetoresShowOnlyCustomGroupList .list-group {
+.AtivosLocaisShowOnlyCustomGroupList .list-group {
     min-width: 300px !important;
 }
 
-.SetoresShowOnlyCustomGroupListItem {
+.AtivosLocaisShowOnlyCustomGroupListItem {
     width: 100%;
     display: flex;
     align-items: center;
@@ -21,12 +21,12 @@
     cursor: pointer;
 }
 
-.SetoresShowOnlyCustomGroupListItem span {
+.AtivosLocaisShowOnlyCustomGroupListItem span {
     font-family: var(--Fonte);
     font-size: 12px;
 }
 
-.SetoresShowOnlyCustomGroupListItem>svg {
+.AtivosLocaisShowOnlyCustomGroupListItem>svg {
     font-family: var(--Fonte);
     font-size: .9rem;
     margin-right: .3rem;
@@ -34,25 +34,25 @@
 }
 
 
-.SetoresShowOnlyCustomGroupListItem svg {
+.AtivosLocaisShowOnlyCustomGroupListItem svg {
     float: right;
     margin-left: .6rem;
 }
 
-.SetoresShowOnlyCustomGroupIcon {
+.AtivosLocaisShowOnlyCustomGroupIcon {
     font-family: var(--Fonte);
     font-size: .9rem;
     margin-right: .3rem;
     color: var(--PrimaryBackground);
 }
 
-.SetoresShowOnlyCustomGroupListCheckbox {
+.AtivosLocaisShowOnlyCustomGroupListCheckbox {
     color: var(--PrimaryColor);
     cursor: pointer;
 }
 
 
-.SetoresShowOnlyCustomGroupListItem input {
+.AtivosLocaisShowOnlyCustomGroupListItem input {
     padding: 4px 12px;
     border: none;
     outline: none;
@@ -69,7 +69,7 @@
 }
 
 
-.SetoresShowOnlyCustomGroupListItem span {
+.AtivosLocaisShowOnlyCustomGroupListItem span {
     user-select: none;
     -webkit-touch-callout: none;
     -webkit-user-select: none;
@@ -79,18 +79,18 @@
     user-select: none;
 }
 
-.SetoresShowOnlyCustomGroupListItem button {
+.AtivosLocaisShowOnlyCustomGroupListItem button {
     border: none;
     background-color: var(--FundoTransparente);
     padding: 5px;
 }
 
-.SetoresShowOnlyCustomGroupListItem form button svg {
+.AtivosLocaisShowOnlyCustomGroupListItem form button svg {
     color: var(--Dark) !important;
 }
 
 
-.SetoresShowOnlyCustomGroupListInput {
+.AtivosLocaisShowOnlyCustomGroupListInput {
     padding: 0 !important;
     margin: 0 !important;
     font-family: var(--Fonte) !important;
@@ -102,12 +102,7 @@
     color: var(--Dark) !important;
 }
 
-.Tilt {
-    transform: scale(1.2) !important;
-    background-color: aqua !important;
-}
-
-.SetoresShowOnlyCustomGroupListTitle {
+.AtivosLocaisShowOnlyCustomGroupListTitle {
     display: flex !important;
     flex-direction: row !important;
     align-items: center !important;
@@ -118,19 +113,6 @@
     user-select: none;
 }
 
-.SetoresShowOnlyCustomGroupListTitleSpan {
-    white-space: nowrap;
-    /* Evita que o texto seja quebrado */
-    overflow: hidden;
-    /* Esconde o conteúdo que ultrapassa o limite do elemento */
-    text-overflow: ellipsis;
-    /* Adiciona reticências no final do texto que ultrapassa o limite do elemento */
-    display: flex;
-    /* Permite que o ícone e o texto fiquem na mesma linha */
-    align-items: center;
-    /* Alinha verticalmente o ícone e o texto */
-    gap: .5rem;
-}
 
 .MarginBottom {
     margin-bottom: 2.5rem;

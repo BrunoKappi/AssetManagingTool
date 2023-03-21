@@ -69,7 +69,7 @@ export const Items = [
     { Id: uuid(), StorageLocation: { ...DefaultStorageLocation2 }, Item: 'Case HD externo 3.0', Type: { ...DefaultAtivoType2 }, Status: { ...DefautltAtivoStatus }, Records: [], Usage: {...DefaultTipoUso} },
 ]
 
-localStorage.setItem('AssetSenseAtivos', JSON.stringify(Items))
+//localStorage.setItem('AssetSenseAtivos', JSON.stringify(Items))
 
 export const ItemTypes = [
     { Id: uuid(), Value: 'Cabo' },

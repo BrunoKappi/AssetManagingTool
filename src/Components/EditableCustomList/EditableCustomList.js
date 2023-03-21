@@ -11,7 +11,9 @@ import { NotificationSucesso } from '../../NotificationUtils';
 import { Tooltip } from 'react-tippy';
 import { SaveUserTipos, GetNotificationErrorMessageDelete, GetNotificationSuccessMessageAdd, GetNotificationExistsMessageAdd, GetNotificationSuccessMessageDelete, saveFunctions, GetNotificationSuccessMessageChangeName, fetchFunctions } from './EditableCustomListUtils';
 import Loading from '../LoadingForTabs/Loading'
-
+import { BiCategory } from "react-icons/bi";
+import { BsBuildingFillGear, BsBoxFill } from "react-icons/bs";
+import { FaCircle, FaUsersCog } from "react-icons/fa";
 
 const EditableCustomList = (props) => {
 
@@ -151,6 +153,17 @@ const EditableCustomList = (props) => {
   }
 
 
+
+
+  const CustomListIcon = {
+    TiposAtivos: <BiCategory />,
+    Setores: <BsBuildingFillGear />,
+    TiposUsuarios: <FaUsersCog />,
+    Locais: <BsBoxFill />,
+    StatusAtivos: <FaCircle />,
+    TiposUso: <BiCategory />
+  };
+
   return (
     <div>
       <div className='CustomGroupList'>
@@ -162,7 +175,7 @@ const EditableCustomList = (props) => {
 
           <ListGroup as="ul">
             <ListGroup.Item as="li" className='CustomGroupListTitle' >
-              {props.Title}
+              <span className='UserTypesShowOnlyCustomGroupListTitleSpan'> {CustomListIcon[props.Module]} {props.Title} </span>
             </ListGroup.Item>
             <DragDropContext onDragEnd={(result) => { HandleDrag(result) }}>
               <Droppable droppableId={'Tipos'} key={'Tipos'}>
@@ -187,9 +200,7 @@ const EditableCustomList = (props) => {
 
                                       {EditingItem && ItemListSelected !== Item.Value && <span onClick={e => { setEditingItem(false); }}> {Item.Value}</span>}
 
-                                      {!EditingItem && <span onDoubleClick={e => InitEditing(Item.Value)}> {Item.Value}</span>
-
-                                      }
+                                      {!EditingItem && <span onDoubleClick={e => InitEditing(Item.Value)}> {Item.Value}</span>}
 
                                       {ItemListSelected === Item.Value && EditingItem &&
                                         <form onSubmit={e => HandleSubmiChangeItemName(e, index, Item.Value)}>

@@ -12,7 +12,7 @@ export async function GetAtivos(gerarErro = false) {
                 else
                     resolve([])
             }
-        }, 500);
+        }, 5);
     });
 }
 
@@ -24,11 +24,11 @@ export async function SaveAtivos(Ativos, gerarErro = false) {
             if (gerarErro) {
                 reject(new Error('Erro ao obter dados'));
             } else {
-                console.log(Ativos)
-                localStorage.setItem('AssetSenseUsersTypes', JSON.stringify(Ativos))
+                //console.log(Ativos)
+                localStorage.setItem('AssetSenseAtivos', JSON.stringify(Ativos))
                 store.dispatch(SetAtivos(Ativos))
                 resolve('Ok');
             }
-        }, 500);
+        }, 5);
     });
 }

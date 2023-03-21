@@ -6,8 +6,8 @@ const RH = { Id: 'ad01ba2f-aa9a-47a2-a771-1fee98ef54a5' }
 const Admin = { Id: 'ea05229e-658a-415a-bc23-62cebd0bbe96' }
 
 
-const Funcionario = { Id: 'c1bedd8c-e439-49a1-86ce-c927ee1973dc' }
-const TipoAdmin = { Id: 'c60f21df-606f-4440-9202-d7506bc3022c' }
+const Funcionario = { Id: '8c25a156-04b7-479f-874f-b16e63383cbd' }
+const TipoAdmin = { Id: '784c4def-b901-4883-b481-a4a6cf6dd070' }
 
 
 export const Users = [
@@ -55,12 +55,12 @@ export const Users = [
 //localStorage.setItem('AssetSenseUsers', JSON.stringify(Users))
 
 export const UserRoles = [
-    { Id: uuid(), Value: 'Funcionário', IsAdmin: false },
+    { Id: '8c25a156-04b7-479f-874f-b16e63383cbd', Value: 'Funcionário', IsAdmin: false },
     { Id: uuid(), Value: 'Cliente', IsAdmin: false },
-    { Id: uuid(), Value: 'Administrador', IsAdmin: true },
+    { Id: '784c4def-b901-4883-b481-a4a6cf6dd070', Value: 'Administrador', IsAdmin: true },
     { Id: uuid(), Value: 'Gerente', IsAdmin: true }
 ]
-
+ 
 export const DefaultUserRole = { Id: '', Role: '', IsAdmin: false }
 
 //localStorage.setItem('AssetSenseUsersTypes', JSON.stringify(UserRoles))

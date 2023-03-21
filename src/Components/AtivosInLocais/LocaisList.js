@@ -1,34 +1,34 @@
 import React, { useState } from 'react'
 import { connect } from 'react-redux'
-import './TypesList.css'
+import './LocaisList.css'
 //ICONES
 import ListGroup from 'react-bootstrap/ListGroup';
 import { v4 } from 'uuid';
 import { Draggable, Droppable } from "react-beautiful-dnd";
 import { Tooltip } from 'react-tippy';
-import { BiCategory } from "react-icons/bi";
+import {  BsBoxFill } from "react-icons/bs";
 
 const SectorList = (props) => {
 
 
-  const [ListaDeItens,] = useState([...props.Ativos.filter(Ativo => Ativo.Type.Id === props.TipoAtivo.Id)]);
+  const [ListaDeItens,] = useState([...props.Ativos.filter(Ativo => Ativo.StorageLocation.Id === props.LocalArmazenamento.Id)]);
 
 
 
   return (
     <div>
-      <div className='AtivosTypesShowOnlyCustomGroupList'>
+      <div className='AtivosLocaisShowOnlyCustomGroupList'>
 
 
 
         <ListGroup as="ul">
-          <ListGroup.Item as="li" className='AtivosTypesShowOnlyCustomGroupListTitle' >
-            <Tooltip title="Arraste e solte ítens nesta área" position="bottom" >       
-              <span className='UserTypesShowOnlyCustomGroupListTitleSpan'> <BiCategory/> {props.TipoAtivo.Value}</span>
+          <ListGroup.Item as="li" className='AtivosLocaisShowOnlyCustomGroupListTitle' >
+            <Tooltip title="Arraste e solte ítens nesta área" position="bottom" >              
+              <span className='UserTypesShowOnlyCustomGroupListTitleSpan'> <BsBoxFill/> {props.LocalArmazenamento.Value}</span>
             </Tooltip>
           </ListGroup.Item>
 
-          <Droppable droppableId={props.TipoAtivo.Id + '/' +  v4()} key={props.TipoAtivo.Id + '/' +  v4()}>
+          <Droppable droppableId={props.LocalArmazenamento.Id + '/' +  v4()} key={props.LocalArmazenamento.Id + '/' +  v4()}>
             {(provided, snapshot) => {
               return (
                 <div className={snapshot.isDraggingOver ? 'MarginBottom' : ''} {...provided.droppableProps} ref={provided.innerRef}>
@@ -38,7 +38,7 @@ const SectorList = (props) => {
                         return (
                           <div ref={DragProvided.innerRef} {...DragProvided.draggableProps} {...DragProvided.dragHandleProps}>
                             <ListGroup.Item key={Item.Item + v4()} >
-                              <span className='AtivosTypesShowOnlyCustomGroupListItem'>
+                              <span className='AtivosLocaisShowOnlyCustomGroupListItem'>
                                 <span> {Item.Item}</span>
                               </span>
                             </ListGroup.Item>
@@ -55,13 +55,13 @@ const SectorList = (props) => {
 
           {ListaDeItens.length === 0 && <ListGroup.Item key={v4()} >
 
-            <Droppable droppableId={props.TipoAtivo.Id} key={props.TipoAtivo.Id}>
+            <Droppable droppableId={props.LocalArmazenamento.Id} key={props.LocalArmazenamento.Id}>
               {(provided, snapshot) => {
                 return (
                   <div  {...provided.droppableProps} ref={provided.innerRef}>
                     <Tooltip title="Arraste e solte usuários nesta área" position="bottom" >
-                      <span className='AtivosTypesShowOnlyCustomGroupListItem'>
-                        <span className='AtivosTypesShowOnlyCustomGroupListItemSpan'>Nenhum Usuário</span>
+                      <span className='AtivosLocaisShowOnlyCustomGroupListItem'>
+                        <span className='AtivosLocaisShowOnlyCustomGroupListItemSpan'>Nenhum Usuário</span>
                       </span>
                     </Tooltip>
                   </div>

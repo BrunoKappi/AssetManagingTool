@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactDOM from 'react-dom/client';
+import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import store from './Config/store/store';
@@ -14,8 +14,7 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <Router>
     <Provider store={store}>
-      <App />
-   
+      <App />   
     </Provider>
   </Router>
 );

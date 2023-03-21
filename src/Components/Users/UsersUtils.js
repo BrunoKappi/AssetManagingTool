@@ -14,7 +14,7 @@ export async function GetUsers(gerarErro = false) {
                 else
                     resolve([])
             }
-        }, 500);
+        }, 5);
     });
 }
 
@@ -55,7 +55,7 @@ export async function GetUsersTypes(gerarErro = false) {
                 else
                     resolve([])
             }
-        }, 500);
+        }, 5);
     });
 }
 

@@ -8,8 +8,10 @@ import ListGroup from 'react-bootstrap/ListGroup';
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
 import AtivosInTypes from '../AtivosInTypes/AtivosInTypes'
+import AtivosInLocais from '../AtivosInLocais/AtivosInLocais'
 
-export default function Ativos() {
+
+const Ativos = (props) => {
 
   const [ListaDeAtivos, setListaDeAtivos] = useState([])
   const [Loaded, setLoaded] = useState(false);
@@ -80,7 +82,7 @@ export default function Ativos() {
         </Tab>
         <Tab eventKey="Armazenamento" title="Armazenamento" >
           <div className='ListItensContainer'>
-            Locais de Armazenamento
+            <AtivosInLocais />
           </div>
         </Tab>
       </Tabs>
@@ -100,3 +102,6 @@ export default function Ativos() {
 
   )
 }
+
+
+export default Ativos

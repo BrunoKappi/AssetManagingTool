@@ -15,3 +15,135 @@
     border-right: 1px solid var(--PrimaryBackGroundFaded50) !important;
     border-left: 1px solid var(--PrimaryBackGroundFaded50) !important;  
 }
+
+
+
+.UserTypesShowOnlyCustomGroupList {
+    min-width: 300px !important;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+.UserTypesShowOnlyCustomGroupList span {
+    cursor: pointer;
+}
+
+
+.UserTypesShowOnlyCustomGroupList .list-group {
+    min-width: 300px !important;
+}
+
+.UserTypesShowOnlyCustomGroupListItem {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    cursor: pointer;
+}
+
+.UserTypesShowOnlyCustomGroupListItem span {
+    font-family: var(--Fonte);
+    font-size: 12px;
+}
+
+.UserTypesShowOnlyCustomGroupListItem>svg {
+    font-family: var(--Fonte);
+    font-size: .9rem;
+    margin-right: .3rem;
+    color: var(--PrimaryBackground);
+}
+
+
+.UserTypesShowOnlyCustomGroupListItem svg {
+    float: right;
+    margin-left: .6rem;
+}
+
+.UserTypesShowOnlyCustomGroupIcon {
+    font-family: var(--Fonte);
+    font-size: .9rem;
+    margin-right: .3rem;
+    color: var(--PrimaryBackground);
+}
+
+.UserTypesShowOnlyCustomGroupListCheckbox {
+    color: var(--PrimaryColor);
+    cursor: pointer;
+}
+
+
+.UserTypesShowOnlyCustomGroupListItem input {
+    padding: 4px 12px;
+    border: none;
+    outline: none;
+    font-family: var(--Fonte);
+    color: var(--Dark);
+    font-size: 14px;
+    background-color: var(--FundoTransparente);
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+
+.UserTypesShowOnlyCustomGroupListItem span {
+    user-select: none;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.UserTypesShowOnlyCustomGroupListItem button {
+    border: none;
+    background-color: var(--FundoTransparente);
+    padding: 5px;
+}
+
+.UserTypesShowOnlyCustomGroupListItem form button svg {
+    color: var(--Dark) !important;
+}
+
+
+.UserTypesShowOnlyCustomGroupListInput {
+    padding: 0 !important;
+    margin: 0 !important;
+    font-family: var(--Fonte) !important;
+    font-size: 13px !important;
+    margin-right: 1rem !important;
+}
+
+.CategoriaEditIcon {
+    color: var(--Dark) !important;
+}
+
+.UserTypesShowOnlyCustomGroupListTitle {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    font-family: var(--Fonte) !important;
+    background-color: var(--PrimaryBackground) !important;
+    color: var(--PrimaryColor) !important;
+    user-select: none;
+}
+
+
+.UserTypesShowOnlyCustomGroupListTitleSpan {
+    white-space: nowrap;
+    /* Evita que o texto seja quebrado */
+    overflow: hidden;
+    /* Esconde o conteúdo que ultrapassa o limite do elemento */
+    text-overflow: ellipsis;
+    /* Adiciona reticências no final do texto que ultrapassa o limite do elemento */
+    display: flex;
+    /* Permite que o ícone e o texto fiquem na mesma linha */
+    align-items: center;
+    /* Alinha verticalmente o ícone e o texto */
+    gap: .5rem;
+}
