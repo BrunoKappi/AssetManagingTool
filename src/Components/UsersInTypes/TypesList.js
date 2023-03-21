@@ -11,8 +11,8 @@ import { ImCheckboxUnchecked, ImCheckboxChecked } from 'react-icons/im';
 import { Tooltip } from 'react-tippy';
 import { NotificationSucesso } from '../../NotificationUtils';
 import { SaveUserTipos } from '../EditableCustomList/EditableCustomListUtils';
-
-const TypesList = (props) => {
+ 
+const TypesList = (props) => { 
 
 
   const [ListaDeItens,] = useState([...props.Users.filter(User => User.Type.Id === props.TipoUsuario.Id)]);

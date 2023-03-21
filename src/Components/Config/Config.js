@@ -27,6 +27,8 @@ export default function Config() {
         <Masonry breakpointCols={breakpointColumnsObj} className="my-masonry-grid" columnClassName="my-masonry-grid_column"   >
           <EditableCustomList Title="Tipos de Ativos" Module="TiposAtivos" />
           <EditableCustomList Title="Locais de Armazenamento" Module="Locais" />
+          <EditableCustomList Title="Status de Ativos" Module="StatusAtivos" />
+          <EditableCustomList Title="Tipos de Uso" Module="TiposUso" />
         </Masonry>
 
         <SubTabTitle Text="Usuários e Setores" />

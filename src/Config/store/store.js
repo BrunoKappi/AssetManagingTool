@@ -5,16 +5,20 @@ import TiposUsuarios from './reducers/TiposUsuarios'
 import Usuarios from './reducers/Usuarios'
 import TiposAtivos from './reducers/TiposAtivos'
 import Ativos from './reducers/Ativos'
+import StatusAtivos from './reducers/StatusAtivos'
+import TiposDeUso from './reducers/TiposDeUso'
 import LocaisArmazenamento from './reducers/LocaisArmazenamento'
 import { SetTiposUsuarios } from './actions/TiposUsuariosActions'
 import { SetSetores } from './actions/SetoresActions'
 import { SetUsuarios } from './actions/UsuariosActions'
 import { SetTiposAtivos } from './actions/TiposAtivosActions'
-import { SetAtivos } from './actions/AtivosActions' 
+import { SetAtivos } from './actions/AtivosActions'
 import { GetUsers } from '../../Components/Users/UsersUtils'
 import { GetAtivos } from '../../Components/Ativos/AtivosUtils'
 import { SetLocaisArmazenamento } from './actions/LocaisArmazenamentoActions'
-import { GetLocaisArmazenamento, GetSetores, GetTipos, GetUserTipos } from '../../Components/EditableCustomList/EditableCustomListUtils'
+import { GetLocaisArmazenamento, GetSetores, GetStatusAtivos, GetTipos, GetTiposDeUso, GetUserTipos } from '../../Components/EditableCustomList/EditableCustomListUtils'
+import { SetStatusAtivos } from './actions/AtivosStatusActions'
+import { SetTiposDeUso } from './actions/TiposDeUsoActions'
 
 
 
@@ -42,6 +46,14 @@ GetLocaisArmazenamento().then((Locais) => {
     store.dispatch(SetLocaisArmazenamento(Locais))
 })
 
+GetStatusAtivos().then((StatusAtivos) => {
+    store.dispatch(SetStatusAtivos(StatusAtivos))
+})
+
+GetTiposDeUso().then((Tipos) => {
+    store.dispatch(SetTiposDeUso(Tipos))
+})
+
 const store = createStore(
     combineReducers({
         LoggedUser,
@@ -50,7 +62,9 @@ const store = createStore(
         Usuarios,
         TiposAtivos,
         Ativos,
-        LocaisArmazenamento
+        LocaisArmazenamento,
+        StatusAtivos,
+        TiposDeUso
     }),
     //window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 )

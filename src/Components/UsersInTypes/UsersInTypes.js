@@ -62,7 +62,7 @@ const UsersInTypes = (props) => {
                 <Masonry breakpointCols={breakpointColumnsObj} className="my-masonry-grid" columnClassName="my-masonry-grid_column"   >
 
                     {props.TiposUsuarios.map((TipoUsuario, Index) => {
-                        return <TypesList key={v4()} TipoUsuario={TipoUsuario} Users={props.Usuarios} UserTypes={props.TiposUsuarios} />
+                        return <TypesList key={v4()} TipoUsuario={TipoUsuario} Users={props.Usuarios} UserTypes={props.TiposUsuarios} /> 
                     })}
 
                 </Masonry>

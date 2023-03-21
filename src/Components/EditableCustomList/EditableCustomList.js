@@ -7,9 +7,9 @@ import ListGroup from 'react-bootstrap/ListGroup';
 import { v4 } from 'uuid';
 import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 import { DefaultItemType } from '../../Data/Items';
-import { NotificationAlerta, NotificationErro, NotificationSucesso } from '../../NotificationUtils';
+import { NotificationSucesso } from '../../NotificationUtils';
 import { Tooltip } from 'react-tippy';
-import { GetTipos, SaveTipos, GetSetores, SaveSetores, GetUserTipos, SaveUserTipos, GetLocaisArmazenamento, SaveLocaisArmazenamento } from './EditableCustomListUtils';
+import { SaveUserTipos, GetNotificationErrorMessageDelete, GetNotificationSuccessMessageAdd, GetNotificationExistsMessageAdd, GetNotificationSuccessMessageDelete, saveFunctions, GetNotificationSuccessMessageChangeName, fetchFunctions } from './EditableCustomListUtils';
 import Loading from '../LoadingForTabs/Loading'
 
 
@@ -22,14 +22,11 @@ const EditableCustomList = (props) => {
   const [ListaDeItens, setListaDeItens] = useState([]);
 
 
+
+
+
   useEffect(() => {
-    // Define um objeto de mapeamento que relaciona o nome do módulo/prop com a função get correspondente
-    const fetchFunctions = {
-      TiposAtivos: GetTipos,
-      Setores: GetSetores,
-      TiposUsuarios: GetUserTipos,
-      Locais: GetLocaisArmazenamento
-    };
+
 
     // Procura a função get correspondente com base no nome do módulo/prop
     const fetchFunction = fetchFunctions[props.Module] || (() => Promise.resolve());
@@ -42,7 +39,7 @@ const EditableCustomList = (props) => {
       console.error(Erro)
       setLoaded(true)
     });
-  }, [props.Module, props.TiposAtivos, props.Setores, props.TiposUsuarios, props.LocaisArmazenamento]);
+  }, [props.Module, props.TiposAtivos, props.Setores, props.TiposUsuarios, props.LocaisArmazenamento, props.StatusAtivos]);
 
 
 
@@ -53,12 +50,7 @@ const EditableCustomList = (props) => {
   const InitEditing = () => { setEditingItem(true) }
   const EndEditing = () => { setEditingItem(false) }
 
-  const saveFunctions = {
-    "TiposAtivos": SaveTipos,
-    "Setores": SaveSetores,
-    "TiposUsuarios": SaveUserTipos,
-    "Locais": SaveLocaisArmazenamento,
-  };
+
 
   const HandleSubmiChangeItemName = (e, index, ID) => {
     e.preventDefault();
@@ -70,7 +62,7 @@ const EditableCustomList = (props) => {
       saveFunction(ItensCopy).then(() => {
         setListaDeItens([...ItensCopy]);
         EndEditing();
-        NotificationSucesso('Alteração', 'Item alterado com Sucesso!');
+        GetNotificationSuccessMessageChangeName(props.Module);
       });
     }
   };
@@ -89,12 +81,13 @@ const EditableCustomList = (props) => {
       if (saveFunction) {
         saveFunction(ItensCopy).then(() => {
           setListaDeItens([...ItensCopy])
+          GetNotificationSuccessMessageAdd(props.Module)
           setNewItemList('')
         });
       }
 
     } else {
-      NotificationAlerta('Adição de Tipo', 'Este item já existe!')
+      GetNotificationExistsMessageAdd(props.Module)
     }
     setNewItemList('')
   }
@@ -114,14 +107,19 @@ const EditableCustomList = (props) => {
       Associated = props.Usuarios.find(User => User.Type.Id === Id)
     else if (props.Module === "Locais")
       Associated = props.Ativos.find(Ativo => Ativo.StorageLocation.Id === Id)
+    else if (props.Module === "StatusAtivos")
+      Associated = props.Ativos.find(Ativo => Ativo.Status.Id === Id)
+    else if (props.Module === "TiposUso")
+      Associated = props.Ativos.find(Ativo => Ativo.Usage.Id === Id)
 
     const saveFunction = saveFunctions[props.Module]
 
     if (Associated) {
-      NotificationErro('Exclusão', 'Não é possível excluir este item')
+      GetNotificationErrorMessageDelete(props.Module)
     } else {
       saveFunction(ItensCopy).then(() => {
         setListaDeItens([...ItensCopy])
+        GetNotificationSuccessMessageDelete(props.Module)
       })
     }
   }
@@ -277,7 +275,8 @@ const ConnectedEditableCustomList = connect((state) => {
     Ativos: state.Ativos,
     Setores: state.Setores,
     LocaisArmazenamento: state.LocaisArmazenamento,
-    Usuarios: state.Usuarios
+    Usuarios: state.Usuarios,
+    StatusAtivos: state.StatusAtivos,
   }
 })(EditableCustomList)
 
