@@ -1,5 +1,4 @@
 .SetoresShowOnlyCustomGroupList {
-    min-width: 300px !important;
     margin-top: 1rem;
     margin-bottom: 1rem;
 }
@@ -8,10 +7,6 @@
     cursor: pointer;
 }
 
-
-.SetoresShowOnlyCustomGroupList .list-group {
-    min-width: 300px !important;
-}
 
 .SetoresShowOnlyCustomGroupListItem {
     width: 100%;
@@ -77,6 +72,9 @@
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .SetoresShowOnlyCustomGroupListItem button {

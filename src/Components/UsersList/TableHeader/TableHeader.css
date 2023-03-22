@@ -1,0 +1,56 @@
+.TableHeader {
+    display: grid;
+    grid-template-columns: 5% 20% 35% 20% 20%;
+    gap: .5rem;
+    align-items: center;
+    margin-bottom: .3rem;
+    padding: .5rem;
+    cursor: pointer; 
+    user-select: none;
+
+}
+
+
+
+
+.TableHeaderColumn {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-family: var(--Fonte);
+    font-size: .9rem;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.TableHeaderColumn>img {
+    width: 50%;
+    border-radius: 50%;
+}
+
+.TypeColumn {
+    background-color: var(--SecondaryBackground);
+    color: var(--SecondaryColor);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding: .2rem .4rem;
+    border-radius: 1rem;
+    font-size: .7rem;
+}
+
+.NameColumn {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-weight: 500;
+}
+
+.EmailColumn {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: .8rem;
+}

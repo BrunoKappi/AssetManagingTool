@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import './Ativos.css'
-import { GetAtivos } from './AtivosUtils';
+import { ArmazenamentoTabTitle, GetAtivos, TiposTabTitle, TodosTabTitle } from './AtivosUtils';
 import Loading from '../LoadingForTabs/Loading';
 import TabTitle from '../TabTitle/TabTitle';
 import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
@@ -29,6 +29,7 @@ const Ativos = (props) => {
 
 
 
+
   return (
 
     <div className='AtivosContainer'>
@@ -38,7 +39,7 @@ const Ativos = (props) => {
 
       <Tabs id="UsersTabs" activeKey={key} onSelect={(k) => setKey(k)} className="mb-3">
 
-        <Tab eventKey="Todos" title="Todos">
+        <Tab eventKey="Todos" title={TodosTabTitle()}>
           <div className='ListItensContainer'>
             {(ListaDeAtivos.length !== 0 || Loaded) &&
               <ListGroup>
@@ -75,12 +76,12 @@ const Ativos = (props) => {
 
           </div>
         </Tab>
-        <Tab eventKey="Tipos" title="Tipos" >
+        <Tab eventKey="Tipos" title={TiposTabTitle()} >
           <div className='ListItensContainer'>
             <AtivosInTypes />
           </div>
         </Tab>
-        <Tab eventKey="Armazenamento" title="Armazenamento" >
+        <Tab eventKey="Armazenamento" title={ArmazenamentoTabTitle()} >
           <div className='ListItensContainer'>
             <AtivosInLocais />
           </div>

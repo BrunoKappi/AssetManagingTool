@@ -5,8 +5,16 @@ import Masonry from "react-masonry-css";
 import { DragDropContext } from "react-beautiful-dnd";
 import { v4 } from 'uuid';
 import { connect } from 'react-redux'
-import SetorsNumbers from './TiposNumbers';
 import { SaveAtivos } from '../Ativos/AtivosUtils';
+import NumbersOfList from '../NumbersOfList/NumbersOfList';
+
+const breakpointColumnsObj = {
+    default: 4,
+    1250: 3,
+    950: 2,
+    700: 1
+};
+
 
 const AtivosInTypes = (props) => {
 
@@ -29,11 +37,7 @@ const AtivosInTypes = (props) => {
     }, [props.Ativos, props.TiposAtivos])
 
 
-    const breakpointColumnsObj = {
-        default: 3,
-        1250: 2,
-        950: 1
-    };
+
 
 
     const HandleDrag = (Resultado) => {
@@ -57,12 +61,12 @@ const AtivosInTypes = (props) => {
         <DragDropContext onDragEnd={(result) => { HandleDrag(result) }}>
             <div className='AtivosInTypesContainer'>
 
-                <SetorsNumbers TiposAtivos={TiposAtivos} />
+                <NumbersOfList Values={TiposAtivos} />
 
                 <Masonry breakpointCols={breakpointColumnsObj} className="my-masonry-grid" columnClassName="my-masonry-grid_column"   >
 
                     {props.TiposAtivos.map((TipoAtivo, Index) => {
-                        return <TypesList key={v4()} TipoAtivo={TipoAtivo} Ativos={props.Ativos}  />
+                        return <TypesList key={v4()} TipoAtivo={TipoAtivo} Ativos={props.Ativos} />
                     })}
 
                 </Masonry>

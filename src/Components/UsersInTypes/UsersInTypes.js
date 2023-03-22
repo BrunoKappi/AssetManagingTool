@@ -8,12 +8,13 @@ import { connect } from 'react-redux'
 import { SaveUsers } from '../Users/UsersUtils';
 import Chart from 'react-apexcharts'
 import { DefaultTypesProps, GetOptionsAndSeries } from './UsersInTypesUtils';
-import TypesNumbers from './TypesNumbers';
+import NumbersOfList from '../NumbersOfList/NumbersOfList';
 
 const breakpointColumnsObj = {
-    default: 3,
-    1250: 2,
-    950: 1
+    default: 4,
+    1250: 3,
+    950: 2,
+    700: 1
 };
 
 
@@ -57,12 +58,12 @@ const UsersInTypes = (props) => {
 
             <div className='UsersInSetoresContainers'>
 
-                <TypesNumbers Types={TiposUsuarios} />
+                <NumbersOfList Values={TiposUsuarios} />
 
                 <Masonry breakpointCols={breakpointColumnsObj} className="my-masonry-grid" columnClassName="my-masonry-grid_column"   >
 
                     {props.TiposUsuarios.map((TipoUsuario, Index) => {
-                        return <TypesList key={v4()} TipoUsuario={TipoUsuario} Users={props.Usuarios} UserTypes={props.TiposUsuarios} /> 
+                        return <TypesList key={v4()} TipoUsuario={TipoUsuario} Users={props.Usuarios} UserTypes={props.TiposUsuarios} />
                     })}
 
                 </Masonry>

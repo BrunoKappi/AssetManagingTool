@@ -6,7 +6,15 @@ import { DragDropContext } from "react-beautiful-dnd";
 import { v4 } from 'uuid';
 import { connect } from 'react-redux'
 import { SaveUsers } from '../Users/UsersUtils';
-import SetorsNumbers from './SetorsNumbers';
+import NumbersOfList from '../NumbersOfList/NumbersOfList';
+
+const breakpointColumnsObj = {
+    default: 4,
+    1250: 3,
+    950: 2,
+    700: 1
+};
+
 
 const UsersInSetores = (props) => {
 
@@ -29,11 +37,7 @@ const UsersInSetores = (props) => {
     }, [props.Usuarios, props.Setores])
 
 
-    const breakpointColumnsObj = {
-        default: 3,
-        1250: 2,
-        950: 1
-    };
+
 
 
     const HandleDrag = (Resultado) => {
@@ -57,14 +61,15 @@ const UsersInSetores = (props) => {
         <DragDropContext onDragEnd={(result) => { HandleDrag(result) }}>
             <div className='UsersInSetoresContainers'>
 
-                <SetorsNumbers Setores={Setores} />
+
+                <NumbersOfList Values={Setores} />
 
                 <Masonry breakpointCols={breakpointColumnsObj} className="my-masonry-grid" columnClassName="my-masonry-grid_column"   >
 
                     {props.Setores.map((Setor, Index) => {
                         return <SectorList key={v4()} Setor={Setor} Users={props.Usuarios} UserTypes={props.TiposUsuarios} />
                     })}
- 
+
                 </Masonry>
             </div >
         </DragDropContext>

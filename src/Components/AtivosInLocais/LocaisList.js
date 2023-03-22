@@ -6,7 +6,7 @@ import ListGroup from 'react-bootstrap/ListGroup';
 import { v4 } from 'uuid';
 import { Draggable, Droppable } from "react-beautiful-dnd";
 import { Tooltip } from 'react-tippy';
-import {  BsBoxFill } from "react-icons/bs";
+import { BsBoxFill } from "react-icons/bs";
 
 const SectorList = (props) => {
 
@@ -22,13 +22,17 @@ const SectorList = (props) => {
 
 
         <ListGroup as="ul">
-          <ListGroup.Item as="li" className='AtivosLocaisShowOnlyCustomGroupListTitle' >
-            <Tooltip title="Arraste e solte ítens nesta área" position="bottom" >              
-              <span className='UserTypesShowOnlyCustomGroupListTitleSpan'> <BsBoxFill/> {props.LocalArmazenamento.Value}</span>
-            </Tooltip>
-          </ListGroup.Item>
+          <Tooltip title="Arraste e solte ítens nesta área" position="bottom" >
+            <ListGroup.Item as="li" className='AtivosLocaisShowOnlyCustomGroupListTitle' >
+              <span className='UserTypesShowOnlyCustomGroupListTitleSpan'>
+                <BsBoxFill />
+                <p className='NoBreak'> {props.LocalArmazenamento.Value}</p>
+              </span>
 
-          <Droppable droppableId={props.LocalArmazenamento.Id + '/' +  v4()} key={props.LocalArmazenamento.Id + '/' +  v4()}>
+            </ListGroup.Item>
+          </Tooltip>
+
+          <Droppable droppableId={props.LocalArmazenamento.Id + '/' + v4()} key={props.LocalArmazenamento.Id + '/' + v4()}>
             {(provided, snapshot) => {
               return (
                 <div className={snapshot.isDraggingOver ? 'MarginBottom' : ''} {...provided.droppableProps} ref={provided.innerRef}>
@@ -61,7 +65,7 @@ const SectorList = (props) => {
                   <div  {...provided.droppableProps} ref={provided.innerRef}>
                     <Tooltip title="Arraste e solte usuários nesta área" position="bottom" >
                       <span className='AtivosLocaisShowOnlyCustomGroupListItem'>
-                        <span className='AtivosLocaisShowOnlyCustomGroupListItemSpan'>Nenhum Usuário</span>
+                        <span className='AtivosLocaisShowOnlyCustomGroupListItemSpan'>Nenhum Ítem</span>
                       </span>
                     </Tooltip>
                   </div>

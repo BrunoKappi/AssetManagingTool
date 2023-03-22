@@ -1,31 +1,6 @@
 import { SetUsuarios } from '../../Config/store/actions/UsuariosActions';
 import store from '../../Config/store/store'
 
-import { BsBuildingFillGear } from 'react-icons/bs';
-import { FaUserEdit } from 'react-icons/fa';
-import { FaCircle } from "react-icons/fa";
-
-export const SetoresTabTitle = () => {
-    return <div className='UsersTabTitle'>
-      <BsBuildingFillGear />
-      <span>Setores</span>
-    </div>
-  }
-
-  export const TiposTabTitle = () => {
-    return <div className='UsersTabTitle'>
-      <FaUserEdit />
-      <span>Tipos</span>
-    </div>
-  }
-  export const TodosTabTitle = () => {
-    return <div className='UsersTabTitle'>
-      <FaCircle />
-      <span>Todos</span>
-    </div>
-  }
-
-
 export async function GetUsers(gerarErro = false) {
     return new Promise((resolve, reject) => {
         setTimeout(() => {
@@ -65,13 +40,7 @@ export async function GetUsersTypes(gerarErro = false) {
                 reject(new Error('Erro ao obter dados'));
             } else {
                 if (localStorage.getItem('AssetSenseUsersTypes')) {
-                    const Types = JSON.parse(localStorage.getItem('AssetSenseUsersTypes')).map((role) => {
-                        return {
-                            value: role.Role,
-                            label: role.Role,
-                        };
-                    });
-                    Types.push({ value: 'Todos', label: 'Todos' })
+                    const Types = JSON.parse(localStorage.getItem('AssetSenseUsersTypes'))
                     resolve(Types)
                 }
 
@@ -81,10 +50,3 @@ export async function GetUsersTypes(gerarErro = false) {
         }, 5);
     });
 }
-
-
-export const UsersFilterOptions = [
-    { value: 'chocolate', label: 'Chocolate' },
-    { value: 'strawberry', label: 'Strawberry' },
-    { value: 'vanilla', label: 'Vanilla' },
-];

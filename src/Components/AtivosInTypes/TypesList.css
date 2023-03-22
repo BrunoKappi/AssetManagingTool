@@ -1,5 +1,4 @@
 .AtivosTypesShowOnlyCustomGroupList {
-    min-width: 300px !important;
     margin-top: 1rem;
     margin-bottom: 1rem;
 }
@@ -9,9 +8,7 @@
 }
 
 
-.AtivosTypesShowOnlyCustomGroupList .list-group {
-    min-width: 300px !important;
-}
+
 
 .AtivosTypesShowOnlyCustomGroupListItem {
     width: 100%;
@@ -19,6 +16,7 @@
     align-items: center;
     justify-content: flex-start;
     cursor: pointer;
+    white-space: nowrap;
 }
 
 .AtivosTypesShowOnlyCustomGroupListItem span {
@@ -77,6 +75,9 @@
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .AtivosTypesShowOnlyCustomGroupListItem button {

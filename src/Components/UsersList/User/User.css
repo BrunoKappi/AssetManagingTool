@@ -1,0 +1,68 @@
+.UserContainer {
+    display: grid;
+    grid-template-columns: 5% 20% 35% 20% 20%;
+    gap: .5rem;
+    align-items: center;
+    margin-bottom: .3rem;
+    padding: .5rem;
+    cursor: pointer;
+    background-color: #edeff2;
+    border-radius: .5rem;
+    user-select: none;
+}
+
+
+
+
+.UserContainerColumn {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-family: var(--Fonte);
+    font-size: .9rem;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.UserContainerColumn>img {
+    width: 50%;
+    border-radius: 50%;
+}
+
+.SetorColumn {
+    background-color: var(--PrimaryBackground);
+    color: white;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding: .2rem .4rem;
+    border-radius: 1rem;
+    font-size: .7rem;
+}
+
+.TypeColumn {
+    background-color: var(--SecondaryBackground);
+    color: var(--SecondaryColor);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding: .2rem .4rem;
+    border-radius: 1rem;
+    font-size: .7rem;
+}
+
+.NameColumn {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-weight: 500;
+}
+
+.EmailColumn {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: .8rem;
+}

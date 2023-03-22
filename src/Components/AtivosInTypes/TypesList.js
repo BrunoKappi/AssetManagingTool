@@ -23,12 +23,12 @@ const SectorList = (props) => {
 
         <ListGroup as="ul">
           <ListGroup.Item as="li" className='AtivosTypesShowOnlyCustomGroupListTitle' >
-            <Tooltip title="Arraste e solte ítens nesta área" position="bottom" >       
-              <span className='UserTypesShowOnlyCustomGroupListTitleSpan'> <BiCategory/> {props.TipoAtivo.Value}</span>
+            <Tooltip title="Arraste e solte ítens nesta área" position="bottom" >
+              <span className='UserTypesShowOnlyCustomGroupListTitleSpan'> <BiCategory /> {props.TipoAtivo.Value}</span>
             </Tooltip>
           </ListGroup.Item>
 
-          <Droppable droppableId={props.TipoAtivo.Id + '/' +  v4()} key={props.TipoAtivo.Id + '/' +  v4()}>
+          <Droppable droppableId={props.TipoAtivo.Id + '/' + v4()} key={props.TipoAtivo.Id + '/' + v4()}>
             {(provided, snapshot) => {
               return (
                 <div className={snapshot.isDraggingOver ? 'MarginBottom' : ''} {...provided.droppableProps} ref={provided.innerRef}>
@@ -61,7 +61,7 @@ const SectorList = (props) => {
                   <div  {...provided.droppableProps} ref={provided.innerRef}>
                     <Tooltip title="Arraste e solte usuários nesta área" position="bottom" >
                       <span className='AtivosTypesShowOnlyCustomGroupListItem'>
-                        <span className='AtivosTypesShowOnlyCustomGroupListItemSpan'>Nenhum Usuário</span>
+                        <span className='AtivosTypesShowOnlyCustomGroupListItemSpan'>Nenhum Ítem</span>
                       </span>
                     </Tooltip>
                   </div>

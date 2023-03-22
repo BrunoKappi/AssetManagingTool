@@ -1,5 +1,4 @@
 .AtivosLocaisShowOnlyCustomGroupList {
-    min-width: 300px !important;
     margin-top: 1rem;
     margin-bottom: 1rem;
 }
@@ -9,9 +8,7 @@
 }
 
 
-.AtivosLocaisShowOnlyCustomGroupList .list-group {
-    min-width: 300px !important;
-}
+
 
 .AtivosLocaisShowOnlyCustomGroupListItem {
     width: 100%;
@@ -19,12 +16,12 @@
     align-items: center;
     justify-content: flex-start;
     cursor: pointer;
+    font-family: var(--Fonte);
+    font-size: .7rem;
+    white-space: nowrap;
 }
 
-.AtivosLocaisShowOnlyCustomGroupListItem span {
-    font-family: var(--Fonte);
-    font-size: 12px;
-}
+
 
 .AtivosLocaisShowOnlyCustomGroupListItem>svg {
     font-family: var(--Fonte);
@@ -77,6 +74,9 @@
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .AtivosLocaisShowOnlyCustomGroupListItem button {
@@ -110,9 +110,27 @@
     font-family: var(--Fonte) !important;
     background-color: var(--PrimaryBackground) !important;
     color: var(--PrimaryColor) !important;
-    user-select: none;
+    user-select: none !important;
+    font-size: .9rem !important;
+    border-top-right-radius: .7rem !important;
+    border-top-left-radius: .7rem !important;
 }
 
+.UserTypesShowOnlyCustomGroupListTitleSpan {
+    display: grid;
+    grid-template-columns: 7% 85%;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+}
+
+.NoBreak {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin: 0;
+}
 
 .MarginBottom {
     margin-bottom: 2.5rem;

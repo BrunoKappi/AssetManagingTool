@@ -4,13 +4,21 @@
     padding: 2rem;
     max-height: 100%;
     overflow-y: scroll;
-} 
+}
 
 .active {
     background-color: transparent !important;
     cursor: auto !important;
 }
- 
+
 .UsersContainer::-webkit-scrollbar {
     display: none;
+}
+
+
+.UsersTabTitle {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: .5rem;
 }

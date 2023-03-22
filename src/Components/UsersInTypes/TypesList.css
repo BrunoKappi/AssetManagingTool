@@ -13,13 +13,13 @@
 .nav-tabs .nav-link.active {
     border-top: 1px solid var(--PrimaryBackGroundFaded50) !important;
     border-right: 1px solid var(--PrimaryBackGroundFaded50) !important;
-    border-left: 1px solid var(--PrimaryBackGroundFaded50) !important;  
+    border-left: 1px solid var(--PrimaryBackGroundFaded50) !important;
 }
 
 
 
 .UserTypesShowOnlyCustomGroupList {
-    min-width: 300px !important;
+
     margin-top: 1rem;
     margin-bottom: 1rem;
 }
@@ -28,10 +28,6 @@
     cursor: pointer;
 }
 
-
-.UserTypesShowOnlyCustomGroupList .list-group {
-    min-width: 300px !important;
-}
 
 .UserTypesShowOnlyCustomGroupListItem {
     width: 100%;
@@ -97,6 +93,9 @@
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .UserTypesShowOnlyCustomGroupListItem button {

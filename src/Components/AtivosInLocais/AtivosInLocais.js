@@ -5,8 +5,15 @@ import Masonry from "react-masonry-css";
 import { DragDropContext } from "react-beautiful-dnd";
 import { v4 } from 'uuid';
 import { connect } from 'react-redux'
-import LocaisNumbers from './LocaisNumbers';
 import { SaveAtivos } from '../Ativos/AtivosUtils';
+import NumbersOfList from '../NumbersOfList/NumbersOfList';
+
+const breakpointColumnsObj = {
+    default: 3,
+    1250: 2,
+    950: 1
+};
+
 
 const AtivosInLocais = (props) => {
 
@@ -27,11 +34,6 @@ const AtivosInLocais = (props) => {
     }, [props.Ativos, props.LocaisArmazenamento])
 
 
-    const breakpointColumnsObj = {
-        default: 3,
-        1250: 2,
-        950: 1
-    };
 
 
     const HandleDrag = (Resultado) => {
@@ -55,7 +57,7 @@ const AtivosInLocais = (props) => {
         <DragDropContext onDragEnd={(result) => { HandleDrag(result) }}>
             <div className='AtivosInLocaisContainer'>
 
-                <LocaisNumbers LocaisArmazenamento={LocaisArmazenamento} />
+                <NumbersOfList Values={LocaisArmazenamento} />
 
                 <Masonry breakpointCols={breakpointColumnsObj} className="my-masonry-grid" columnClassName="my-masonry-grid_column"   >
 
