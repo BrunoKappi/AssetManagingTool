@@ -3,10 +3,7 @@ import './TableHeader.css'
 
 export default function TableHeader() {
     return (
-        <div className='TableHeader'>
-            <div className='TableHeaderColumn'>
-
-            </div>
+        <div className='TableHeader'>           
             <span className='TableHeaderColumn'>
                 <span > Nome</span>
             </span>

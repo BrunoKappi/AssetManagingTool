@@ -7,12 +7,10 @@
 
 .NavBar {
   background-color: var(--PrimaryBackground) !important;
-  -webkit-box-shadow: 6px 4px 33px -17px rgba(0, 0, 0, 1);
-  -moz-box-shadow: 6px 4px 33px -17px rgba(0, 0, 0, 1);
-  box-shadow: 6px 4px 33px -17px rgba(0, 0, 0, 1);
+  border-bottom: 1px solid #386dc2;
 }
 
-.NavBarContainer{
+.NavBarContainer {
   position: sticky;
   top: 0;
   z-index: 10;
@@ -20,14 +18,14 @@
 }
 
 
-.NavSidebarUserPhotoContainer{
+.NavSidebarUserPhotoContainer {
   width: 100%;
   display: none;
   align-items: center;
   justify-content: center;
 }
 
-.NavSidebarUserPhoto{
+.NavSidebarUserPhoto {
   width: 30%;
   border-radius: 50%;
 }
@@ -396,7 +394,7 @@
 
 @media (max-width: 750px) {
 
-  .NavSidebarUserPhotoContainer{
+  .NavSidebarUserPhotoContainer {
     display: flex;
   }
 

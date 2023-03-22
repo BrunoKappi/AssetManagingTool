@@ -4,10 +4,11 @@ import { HiUsers } from 'react-icons/hi';
 import { FaList, FaUserCog } from 'react-icons/fa';
 import { IoMdSettings } from 'react-icons/io';
 import { MdDashboard } from 'react-icons/md';
+
 import { Link } from 'react-router-dom';
 import { GetSidebarItemClass, SetTab } from './SidebarUtils';
 import { connect } from 'react-redux'
-import User from '../../Images/User.png'
+import User from '../../Images/SerranoLogoFuncoBranco.jpg'
 
 const Sidebar = (props) => {   
 

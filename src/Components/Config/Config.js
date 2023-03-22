@@ -1,10 +1,11 @@
 import React, { useState } from 'react'
 import './Config.css'
 import Masonry from "react-masonry-css";
-import TabTitle from '../TabTitle/TabTitle';
+
 import EditableCustomList from '../EditableCustomList/EditableCustomList'
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
+import { AtivosTabTitle, SetoresEUsuáriosTabTitle } from './ConfigUtils';
 
 export default function Config() {
 
@@ -25,11 +26,11 @@ export default function Config() {
 
     <div className='ConfigContainer'>
 
-      <TabTitle Text="Configurações" />
+
 
       <Tabs id="UsersTabs" activeKey={key} onSelect={(k) => setKey(k)} className="mb-3">
 
-        <Tab eventKey="Ativos" title="Ativos">
+        <Tab eventKey="Ativos" title={AtivosTabTitle()}>
           <div className='ListItensContainer'>
             <Masonry breakpointCols={breakpointColumnsObj} className="my-masonry-grid" columnClassName="my-masonry-grid_column"   >
               <EditableCustomList Title="Tipos de Ativos" Module="TiposAtivos" />
@@ -39,7 +40,7 @@ export default function Config() {
             </Masonry>
           </div>
         </Tab>
-        <Tab eventKey="Setores e Usuários" title="Setores e Usuários" >
+        <Tab eventKey="Setores e Usuários" title={SetoresEUsuáriosTabTitle()} >
           <div className='ListItensContainer'>
             <Masonry breakpointCols={breakpointColumnsObj} className="my-masonry-grid" columnClassName="my-masonry-grid_column"  >
               <EditableCustomList Title="Setores da Empresa" Module="Setores" />

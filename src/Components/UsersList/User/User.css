@@ -1,14 +1,15 @@
 .UserContainer {
     display: grid;
-    grid-template-columns: 5% 20% 35% 20% 20%;
+    grid-template-columns: 25% 35% 20% 20%;
     gap: .5rem;
     align-items: center;
     margin-bottom: .3rem;
     padding: .5rem;
     cursor: pointer;
-    background-color: #edeff2;
-    border-radius: .5rem;
+    background-color: white;
+    border-bottom: 1px solid rgb(210, 210, 210);   
     user-select: none;
+    border-radius: .5rem;
 }
 
 

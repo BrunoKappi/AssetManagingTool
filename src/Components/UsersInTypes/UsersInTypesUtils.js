@@ -23,7 +23,7 @@ export async function GetUsersTypes(gerarErro = false) {
                 if (localStorage.getItem('AssetSenseUsersTypes')) {
                     const Types = JSON.parse(localStorage.getItem('AssetSenseUsersTypes')).map((role) => {
                         return {
-                            value: role.Value,
+                            value: role.Id,
                             label: role.Value,
                         };
                     });

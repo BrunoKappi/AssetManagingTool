@@ -1,6 +1,6 @@
 .TableHeader {
     display: grid;
-    grid-template-columns: 5% 20% 35% 20% 20%;
+    grid-template-columns: 25% 35% 20% 20%;
     gap: .5rem;
     align-items: center;
     margin-bottom: .3rem;
@@ -18,7 +18,9 @@
     overflow: hidden;
     text-overflow: ellipsis;
     font-family: var(--Fonte);
-    font-size: .9rem;
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--ComplementaryColor);
     margin: 0;
     display: flex;
     align-items: center;

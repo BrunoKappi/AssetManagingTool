@@ -14,6 +14,14 @@
     border-top: 1px solid var(--PrimaryBackGroundFaded50) !important;
     border-right: 1px solid var(--PrimaryBackGroundFaded50) !important;
     border-left: 1px solid var(--PrimaryBackGroundFaded50) !important;
+    border-bottom: 1px solid var(--Background) !important;
+}
+
+.nav-tabs .nav-link:hover {
+    border-top: 1px solid var(--PrimaryBackGroundFaded50) !important;
+    border-right: 1px solid var(--PrimaryBackGroundFaded50) !important;
+    border-left: 1px solid var(--PrimaryBackGroundFaded50) !important;
+    border-bottom: 1px solid var(--Background) !important;
 }
 
 
@@ -35,6 +43,7 @@
     align-items: center;
     justify-content: flex-start;
     cursor: pointer;
+    background-color: aqua !;
 }
 
 .UserTypesShowOnlyCustomGroupListItem span {

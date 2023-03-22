@@ -50,3 +50,55 @@ export async function GetUsersTypes(gerarErro = false) {
         }, 5);
     });
 }
+
+
+export async function GetUsersTypesSelect(gerarErro = false) {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            if (gerarErro) {
+                reject(new Error('Erro ao obter dados'));
+            } else {
+                if (localStorage.getItem('AssetSenseUsersTypes')) {
+
+                    const Types = JSON.parse(localStorage.getItem('AssetSenseUsersTypes')).map((item) => {
+                        return {
+                            value: item.Id,
+                            label: item.Value,
+                        };
+                    });
+                    console.log(Types)
+                    Types.push({ value: 'Todos', label: 'Todos' })
+                    resolve(Types)
+                }
+
+                else
+                    resolve([])
+            }
+        }, 5);
+    });
+}
+
+
+export async function GetSetoresSelect(gerarErro = false) {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            if (gerarErro) {
+                reject(new Error('Erro ao obter dados'));
+            } else {
+                if (localStorage.getItem('AssetSenseSetores')) {
+                    const Types = JSON.parse(localStorage.getItem('AssetSenseSetores')).map((item) => {
+                        return {
+                            value: item.Id,
+                            label: item.Value,
+                        };
+                    });
+                    Types.push({ value: 'Todos', label: 'Todos' })
+                    resolve(Types)
+                }
+
+                else
+                    resolve([])
+            }
+        }, 5);
+    });
+}

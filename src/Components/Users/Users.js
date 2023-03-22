@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import './Users.css'
 import { SetoresTabTitle, TiposTabTitle, TodosTabTitle } from './UsersUtils';
-import TabTitle from '../TabTitle/TabTitle';
 
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
@@ -21,11 +20,11 @@ export default function Users() {
   return (
     <div className='UsersContainer'>
 
-      <TabTitle Text="Usuários" />
+      
 
 
       <Tabs id="UsersTabs" activeKey={key} onSelect={(k) => setKey(k)} className="mb-3">
-        <Tab eventKey="Todos" title={TodosTabTitle()}>
+        <Tab className='TabItem' eventKey="Todos" title={TodosTabTitle()}>
           <UsersList />
         </Tab>
         <Tab eventKey="Setores" title={SetoresTabTitle()}>

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import './Ativos.css'
 import { ArmazenamentoTabTitle, GetAtivos, TiposTabTitle, TodosTabTitle } from './AtivosUtils';
 import Loading from '../LoadingForTabs/Loading';
-import TabTitle from '../TabTitle/TabTitle';
+
 import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 import ListGroup from 'react-bootstrap/ListGroup';
 import Tab from 'react-bootstrap/Tab';
@@ -34,7 +34,7 @@ const Ativos = (props) => {
 
     <div className='AtivosContainer'>
 
-      <TabTitle Text="Lista de Ativos" />
+
 
 
       <Tabs id="UsersTabs" activeKey={key} onSelect={(k) => setKey(k)} className="mb-3">

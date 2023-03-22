@@ -4,7 +4,8 @@
     padding: 2rem;
     max-height: 100%;
     overflow-y: scroll;
-}
+    background-color: var(--Background);
+} 
 
 .active {
     background-color: transparent !important;
@@ -16,9 +17,17 @@
 }
 
 
+
+
+/* =========== ESTILO TABS TELA USUARIOS ==================== */
+
 .UsersTabTitle {
     display: flex;
     flex-direction: row;
     align-items: center;
     gap: .5rem;
+    color: var(--ComplementaryColor);
+    font-size: 1rem;
 }
+
+/* =========== ESTILO TABS TELA USUARIOS ==================== */

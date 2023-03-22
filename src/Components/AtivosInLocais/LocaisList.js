@@ -11,9 +11,10 @@ import { BsBoxFill } from "react-icons/bs";
 const SectorList = (props) => {
 
 
+
   const [ListaDeItens,] = useState([...props.Ativos.filter(Ativo => Ativo.StorageLocation.Id === props.LocalArmazenamento.Id)]);
 
-
+  console.log(props.LocalArmazenamento.Value)
 
   return (
     <div>
@@ -32,12 +33,12 @@ const SectorList = (props) => {
             </ListGroup.Item>
           </Tooltip>
 
-          <Droppable droppableId={props.LocalArmazenamento.Id + '/' + v4()} key={props.LocalArmazenamento.Id + '/' + v4()}>
-            {(provided, snapshot) => {
+          <Droppable droppableId={props.LocalArmazenamento.Id} key={props.LocalArmazenamento.Id}>
+            {(DropProvidedArmazenamento, snapshotArmazenamento) => {
               return (
-                <div className={snapshot.isDraggingOver ? 'MarginBottom' : ''} {...provided.droppableProps} ref={provided.innerRef}>
+                <div className={snapshotArmazenamento.isDraggingOver ? 'MarginBottom' : ''} {...DropProvidedArmazenamento.droppableProps} ref={DropProvidedArmazenamento.innerRef}>
                   {ListaDeItens.sort((a, b) => a.Item.localeCompare(b.Item)).map((Item, index) => {
-                    return <Draggable action as="li" key={Item.Id} draggableId={Item.Id} index={index} >
+                    return <Draggable isDragDisabled={!props.LocalArmazenamento.Id} action as="li" key={Item.Id} draggableId={Item.Id} index={index} >
                       {(DragProvided) => {
                         return (
                           <div ref={DragProvided.innerRef} {...DragProvided.draggableProps} {...DragProvided.dragHandleProps}>
@@ -60,9 +61,9 @@ const SectorList = (props) => {
           {ListaDeItens.length === 0 && <ListGroup.Item key={v4()} >
 
             <Droppable droppableId={props.LocalArmazenamento.Id} key={props.LocalArmazenamento.Id}>
-              {(provided, snapshot) => {
+              {(DropProvidedArmazenamento2) => {
                 return (
-                  <div  {...provided.droppableProps} ref={provided.innerRef}>
+                  <div  {...DropProvidedArmazenamento2.droppableProps} ref={DropProvidedArmazenamento2.innerRef}>
                     <Tooltip title="Arraste e solte usuários nesta área" position="bottom" >
                       <span className='AtivosLocaisShowOnlyCustomGroupListItem'>
                         <span className='AtivosLocaisShowOnlyCustomGroupListItemSpan'>Nenhum Ítem</span>

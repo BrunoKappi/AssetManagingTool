@@ -1,0 +1,137 @@
+/* ============  FORM FILTRO DOS USUARIOS  ===================*/
+
+.UsersLisFormFilter {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+    row-gap: 1rem;
+    padding: .5rem;
+    align-items: flex-end;
+
+}
+
+.UsersLisFormFilter>input {
+    flex-grow: 1;
+    outline: none;
+    padding: .4rem .8rem;
+    border: 1px solid rgb(184, 183, 183);
+    border-radius: .3rem;
+    font-family: var(--Fonte);
+    font-size: .8rem;
+}
+
+
+.UsersLisFormFilter>span {
+    font-family: var(--Fonte);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: .3rem;
+    color: var(--ComplementaryColor);
+    font-size: 1.1rem;
+    font-weight: 500;
+    user-select: none;
+
+}
+
+.UsersLisFormFilter>button {
+    font-family: var(--Fonte);
+    font-size: .8rem;
+    outline: none;
+    border: none;
+    background-color: var(--ComplementaryColor);
+    color: white;
+    padding: .6rem 1rem;
+    border-radius: .5rem;
+}
+
+.UsersLisFormFilter>button:hover {
+    transform: scale(1.1);
+}
+
+.UsersLisFormFilter>button:active {
+    transform: scale(1);
+}
+
+/* ============  FORM FILTRO DOS USUARIOS  ===================*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ============  DROPDOWN FILTRO DE SETOR ===================*/
+
+#FiltroDeSetor::after {
+    display: none !important;
+    background-color: aqua !important;
+}
+
+#FiltroDeSetor {
+    background-color: transparent !important;
+    border: none !important;
+    color: black !important;    
+    padding: 0 !important;
+}
+
+.FiltroDeSetorTitle{
+    display: flex;
+    flex-direction: row;
+    gap: .5rem;
+    align-items: center;
+    font-family: var(--Fonte);
+    background-color: var(--PrimaryBackground);
+    padding: .3rem .6rem;
+    border-radius: 1rem;
+    color: white;
+    font-size: .8rem;
+}
+
+/* ============  DROPDOWN FILTRO DE SETOR ===================*/
+
+
+
+
+
+
+
+
+
+/* ============  DROPDOWN FILTRO DE Tipo ===================*/
+
+#FiltroDeTipo::after {
+    display: none !important;
+    background-color: aqua !important;
+}
+
+#FiltroDeTipo {
+    background-color: transparent !important;
+    border: none !important;
+    color: black;
+    padding: 0 !important;
+}
+
+.FiltroDeTipoTitle{
+    display: flex;
+    flex-direction: row;
+    gap: .5rem;
+    align-items: center;
+    font-family: var(--Fonte);
+    background-color: var(--SecondaryBackground);
+    padding: .3rem .6rem;
+    border-radius: 1rem;
+    color: white;
+    font-size: .8rem;
+}
+
+/* ============  DROPDOWN FILTRO DE SETOR ===================*/

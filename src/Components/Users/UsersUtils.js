@@ -7,23 +7,23 @@ import { FaCircle } from "react-icons/fa";
 
 export const SetoresTabTitle = () => {
     return <div className='UsersTabTitle'>
-      <BsBuildingFillGear />
-      <span>Setores</span>
+        <BsBuildingFillGear />
+        <span>Setores</span>
     </div>
-  }
+}
 
-  export const TiposTabTitle = () => {
+export const TiposTabTitle = () => {
     return <div className='UsersTabTitle'>
-      <FaUserEdit />
-      <span>Tipos</span>
+        <FaUserEdit />
+        <span>Tipos</span>
     </div>
-  }
-  export const TodosTabTitle = () => {
+}
+export const TodosTabTitle = () => {
     return <div className='UsersTabTitle'>
-      <FaCircle />
-      <span>Todos</span>
+        <FaCircle />
+        <span>Usuários</span>
     </div>
-  }
+}
 
 
 export async function GetUsers(gerarErro = false) {

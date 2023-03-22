@@ -8,6 +8,7 @@ import { connect } from 'react-redux'
 import { SaveAtivos } from '../Ativos/AtivosUtils';
 import NumbersOfList from '../NumbersOfList/NumbersOfList';
 
+
 const breakpointColumnsObj = {
     default: 3,
     1250: 2,
@@ -16,6 +17,8 @@ const breakpointColumnsObj = {
 
 
 const AtivosInLocais = (props) => {
+
+    
 
     const [LocaisArmazenamento, setLocaisArmazenamento] = useState([
         ...props.LocaisArmazenamento.map(element => {
@@ -26,6 +29,7 @@ const AtivosInLocais = (props) => {
 
 
     useEffect(() => {
+        
         setLocaisArmazenamento([
             ...props.LocaisArmazenamento.map(element => {
                 var Qtd = props.Ativos.filter(el => el.StorageLocation.Id === element.Id).length
@@ -34,11 +38,17 @@ const AtivosInLocais = (props) => {
     }, [props.Ativos, props.LocaisArmazenamento])
 
 
-
+    const onBeforeCapture = (Re) => { 
+        //console.log("BEFORE", Re)
+    };
 
     const HandleDrag = (Resultado) => {
         console.log(Resultado)
-        if (!Resultado.destination) return;
+
+        if (!Resultado.destination) {           
+            return;
+        }
+
 
         const TypeDestinationID = Resultado.destination.droppableId.split("/")[0];
         const ItemId = Resultado.draggableId
@@ -54,7 +64,7 @@ const AtivosInLocais = (props) => {
     }
 
     return (
-        <DragDropContext onDragEnd={(result) => { HandleDrag(result) }}>
+        <DragDropContext onDragUpdate={(result) => { onBeforeCapture(result) }} onDragEnd={(result) => { HandleDrag(result) }}>
             <div className='AtivosInLocaisContainer'>
 
                 <NumbersOfList Values={LocaisArmazenamento} />
@@ -62,7 +72,7 @@ const AtivosInLocais = (props) => {
                 <Masonry breakpointCols={breakpointColumnsObj} className="my-masonry-grid" columnClassName="my-masonry-grid_column"   >
 
                     {props.LocaisArmazenamento.map((LocalArmazenamento, Index) => {
-                        return <LocaisList key={v4()} LocalArmazenamento={LocalArmazenamento} Ativos={props.Ativos} />
+                        return <LocaisList key={v4()} LocalArmazenamento={LocalArmazenamento} Ativos={props.Ativos} IndexList={Index} />
                     })}
 
                 </Masonry>
