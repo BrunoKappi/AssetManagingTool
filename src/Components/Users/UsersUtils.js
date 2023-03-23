@@ -1,26 +1,25 @@
 import { SetUsuarios } from '../../Config/store/actions/UsuariosActions';
 import store from '../../Config/store/store'
 
-import { BsBuildingFillGear } from 'react-icons/bs';
-import { FaUserEdit } from 'react-icons/fa';
-import { FaCircle } from "react-icons/fa";
+
+import { UilUsersAlt, UilSitemap, UilListUl } from '@iconscout/react-unicons'
 
 export const SetoresTabTitle = () => {
-    return <div className='UsersTabTitle'>
-        <BsBuildingFillGear />
+    return <div className='TabsTitle'>
+        <UilSitemap />
         <span>Setores</span>
     </div>
 }
 
 export const TiposTabTitle = () => {
-    return <div className='UsersTabTitle'>
-        <FaUserEdit />
+    return <div className='TabsTitle'>
+        <UilListUl />
         <span>Tipos</span>
     </div>
 }
 export const TodosTabTitle = () => {
-    return <div className='UsersTabTitle'>
-        <FaCircle />
+    return <div className='TabsTitle'>
+        <UilUsersAlt />
         <span>Usuários</span>
     </div>
 }

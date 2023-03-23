@@ -4,12 +4,8 @@ import './NavBar.css'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 //Icones
-import { MdOutlineLogout } from "react-icons/md";
-import { GiHamburgerMenu } from "react-icons/gi";
-import { HiUsers } from 'react-icons/hi';
-import { FaList, FaUserCog } from 'react-icons/fa';
-import { IoMdSettings } from 'react-icons/io';
-import { MdDashboard } from 'react-icons/md';
+
+
 //Bootstrap
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
@@ -27,6 +23,8 @@ import { GetNavbarSidebarItemClass, SetTab } from '../Sidebar/SidebarUtils';
 import { NotificationSucesso } from '../../NotificationUtils';
 import User from '../../Images/User.png'
 
+import { UilChartPieAlt, UilListUl, UilUsersAlt, UilSetting, UilUserCircle,UilSignout,UilBars } from '@iconscout/react-unicons'
+
 
 const NavBar = (props) => {
 
@@ -43,7 +41,7 @@ const NavBar = (props) => {
             <Navbar className='NavBar' expand={'md'} id='navBarResponsive' >
                 <Container fluid bg='dark'>
                     <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-md`} >
-                        <GiHamburgerMenu className='NavBarToggleIcon' />
+                        <UilBars className='NavBarToggleIcon' />
                     </Navbar.Toggle>
                     <Navbar.Brand>
                         <div className='LogoAndCollpse'>
@@ -71,30 +69,30 @@ const NavBar = (props) => {
                                     <NavDropdown title={<span className='ProfileNavLinkTitle' >Bruno Kappi</span>}>
 
                                         <Link to="/App/Dash" className={GetNavbarSidebarItemClass('Dash', props.LoggedUser.CurrentSidebarTab) + ' dropDownLink'} onClick={e => SetTab('Dash')}>
-                                            <MdDashboard />
+                                            <UilChartPieAlt />
                                             <span>Dashboard</span>
                                         </Link>
 
                                         <Link to="/App/Ativos" className={GetNavbarSidebarItemClass('Ativos', props.LoggedUser.CurrentSidebarTab) + ' dropDownLink'} onClick={e => SetTab('Ativos')}>
-                                            <FaList />
+                                            <UilListUl />
                                             <span>Ativos</span>
                                         </Link>
                                         <Link to="/App/Users" className={GetNavbarSidebarItemClass('Users', props.LoggedUser.CurrentSidebarTab) + ' dropDownLink'} onClick={e => SetTab('Users')}>
-                                            <HiUsers />
+                                            <UilUsersAlt />
                                             <span>Usuarios</span>
                                         </Link>
                                         <Link to="/App/Profile" className={GetNavbarSidebarItemClass('Profile', props.LoggedUser.CurrentSidebarTab) + ' dropDownLink'} onClick={e => SetTab('Profile')}>
-                                            <FaUserCog />
+                                            <UilUserCircle />
                                             <span>Meu Perfil</span>
                                         </Link>
                                         <Link to="/App/Config" className={GetNavbarSidebarItemClass('Config', props.LoggedUser.CurrentSidebarTab) + ' dropDownLink'} onClick={e => SetTab('Config')}>
-                                            <IoMdSettings />
+                                            <UilSetting />
                                             <span>Configurações</span>
                                         </Link>
 
                                         <NavDropdown.Divider />
                                         <span href='/' className="dropDownLink" onClick={Sair}>
-                                            <MdOutlineLogout /> Sair
+                                            <UilSignout /> Sair
                                         </span>
                                     </NavDropdown>
                                 </div>
@@ -115,28 +113,28 @@ const NavBar = (props) => {
 
                                 <ul className='NavBarListSidebar'>
                                     <Link to="/App/Dash" className={GetNavbarSidebarItemClass('Dash', props.LoggedUser.CurrentSidebarTab)} onClick={e => SetTab('Dash')}>
-                                        <MdDashboard />
+                                        <UilChartPieAlt />
                                         <span>Dashboard</span>
                                     </Link>
                                     <Link to="/App/Ativos" className={GetNavbarSidebarItemClass('Ativos', props.LoggedUser.CurrentSidebarTab)} onClick={e => SetTab('Ativos')}>
-                                        <FaList />
+                                        <UilListUl />
                                         <span>Ativos</span>
                                     </Link>
                                     <Link to="/App/Users" className={GetNavbarSidebarItemClass('Users', props.LoggedUser.CurrentSidebarTab)} onClick={e => SetTab('Users')}>
-                                        <HiUsers />
+                                        <UilUsersAlt />
                                         <span>Usuarios</span>
                                     </Link>
                                     <Link to="/App/Profile" className={GetNavbarSidebarItemClass('Profile', props.LoggedUser.CurrentSidebarTab)} onClick={e => SetTab('Profile')}>
-                                        <FaUserCog />
+                                        <UilUserCircle />
                                         <span>Meu Perfil</span>
                                     </Link>
                                     <Link to="/App/Config" className={GetNavbarSidebarItemClass('Config', props.LoggedUser.CurrentSidebarTab)} onClick={e => SetTab('Config')}>
-                                        <IoMdSettings />
+                                        <UilSetting />
                                         <span>Configurações</span>
                                     </Link>
 
                                     <Link to="/" className={GetNavbarSidebarItemClass('Sair', props.LoggedUser.CurrentSidebarTab)} onClick={Sair}>
-                                        <MdOutlineLogout />
+                                        <UilSignout />
                                         <span>Sair</span>
                                     </Link>
 

@@ -5,11 +5,9 @@ import Loading from '../LoadingForTabs/Loading';
 import User from './User/User';
 import { connect } from 'react-redux'
 import { v4 } from 'uuid';
-import TableHeader from './TableHeader/TableHeader';
-import { FaFilter } from 'react-icons/fa';
 import { MdFilterList } from 'react-icons/md';
 import Dropdown from 'react-bootstrap/Dropdown';
-import { Tooltip } from 'react-tippy';
+import { UilExclamationCircle } from '@iconscout/react-unicons'
 
 
 
@@ -85,41 +83,59 @@ const UsersList = (props) => {
         <div className='UsersListContainer'>
 
             <div className='UsersLisFormFilter'>
-                <span> <FaFilter />Filtros</span>
-                <input value={FiltroDeTexto} placeholder='Procurar Usuário' onChange={e => setFiltroDeTexto(e.target.value)}></input>
+                <input value={FiltroDeTexto} placeholder='Procurar Usuário...' onChange={e => setFiltroDeTexto(e.target.value)}></input>
+                <Dropdown autoClose="outside">
+                    <Dropdown.Toggle id="Filtros">
+                        <div className='FiltrosTitle'>
+                            Filtros
+                            <MdFilterList />
+                        </div>
+                    </Dropdown.Toggle>
+                    <Dropdown.Menu>
+
+                        <Dropdown.Item id='FiltrosItem'>
+
+                            <Dropdown>
+                                <Dropdown.Toggle id="FiltroDeSetor">
+                                    <div className='FiltroDeSetorTitle'>
+                                        {(FiltroSetor !== 'Todos' && FiltroSetor) ? SetorLabel : 'Filtro de Setor'}
+                                        <MdFilterList />
+                                    </div>
+                                </Dropdown.Toggle>
+                                <Dropdown.Menu>
+                                    {SetoresOptions.map(Setor => {
+                                        return <Dropdown.Item onClick={e => handleSetorOptionChange(Setor)} >{Setor.label}</Dropdown.Item>
+                                    })}
+                                </Dropdown.Menu>
+                            </Dropdown>
 
 
-                <Tooltip title="Filtrar Usuários por Setor" position="bottom" >
-                    <Dropdown>
-                        <Dropdown.Toggle id="FiltroDeSetor">
-                            <div className='FiltroDeSetorTitle'>
-                                {(FiltroSetor !== 'Todos' && FiltroSetor) ? SetorLabel : 'Filtro de Setor'}
-                                <MdFilterList />
-                            </div>
-                        </Dropdown.Toggle>
-                        <Dropdown.Menu>
-                            {SetoresOptions.map(Setor => {
-                                return <Dropdown.Item onClick={e => handleSetorOptionChange(Setor)} >{Setor.label}</Dropdown.Item>
-                            })}
-                        </Dropdown.Menu>
-                    </Dropdown>
-                </Tooltip>
 
-                <Tooltip title="Filtrar Usuários por Tipo" position="bottom" >
-                    <Dropdown>
-                        <Dropdown.Toggle id="FiltroDeTipo">
-                            <div className='FiltroDeTipoTitle'>
-                                {(FiltroTipo !== 'Todos' && FiltroTipo) ? TypeLabel : 'Tipo de Usuário'}
-                                <MdFilterList />
-                            </div>
-                        </Dropdown.Toggle>
-                        <Dropdown.Menu>
-                            {UserTypesOptions.map(Type => {
-                                return <Dropdown.Item onClick={e => handleTypeOptionChange(Type)} >{Type.label}</Dropdown.Item>
-                            })}
-                        </Dropdown.Menu>
-                    </Dropdown>
-                </Tooltip>
+                            <Dropdown>
+                                <Dropdown.Toggle id="FiltroDeTipo">
+                                    <div className='FiltroDeTipoTitle'>
+                                        {(FiltroTipo !== 'Todos' && FiltroTipo) ? TypeLabel : 'Tipo de Usuário'}
+                                        <MdFilterList />
+                                    </div>
+                                </Dropdown.Toggle>
+                                <Dropdown.Menu>
+                                    {UserTypesOptions.map(Type => {
+                                        return <Dropdown.Item onClick={e => handleTypeOptionChange(Type)} >{Type.label}</Dropdown.Item>
+                                    })}
+                                </Dropdown.Menu>
+                            </Dropdown>
+
+
+                        </Dropdown.Item>
+
+                    </Dropdown.Menu>
+                </Dropdown>
+
+
+
+
+
+
 
 
 
@@ -127,7 +143,6 @@ const UsersList = (props) => {
             </div>
 
 
-            <TableHeader />
 
 
 
@@ -137,7 +152,10 @@ const UsersList = (props) => {
 
             {ListaDeUsuarios.length === 0 && !Loaded && <Loading />}
 
-            {ListaDeUsuarios.length === 0 && Loaded && <h2>Nenhum Usuário encontrado</h2>}
+            {ListaDeUsuarios.length === 0 && Loaded && <div className='FilterNoResultsContainer'>
+                <UilExclamationCircle />
+                <h3>Nenhum Usuário encontrado</h3>
+            </div>}
 
         </div>
     )

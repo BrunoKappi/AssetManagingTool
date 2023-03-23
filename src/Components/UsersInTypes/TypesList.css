@@ -6,7 +6,7 @@
 }
 
 .nav-tabs {
-    border-bottom: 1px solid var(--PrimaryBackGroundFaded50) !important;
+    border-bottom: none !important;
 }
 
 
@@ -51,18 +51,19 @@
     font-size: 12px;
 }
 
-.UserTypesShowOnlyCustomGroupListItem>svg {
+.UserTypesShowOnlyCustomGroupListItem svg {
     font-family: var(--Fonte);
     font-size: .9rem;
     margin-right: .3rem;
     color: var(--PrimaryBackground);
+    width: 1rem !important;
 }
 
 
-.UserTypesShowOnlyCustomGroupListItem svg {
-    float: right;
-    margin-left: .6rem;
+.UserTypesShowOnlyCustomGroupList .list-group-item {
+    padding: .2rem .7rem !important;
 }
+
 
 .UserTypesShowOnlyCustomGroupIcon {
     font-family: var(--Fonte);
@@ -139,6 +140,11 @@
     background-color: var(--PrimaryBackground) !important;
     color: var(--PrimaryColor) !important;
     user-select: none;
+    padding: 1rem !important;
+}
+
+.UserTypesShowOnlyCustomGroupListTitle.list-group-item {
+    padding: .6rem .7rem !important;
 }
 
 
@@ -154,4 +160,9 @@
     align-items: center;
     /* Alinha verticalmente o ícone e o texto */
     gap: .5rem;
+}
+
+
+.UserTypesShowOnlyCustomGroupListTitleSpan svg {
+    width: 1.1rem;
 }

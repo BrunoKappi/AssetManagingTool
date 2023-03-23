@@ -35,11 +35,16 @@ const Ativos = (props) => {
     <div className='AtivosContainer'>
 
 
+      <div className='TabsContainer'>
+        <button onClick={(k) => setKey('Todos')} className={key === 'Todos' ? 'TabsButtonActive' : ''}>{TodosTabTitle()}</button>
+        <button onClick={(k) => setKey('Armazenamento')} className={key === 'Armazenamento' ? 'TabsButtonActive' : ''}>{ArmazenamentoTabTitle()}</button>
+        <button onClick={(k) => setKey('Tipos')} className={key === 'Tipos' ? 'TabsButtonActive' : ''}>{TiposTabTitle()}</button>
+      </div>
 
 
       <Tabs id="UsersTabs" activeKey={key} onSelect={(k) => setKey(k)} className="mb-3">
 
-        <Tab eventKey="Todos" title={TodosTabTitle()}>
+        <Tab eventKey="Todos" >
           <div className='ListItensContainer'>
             {(ListaDeAtivos.length !== 0 || Loaded) &&
               <ListGroup>
@@ -76,12 +81,12 @@ const Ativos = (props) => {
 
           </div>
         </Tab>
-        <Tab eventKey="Tipos" title={TiposTabTitle()} >
+        <Tab eventKey="Tipos" >
           <div className='ListItensContainer'>
             <AtivosInTypes />
           </div>
         </Tab>
-        <Tab eventKey="Armazenamento" title={ArmazenamentoTabTitle()} >
+        <Tab eventKey="Armazenamento">
           <div className='ListItensContainer'>
             <AtivosInLocais />
           </div>

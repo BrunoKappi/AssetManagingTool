@@ -2,16 +2,16 @@ import React, { useState, useEffect } from 'react'
 import { GetSetores } from '../../EditableCustomList/EditableCustomListUtils'
 import { GetUsersTypes } from '../UsersListUtils'
 import './User.css'
-import { MyVerticallyCenteredModal } from './UserModal'
-
-
+import { UserModal } from './UserModal'
+import { UilEnvelope, UilUser } from '@iconscout/react-unicons'
 
 export default function User(props) {
 
+
     const [UserType, setUserType] = useState({})
     const [UserSetor, setUserSetor] = useState({})
+    const [modalShow, setModalShow] = useState(false);
 
-    const [modalShow, setModalShow] = React.useState(false);
 
     useEffect(() => {
         GetUsersTypes().then((Lista) => {
@@ -37,22 +37,32 @@ export default function User(props) {
     return (
         <>
 
-            <MyVerticallyCenteredModal User={props.User} UserType={UserType} UserSetor={UserSetor} show={modalShow} onHide={() => setModalShow(false)} />
+            <UserModal User={props.User} UserType={UserType} UserSetor={UserSetor} show={modalShow} onHide={() => setModalShow(false)} />
 
 
             <div className='UserContainer' onClick={() => setModalShow(true)}>
-                
+
                 <span className='UserContainerColumn'>
-                    <span className='NameColumn'> {props.User.Name}</span>
+                    <span className='NameColumn'>
+                        <UilUser />
+                        {props.User.Name}
+                    </span>
                 </span>
                 <span className='UserContainerColumn'>
-                    <span className='EmailColumn'> {props.User.Email}</span>
+                    <span className='EmailColumn'>
+                        <UilEnvelope />
+                        {props.User.Email.charAt(0).toUpperCase() + props.User.Email.slice(1)}
+                    </span>
                 </span>
                 <div className='UserContainerColumn'>
-                    <span className='SetorColumn'>{UserSetor.Value}</span>
+                    <span className='SetorColumn'>
+                        {UserSetor.Value}
+                    </span>
                 </div>
                 <span className='UserContainerColumn'>
-                    <span className='TypeColumn'>{UserType.Value}</span>
+                    <span className='TypeColumn'>
+                        {UserType.Value}
+                    </span>
                 </span>
             </div>
         </>

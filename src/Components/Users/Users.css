@@ -1,3 +1,5 @@
+/* =========== ESTILO TELA USUARIOS ==================== */
+
 .UsersContainer {
     width: 100%;
     height: 100%;
@@ -5,7 +7,16 @@
     max-height: 100%;
     overflow-y: scroll;
     background-color: var(--Background);
-} 
+}
+
+@media (max-width: 750px) {
+    .UsersContainer {
+
+        padding: .5rem;
+
+    }
+
+}
 
 .active {
     background-color: transparent !important;
@@ -19,15 +30,58 @@
 
 
 
-/* =========== ESTILO TABS TELA USUARIOS ==================== */
 
-.UsersTabTitle {
+
+
+/* =========== ESTILO TABS TELA  ==================== */
+.TabsTitle {
     display: flex;
     flex-direction: row;
     align-items: center;
     gap: .5rem;
-    color: var(--ComplementaryColor);
-    font-size: 1rem;
 }
 
-/* =========== ESTILO TABS TELA USUARIOS ==================== */
+.TabsTitle>svg {
+    width: 1.1rem;
+}
+/* =========== ESTILO TABS TELA  ==================== */
+
+
+
+
+
+
+
+/* =========== TABS BUTTONS ==================== */
+
+.TabsContainer {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+}
+
+.TabsContainer>button {
+
+    border-radius: .5rem;
+    border: none;
+    padding: .5rem 1.5rem;
+    font-family: var(--Fonte);
+    background-color: var(--PrimaryBackGroundFaded2);
+    color: var(--PrimaryBackground);
+}
+
+.TabsButtonActive {
+    background-color: var(--PrimaryBackground) !important;
+    color: var(--PrimaryColor) !important;
+}
+
+
+@media (max-width: 650px) {
+    .TabsContainer {
+        flex-direction: column;
+        gap: .5rem;
+        margin-top: .5rem;
+    }
+}
+
+/* =========== TABS BUTTONS ==================== */

@@ -5,13 +5,12 @@ import './TypesList.css'
 import ListGroup from 'react-bootstrap/ListGroup';
 import { v4 } from 'uuid';
 import { Draggable, Droppable } from "react-beautiful-dnd";
-import { RiUser3Fill } from 'react-icons/ri';
-import { MdVerifiedUser } from 'react-icons/md';
-import { FaUsersCog } from 'react-icons/fa';
 import { ImCheckboxUnchecked, ImCheckboxChecked } from 'react-icons/im';
 import { Tooltip } from 'react-tippy';
 import { NotificationSucesso } from '../../NotificationUtils';
 import { SaveUserTipos } from '../EditableCustomList/EditableCustomListUtils';
+
+import { UilPuzzlePiece,UilShieldCheck,UilUser   } from '@iconscout/react-unicons'
 
 const TypesList = (props) => {
 
@@ -37,7 +36,7 @@ const TypesList = (props) => {
         <ListGroup as="ul">
           <ListGroup.Item as="li" className='UserTypesShowOnlyCustomGroupListTitle' >
             <Tooltip title="Arraste e solte ítens nesta área" position="bottom" >
-              <span className='UserTypesShowOnlyCustomGroupListTitleSpan'> <FaUsersCog/> { props.TipoUsuario.Value }</span>
+              <span className='UserTypesShowOnlyCustomGroupListTitleSpan'> <UilPuzzlePiece/> { props.TipoUsuario.Value }</span>
             </Tooltip>
             <Tooltip title="Possui permissões de Administrador" position="bottom" >
               {props.TipoUsuario.IsAdmin ? <ImCheckboxChecked className='UserTypesShowOnlyCustomGroupListCheckbox' onClick={e => HandleSubmiChangePermit(props.TipoUsuario)} /> : <ImCheckboxUnchecked className='UserTypesShowOnlyCustomGroupListCheckbox' onClick={e => HandleSubmiChangePermit(props.TipoUsuario)} />}
@@ -59,11 +58,11 @@ const TypesList = (props) => {
                               <span className='UserTypesShowOnlyCustomGroupListItem'>
                                 {IsAdmin ?
                                   <Tooltip title="Possui permissões de Administrador" position="bottom" >
-                                    <MdVerifiedUser className='UserTypesShowOnlyCustomGroupIcon' />
+                                    <UilShieldCheck className='UserTypesShowOnlyCustomGroupIcon' />
                                   </Tooltip>
                                   :
                                   <Tooltip title="Não possui permissões de Administrador" position="bottom" >
-                                    <RiUser3Fill className='UserTypesShowOnlyCustomGroupIcon' />
+                                    <UilUser className='UserTypesShowOnlyCustomGroupIcon' />
                                   </Tooltip>
                                 }
                                 <span> {Item.Name}</span>

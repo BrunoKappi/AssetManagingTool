@@ -4,15 +4,13 @@
     gap: .5rem;
     align-items: center;
     margin-bottom: .3rem;
-    padding: .5rem;
+    padding: .7rem .5rem;
     cursor: pointer;
     background-color: white;
-    border-bottom: 1px solid rgb(210, 210, 210);   
+    border-bottom: 1px solid rgb(210, 210, 210);
     user-select: none;
     border-radius: .5rem;
 }
-
-
 
 
 .UserContainerColumn {
@@ -59,11 +57,42 @@
     overflow: hidden;
     text-overflow: ellipsis;
     font-weight: 500;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    gap: .3rem;
+    color: var(--ComplementaryColor);
+    font-size: .9rem;
+}
+
+.NameColumnIcon {
+    padding: 0;
+    width: 1.5rem;
+    height: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background-color: var(--ComplementaryColor);
+    color: white;
+    font-size: .9rem;
+}
+
+.NameColumn>svg {
+    width: 1rem;
 }
 
 .EmailColumn {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    gap: .1rem;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
     font-size: .8rem;
+}
+
+.EmailColumn>svg {
+    width: .9rem;
 }

@@ -8,16 +8,16 @@
   --PrimaryBackGroundFaded50: rgba(43, 90, 166, .5);
   --PrimaryBackGroundFaded2: rgba(43, 90, 166, .1);
   --PrimaryColor: #FFFF;
-  --SecondaryBackground: #D4A418;
-  --SecondaryBackground: rgba(212, 164, 24, .8);
+  --SecondaryBackground: #424656;
   --SecondaryColor: #FFFF;
   --Dark: #161c2d;
   --ColorDark: white;
   --Fonte: 'Kanit', 'Sans-serif'
 }
 
-image.png
-.LoadingContainer {
+
+
+image.png .LoadingContainer {
   width: 100%;
   height: 100dvh;
   display: flex;

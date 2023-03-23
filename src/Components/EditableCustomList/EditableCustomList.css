@@ -1,3 +1,4 @@
+/* ===================== CUSTOMGROUP LIST =================================*/
 .CustomGroupList {
     margin-top: 1rem;
     margin-bottom: 1rem;
@@ -28,9 +29,6 @@
     float: right;
     margin-left: .6rem;
 }
-
-
-
 
 
 
@@ -77,6 +75,11 @@
     margin-right: 1rem !important;
 }
 
+
+.CustomGroupListTitleIcon>svg {
+    height: 1.2rem;
+}
+
 .CategoriaEditIcon {
     color: var(--Dark) !important;
 }
@@ -93,7 +96,31 @@
 }
 
 
-/* CHECKBOX */
+.CustomGroupListTitleRow {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: .5rem;
+}
+
+/* ===================== CUSTOMGROUP LIST =================================*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ===================== CHECKBOX =================================*/
 
 /* Hide the default checkbox */
 .containerCheck input {
@@ -142,10 +169,4 @@
 }
 
 
-
-.UserTypesRow {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: .5rem;
-}
+/* ===================== CHECKBOX =================================*/

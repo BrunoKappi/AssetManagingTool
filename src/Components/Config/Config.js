@@ -27,10 +27,15 @@ export default function Config() {
     <div className='ConfigContainer'>
 
 
+      <div className='TabsContainer'>
+        <button onClick={(k) => setKey('Ativos')} className={key === 'Ativos' ? 'TabsButtonActive' : ''}>{AtivosTabTitle()}</button>
+        <button onClick={(k) => setKey('Setores e Usuários')} className={key === 'Setores e Usuários' ? 'TabsButtonActive' : ''}>{SetoresEUsuáriosTabTitle()}</button>
+      </div>
+
 
       <Tabs id="UsersTabs" activeKey={key} onSelect={(k) => setKey(k)} className="mb-3">
 
-        <Tab eventKey="Ativos" title={AtivosTabTitle()}>
+        <Tab eventKey="Ativos" >
           <div className='ListItensContainer'>
             <Masonry breakpointCols={breakpointColumnsObj} className="my-masonry-grid" columnClassName="my-masonry-grid_column"   >
               <EditableCustomList Title="Tipos de Ativos" Module="TiposAtivos" />
@@ -40,7 +45,7 @@ export default function Config() {
             </Masonry>
           </div>
         </Tab>
-        <Tab eventKey="Setores e Usuários" title={SetoresEUsuáriosTabTitle()} >
+        <Tab eventKey="Setores e Usuários"  >
           <div className='ListItensContainer'>
             <Masonry breakpointCols={breakpointColumnsObj} className="my-masonry-grid" columnClassName="my-masonry-grid_column"  >
               <EditableCustomList Title="Setores da Empresa" Module="Setores" />
@@ -49,7 +54,7 @@ export default function Config() {
           </div>
         </Tab>
       </Tabs>
-      
+
     </div>
 
 

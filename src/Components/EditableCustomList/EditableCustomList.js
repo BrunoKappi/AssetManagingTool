@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
 import './EditableCustomList.css'
 //ICONES
-import { MdAddCircle, MdDelete, MdModeEditOutline, MdCancel } from "react-icons/md";
+
 import ListGroup from 'react-bootstrap/ListGroup';
 import { v4 } from 'uuid';
 import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
@@ -11,9 +11,18 @@ import { NotificationSucesso } from '../../NotificationUtils';
 import { Tooltip } from 'react-tippy';
 import { SaveUserTipos, GetNotificationErrorMessageDelete, GetNotificationSuccessMessageAdd, GetNotificationExistsMessageAdd, GetNotificationSuccessMessageDelete, saveFunctions, GetNotificationSuccessMessageChangeName, fetchFunctions } from './EditableCustomListUtils';
 import Loading from '../LoadingForTabs/Loading'
-import { BiCategory } from "react-icons/bi";
-import { BsBuildingFillGear, BsBoxFill } from "react-icons/bs";
-import { FaCircle, FaUsersCog } from "react-icons/fa";
+
+
+import { UilLabel, UilPuzzlePiece, UilBox, UilPlay, UilPlus, UilTrashAlt, UilBackspace, UilPen } from '@iconscout/react-unicons'
+
+const CustomListIcon = {
+  TiposAtivos: <UilLabel />,
+  Setores: <UilPuzzlePiece />,
+  TiposUsuarios: <UilLabel />,
+  Locais: <UilBox />,
+  StatusAtivos: <UilLabel />,
+  TiposUso: <UilPlay />
+};
 
 const EditableCustomList = (props) => {
 
@@ -155,14 +164,7 @@ const EditableCustomList = (props) => {
 
 
 
-  const CustomListIcon = {
-    TiposAtivos: <BiCategory />,
-    Setores: <BsBuildingFillGear />,
-    TiposUsuarios: <FaUsersCog />,
-    Locais: <BsBoxFill />,
-    StatusAtivos: <FaCircle />,
-    TiposUso: <BiCategory />
-  };
+
 
   return (
     <div>
@@ -175,7 +177,7 @@ const EditableCustomList = (props) => {
 
           <ListGroup as="ul">
             <ListGroup.Item as="li" className='CustomGroupListTitle' >
-              <span className='UserTypesShowOnlyCustomGroupListTitleSpan'> {CustomListIcon[props.Module]} {props.Title} </span>
+              <span className='CustomGroupListTitleIcon'> {CustomListIcon[props.Module]} {props.Title} </span>
             </ListGroup.Item>
             <DragDropContext onDragEnd={(result) => { HandleDrag(result) }}>
               <Droppable droppableId={'Tipos'} key={'Tipos'}>
@@ -188,7 +190,7 @@ const EditableCustomList = (props) => {
                             return (
                               <div ref={DragProvided.innerRef} {...DragProvided.draggableProps} {...DragProvided.dragHandleProps}>
                                 <ListGroup.Item key={Item.Value + v4()} action as="li">
-                                  <div className='UserTypesRow'>
+                                  <div className='CustomGroupListTitleRow'>
                                     {props.Module === "TiposUsuarios" && <Tooltip title="Permissões de Administrador" position="bottom" >
                                       <label class="containerCheck">
                                         <input checked={Item.IsAdmin} onChange={e => HandleSubmiChangePermit(index)} type="checkbox"></input>
@@ -212,7 +214,7 @@ const EditableCustomList = (props) => {
 
                                         <Tooltip title="Editar Item" position="bottom" >
                                           <button onClick={e => InitEditing(Item.Value)}>
-                                            <MdModeEditOutline className='EditableCustomListIcon' />
+                                            <UilPen className='EditableCustomListIcon' />
                                           </button>
                                         </Tooltip>
                                       }
@@ -220,14 +222,14 @@ const EditableCustomList = (props) => {
                                       {ItemListSelected === Item.Value && EditingItem &&
                                         <Tooltip title="Cancelar" position="bottom" >
                                           <button onClick={e => EndEditing()}>
-                                            <MdCancel className='EditableCustomListIcon' />
+                                            <UilBackspace className='EditableCustomListIcon' />
                                           </button>
                                         </Tooltip>
                                       }
                                       {ItemListSelected === Item.Value &&
                                         <Tooltip title="Excluir Item" position="bottom" >
                                           <button onClick={e => HandleDeleteItem(index, Item.Id)}>
-                                            <MdDelete className='EditableCustomListIcon' />
+                                            <UilTrashAlt lete className='EditableCustomListIcon' />
                                           </button>
                                         </Tooltip>
                                       }
@@ -258,7 +260,7 @@ const EditableCustomList = (props) => {
 
                   <Tooltip title="Adicionar Item" position="bottom" >
                     <button className='EditableCustomListAddButton'>
-                      <MdAddCircle className='EditableCustomListIcon' />
+                      <UilPlus className='EditableCustomListIcon' />
                     </button>
                   </Tooltip>
 

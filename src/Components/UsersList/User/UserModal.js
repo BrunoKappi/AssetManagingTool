@@ -1,38 +1,121 @@
-
-import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
-import Select from 'react-select'
 import './UserModal.css'
+import User from '../../../Images/SerranoLogoFuncoBranco.jpg'
+import { UilTimes } from '@iconscout/react-unicons'
+import { UilUserCircle, UilClipboardNotes, UilEnvelope, UilPhone, UilMap, UilMapMarker, UilPen } from '@iconscout/react-unicons'
+import { useState } from 'react';
 
-const options = [
-    { value: 'chocolate', label: 'Chocolate' },
-    { value: 'strawberry', label: 'Strawberry' },
-    { value: 'vanilla', label: 'Vanilla' }
-]
+export const UserModal = (props) => {
+ 
+    const [Tab, setTab] = useState('UserInfo')
 
-export const MyVerticallyCenteredModal = (props) => {
     return (
-        <Modal
-            {...props}
-            size="xl"
-            aria-labelledby="contained-modal-title-vcenter"
-            centered
-            fullscreen={'sm-down'}
-        >
-            <Modal.Header closeButton>
-                <Modal.Title id="contained-modal-title-vcenter">
-                    {props.User.Name}
-                </Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
-                <div className='ModalForm'>
-                    <input></input>
-                    <Select options={options} />
+        <Modal {...props} size="xl" aria-labelledby="contained-modal-title-vcenter" centered fullscreen={'md-down'}>
+
+            <Modal.Body closeButton>
+
+                <div className='UserModal'>
+                    <div className='UserModalHeader'>
+                        <div className='UserModalHeader-Left'>
+                            <div className='UserModalHeader-Left-Photo'>
+                                <img src={User} alt="User" />
+                            </div>
+                        </div>
+                        <div className='UserModalHeader-Right'>
+                            <div className='UserModalHeader-Right-Name'>
+                                {props.User.Name}
+                                <UilTimes className='UserModalHeader-Right-Close' onClick={props.onHide}/>
+                            </div>
+                            <div className='UserModalHeader-Right-Setor'>
+                                {props.UserSetor.Value}
+                            </div>
+                            <div className='UserModalHeader-Right-Tipo'>
+                                {props.UserType.Value}
+                            </div>
+                        </div>
+
+                    </div>
+                    <div className='UserModalBody'>
+                        <div className='UserModalBody-Sidebar'>
+                            <div className={Tab === 'UserInfo' ? 'UserModalBody-Sidebar-ActiveItem' : 'UserModalBody-Sidebar-Item'} onClick={e => setTab('UserInfo')}>
+                                <UilUserCircle />
+                                Informações Pessoais
+                            </div>
+                            <div className={Tab === 'Ativos' ? 'UserModalBody-Sidebar-ActiveItem' : 'UserModalBody-Sidebar-Item'} onClick={e => setTab('Ativos')}>
+                                <UilClipboardNotes />
+                                Ativos
+                            </div>
+                        </div>
+                        <div className='UserModalBody-UserInfo'>
+                            {Tab === 'UserInfo' && <div className='UserModalBody-UserInfoForm'>
+                                <form>
+                                    <div className='UserModalBody-UserInfoForm-OneLine'>
+                                        <div className='UserModalBody-UserInfoForm-Group'>
+                                            <span>
+                                                <UilEnvelope />
+                                                Email
+                                            </span>
+                                            <input value={props.User.Email} type="text" />
+                                        </div>
+                                    </div>
+
+
+                                    <div className='UserModalBody-UserInfoForm-TwoLine'>
+                                        <div className='UserModalBody-UserInfoForm-Group'>
+                                            <span>
+                                                <UilPen />
+                                                Nome
+                                            </span>
+                                            <input value={props.User.Name.split(' ')[0]} type="text" />
+                                        </div>
+                                        <div className='UserModalBody-UserInfoForm-Group'>
+                                            <span>
+                                                <UilPen />
+                                                Sobrenome
+                                            </span>
+                                            <input value={props.User.Name.split(' ').slice(1).join(" ")} type="text" />
+                                        </div>
+                                    </div>
+
+                                    <div className='UserModalBody-UserInfoForm-OneLine'>
+                                        <div className='UserModalBody-UserInfoForm-Group'>
+                                            <span>
+                                                <UilPhone />
+                                                Telefone
+                                            </span>
+                                            <input type="text" />
+                                        </div>
+                                    </div>
+
+
+                                    <div className='UserModalBody-UserInfoForm-TwoLine'>
+                                        <div className='UserModalBody-UserInfoForm-Group'>
+                                            <span>
+                                                <UilMap />
+                                                Estado
+                                            </span>
+                                            <input type="text" />
+                                        </div>
+                                        <div className='UserModalBody-UserInfoForm-Group'>
+                                            <span>
+                                                <UilMapMarker />
+                                                Cidade
+                                            </span>
+                                            <input type="text" />
+                                        </div>
+                                    </div>
+
+                                    
+
+                                </form>
+                            </div>}
+                        </div>
+                    </div>
                 </div>
+
+
             </Modal.Body>
-            <Modal.Footer>
-                <Button onClick={props.onHide}>Close</Button>
-            </Modal.Footer>
+
         </Modal>
     );
 }

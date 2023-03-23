@@ -6,7 +6,9 @@ import ListGroup from 'react-bootstrap/ListGroup';
 import { v4 } from 'uuid';
 import { Draggable, Droppable } from "react-beautiful-dnd";
 import { Tooltip } from 'react-tippy';
-import { BsBoxFill } from "react-icons/bs";
+
+
+import {UilBox  } from '@iconscout/react-unicons'
 
 const SectorList = (props) => {
 
@@ -26,7 +28,7 @@ const SectorList = (props) => {
           <Tooltip title="Arraste e solte ítens nesta área" position="bottom" >
             <ListGroup.Item as="li" className='AtivosLocaisShowOnlyCustomGroupListTitle' >
               <span className='UserTypesShowOnlyCustomGroupListTitleSpan'>
-                <BsBoxFill />
+                <UilBox />
                 <p className='NoBreak'> {props.LocalArmazenamento.Value}</p>
               </span>
 

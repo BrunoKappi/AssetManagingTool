@@ -1,27 +1,25 @@
 import store from '../../Config/store/store'
 import { SetAtivos } from '../../Config/store/actions/AtivosActions'
 
-import { BsBoxFill } from "react-icons/bs";
-import { FaListAlt, FaCircle } from "react-icons/fa";
 
-
+import { UilListUl,UilLabel,UilBox  } from '@iconscout/react-unicons'
 
 export const ArmazenamentoTabTitle = () => {
-  return <div className='AtivoTabTitle'>
-    <BsBoxFill />
+  return <div className='TabsTitle'>
+    <UilBox />
     <span>Armazenamento</span>
   </div>
 }
 
 export const TiposTabTitle = () => {
-  return <div className='AtivoTabTitle'>
-    <FaListAlt />
+  return <div className='TabsTitle'>
+    <UilListUl />
     <span>Tipos</span>
   </div>
 }
 export const TodosTabTitle = () => {
-  return <div className='AtivoTabTitle'>
-    <FaCircle />
+  return <div className='TabsTitle'>
+    <UilLabel />
     <span>Todos</span>
   </div>
 }

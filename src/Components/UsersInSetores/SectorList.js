@@ -5,10 +5,10 @@ import './SectorList.css'
 import ListGroup from 'react-bootstrap/ListGroup';
 import { v4 } from 'uuid';
 import { Draggable, Droppable } from "react-beautiful-dnd";
-import { RiUser3Fill } from 'react-icons/ri';
-import { MdVerifiedUser } from 'react-icons/md';
-import { BsBuildingFillGear } from 'react-icons/bs';
+
 import { Tooltip } from 'react-tippy';
+
+import { UilPuzzlePiece,UilShieldCheck,UilUser   } from '@iconscout/react-unicons'
 
 const SectorList = (props) => {
 
@@ -24,7 +24,7 @@ const SectorList = (props) => {
         <ListGroup as="ul">
           <ListGroup.Item as="li" className='SetoresShowOnlyCustomGroupListTitle' >
             <Tooltip title="Arraste e solte ítens nesta área" position="bottom" >
-              <span className='SetoresShowOnlyCustomGroupListTitleSpan'> <BsBuildingFillGear /> {props.Setor.Value}</span>
+              <span className='SetoresShowOnlyCustomGroupListTitleSpan'> <UilPuzzlePiece /> {props.Setor.Value}</span>
             </Tooltip>
           </ListGroup.Item>
 
@@ -42,11 +42,11 @@ const SectorList = (props) => {
                               <span className='SetoresShowOnlyCustomGroupListItem'>
                                 {IsAdmin ?
                                   <Tooltip title="Possui permissões de Administrador" position="bottom" >
-                                    <MdVerifiedUser className='SetoresShowOnlyCustomGroupIcon' />
+                                    <UilShieldCheck className='SetoresShowOnlyCustomGroupIcon' />
                                   </Tooltip>
                                   :
                                   <Tooltip title="Não possui permissões de Administrador" position="bottom" >
-                                    <RiUser3Fill className='SetoresShowOnlyCustomGroupIcon' />
+                                    <UilUser className='SetoresShowOnlyCustomGroupIcon' />
                                   </Tooltip>
                                 }
                                 <span> {Item.Name}</span>
