@@ -5,9 +5,8 @@ import Masonry from "react-masonry-css";
 import { DragDropContext } from "react-beautiful-dnd";
 import { v4 } from 'uuid';
 import { connect } from 'react-redux'
-import { SaveAtivos } from '../Ativos/AtivosUtils';
 import NumbersOfList from '../NumbersOfList/NumbersOfList';
-
+import { SaveAtivos } from '../../Functions/Middleware';
 
 const breakpointColumnsObj = {
     default: 3,

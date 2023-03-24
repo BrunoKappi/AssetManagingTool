@@ -5,8 +5,8 @@ import Masonry from "react-masonry-css";
 import { DragDropContext } from "react-beautiful-dnd";
 import { v4 } from 'uuid';
 import { connect } from 'react-redux'
-import { SaveUsers } from '../Users/UsersUtils';
 import NumbersOfList from '../NumbersOfList/NumbersOfList';
+import { SaveUsers } from '../../Functions/Middleware';
 
 const breakpointColumnsObj = {
     default: 4,

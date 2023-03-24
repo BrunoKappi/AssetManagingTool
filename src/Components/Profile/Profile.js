@@ -2,10 +2,11 @@ import React, { useState, useEffect } from 'react'
 import './Profile.css'
 import { connect } from 'react-redux'
 import { Users } from '../../Data/User'
-import { GetSetores, GetUserTipos } from '../EditableCustomList/EditableCustomListUtils'
+
 import UserPhoto from '../../Images/SerranoLogoFuncoBranco.jpg'
 import { UilTimes } from '@iconscout/react-unicons'
 import { UilUserCircle, UilClipboardNotes, UilEnvelope, UilPhone, UilMap, UilMapMarker, UilPen } from '@iconscout/react-unicons'
+import { GetSetores, GetUserTipos } from '../../Functions/Middleware'
 
 
 const Profile = (props) => {

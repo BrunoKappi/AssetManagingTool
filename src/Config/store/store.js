@@ -13,12 +13,10 @@ import { SetSetores } from './actions/SetoresActions'
 import { SetUsuarios } from './actions/UsuariosActions'
 import { SetTiposAtivos } from './actions/TiposAtivosActions'
 import { SetAtivos } from './actions/AtivosActions'
-import { GetUsers } from '../../Components/Users/UsersUtils'
-import { GetAtivos } from '../../Components/Ativos/AtivosUtils'
 import { SetLocaisArmazenamento } from './actions/LocaisArmazenamentoActions'
-import { GetLocaisArmazenamento, GetSetores, GetStatusAtivos, GetTipos, GetTiposDeUso, GetUserTipos } from '../../Components/EditableCustomList/EditableCustomListUtils'
 import { SetStatusAtivos } from './actions/AtivosStatusActions'
 import { SetTiposDeUso } from './actions/TiposDeUsoActions'
+import { GetAtivos, GetLocaisArmazenamento, GetSetores, GetStatusAtivos, GetTipos, GetTiposDeUso, GetUsers, GetUserTipos } from '../../Functions/Middleware'
 
 
 

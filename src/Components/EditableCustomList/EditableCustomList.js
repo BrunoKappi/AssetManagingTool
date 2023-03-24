@@ -9,11 +9,12 @@ import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 import { DefaultItemType } from '../../Data/Items';
 import { NotificationSucesso } from '../../NotificationUtils';
 import { Tooltip } from 'react-tippy';
-import { SaveUserTipos, GetNotificationErrorMessageDelete, GetNotificationSuccessMessageAdd, GetNotificationExistsMessageAdd, GetNotificationSuccessMessageDelete, saveFunctions, GetNotificationSuccessMessageChangeName, fetchFunctions } from './EditableCustomListUtils';
+import { GetNotificationErrorMessageDelete, GetNotificationSuccessMessageAdd, GetNotificationExistsMessageAdd, GetNotificationSuccessMessageDelete, GetNotificationSuccessMessageChangeName } from './EditableCustomListUtils';
 import Loading from '../LoadingForTabs/Loading'
 
 
 import { UilLabel, UilPuzzlePiece, UilBox, UilPlay, UilPlus, UilTrashAlt, UilBackspace, UilPen } from '@iconscout/react-unicons'
+import { fetchFunctions, saveFunctions, SaveUserTipos } from '../../Functions/Middleware';
 
 const CustomListIcon = {
   TiposAtivos: <UilLabel />,

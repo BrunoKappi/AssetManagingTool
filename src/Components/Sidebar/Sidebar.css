@@ -25,26 +25,25 @@
     flex-direction: row;
     align-items: center;
     gap: 1rem;
-    border: 1px solid var(--ComplementaryColor);
-    padding: .6rem 1.7rem;
-    color: var(--PrimaryBackground);
+    border: 1px solid var(--PrimaryBackground);
+    padding: .6rem 1.7rem;   
     font-weight: 500;
     text-decoration: none;
     font-family: var(--Fonte);
     font-size: .9rem;
-    color: var(--ComplementaryColor);   
+    color: var(--PrimaryBackground);   
     border-top-right-radius: 1rem;
     border-bottom-right-radius: 1rem;
     border-radius: 1REM;
 }
 
 .SidebarItem:hover {
-    background-color: var(--ComplementaryColor);
+    background-color: var(--PrimaryBackground);
     color: var(--PrimaryColor);
 }
 
 .SidebarItem.ActiveSidebar {
-    background-color: var(--ComplementaryColor);
+    background-color: var(--PrimaryBackground);
     ;
     color: var(--PrimaryColor);
 }

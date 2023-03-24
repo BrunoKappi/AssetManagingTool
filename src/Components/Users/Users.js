@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import './Users.css'
 import { SetoresTabTitle, TiposTabTitle, TodosTabTitle } from './UsersUtils';
-
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
 import UsersInSetores from '../UsersInSetores/UsersInSetores';

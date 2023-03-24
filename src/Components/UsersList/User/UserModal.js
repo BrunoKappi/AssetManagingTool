@@ -1,13 +1,51 @@
 import Modal from 'react-bootstrap/Modal';
+import React, { useState, useEffect } from 'react'
 import './UserModal.css'
-import User from '../../../Images/SerranoLogoFuncoBranco.jpg'
+import UserPhoto from '../../../Images/SerranoLogoFuncoBranco.jpg'
 import { UilTimes } from '@iconscout/react-unicons'
-import { UilUserCircle, UilClipboardNotes, UilEnvelope, UilPhone, UilMap, UilMapMarker, UilPen, UilPuzzlePiece, UilSquareFull, UilCheckSquare, UilListUl, UilSave } from '@iconscout/react-unicons'
-import { useState } from 'react';
+import { UilUserCircle, UilClipboardNotes, UilEnvelope, UilPhone, UilMap, UilMapMarker, UilPen, UilPuzzlePiece, UilListUl, UilSave } from '@iconscout/react-unicons'
+import { GetSetores, GetUserTipos } from '../../../Functions/Middleware'
+import { DefaultUser } from '../../../Data/User';
+import { DefaultSetor, DefaultUserType } from '../../../Data/Items';
 
 export const UserModal = (props) => {
 
     const [Tab, setTab] = useState('UserInfo')
+
+    const [UserType, setUserType] = useState({ ...DefaultUserType })
+    const [User, setUser] = useState({ ...DefaultUser })
+    const [UserSetor, setUserSetor] = useState({ ...DefaultSetor })
+    const [Setores, setSetores] = useState([])
+    const [TiposUsuarios, setTiposUsuarios] = useState([])
+
+
+    useEffect(() => {
+        if (props.User.Name)
+            setUser({ ...props.User })       
+    }, [props.User])
+ 
+
+    useEffect(() => {
+        GetUserTipos().then((Lista) => {
+            setTiposUsuarios([...Lista])
+            if (User.Name !== '')
+                setUserType(Lista.find(U => U.Id === User.Type.Id))
+        }).catch(Erro => {
+            console.error(Erro)
+        })
+    }, [User])
+
+
+    useEffect(() => {
+        GetSetores().then((Lista) => {
+            setSetores([...Lista])
+            if (User.Name !== '')
+                setUserSetor({ ...Lista.find(U => U.Id === User.Sector.Id) })
+        }).catch(Erro => {
+            console.error(Erro)
+        })
+    }, [User])
+
 
     return (
         <Modal {...props} size="xl" aria-labelledby="contained-modal-title-vcenter" centered fullscreen={'md-down'}>
@@ -18,19 +56,19 @@ export const UserModal = (props) => {
                     <div className='UserModalHeader'>
                         <div className='UserModalHeader-Left'>
                             <div className='UserModalHeader-Left-Photo'>
-                                <img src={User} alt="User" />
+                                <img src={UserPhoto} alt="User" />
                             </div>
                         </div>
                         <div className='UserModalHeader-Right'>
                             <div className='UserModalHeader-Right-Name'>
-                                {props.User.Name + ' ' + props.User.LastName}
+                                {User.Name + ' ' + User.LastName}
                                 <UilTimes className='UserModalHeader-Right-Close' onClick={props.onHide} />
                             </div>
                             <div className='UserModalHeader-Right-Setor'>
-                                {props.UserSetor.Value}
+                                {UserSetor.Value}
                             </div>
                             <div className='UserModalHeader-Right-Tipo'>
-                                {props.UserType.Value}
+                                {UserType.Value}
                             </div>
                         </div>
 
@@ -58,7 +96,7 @@ export const UserModal = (props) => {
                                                 <UilEnvelope />
                                                 Email
                                             </span>
-                                            <input value={props.User.Email} type="text" />
+                                            <input value={User.Email} type="text" />
                                         </div>
                                     </div>
 
@@ -69,14 +107,14 @@ export const UserModal = (props) => {
                                                 <UilPen />
                                                 Nome
                                             </span>
-                                            <input value={props.User.Name} type="text" />
+                                            <input value={User.Name} type="text" />
                                         </div>
                                         <div className='UserModalBody-UserInfoForm-Group'>
                                             <span>
                                                 <UilPen />
                                                 Sobrenome
                                             </span>
-                                            <input value={props.User.LastName} type="text" />
+                                            <input value={User.LastName} type="text" />
                                         </div>
                                     </div>
 
@@ -86,7 +124,7 @@ export const UserModal = (props) => {
                                                 <UilPhone />
                                                 Telefone
                                             </span>
-                                            <input value={props.User.Phone} type="text" />
+                                            <input value={User.Phone} type="text" />
                                         </div>
                                     </div>
 
@@ -97,14 +135,14 @@ export const UserModal = (props) => {
                                                 <UilMap />
                                                 Estado
                                             </span>
-                                            <input value={props.User.Estate} type="text" />
+                                            <input value={User.Estate} type="text" />
                                         </div>
                                         <div className='UserModalBody-UserInfoForm-Group'>
                                             <span>
                                                 <UilMapMarker />
                                                 Cidade
                                             </span>
-                                            <input value={props.User.City} type="text" />
+                                            <input value={User.City} type="text" />
                                         </div>
                                     </div>
 
@@ -119,9 +157,8 @@ export const UserModal = (props) => {
                                                     Setor
                                                 </div>
                                                 <div className='UserModalBody-UserInfoForm-SetorList-Itens'>
-                                                    {props.Setores.map(Setor => {
-                                                        return <div className='UserModalBody-UserInfoForm-SetorList-Item'>
-                                                            {props.User.Sector.Id === Setor.Id ? <UilCheckSquare /> : <UilSquareFull />}
+                                                    {Setores.map(Setor => {
+                                                        return <div className={'UserModalBody-UserInfoForm-SetorList-Item' + (User.Sector.Id === Setor.Id ? ' UserModalBody-UserInfoForm-SetorList-ItemActive' : '')}>
                                                             {Setor.Value}
                                                         </div>
                                                     })}
@@ -137,9 +174,8 @@ export const UserModal = (props) => {
                                                     Tipos de Usuario
                                                 </div>
                                                 <div className='UserModalBody-UserInfoForm-TiposUserList-Itens'>
-                                                    {props.TiposUsuarios.map(TipoUser => {
-                                                        return <div className='UserModalBody-UserInfoForm-TiposUserList-Item'>
-                                                            {props.User.Type.Id === TipoUser.Id ? <UilCheckSquare /> : <UilSquareFull />}
+                                                    {TiposUsuarios.map(TipoUser => {
+                                                        return <div className={'UserModalBody-UserInfoForm-TiposUserList-Item' + (User.Type.Id === TipoUser.Id ? ' UserModalBody-UserInfoForm-TiposUserList-ItemActive' : '')}>
                                                             {TipoUser.Value}
                                                         </div>
                                                     })}

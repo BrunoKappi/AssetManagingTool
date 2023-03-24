@@ -8,9 +8,9 @@ import { Draggable, Droppable } from "react-beautiful-dnd";
 import { ImCheckboxUnchecked, ImCheckboxChecked } from 'react-icons/im';
 import { Tooltip } from 'react-tippy';
 import { NotificationSucesso } from '../../NotificationUtils';
-import { SaveUserTipos } from '../EditableCustomList/EditableCustomListUtils';
 
 import { UilPuzzlePiece,UilShieldCheck,UilUser   } from '@iconscout/react-unicons'
+import { SaveUserTipos } from '../../Functions/Middleware';
 
 const TypesList = (props) => {
 

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import './UsersList.css'
-import { GetSetoresSelect, GetUsers, GetUsersTypesSelect } from './UsersListUtils';
+import { UserModal } from './User/UserModal'
 import Loading from '../LoadingForTabs/Loading';
 import User from './User/User';
 import { connect } from 'react-redux'
@@ -8,11 +8,13 @@ import { v4 } from 'uuid';
 import { MdFilterList } from 'react-icons/md';
 import Dropdown from 'react-bootstrap/Dropdown';
 import { UilExclamationCircle } from '@iconscout/react-unicons'
+import { GetSetoresSelect, GetUsers, GetUsersTypesSelect } from '../../Functions/Middleware';
 
 
 
 const UsersList = (props) => {
 
+    const [SelectedUser, setSelectedUser] = useState({})
     const [ListaDeUsuarios, setListaDeUsuarios] = useState([])
     const [SetoresOptions, setSetoresOptions] = useState([])
     const [SetorLabel, setSetorLabel] = useState('')
@@ -22,6 +24,10 @@ const UsersList = (props) => {
     const [FiltroDeTexto, setFiltroDeTexto] = useState('');
     const [FiltroSetor, setFiltroSetor] = useState('Todos');
     const [FiltroTipo, setFiltroTipo] = useState('Todos');
+
+    const [modalShow, setModalShow] = useState(false);
+
+
 
 
     useEffect(() => {
@@ -33,7 +39,6 @@ const UsersList = (props) => {
             setSetoresOptions(Options)
         })
     }, [])
-
 
 
     useEffect(() => {
@@ -50,7 +55,7 @@ const UsersList = (props) => {
     useEffect(() => {
         GetUsers().then((Lista) => {
             setListaDeUsuarios(Lista.filter(Usuario => {
-                const TextFilter = FiltroDeTexto === '' || Usuario.Name.toLowerCase().includes(FiltroDeTexto.toLowerCase())
+                const TextFilter = FiltroDeTexto === '' || (Usuario.Name.toLowerCase().includes(FiltroDeTexto.toLowerCase()) || Usuario.Email.toLowerCase().includes(FiltroDeTexto.toLowerCase()))
                 const SetorFilter = FiltroSetor === 'Todos' || FiltroSetor === '' || Usuario.Sector.Id === FiltroSetor
                 const TipoFilter = FiltroTipo === 'Todos' || FiltroTipo === '' || Usuario.Type.Id === FiltroTipo
                 return TextFilter && SetorFilter && TipoFilter
@@ -79,8 +84,17 @@ const UsersList = (props) => {
         setFiltroTipo('')
     }
 
+
+    const handleUserClick = (UserClicked) => {
+        console.log("CLICKsa")
+        setModalShow(true);
+        setSelectedUser({ ...UserClicked });
+    }
+
     return (
         <div className='UsersListContainer'>
+
+            <UserModal User={SelectedUser} show={modalShow} onHide={() => setModalShow(false)} />
 
             <div className='UsersLisFormFilter'>
                 <input value={FiltroDeTexto} placeholder='Procurar Usuário...' onChange={e => setFiltroDeTexto(e.target.value)}></input>
@@ -147,7 +161,9 @@ const UsersList = (props) => {
 
 
             {(ListaDeUsuarios.length !== 0 || Loaded) && ListaDeUsuarios.map((Item, Index) => {
-                return <User User={Item} key={v4()} />
+                return <div onClick={e => handleUserClick(Item)}>
+                    <User User={Item} key={v4()} />
+                </div>
             })}
 
             {ListaDeUsuarios.length === 0 && !Loaded && <Loading />}

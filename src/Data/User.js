@@ -64,3 +64,29 @@ export const UserRoles = [
 export const DefaultUserRole = { Id: '', Role: '', IsAdmin: false }
 
 //localStorage.setItem('AssetSenseUsersTypes', JSON.stringify(UserRoles))
+
+
+
+
+
+
+
+
+// DEFAULT USER 
+export const DefaultUser =
+{
+    Id: uuid(),
+    Phone: '',
+    Estate: '',
+    City: '',
+    AccessToken: '',
+    Name: '',
+    LastName: '',
+    Email: '',
+    Type: {
+        Id :'' 
+    },
+    Sector: {
+        Id :''
+    }
+}

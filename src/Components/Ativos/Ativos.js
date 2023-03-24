@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react'
 import './Ativos.css'
-import { ArmazenamentoTabTitle, GetAtivos, TiposTabTitle, TodosTabTitle } from './AtivosUtils';
+import { ArmazenamentoTabTitle, TiposTabTitle, TodosTabTitle } from './AtivosUtils';
 import Loading from '../LoadingForTabs/Loading';
-
 import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 import ListGroup from 'react-bootstrap/ListGroup';
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
 import AtivosInTypes from '../AtivosInTypes/AtivosInTypes'
 import AtivosInLocais from '../AtivosInLocais/AtivosInLocais'
+import { GetAtivos } from '../../Functions/Middleware';
 
 
 const Ativos = (props) => {

@@ -145,6 +145,7 @@ export const TiposDeUso = [
 
 
 
+export const DefaultUserType = { Id: uuid(), Value: '' }
 export const DefaultSetor = { Id: uuid(), Value: '' }
 export const DefaultLocal = { Id: uuid(), Value: '' }
 export const DefaultItemType = { Id: uuid(), Value: '' }
