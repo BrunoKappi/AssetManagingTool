@@ -380,7 +380,9 @@
   cursor: pointer;
 }
 
-
+.NavBarListSidebarItem > svg{
+  width: 1rem;
+}
 
 
 .NavBarListSidebar {
@@ -434,9 +436,10 @@
     text-decoration: none;
     font-family: var(--Fonte);
     font-size: 1rem;
-
   }
 
+
+  
   .NavBarListSidebarItem:hover {
     background-color: var(--PrimaryColor);
     color: var(--PrimaryBackground);

@@ -93,6 +93,7 @@
 
 .EditableCustomListIcon {
     color: var(--PrimaryBackground) !important;
+    width: 1rem;
 }
 
 

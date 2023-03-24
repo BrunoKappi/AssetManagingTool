@@ -21,6 +21,17 @@ const breakpointColumnsObj = {
 
 const UsersInTypes = (props) => {
 
+    const [Load, setLoad] = useState(false)
+
+    useEffect(() => {
+        setTimeout(() => {
+            setLoad(true)
+        }, 2000);
+    }, [])
+    
+
+    console.log("TESTE")
+
     const [Options, setOptions] = useState({ ...DefaultTypesProps })
     const [TiposUsuarios, setTiposUsuarios] = useState([
         ...props.TiposUsuarios.map(element => {
@@ -56,7 +67,7 @@ const UsersInTypes = (props) => {
     return (
         <DragDropContext onDragEnd={(result) => { HandleDrag(result) }}>
 
-            <div className='UsersInSetoresContainers'>
+            <div className={ Load ? 'UsersInSetoresContainers Animate' : 'UsersInSetoresContainers'}>
 
                 <NumbersOfList Values={TiposUsuarios} />
 

@@ -91,7 +91,7 @@ const NavBar = (props) => {
                                         </Link>
 
                                         <NavDropdown.Divider />
-                                        <span href='/' className="dropDownLink" onClick={Sair}>
+                                        <span href='/'  className="dropDownLink NavBarListSidebarItem" onClick={Sair}>
                                             <UilSignout /> Sair
                                         </span>
                                     </NavDropdown>

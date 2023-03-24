@@ -13,13 +13,13 @@ export const ArmazenamentoTabTitle = () => {
 
 export const TiposTabTitle = () => {
   return <div className='TabsTitle'>
-    <UilListUl />
+    <UilLabel />
     <span>Tipos</span>
   </div>
 }
 export const TodosTabTitle = () => {
   return <div className='TabsTitle'>
-    <UilLabel />
+    <UilListUl />
     <span>Todos</span>
   </div>
 }

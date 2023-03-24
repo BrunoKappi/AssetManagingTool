@@ -12,9 +12,12 @@ export default function User(props) {
     const [UserSetor, setUserSetor] = useState({})
     const [modalShow, setModalShow] = useState(false);
 
+    const [Setores, setSetores] = useState([])
+    const [TiposUsuarios, setTiposUsuarios] = useState([])
 
     useEffect(() => {
         GetUsersTypes().then((Lista) => {
+            setTiposUsuarios([...Lista])
             setUserType(Lista.find(U => U.Id === props.User.Type.Id))
         }).catch(Erro => {
             console.error(Erro)
@@ -24,6 +27,7 @@ export default function User(props) {
 
     useEffect(() => {
         GetSetores().then((Lista) => {
+            setSetores([...Lista])
             setUserSetor({ ...Lista.find(U => U.Id === props.User.Sector.Id) })
         }).catch(Erro => {
             console.error(Erro)
@@ -37,7 +41,7 @@ export default function User(props) {
     return (
         <>
 
-            <UserModal User={props.User} UserType={UserType} UserSetor={UserSetor} show={modalShow} onHide={() => setModalShow(false)} />
+            <UserModal Setores={Setores} TiposUsuarios={TiposUsuarios} User={props.User} UserType={UserType} UserSetor={UserSetor} show={modalShow} onHide={() => setModalShow(false)} />
 
 
             <div className='UserContainer' onClick={() => setModalShow(true)}>
