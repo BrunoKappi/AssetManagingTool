@@ -53,6 +53,10 @@
 
 
 .navDiv {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 1rem;
   margin-right: 20px;
 }
 
@@ -63,6 +67,38 @@
 }
 
 
+.ChangeThemeButton {
+  border-radius: .5rem;
+  border: none;
+  background-color: var(--ComplementaryColor);
+  font-size: .8rem !important;
+  color: white;
+  font-weight: 500;
+  padding: .2rem .7rem;
+  flex-grow: 1;
+}
+
+@media (max-width: 750px) {
+  .ChangeThemeButton {
+    border-radius: .5rem;
+    border: none;
+    background-color: var(--ComplementaryColor);
+    font-size: .9rem !important;
+    color: white;
+    font-weight: 500;
+    padding: .4rem .7rem;
+    flex-grow: 1;
+  }
+}
+
+
+.ChangeThemeContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: stretch;
+  padding-left: 1rem;
+}
 
 .barraDePesquisa {
   flex-grow: 1;
@@ -380,7 +416,7 @@
   cursor: pointer;
 }
 
-.NavBarListSidebarItem > svg{
+.NavBarListSidebarItem>svg {
   width: 1rem;
 }
 
@@ -439,7 +475,7 @@
   }
 
 
-  
+
   .NavBarListSidebarItem:hover {
     background-color: var(--PrimaryColor);
     color: var(--PrimaryBackground);

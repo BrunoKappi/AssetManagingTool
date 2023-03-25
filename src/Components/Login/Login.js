@@ -49,7 +49,7 @@ function Login() {
     };
 
     return (
-        <div className="LoginContainer">
+        <div className={localStorage.getItem('AssetSenseTema') === 'Escuro' ? 'LoginContainerEscuro LoginContainer' : 'LoginContainerClaro LoginContainer'}>
 
             <LogoutHeader />
 

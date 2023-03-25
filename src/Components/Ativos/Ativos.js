@@ -32,10 +32,10 @@ const Ativos = (props) => {
 
   return (
 
-    <div className='AtivosContainer'>
+    <div className={localStorage.getItem('AssetSenseTema') === 'Escuro' ? 'AtivosContainerEscuro AtivosContainer' : 'AtivosContainerClaro AtivosContainer'}>
 
 
-      <div className='TabsContainer'>
+      <div className={localStorage.getItem('AssetSenseTema') === 'Escuro' ? 'TabsContainerEscuro TabsContainer' : 'TabsContainerClaro TabsContainer'}>
         <button onClick={(k) => setKey('Todos')} className={key === 'Todos' ? 'TabsButtonActive' : ''}>{TodosTabTitle()}</button>
         <button onClick={(k) => setKey('Armazenamento')} className={key === 'Armazenamento' ? 'TabsButtonActive' : ''}>{ArmazenamentoTabTitle()}</button>
         <button onClick={(k) => setKey('Tipos')} className={key === 'Tipos' ? 'TabsButtonActive' : ''}>{TiposTabTitle()}</button>
@@ -77,7 +77,9 @@ const Ativos = (props) => {
                 </DragDropContext>
               </ListGroup>}
             {ListaDeAtivos.length === 0 && !Loaded && <Loading />}
-            {ListaDeAtivos.length === 0 && Loaded && <div>Não há ativos</div>}
+            {ListaDeAtivos.length === 0 && Loaded && <div className='NoAtivosRegistered'>
+              <p>Não há nenhum Ativo cadastrado</p>
+            </div>}
 
           </div>
         </Tab>

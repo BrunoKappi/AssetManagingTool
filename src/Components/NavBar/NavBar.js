@@ -1,5 +1,5 @@
 //Dependencias
-import React from 'react'
+import React, { useState } from 'react'
 import './NavBar.css'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
@@ -23,7 +23,8 @@ import { GetNavbarSidebarItemClass, SetTab } from '../Sidebar/SidebarUtils';
 import { NotificationSucesso } from '../../NotificationUtils';
 import User from '../../Images/User.png'
 
-import { UilChartPieAlt, UilListUl, UilUsersAlt, UilSetting, UilUserCircle,UilSignout,UilBars } from '@iconscout/react-unicons'
+import { UilChartPieAlt, UilListUl, UilUsersAlt, UilSetting, UilUserCircle, UilSignout, UilBars } from '@iconscout/react-unicons'
+import { ToggleTema } from '../../Functions/Middleware';
 
 
 const NavBar = (props) => {
@@ -34,6 +35,12 @@ const NavBar = (props) => {
         NotificationSucesso('Logoff', "Logoff feito com sucesso!")
     }
 
+    const handleToggleTema = () => {
+        ToggleTema()
+        window.location.reload()
+    }
+
+    const [CurrentUser,] = useState({ ...props.Usuarios.find(user => user.Email === props.LoggedUser.Email) })
 
     return (
         <div className='NavBarContainer'>
@@ -66,7 +73,12 @@ const NavBar = (props) => {
                             <Nav className="justify-content-end flex-grow-1 navBody ">
 
                                 <div className='navDiv'>
-                                    <NavDropdown title={<span className='ProfileNavLinkTitle' >Bruno Kappi</span>}>
+                                    <Tooltip title="Alterar o Tema" position="bottom" >
+                                        <button className='ChangeThemeButton' onClick={handleToggleTema}>
+                                            {localStorage.getItem('AssetSenseTema') === 'Escuro' ? 'Tema Escuro' : 'Tema Claro'}
+                                        </button>
+                                    </Tooltip>
+                                    <NavDropdown title={<span className='ProfileNavLinkTitle' > {CurrentUser.Name + ' ' + CurrentUser.LastName}</span>}>
 
                                         <Link to="/App/Dash" className={GetNavbarSidebarItemClass('Dash', props.LoggedUser.CurrentSidebarTab) + ' dropDownLink'} onClick={e => SetTab('Dash')}>
                                             <UilChartPieAlt />
@@ -81,7 +93,7 @@ const NavBar = (props) => {
                                             <UilUsersAlt />
                                             <span>Usuarios</span>
                                         </Link>
-                                        <Link to="/App/Profile" className={GetNavbarSidebarItemClass('Profile', props.LoggedUser.CurrentSidebarTab) + ' dropDownLink'} onClick={e => SetTab('Profile')}>
+                                        <Link to="/App/Profile" className={GetNavbarSidebarItemClass('Profile', props.LoggedUser.CurrentSidebarTab) + ' dropDownLink'} >
                                             <UilUserCircle />
                                             <span>Meu Perfil</span>
                                         </Link>
@@ -91,7 +103,7 @@ const NavBar = (props) => {
                                         </Link>
 
                                         <NavDropdown.Divider />
-                                        <span href='/'  className="dropDownLink NavBarListSidebarItem" onClick={Sair}>
+                                        <span href='/' className="dropDownLink NavBarListSidebarItem" onClick={Sair}>
                                             <UilSignout /> Sair
                                         </span>
                                     </NavDropdown>
@@ -107,8 +119,8 @@ const NavBar = (props) => {
                                 </div>
 
                                 <div className='NavbarSidebarUserName'>
-                                    <p>Bruno</p>
-                                    <p>Kappi</p>
+                                    <p> {CurrentUser.Name}</p>
+                                    <p> {CurrentUser.LastName}</p>
                                 </div>
 
                                 <ul className='NavBarListSidebar'>
@@ -124,7 +136,7 @@ const NavBar = (props) => {
                                         <UilUsersAlt />
                                         <span>Usuarios</span>
                                     </Link>
-                                    <Link to="/App/Profile" className={GetNavbarSidebarItemClass('Profile', props.LoggedUser.CurrentSidebarTab)} onClick={e => SetTab('Profile')}>
+                                    <Link to="/App/Profile" className={GetNavbarSidebarItemClass('Profile', props.LoggedUser.CurrentSidebarTab)} >
                                         <UilUserCircle />
                                         <span>Meu Perfil</span>
                                     </Link>
@@ -132,6 +144,12 @@ const NavBar = (props) => {
                                         <UilSetting />
                                         <span>Configurações</span>
                                     </Link>
+
+                                    <div className='ChangeThemeContainer'>
+                                        <button className='ChangeThemeButton' onClick={handleToggleTema}>
+                                            {localStorage.getItem('AssetSenseTema') === 'Escuro' ? 'Mudar para Tema Claro' : 'Mudar para Tema Escuro'}
+                                        </button>
+                                    </div>
 
                                     <Link to="/" className={GetNavbarSidebarItemClass('Sair', props.LoggedUser.CurrentSidebarTab)} onClick={Sair}>
                                         <UilSignout />
@@ -161,7 +179,8 @@ const NavBar = (props) => {
 
 const ConnectedNavBar = connect((state) => {
     return {
-        LoggedUser: state.LoggedUser
+        LoggedUser: state.LoggedUser,
+        Usuarios: state.Usuarios
     }
 })(NavBar)
 

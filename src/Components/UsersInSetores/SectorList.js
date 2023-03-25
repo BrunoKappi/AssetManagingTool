@@ -8,7 +8,7 @@ import { Draggable, Droppable } from "react-beautiful-dnd";
 
 import { Tooltip } from 'react-tippy';
 
-import { UilPuzzlePiece,UilShieldCheck,UilUser   } from '@iconscout/react-unicons'
+import { UilPuzzlePiece, UilShieldCheck, UilUser } from '@iconscout/react-unicons'
 
 const SectorList = (props) => {
 
@@ -17,7 +17,7 @@ const SectorList = (props) => {
 
   return (
     <div>
-      <div className='SetoresShowOnlyCustomGroupList'>
+      <div className={localStorage.getItem('AssetSenseTema') === 'Escuro' ? 'SetoresShowOnlyCustomGroupListEscuro SetoresShowOnlyCustomGroupList' : 'SetoresShowOnlyCustomGroupListClaro SetoresShowOnlyCustomGroupList'}>
 
 
 

@@ -69,7 +69,14 @@ export const Items = [
     { Id: uuid(), StorageLocation: { ...DefaultStorageLocation2 }, Item: 'Case HD externo 3.0', Type: { ...DefaultAtivoType2 }, Status: { ...DefautltAtivoStatus }, Records: [], Usage: { ...DefaultTipoUso } },
 ]
 
-//localStorage.setItem('AssetSenseAtivos', JSON.stringify(Items))
+
+
+if (!localStorage.getItem('AssetSenseAtivos')) {
+    localStorage.setItem('AssetSenseAtivos', JSON.stringify(Items))
+}
+////localStorage.setItem('AssetSenseAtivos', JSON.stringify([])) // RESET
+
+
 
 
 
@@ -79,7 +86,16 @@ export const ItemTypes = [
     { Id: '9bff9e15-f30d-4287-891b-565389906a35', Value: 'Equipamento' }
 ]
 
-//localStorage.setItem('AssetSenseTipos', JSON.stringify(ItemTypes))
+if (!localStorage.getItem('AssetSenseTipos')) {
+    localStorage.setItem('AssetSenseTipos', JSON.stringify(ItemTypes))
+}
+////localStorage.setItem('AssetSenseTipos', JSON.stringify(ItemTypes)) //RESET
+
+
+
+
+
+
 
 
 
@@ -90,7 +106,12 @@ export const Setores = [
     { Id: 'ea05229e-658a-415a-bc23-62cebd0bbe96', Value: 'RH' },
 ]
 
-//localStorage.setItem('AssetSenseSetores', JSON.stringify(Setores))
+export const SetoresReset = [{ Id: 'ad01ba2f-aa9a-47a2-a771-1fee98ef54a5', Value: 'Administrativo' }]
+
+if (!localStorage.getItem('AssetSenseSetores')) {
+    localStorage.setItem('AssetSenseSetores', JSON.stringify(Setores))
+}
+////localStorage.setItem('AssetSenseSetores', JSON.stringify(SetoresReset)) //RESET
 
 
 
@@ -102,7 +123,14 @@ export const LocaisDeArmazenamento = [
     { Id: '59ca3189-70cb-451c-a597-4320e0bf158f', Value: 'Armário Administrativo' },
     { Id: '24d50296-fb80-473a-9eaa-f2745341b148', Value: 'Projeto' }
 ]
-//localStorage.setItem('AssetSenseLocaisArmazenamento', JSON.stringify(LocaisDeArmazenamento))
+
+//LOCAIS
+export const LocaisDeArmazenamentoReset = [{ Id: 'b21e3ca1-985a-4958-9d16-9ff68579c576', Value: 'Armário' }]
+
+if (!localStorage.getItem('AssetSenseLocaisArmazenamento')) {
+    localStorage.setItem('AssetSenseLocaisArmazenamento', JSON.stringify(LocaisDeArmazenamento))
+}
+////localStorage.setItem('AssetSenseLocaisArmazenamento', JSON.stringify(LocaisDeArmazenamentoReset)) //RESET
 
 
 
@@ -115,7 +143,16 @@ export const AtivosStatus = [
     { Id: '144febcf-6a34-4c60-9166-1751ff5e8e6b', Value: 'Em uso' },
     { Id: v4(), Value: 'Em Manutenção' }
 ]
-//localStorage.setItem('AssetSenseStatusAtivos', JSON.stringify(AtivosStatus))
+export const AtivosStatusReset = [
+    { Id: '693ae26e-399e-4a2f-a646-d6315fb9a516', Value: 'Disponível' },
+    { Id: '144febcf-6a34-4c60-9166-1751ff5e8e6b', Value: 'Em uso' },
+    { Id: v4(), Value: 'Em Manutenção' }
+]
+if (!localStorage.getItem('AssetSenseStatusAtivos')) {
+    localStorage.setItem('AssetSenseStatusAtivos', JSON.stringify(AtivosStatus))
+}
+
+////localStorage.setItem('AssetSenseStatusAtivos', JSON.stringify(AtivosStatusReset)) //RESET
 
 
 
@@ -134,7 +171,14 @@ export const TiposDeUso = [
     { Id: uuid(), Value: 'Uso especializado' }
 ]
 
-//localStorage.setItem('AssetSenseTiposDeUso', JSON.stringify(TiposDeUso))
+//USOS
+export const TiposDeUsoReset = [{ Id: 'd0e718ac-9cdc-4d7a-ba00-711d68d2c108', Value: 'Uso contínuo' }]
+
+
+if (!localStorage.getItem('AssetSenseTiposDeUso')) {
+    localStorage.setItem('AssetSenseTiposDeUso', JSON.stringify(TiposDeUso))
+}
+////localStorage.setItem('AssetSenseTiposDeUso', JSON.stringify(TiposDeUsoReset)) //RESET
 
 
 

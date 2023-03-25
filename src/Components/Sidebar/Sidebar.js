@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './Sidebar.css'
 
 import { Link } from 'react-router-dom';
@@ -10,16 +10,19 @@ import { UilChartPieAlt, UilListUl, UilUsersAlt, UilSetting, UilUserCircle } fro
 
 const Sidebar = (props) => {
 
+
+    const [CurrentUser,] = useState({ ...props.Usuarios.find(user => user.Email === props.LoggedUser.Email) })
+
     return (
-        <div className='SidebarContainer' >
+        <div className={localStorage.getItem('AssetSenseTema') === 'Escuro' ? 'SidebarContainerEscuro SidebarContainer' : 'SidebarContainerClaro SidebarContainer'}>
 
             <div className='SidebarUserPhotoContainer'>
                 <img alt='User' className='SidebarUserPhoto' src={User}></img>
             </div>
 
             <div className='SidebarUserName'>
-                <p>Bruno</p>
-                <p>Kappi</p>
+                <p> {CurrentUser.Name}</p>
+                <p> {CurrentUser.LastName}</p>
             </div>
 
             <ul className='SidebarList'>
@@ -27,7 +30,7 @@ const Sidebar = (props) => {
                     <UilChartPieAlt />
                     <span>Dashboard</span>
                 </Link>
-                <Link to="/App/Ativos" className={ GetSidebarItemClass('Ativos', props.LoggedUser.CurrentSidebarTab)} onClick={e => SetTab('Ativos')}>
+                <Link to="/App/Ativos" className={GetSidebarItemClass('Ativos', props.LoggedUser.CurrentSidebarTab)} onClick={e => SetTab('Ativos')}>
                     <UilListUl />
                     <span>Ativos</span>
                 </Link>
@@ -54,7 +57,8 @@ const Sidebar = (props) => {
 
 const ConnectedSidebar = connect((state) => {
     return {
-        LoggedUser: state.LoggedUser
+        LoggedUser: state.LoggedUser,
+        Usuarios: state.Usuarios
     }
 })(Sidebar)
 

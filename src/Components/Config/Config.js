@@ -24,10 +24,10 @@ export default function Config() {
 
 
 
-    <div className='ConfigContainer'>
+    <div className={localStorage.getItem('AssetSenseTema') === 'Escuro' ? 'ConfigContainerEscuro ConfigContainer' : 'ConfigContainerClaro ConfigContainer'}>
 
 
-      <div className='TabsContainer'>
+      <div className={localStorage.getItem('AssetSenseTema') === 'Escuro' ? 'TabsContainerEscuro TabsContainer' : 'TabsContainerClaro TabsContainer'}>
         <button onClick={(k) => setKey('Ativos')} className={key === 'Ativos' ? 'TabsButtonActive' : ''}>{AtivosTabTitle()}</button>
         <button onClick={(k) => setKey('Setores e Usuários')} className={key === 'Setores e Usuários' ? 'TabsButtonActive' : ''}>{SetoresEUsuáriosTabTitle()}</button>
       </div>

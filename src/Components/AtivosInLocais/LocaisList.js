@@ -20,7 +20,7 @@ const SectorList = (props) => {
 
   return (
     <div>
-      <div className='AtivosLocaisShowOnlyCustomGroupList'>
+      <div className={localStorage.getItem('AssetSenseTema') === 'Escuro' ? 'AtivosLocaisShowOnlyCustomGroupListEscuro AtivosLocaisShowOnlyCustomGroupList' : 'AtivosLocaisShowOnlyCustomGroupListClaro AtivosLocaisShowOnlyCustomGroupList'} >
 
 
 

@@ -18,10 +18,10 @@ export default function Users() {
 
 
   return (
-    <div className='UsersContainer'>
+    <div className={localStorage.getItem('AssetSenseTema') === 'Escuro' ? 'UsersContainerEscuro UsersContainer' : 'UsersContainerClaro UsersContainer'}>
 
 
-      <div className='TabsContainer'>
+      <div className={localStorage.getItem('AssetSenseTema') === 'Escuro' ? 'TabsContainerEscuro TabsContainer' : 'TabsContainerClaro TabsContainer'}>
         <button onClick={(k) => setKey('Todos')} className={key === 'Todos' ? 'TabsButtonActive' : ''}>{TodosTabTitle()}</button>
         <button onClick={(k) => setKey('Setores')} className={key === 'Setores' ? 'TabsButtonActive' : ''}>{SetoresTabTitle()}</button>
         <button onClick={(k) => setKey('Tipos')} className={key === 'Tipos' ? 'TabsButtonActive' : ''}>{TiposTabTitle()}</button>

@@ -1,3 +1,41 @@
+.UserContainerClaro {
+    --UserContainer-Background: white;
+    --UserContainer-Border: transparent;
+
+    --UserContainer-Setor-Background: var(--PrimaryBackground);
+    --UserContainer-Setor-Color: white;
+
+    --UserContainer-Tipo-Background: var(--SecondaryBackground);
+    --UserContainer-Tipo-Color: white;
+
+    --UserContainer-Name-Color: var(--ComplementaryColor);
+    --UserContainer-Email-Color: var(--SecondaryBackground);
+
+}
+
+.UserContainerEscuro {
+    --UserContainer-Background: var(--BackgroundDark);
+    --UserContainer-Border: var(--ComplementaryColor);
+
+    --UserContainer-Setor-Background: var(--PrimaryBackground);
+    --UserContainer-Setor-Color: white;
+
+    --UserContainer-Tipo-Background: var(--SecondaryBackground);
+    --UserContainer-Tipo-Color: white;
+
+    --UserContainer-Name-Color: var(--ComplementaryColor);
+    --UserContainer-Email-Color: white;
+}
+
+
+
+
+
+
+
+
+
+
 .UserContainer {
     display: grid;
     grid-template-columns: 25% 35% 20% 20%;
@@ -6,13 +44,12 @@
     margin-bottom: .3rem;
     padding: .7rem .5rem;
     cursor: pointer;
-    background-color: white;
-    border-bottom: 1px solid rgb(210, 210, 210);
+    background-color: var(--UserContainer-Background);
+    border: 1px solid var(--UserContainer-Border);
     user-select: none;
     border-radius: .5rem;
-    
-}
 
+}
 
 .UserContainerColumn {
     white-space: nowrap;
@@ -32,8 +69,8 @@
 }
 
 .SetorColumn {
-    background-color: var(--PrimaryBackground);
-    color: white;
+    background-color: var(--UserContainer-Setor-Background);
+    color: var(--UserContainer-Setor-Color);
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -43,8 +80,8 @@
 }
 
 .TypeColumn {
-    background-color: var(--SecondaryBackground);
-    color: var(--SecondaryColor);
+    background-color: var(--UserContainer-Tipo-Background);
+    color: var(--UserContainer-Tipo-Color);
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -62,7 +99,7 @@
     align-items: center;
     flex-direction: row;
     gap: .3rem;
-    color: var(--ComplementaryColor);
+    color: var(--UserContainer-Name-Color);
     font-size: .9rem;
 }
 
@@ -92,6 +129,7 @@
     overflow: hidden;
     text-overflow: ellipsis;
     font-size: .8rem;
+    color: var(--UserContainer-Email-Color);
 }
 
 .EmailColumn>svg {

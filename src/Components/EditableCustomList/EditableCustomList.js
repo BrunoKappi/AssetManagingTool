@@ -169,7 +169,7 @@ const EditableCustomList = (props) => {
 
   return (
     <div>
-      <div className='CustomGroupList'>
+      <div className={localStorage.getItem('AssetSenseTema') === 'Escuro' ? 'CustomGroupListEscuro CustomGroupList' : 'CustomGroupListClaro CustomGroupList'}>
 
         {ListaDeItens.length === 0 && !Loaded && <Loading />}
 
@@ -177,7 +177,7 @@ const EditableCustomList = (props) => {
         {(ListaDeItens.length !== 0 || Loaded) &&
 
           <ListGroup as="ul">
-            <ListGroup.Item as="li" className='CustomGroupListTitle' >
+            <ListGroup.Item Id="CustomGroupListTitle" as="li" className='CustomGroupListTitle' >
               <span className='CustomGroupListTitleIcon'> {CustomListIcon[props.Module]} {props.Title} </span>
             </ListGroup.Item>
             <DragDropContext onDragEnd={(result) => { HandleDrag(result) }}>
@@ -186,11 +186,11 @@ const EditableCustomList = (props) => {
                   return (
                     <div {...provided.droppableProps} ref={provided.innerRef}>
                       {ListaDeItens.map((Item, index) => {
-                        return <Draggable key={Item.Id} draggableId={Item.Id} index={index} >
+                        return <Draggable  key={Item.Id} draggableId={Item.Id} index={index} >
                           {(DragProvided) => {
                             return (
                               <div ref={DragProvided.innerRef} {...DragProvided.draggableProps} {...DragProvided.dragHandleProps}>
-                                <ListGroup.Item key={Item.Value + v4()} action as="li">
+                                <ListGroup.Item className='CustomGroupListItem' key={Item.Value + v4()} action as="li">
                                   <div className='CustomGroupListTitleRow'>
                                     {props.Module === "TiposUsuarios" && <Tooltip title="Permissões de Administrador" position="bottom" >
                                       <label class="containerCheck">

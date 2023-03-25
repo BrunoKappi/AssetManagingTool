@@ -37,13 +37,23 @@ const UserModal = (props) => {
         input: (provided) => ({
             ...provided,
             border: 'none',
-            outline: 'none'
+            outline: 'none',
+            color: 'var(--UserModal-Color-Input)',
+            ':placeholder': {
+                color: 'var(--UserModal-Color-Input)',
+            }
         }),
         control: (provided, state) => ({
             ...provided,
             borderRadius: '.5rem',
             boxShadow: state.isFocused ? 'none' : 'none',
-            border: state.isFocused ? '1px solid var(--PrimaryBackGroundFaded50)' : '1px solid var(--PrimaryBackGroundFaded50)'
+            border: state.isFocused ? '1px solid var(--PrimaryBackGroundFaded50)' : '1px solid var(--PrimaryBackGroundFaded50)',
+            backgroundColor: 'var(--UserModal-Background-Input)',
+            color: 'var(--UserModal-Color-Input)'
+        }),
+        singleValue: (provided) => ({
+            ...provided,
+            color: 'var(--UserModal-Color-Input)'
         }),
     };
 
@@ -232,9 +242,9 @@ const UserModal = (props) => {
 
 
     return (
-        <Modal {...props} size="xl" aria-labelledby="contained-modal-title-vcenter" centered fullscreen={'md-down'}>
+        <Modal {...props} size="xl" aria-labelledby="contained-modal-title-vcenter" centered fullscreen={'md-down'} className={localStorage.getItem('AssetSenseTema') === 'Escuro' ? 'UserModal-ModalEscuro UserModal-Modal' : 'UserModal-ModalClaro UserModal-Modal'}>
 
-            <Modal.Body closeButton>
+            <Modal.Body closeButton className="UserModal-Body">
 
                 <div className='UserModal'>
                     <div className='UserModalHeader'>
@@ -278,7 +288,7 @@ const UserModal = (props) => {
 
                                     <h4 className='UserModalBody-UserInfoForm-SectionTitle'>Dados Cadastrais</h4>
 
-                                   
+
                                     <div className='UserModalBody-UserInfoForm-OneLine'>
                                         <div className='UserModalBody-UserInfoForm-Group'>
                                             <span>

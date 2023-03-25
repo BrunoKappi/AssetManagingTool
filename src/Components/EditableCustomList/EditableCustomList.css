@@ -1,3 +1,80 @@
+.CustomGroupListClaro {
+    --CustomGroupList-Title-Background: var(--PrimaryBackground);
+    --CustomGroupList-Title-Color: white;
+
+    --CustomGroupList-ListItem-Background: white;
+    --CustomGroupList-ListItem-Border: rgb(211, 211, 211);
+    --CustomGroupList-ListItem-Border-LR: rgb(211, 211, 211);
+    --CustomGroupList-ListItem-Color: var(--SecondaryBackground);
+    --CustomGroupList-ListItem-Background-Hover: var(--ComplementaryColor);
+    --CustomGroupList-ListItem-Border-Hover: var(--ComplementaryColor);
+    --CustomGroupList-ListItem-Color-Hover: white;
+
+    --CustomGroupList-ListItem-Input-Background: transparent;
+    --CustomGroupList-ListItem-Input-Color: var(--SecondaryBackground);
+
+    --CustomGroupList-ListItem-Checkbox-Checked: var(--ComplementaryColor);
+    --CustomGroupList-ListItem-Checkbox-UnChecked: var(--SecondaryBackground);
+    --CustomGroupList-ListItem-Checkbox-Checked-Border: var(--ComplementaryColor);
+    --CustomGroupList-ListItem-Checkbox-UnChecked-Border: var(--SecondaryBackground);
+
+    --CustomGroupList-ListItem-Checkbox-Checked-Hover: white;
+    --CustomGroupList-ListItem-Checkbox-UnChecked-Hover: transparent;
+    --CustomGroupList-ListItem-Checkbox-Checked-Border-Hover: white;
+    --CustomGroupList-ListItem-Checkbox-UnChecked-Border-Hover: white;
+}
+
+
+
+
+
+.CustomGroupListEscuro {
+    --CustomGroupList-Title-Background: var(--PrimaryBackground);
+    --CustomGroupList-Title-Color: white;
+
+    --CustomGroupList-ListItem-Background:  var(--PrimaryBackGroundFaded2);
+    --CustomGroupList-ListItem-Border: rgb(211, 211, 211);
+    --CustomGroupList-ListItem-Border-LR: rgb(211, 211, 211);
+    --CustomGroupList-ListItem-Color: var(--ComplementaryColor);
+    --CustomGroupList-ListItem-Background-Hover: var(--ComplementaryColor);
+    --CustomGroupList-ListItem-Border-Hover: var(--ComplementaryColor);
+    --CustomGroupList-ListItem-Color-Hover: white;
+
+    --CustomGroupList-ListItem-Input-Background: transparent;
+    --CustomGroupList-ListItem-Input-Color: white;
+    
+    --CustomGroupList-ListItem-Checkbox-Checked: var(--ComplementaryColor);
+    --CustomGroupList-ListItem-Checkbox-UnChecked: var(--SecondaryBackground);
+    --CustomGroupList-ListItem-Checkbox-Checked-Border: var(--ComplementaryColor);
+    --CustomGroupList-ListItem-Checkbox-UnChecked-Border: var(--SecondaryBackground);
+
+    --CustomGroupList-ListItem-Checkbox-Checked-Hover: white;
+    --CustomGroupList-ListItem-Checkbox-UnChecked-Hover: transparent;
+    --CustomGroupList-ListItem-Checkbox-Checked-Border-Hover: white;
+    --CustomGroupList-ListItem-Checkbox-UnChecked-Border-Hover: white;
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /* ===================== CUSTOMGROUP LIST =================================*/
 .CustomGroupList {
     margin-top: 1rem;
@@ -8,8 +85,6 @@
     cursor: pointer;
 }
 
-
-
 .CustomGroupListItem {
     width: 100%;
     display: flex;
@@ -18,10 +93,22 @@
     cursor: pointer;
 }
 
-.CustomGroupListItem span {
-    flex-grow: 1;
-    font-family: var(--Fonte);
-    font-size: 12px;
+.CustomGroupList .list-group-item {
+    background-color: var(--CustomGroupList-ListItem-Background) !important;
+    border: 1px solid var(--CustomGroupList-ListItem-Border) !important;
+    border-top: none !important;
+    border-right: 1px solid var(--CustomGroupList-ListItem-Border-LR) !important;
+    border-left: 1px solid var(--CustomGroupList-ListItem-Border-LR) !important;
+}
+
+.CustomGroupList .list-group-item:hover {
+    background-color: var(--CustomGroupList-ListItem-Background-Hover) !important;
+    border: 1px solid var(--CustomGroupList-ListItem-Border-Hover) !important;
+    border-top: none !important;
+}
+
+.CustomGroupList .list-group-item:hover span {
+    color: var(--CustomGroupList-ListItem-Color-Hover) !important;
 }
 
 
@@ -30,22 +117,33 @@
     margin-left: .6rem;
 }
 
-
-
 .CustomGroupListItem input {
     padding: 4px 12px;
     border: none;
     outline: none;
     font-family: var(--Fonte);
-    color: var(--Dark);
+    color: var(--CustomGroupList-ListItem-Input-Color);
     font-size: 14px;
-    background-color: var(--FundoTransparente);
+    background-color: var(--CustomGroupList-ListItem-Input-Background);
     -webkit-touch-callout: none;
     -webkit-user-select: none;
     -khtml-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
+}
+
+.CustomGroupListItem input::placeholder {
+    color: var(--CustomGroupList-ListItem-Input-Color) !important;
+}
+
+
+.CustomGroupList .list-group-item:hover input {
+    color: var(--CustomGroupList-ListItem-Color-Hover) !important;
+}
+
+.CustomGroupList .list-group-item:hover input::placeholder {
+    color: var(--CustomGroupList-ListItem-Color-Hover) !important;
 }
 
 
@@ -57,6 +155,10 @@
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
+    flex-grow: 1;
+    font-family: var(--Fonte);
+    font-size: 12px;
+    color: var(--CustomGroupList-ListItem-Color);
 }
 
 .CustomGroupListItem button {
@@ -64,8 +166,6 @@
     background-color: var(--FundoTransparente);
     padding: 5px;
 }
-
-
 
 .CustomGroupListInput {
     padding: 0 !important;
@@ -86,14 +186,25 @@
 
 .CustomGroupListTitle {
     font-family: var(--Fonte);
-    background-color: var(--PrimaryBackground) !important;
-    color: var(--PrimaryColor) !important;
+    background-color: var(--CustomGroupList-Title-Background) !important;
+    color: var(--CustomGroupList-Title-Color) !important;
+    user-select: none;
+}
+
+#CustomGroupListTitle {
+    font-family: var(--Fonte);
+    background-color: var(--CustomGroupList-Title-Background) !important;
+    color: var(--CustomGroupList-Title-Color) !important;
     user-select: none;
 }
 
 .EditableCustomListIcon {
-    color: var(--PrimaryBackground) !important;
+    color: var(--CustomGroupList-ListItem-Color) !important;
     width: 1rem;
+}
+
+.CustomGroupList .list-group-item:hover .EditableCustomListIcon {
+    color: var(--CustomGroupList-ListItem-Color-Hover) !important;
 }
 
 
@@ -140,21 +251,30 @@
     user-select: none;
 }
 
-/* Create a custom checkbox */
-.checkmark {
+.CustomGroupList .list-group-item:hover .checkmark {
+    background: var(--CustomGroupList-ListItem-Checkbox-UnChecked-Hover);
+    border: 1px solid var(--CustomGroupList-ListItem-Checkbox-UnChecked-Border-Hover)
+}
+
+.checkmark { 
     position: relative;
     top: 0;
     left: 0;
     height: 1rem;
     width: 1rem;
-    background: #606062;
+    background: var(--CustomGroupList-ListItem-Checkbox-UnChecked);
     border-radius: 5px;
     box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.30), 0px 1px 1px rgba(0, 5);
+    border: 1px solid var(--CustomGroupList-ListItem-Checkbox-UnChecked-Border)
 }
 
-/* When the checkbox is checked, add a blue background */
+.CustomGroupList .list-group-item:hover .containerCheck input:checked~.checkmark {
+    background-color: var(--CustomGroupList-ListItem-Checkbox-Checked-Hover)
+}
+
 .containerCheck input:checked~.checkmark {
-    background-color: var(--PrimaryBackground)
+    background-color: var(--CustomGroupList-ListItem-Checkbox-Checked);
+    border: 1px solid var(--CustomGroupList-ListItem-Checkbox-Checked-Border)
 }
 
 /* Create the checkmark/indicator (hidden when not checked) */

@@ -1,3 +1,48 @@
+.SidebarContainerClaro {
+    --SidebarContainer-Background: #eceff1;
+
+    --Sidebar-Item-Border: var(--PrimaryBackGroundFaded2);
+    --Sidebar-Item-Background: var(--PrimaryBackGroundFaded2);
+    --Sidebar-Item-Color: var(--PrimaryBackground);
+    --Sidebar-Item-Border-Hover: var(--PrimaryBackground);
+    --Sidebar-Item-Background-Hover: var(--PrimaryBackground);
+    --Sidebar-Item-Color-Hover: white;
+    --Sidebar-Item-Border-Active: var(--PrimaryBackground);
+    --Sidebar-Item-Background-Active: var(--PrimaryBackground);
+    --Sidebar-Item-Color-Active: white;
+
+    --Sidebar-Name-Color: var(--ComplementaryColor);
+
+}
+
+
+
+.SidebarContainerEscuro {
+    --SidebarContainer-Background: var(--BackgroundDark);
+
+    --Sidebar-Item-Border: var(--PrimaryBackGroundFaded2);
+    --Sidebar-Item-Background: var(--PrimaryBackGroundFaded2);
+    --Sidebar-Item-Color: var(--PrimaryBackground);
+    --Sidebar-Item-Border-Hover: var(--PrimaryBackground);
+    --Sidebar-Item-Background-Hover: var(--PrimaryBackground);
+    --Sidebar-Item-Color-Hover: white;
+    --Sidebar-Item-Border-Active: var(--PrimaryBackground);
+    --Sidebar-Item-Background-Active: var(--PrimaryBackground);
+    --Sidebar-Item-Color-Active: white;
+
+    --Sidebar-Name-Color: var(--ComplementaryColor);
+
+}
+
+
+
+
+
+
+
+
+
+
 .SidebarContainer {
     height: 100%;
     display: flex;
@@ -7,10 +52,9 @@
     width: 25%;
     padding: 0;
     padding-top: 1.5rem;
-    background-color: var(--Background);
+    background-color: var(--SidebarContainer-Background);
     padding-left: .5rem;
 }
-
 
 .SidebarList {
     list-style: none;
@@ -25,29 +69,29 @@
     flex-direction: row;
     align-items: center;
     gap: 1rem;
-    border: 1px solid var(--PrimaryBackground);
-    padding: .6rem 1.7rem;   
+    padding: .6rem 1.7rem;
     font-weight: 500;
     text-decoration: none;
     font-family: var(--Fonte);
     font-size: .9rem;
-    color: var(--PrimaryBackground);   
     border-top-right-radius: 1rem;
     border-bottom-right-radius: 1rem;
     border-radius: 1REM;
-    background-color: var(--PrimaryBackGroundFaded2);
-    border: 1px solid var(--PrimaryBackGroundFaded2);
+    background-color: var(--Sidebar-Item-Background);
+    border: 1px solid var(--Sidebar-Item-Border);
+    color: var(--Sidebar-Item-Color);
 }
 
 .SidebarItem:hover {
-    background-color: var(--PrimaryBackground);
-    color: var(--PrimaryColor);
+    border: 1px solid var(--Sidebar-Item-Border-Hover);
+    background-color: var(--Sidebar-Item-Background-Hover);
+    color: var(--Sidebar-Item-Color-Hover);
 }
 
 .SidebarItem.ActiveSidebar {
-    background-color: var(--PrimaryBackground);
-    ;
-    color: var(--PrimaryColor);
+    border: 1px solid var(--Sidebar-Item-Border-Active);
+    background-color: var(--Sidebar-Item-Background-Active);
+    color: var(--Sidebar-Item-Color-Active);
 }
 
 .SidebarUserPhotoContainer {
@@ -66,12 +110,14 @@
 }
 
 .SidebarUserName {
+    padding: .2rem;
     display: flex;
     flex-wrap: wrap;
     gap: .5rem;
     justify-content: center;
     align-items: center;
     margin-bottom: 1rem;
+    row-gap: .1rem;
 
 }
 
@@ -80,7 +126,7 @@
     font-family: var(--Fonte);
     font-size: 1.5rem;
     font-weight: 600;
-    color: var(--ComplementaryColor);
+    color: var(--Sidebar-Name-Color);
 }
 
 
@@ -99,7 +145,7 @@
 
     .SidebarUserName>p {
         font-size: 1.3rem;
-        font-weight: 500; 
+        font-weight: 500;
 
     }
 }

@@ -31,7 +31,7 @@ const TypesList = (props) => {
 
   return (
     <div>
-      <div className='UserTypesShowOnlyCustomGroupList'>
+      <div className={localStorage.getItem('AssetSenseTema') === 'Escuro' ? 'UserTypesShowOnlyCustomGroupListEscuro UserTypesShowOnlyCustomGroupList' : 'UserTypesShowOnlyCustomGroupListClaro UserTypesShowOnlyCustomGroupList'}>
 
         <ListGroup as="ul">
           <ListGroup.Item as="li" className='UserTypesShowOnlyCustomGroupListTitle' >

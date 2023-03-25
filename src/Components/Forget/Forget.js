@@ -20,7 +20,7 @@ export default function Forget() {
     }
 
     return (
-        <div className='ForgetContainer'>
+        <div className={localStorage.getItem('AssetSenseTema') === 'Escuro' ? 'ForgetContainerEscuro ForgetContainer' : 'ForgetContainerClaro ForgetContainer'} >
 
             <LogoutHeader />
 

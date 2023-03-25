@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import './Profile.css'
 import { connect } from 'react-redux'
-import ProfilePage from './ProfilePage/ProfilePage'
+import UserMOdal from '../UsersList/User/UserModal'
 import { useNavigate } from 'react-router-dom';
 
 
@@ -17,11 +17,11 @@ const Profile = (props) => {
     return (
         <div className='ProfileContainer'>
 
-            <ProfilePage CurrentUser={CurrentUser} User={CurrentUser} show={modalShow} onHide={() => {  setModalShow(false); navigate('../' + props.LoggedUser.CurrentSidebarTab);}} />
+            <UserMOdal CurrentUser={CurrentUser} User={CurrentUser} show={modalShow} onHide={() => {  setModalShow(false); navigate('../' + props.LoggedUser.CurrentSidebarTab);}} />
 
         </div>
     )
-}
+} 
 
 
 const ConnectedProfile = connect((state) => {

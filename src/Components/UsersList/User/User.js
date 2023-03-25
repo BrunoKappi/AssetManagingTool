@@ -6,8 +6,10 @@ import { GetSetores, GetUserTipos } from '../../../Functions/Middleware'
 export default function User(props) {
 
 
-    const [UserType, setUserType] = useState({})
+    const [UserType, setUserType] = useState({})  
     const [UserSetor, setUserSetor] = useState({})
+
+
 
     useEffect(() => {
         GetUserTipos().then((Lista) => {
@@ -33,7 +35,7 @@ export default function User(props) {
     return (
         <>
 
-            <div className='UserContainer' >
+            <div className={localStorage.getItem('AssetSenseTema') === 'Escuro' ? 'UserContainerEscuro UserContainer' : 'UserContainerClaro UserContainer'} >
 
                 <span className='UserContainerColumn'>
                     <span className='NameColumn'>

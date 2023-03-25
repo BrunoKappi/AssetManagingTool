@@ -1,3 +1,30 @@
+.AtivosLocaisShowOnlyCustomGroupListClaro {
+    --Setores-Title-Backround: var(--PrimaryBackground);
+    --Setores-Title-Color: white;
+
+    --Setores-Item-Backround: white;
+    --Setores-Item-Border: rgb(205, 205, 205);
+    --Setores-Item-Border-LR: rgb(205, 205, 205);
+    --Setores-Item-Icon-Color: var(--PrimaryBackground);
+    --Setores-Item-Span-Color: var(--SecondaryBackground);
+}
+
+
+.AtivosLocaisShowOnlyCustomGroupListEscuro {
+    --Setores-Title-Backround: var(--PrimaryBackground);
+    --Setores-Title-Color: white;
+
+    --Setores-Item-Backround: var(--BackgroundDark)lack;
+    --Setores-Item-Border: rgb(88, 86, 86);
+    --Setores-Item-Border-LR: rgb(88, 86, 86);
+    --Setores-Item-Icon-Color: var(--ComplementaryColor);
+    --Setores-Item-Span-Color: white;
+}
+
+
+
+
+
 .AtivosLocaisShowOnlyCustomGroupList {
     margin-top: 1rem;
     margin-bottom: 1rem;
@@ -7,7 +34,12 @@
     cursor: pointer;
 }
 
-
+.AtivosLocaisShowOnlyCustomGroupList .list-group-item {
+    background-color: var(--Setores-Item-Backround);
+    border-bottom: 1px solid var(--Setores-Item-Border);
+    border-left: 1px solid var(--Setores-Item-Border-LR);
+    border-right: 1px solid var(--Setores-Item-Border-LR);
+}
 
 
 .AtivosLocaisShowOnlyCustomGroupListItem {
@@ -16,31 +48,37 @@
     align-items: center;
     justify-content: flex-start;
     cursor: pointer;
-    font-family: var(--Fonte);
-    font-size: .7rem;
-    white-space: nowrap;
 }
 
-
+.AtivosLocaisShowOnlyCustomGroupListItem span {
+    font-family: var(--Fonte);
+    font-size: 12px;
+    color: var(--Setores-Item-Span-Color);
+}
 
 .AtivosLocaisShowOnlyCustomGroupListItem>svg {
     font-family: var(--Fonte);
     font-size: .9rem;
     margin-right: .3rem;
-    color: var(--PrimaryBackground);
 }
 
 
 .AtivosLocaisShowOnlyCustomGroupListItem svg {
     float: right;
     margin-left: .6rem;
+    font-size: .9rem;
+    width: 1rem !important;
 }
 
-.AtivosLocaisShowOnlyCustomGroupIcon {
+.SetoresShowOnlyCustomGroupIcon {
     font-family: var(--Fonte);
     font-size: .9rem;
     margin-right: .3rem;
-    color: var(--PrimaryBackground);
+    color: var(--Setores-Item-Icon-Color);
+}
+
+.SetoresShowOnlyCustomGroupIcon>svg {
+    width: .4rem !important;
 }
 
 .AtivosLocaisShowOnlyCustomGroupListCheckbox {
@@ -98,8 +136,20 @@
     margin-right: 1rem !important;
 }
 
-.CategoriaEditIcon {
-    color: var(--Dark) !important;
+
+.AtivosLocaisShowOnlyCustomGroupList .list-group-item {
+    padding: .2rem .7rem !important;
+}
+
+.AtivosLocaisShowOnlyCustomGroupListTitle.list-group-item {
+    padding: .6rem .7rem !important;
+}
+
+
+
+.Tilt {
+    transform: scale(1.2) !important;
+    background-color: aqua !important;
 }
 
 .AtivosLocaisShowOnlyCustomGroupListTitle {
@@ -108,30 +158,42 @@
     align-items: center !important;
     justify-content: space-between !important;
     font-family: var(--Fonte) !important;
-    background-color: var(--PrimaryBackground) !important;
-    color: var(--PrimaryColor) !important;
-    user-select: none !important;
-    font-size: .9rem !important;
-    border-top-right-radius: .7rem !important;
-    border-top-left-radius: .7rem !important;
+    background-color: var(--Setores-Title-Backround) !important;
+    color: var(--Setores-Title-Color) !important;
+    user-select: none;
+    border-top-right-radius: .5rem !important;
+    border-top-left-radius: .5rem !important;
 }
 
-.UserTypesShowOnlyCustomGroupListTitleSpan {
-    display: grid;
-    grid-template-columns: 7% 85%;
-    flex-direction: row;
+.AtivosLocaisShowOnlyCustomGroupListTitleSpan {
+    white-space: nowrap;
+    /* Evita que o texto seja quebrado */
+    overflow: hidden;
+    /* Esconde o conteúdo que ultrapassa o limite do elemento */
+    text-overflow: ellipsis;
+    /* Adiciona reticências no final do texto que ultrapassa o limite do elemento */
+    display: flex;
+    /* Permite que o ícone e o texto fiquem na mesma linha */
     align-items: center;
-    justify-content: flex-start;
-    width: 100%;
+    /* Alinha verticalmente o ícone e o texto */
+    gap: .5rem;
+    color: var(--Setores-Title-Color);
 }
+
+.AtivosLocaisShowOnlyCustomGroupListTitleSpan>svg {
+    width: 1.1rem;
+    color: var(--Setores-Title-Color);
+}
+
+.MarginBottom {
+    margin-bottom: 2.5rem;
+}
+
+
 
 .NoBreak {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
     margin: 0;
-}
-
-.MarginBottom {
-    margin-bottom: 2.5rem;
 }

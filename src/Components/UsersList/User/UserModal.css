@@ -1,3 +1,105 @@
+.UserModal-ModalClaro {
+
+    --UserModal-Backgound: white;
+    --UserModal-Border: white;
+    --UserModal-SectionTitleColor: var(--ComplementaryColor);
+
+
+    --UserModal-IconeELabe-Input: var(--ComplementaryColor);
+    --UserModal-Borda-Input: var(--PrimaryBackGroundFaded50);
+    --UserModal-Color-Input: var(--SecondaryBackground);
+    --UserModal-Background-Input: transparent;
+
+    --UserModal-ListTittle-Background: var(--ComplementaryColor);
+    --UserModal-ListTittle-Color: white;
+    --UserModal-ListTittle-Item-Background: transparent;
+    --UserModal-ListTittle-Item-Color: var(--ComplementaryColor);
+    --UserModal-ListTittle-Item-Border: var(--ComplementaryColor);
+    --UserModal-ListTittle-Item-Background-Hover: var(--ComplementaryColor);
+    --UserModal-ListTittle-Item-Color-Hover: white;
+    --UserModal-ListTittle-Item-Border-Hover: var(--ComplementaryColor);
+
+    --UserModal-Header-Name-Color: var(--ComplementaryColor);
+    --UserModal-Header-Setor-Background: var(--SecondaryBackground);
+    --UserModal-Header-Setor-Color: white;
+    --UserModal-Header-Tipo-Background: var(--PrimaryBackground);
+    --UserModal-Header-Tipo-Color: white;
+
+    --UserModal-Sidebar-Item-Background: var(--PrimaryBackGroundFaded2);
+    --UserModal-Sidebar-Item-Border: var(--PrimaryBackGroundFaded2);
+    --UserModal-Sidebar-Item-Color: var(--PrimaryBackground);
+    --UserModal-Sidebar-Item-Background-Active: var(--PrimaryBackground);
+    --UserModal-Sidebar-Item-Border-Active: var(--PrimaryBackground);
+    --UserModal-Sidebar-Item-Color-Active: white;
+    --UserModal-Sidebar-Item-Background-Hover: var(--PrimaryBackground);
+    --UserModal-Sidebar-Item-Border-Hover: var(--PrimaryBackground);
+    --UserModal-Sidebar-Item-Color-Hover: white;
+}
+
+
+
+.UserModal-ModalEscuro {
+
+    --UserModal-Backgound: var(--BackgroundDark);
+    --UserModal-Border: rgb(127, 126, 126);
+    --UserModal-SectionTitleColor: var(--ComplementaryColor);
+
+    --UserModal-IconeELabe-Input: var(--ComplementaryColor);
+    --UserModal-Borda-Input: var(--PrimaryBackGroundFaded50);
+    --UserModal-Color-Input: white;
+    --UserModal-Background-Input: transparent;
+
+    --UserModal-ListTittle-Background: var(--ComplementaryColor);
+    --UserModal-ListTittle-Color: white;
+    --UserModal-ListTittle-Item-Background: transparent;
+    --UserModal-ListTittle-Item-Color: var(--ComplementaryColor);
+    --UserModal-ListTittle-Item-Border: var(--ComplementaryColor);
+    --UserModal-ListTittle-Item-Background-Hover: var(--ComplementaryColor);
+    --UserModal-ListTittle-Item-Color-Hover: white;
+    --UserModal-ListTittle-Item-Border-Hover: var(--ComplementaryColor);
+
+    --UserModal-Header-Name-Color: var(--ComplementaryColor);
+    --UserModal-Header-Setor-Background: var(--SecondaryBackground);
+    --UserModal-Header-Setor-Color: white;
+    --UserModal-Header-Tipo-Background: var(--PrimaryBackground);
+    --UserModal-Header-Tipo-Color: white;
+
+    --UserModal-Sidebar-Item-Background: var(--PrimaryBackGroundFaded2);
+    --UserModal-Sidebar-Item-Border: var(--PrimaryBackGroundFaded2);
+    --UserModal-Sidebar-Item-Color: var(--PrimaryBackground);
+    --UserModal-Sidebar-Item-Background-Active: var(--PrimaryBackground);
+    --UserModal-Sidebar-Item-Border-Active: var(--PrimaryBackground);
+    --UserModal-Sidebar-Item-Color-Active: white;
+    --UserModal-Sidebar-Item-Background-Hover: var(--PrimaryBackground);
+    --UserModal-Sidebar-Item-Border-Hover: var(--PrimaryBackground);
+    --UserModal-Sidebar-Item-Color-Hover: white;
+}
+
+
+/* blurred background modal for bootstrap v4 */
+.modal-open> :not(.modal) {}
+
+@media (max-width: 760px) {
+    .modal-open> :not(.modal) {
+        -webkit-filter: none;
+        -moz-filter: none;
+        -o-filter: none;
+        -ms-filter: none;
+        filter: none;
+    }
+}
+
+.UserModal {
+    z-index: 0 !important;
+}
+
+
+.UserModal-Modal .modal-content {
+    background-color: var(--UserModal-Backgound) !important;
+    border: 1px solid var(--UserModal-Border) !important;
+}
+
+
 .UserModal {
     display: flex;
     flex-direction: column;
@@ -92,7 +194,7 @@
     width: 100%;
     font-family: var(--Fonte);
     font-size: 1.3rem;
-    color: var(--ComplementaryColor);
+    color: var(--UserModal-Header-Name-Color);
 }
 
 .UserModalHeader-Right-Close {
@@ -107,27 +209,27 @@
 }
 
 
+
+
 .UserModalHeader-Right-Setor {
-    background-color: antiquewhite;
     border-radius: 1rem;
     padding: .1rem 1rem;
     font-family: var(--Fonte);
     font-size: .8rem;
-    color: var(--SecondaryColor);
-    background-color: var(--SecondaryBackground);
+    color: var(--UserModal-Header-Setor-Color);
+    background-color: var(--UserModal-Header-Setor-Background);
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
 .UserModalHeader-Right-Tipo {
-    background-color: antiquewhite;
     border-radius: 1rem;
     padding: .1rem 1rem;
     font-family: var(--Fonte);
     font-size: .8rem;
-    color: var(--PrimaryColor);
-    background-color: var(--PrimaryBackground);
+    color: var(--UserModal-Header-Tipo-Color);
+    background-color: var(--UserModal-Header-Tipo-Background);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -185,7 +287,7 @@
 }
 
 .UserModalBody-Sidebar {
-   
+
     display: flex;
     flex-direction: column;
     align-items: stretch;
@@ -211,7 +313,7 @@
     align-items: center;
     gap: .5rem;
     padding: .6rem 1.7rem;
-    color: var(--PrimaryBackground);
+    color: var(--UserModal-Sidebar-Item-Color);
     font-weight: 500;
     text-decoration: none;
     font-family: var(--Fonte);
@@ -219,9 +321,11 @@
     border-top-right-radius: 1rem;
     border-bottom-right-radius: 1rem;
     border-radius: 1REM;
-    background-color: var(--PrimaryBackGroundFaded2);
-    border: 1px solid var(--PrimaryBackGroundFaded2);
+    background-color: var(--UserModal-Sidebar-Item-Background);
+    border: 1px solid var(--UserModal-Sidebar-Item-Border);
 }
+
+
 
 .UserModalBody-Sidebar-ActiveItem {
     cursor: pointer;
@@ -237,15 +341,18 @@
     border-top-right-radius: 1rem;
     border-bottom-right-radius: 1rem;
     border-radius: 1REM;
-    border: 1px solid var(--PrimaryBackground);
-    color: var(--PrimaryColor);
-    background-color: var(--PrimaryBackground);
+    border: 1px solid var(--UserModal-Sidebar-Item-Border-Active);
+    color: var(--UserModal-Sidebar-Item-Color-Active);
+    background-color: var(--UserModal-Sidebar-Item-Background-Active);
 }
 
+
+
+
 .UserModalBody-Sidebar-Item:hover {
-    border: 1px solid var(--ComplementaryColor);
-    color: var(--PrimaryColor);
-    background-color: var(--ComplementaryColor);
+    border: 1px solid var(--UserModal-Sidebar-Item-Border-Hover);
+    color: var(--UserModal-Sidebar-Item-Color-Hover);
+    background-color: var(--UserModal-Sidebar-Item-Background-Hover);
 }
 
 
@@ -264,7 +371,7 @@
 .UserModalBody-UserInfo {
     padding: 0rem 1rem 1rem 3rem;
     width: 100%;
-   
+
 }
 
 
@@ -304,7 +411,7 @@
     justify-content: flex-start;
     gap: .5rem;
     font-family: var(--Fonte);
-    color: var(--ComplementaryColor);
+    color: var(--UserModal-IconeELabe-Input);
     font-size: .9rem;
 }
 
@@ -324,24 +431,25 @@
 
 .UserModalBody-UserInfoForm-SectionTitle {
     font-family: var(--Fonte);
-    color: var(--SecondaryBackground);
+    color: var(--UserModal-SectionTitleColor);
 }
 
 .UserModalBody-UserInfoForm-Group>input {
     border-radius: .5rem;
     outline: none;
-    border: 1px solid var(--PrimaryBackGroundFaded50);
+    border: 1px solid var(--UserModal-Borda-Input);
     padding: .5rem .8rem;
-    color: var(--SecondaryBackground);
+    color: var(--UserModal-Color-Input);
     font-family: var(--Fonte);
     font-size: .9rem;
+    background-color: var(--UserModal-Background-Input);
 }
 
 .UserModalBody-UserInfoForm-PhoneInput-Container {
     border-radius: .5rem !important;
     outline: none !important;
-    border: 1px solid var(--PrimaryBackGroundFaded50) !important;
-    color: var(--SecondaryBackground) !important;
+    border: 1px solid var(--UserModal-Borda-Input) !important;
+
     font-family: var(--Fonte) !important;
     font-size: .9rem !important;
     box-shadow: none !important;
@@ -351,17 +459,27 @@
     border-radius: .5rem !important;
     outline: none !important;
     border: none !important;
-    color: var(--SecondaryBackground) !important;
+    color: var(--UserModal-Color-Input) !important;
     font-family: var(--Fonte) !important;
     font-size: .9rem !important;
     width: 100% !important;
     box-shadow: none !important;
+    background-color: var(--UserModal-Background-Input) !important;
 }
 
 .UserModalBody-UserInfoForm-PhoneInput-Button {
-    background-color: transparent !important;
+    background-color: var(--UserModal-Background-Input) !important;
     border: none !important;
+}
 
+.UserModalBody-UserInfoForm-PhoneInput-Button:hover {
+    background-color: var(--UserModal-Background-Input) !important;
+    border: none !important;
+}
+
+.UserModalBody-UserInfoForm-PhoneInput-Button:active {
+    background-color: var(--UserModal-Background-Input) !important;
+    border: none !important;
 }
 
 .UserModalBody-UserInfoForm-LocationSelect {
@@ -467,8 +585,8 @@
     gap: .5rem;
     padding: .5rem;
     font-family: var(--Fonte);
-    background-color: var(--ComplementaryColor);
-    color: var(--PrimaryColor);
+    background-color: var(--UserModal-ListTittle-Background);
+    color: var(--UserModal-ListTittle-Color);
     border-top-right-radius: .5rem;
     border-top-left-radius: .5rem;
 }
@@ -486,13 +604,15 @@
     gap: .5rem;
     padding: .5rem;
     font-family: var(--Fonte);
-    border-bottom: 1px solid var(--ComplementaryColor);
-    border-right: 1px solid var(--ComplementaryColor);
-    border-left: 1px solid var(--ComplementaryColor);
-    color: var(--ComplementaryColor);
+    border-bottom: 1px solid var(--UserModal-ListTittle-Item-Border);
+    border-right: 1px solid var(--UserModal-ListTittle-Item-Border);
+    border-left: 1px solid var(--UserModal-ListTittle-Item-Border);
+    color: var(--UserModal-ListTittle-Item-Color);
     cursor: pointer;
     font-size: .9rem;
+    background-color: var(--UserModal-ListTittle-Item-Background);
 }
+
 
 .UserModalBody-UserInfoForm-SetorList-ItemActive {
     background-color: var(--ComplementaryColor);
@@ -504,13 +624,14 @@
 }
 
 .UserModalBody-UserInfoForm-SetorList-Item:hover {
-    background-color: var(--ComplementaryColor);
-    color: var(--PrimaryColor);
-    border-bottom: 1px solid var(--ComplementaryColor);
-    border-right: 1px solid var(--ComplementaryColor);
-    border-left: 1px solid var(--ComplementaryColor);
-
+    background-color: var(--UserModal-ListTittle-Item-Background-Hover);
+    color: var(--UserModal-ListTittle-Item-Color-Hover);
+    border-bottom: 1px solid var(--UserModal-ListTittle-Item-Border-Hover);
+    border-right: 1px solid var(--UserModal-ListTittle-Item-Border-Hover);
+    border-left: 1px solid var(--UserModal-ListTittle-Item-Border-Hover);
 }
+
+
 
 .UserModalBody-UserInfoForm-SetorList-Item>svg {
     width: .9rem;
@@ -557,8 +678,8 @@
     gap: .5rem;
     padding: .5rem;
     font-family: var(--Fonte);
-    background-color: var(--ComplementaryColor);
-    color: var(--PrimaryColor);
+    background-color: var(--UserModal-ListTittle-Background);
+    color: var(--UserModal-ListTittle-Color);
     border-top-right-radius: .5rem;
     border-top-left-radius: .5rem;
 }
@@ -576,12 +697,13 @@
     gap: .5rem;
     padding: .5rem;
     font-family: var(--Fonte);
-    border-bottom: 1px solid var(--ComplementaryColor);
-    border-right: 1px solid var(--ComplementaryColor);
-    border-left: 1px solid var(--ComplementaryColor);
-    color: var(--ComplementaryColor);
+    border-bottom: 1px solid var(--UserModal-ListTittle-Item-Border);
+    border-right: 1px solid var(--UserModal-ListTittle-Item-Border);
+    border-left: 1px solid var(--UserModal-ListTittle-Item-Border);
+    color: var(--UserModal-ListTittle-Item-Color);
     cursor: pointer;
     font-size: .9rem;
+    background-color: var(--UserModal-ListTittle-Item-Background);
 }
 
 .UserModalBody-UserInfoForm-TiposUserList-ItemActive {
@@ -594,11 +716,11 @@
 
 
 .UserModalBody-UserInfoForm-TiposUserList-Item:hover {
-    background-color: var(--ComplementaryColor);
-    color: var(--PrimaryColor);
-    border-bottom: 1px solid var(--ComplementaryColor);
-    border-right: 1px solid var(--ComplementaryColor);
-    border-left: 1px solid var(--ComplementaryColor);
+    background-color: var(--UserModal-ListTittle-Item-Background-Hover);
+    color: var(--UserModal-ListTittle-Item-Color-Hover);
+    border-bottom: 1px solid var(--UserModal-ListTittle-Item-Border-Hover);
+    border-right: 1px solid var(--UserModal-ListTittle-Item-Border-Hover);
+    border-left: 1px solid var(--UserModal-ListTittle-Item-Border-Hover);
 }
 
 

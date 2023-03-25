@@ -11,10 +11,13 @@ import Profile from './Components/Profile/Profile'
 import Config from './Components/Config/Config'
 import Dashboard from './Components/Dashboard/Dashboard';
 import { ReactNotifications } from 'react-notifications-component'
+import { GetTema } from './Functions/Middleware';
 
 
 const App = (props) => {
 
+
+  GetTema()
 
   const RequireAuth = ({ children }) => {
     if (props.LoggedUser.Email) {

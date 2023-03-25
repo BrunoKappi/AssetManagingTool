@@ -64,7 +64,7 @@ const AtivosInLocais = (props) => {
 
     return (
         <DragDropContext onDragUpdate={(result) => { onBeforeCapture(result) }} onDragEnd={(result) => { HandleDrag(result) }}>
-            <div className='AtivosInLocaisContainer'>
+            <div  className={localStorage.getItem('AssetSenseTema') === 'Escuro' ? 'AtivosInLocaisContainerEscuro AtivosInLocaisContainer' : 'AtivosInLocaisContainerClaro AtivosInLocaisContainer'}>
 
                 <NumbersOfList Values={LocaisArmazenamento} />
 

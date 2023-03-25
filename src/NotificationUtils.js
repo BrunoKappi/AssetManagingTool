@@ -7,13 +7,14 @@ const DefaultNotification = {
   type: "success",
   insert: "bottom",
   container: "bottom-left",
+  className: "NotificationContainer",
   animationIn: ["animate__animated", "animate__zoomIn"],
   animationOut: ["animate__animated", "animate__fadeOut"],
   dismiss: {
     duration: 5000,
     onScreen: true
   },
-  showIcon:true
+  showIcon: true
 }
 
 

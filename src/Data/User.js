@@ -77,9 +77,25 @@ export const Users = [
     { Id: uuid(), Phone: '5551991918181', Country: { ...DefaultCountry }, Estate: { ...DefaultEstate }, City: { ...DefaultCity }, AccessToken: '1234', Name: 'Tiago', LastName: 'Silva', Email: 'tiagosilva@serranoautomacao.com.br', Type: { ...Funcionario }, Sector: { ...Integracao } },
     { Id: uuid(), Phone: '5551991918181', Country: { ...DefaultCountry }, Estate: { ...DefaultEstate }, City: { ...DefaultCity }, AccessToken: '1234', Name: 'Valéria', LastName: 'Rex', Email: 'valeriarex@serranoautomacao.com.br', Type: { ...Funcionario }, Sector: { ...Integracao } },
     { Id: uuid(), Phone: '5551991918181', Country: { ...DefaultCountry }, Estate: { ...DefaultEstate }, City: { ...DefaultCity }, AccessToken: '1234', Name: 'Vera', LastName: 'Lucia Santos', Email: 'verasantos@serranoautomacao.com.br', Type: { ...Funcionario }, Sector: { ...Integracao } },
+    { Id: uuid(), Phone: '5551991918181', Country: { ...DefaultCountry }, Estate: { ...DefaultEstate }, City: { ...DefaultCity }, AccessToken: '1234', Name: 'Administrador', LastName: 'Serrano', Email: 'admin@serranoautomacao.com.br', Type: { ...TipoAdmin }, Sector: { ...RH } }
 ]
 
-//localStorage.setItem('AssetSenseUsers', JSON.stringify(Users))
+
+export const UsersReset = [{ Id: uuid(), Phone: '5551991918181', Country: { ...DefaultCountry }, Estate: { ...DefaultEstate }, City: { ...DefaultCity }, AccessToken: '1234', Name: 'Administrador', LastName: 'Serrano', Email: 'admin@serranoautomacao.com.br', Type: { ...TipoAdmin }, Sector: { ...RH } }]
+
+
+if (!localStorage.getItem('AssetSenseUsers')) {
+    localStorage.setItem('AssetSenseUsers', JSON.stringify(Users))
+}
+////localStorage.setItem('AssetSenseUsers', JSON.stringify(UsersReset)) //RESET
+
+
+
+
+
+
+
+
 
 export const UserRoles = [
     { Id: '8c25a156-04b7-479f-874f-b16e63383cbd', Value: 'Funcionário', IsAdmin: false },
@@ -88,9 +104,15 @@ export const UserRoles = [
     { Id: uuid(), Value: 'Gerente', IsAdmin: true }
 ]
 
+export const UserRolesReset = [{ Id: '784c4def-b901-4883-b481-a4a6cf6dd070', Value: 'Administrador', IsAdmin: true }]
+
+
 export const DefaultUserRole = { Id: '', Role: '', IsAdmin: false }
 
-//localStorage.setItem('AssetSenseUsersTypes', JSON.stringify(UserRoles))
+if (!localStorage.getItem('AssetSenseUsersTypes')) {
+    localStorage.setItem('AssetSenseUsersTypes', JSON.stringify(UserRoles))
+}
+////localStorage.setItem('AssetSenseUsersTypes', JSON.stringify(UserRolesReset)) //RESET
 
 
 

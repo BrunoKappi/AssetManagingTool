@@ -7,7 +7,7 @@ import { SetLocaisArmazenamento } from "../Config/store/actions/LocaisArmazename
 import { SetStatusAtivos } from "../Config/store/actions/AtivosStatusActions"
 import { SetTiposDeUso } from "../Config/store/actions/TiposDeUsoActions"
 import { SetAtivos } from "../Config/store/actions/AtivosActions"
-import {  SetUsuarios } from "../Config/store/actions/UsuariosActions"
+import { SetUsuarios } from "../Config/store/actions/UsuariosActions"
 
 
 export const LoginUtil = (email, password) => {
@@ -431,7 +431,7 @@ export async function EditUser(EditedUser, gerarErro = false) {
     });
 }
 
-    ////////////////////// USUARIOS  //////////////////////////
+////////////////////// USUARIOS  //////////////////////////
 
 
 
@@ -443,9 +443,22 @@ export async function EditUser(EditedUser, gerarErro = false) {
 
 
 
+/////////////////////// TEMA //////////////////
 
 
 
+export async function GetTema() {
+    if (!localStorage.getItem('AssetSenseTema'))
+        localStorage.setItem('AssetSenseTema', 'Claro')
+}
 
 
+export async function ToggleTema() {
+    const TEMA = localStorage.getItem('AssetSenseTema')
+    if (TEMA === 'Escuro')
+        localStorage.setItem('AssetSenseTema', 'Claro')
+    if (TEMA === 'Claro')
+        localStorage.setItem('AssetSenseTema', 'Escuro')
+
+}
 
