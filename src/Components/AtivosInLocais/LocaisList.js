@@ -16,7 +16,7 @@ const SectorList = (props) => {
 
   const [ListaDeItens,] = useState([...props.Ativos.filter(Ativo => Ativo.StorageLocation.Id === props.LocalArmazenamento.Id)]);
 
-  console.log(props.LocalArmazenamento.Value)
+  //console.log(props.LocalArmazenamento.Value)
 
   return (
     <div>

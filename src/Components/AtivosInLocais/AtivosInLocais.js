@@ -38,11 +38,11 @@ const AtivosInLocais = (props) => {
 
 
     const onBeforeCapture = (Re) => { 
-        //console.log("BEFORE", Re)
+        ////console.log("BEFORE", Re)
     };
 
     const HandleDrag = (Resultado) => {
-        console.log(Resultado)
+        //console.log(Resultado)
 
         if (!Resultado.destination) {           
             return;

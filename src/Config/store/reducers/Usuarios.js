@@ -11,12 +11,12 @@ const Usuarios = (state = [], action) => {
             return action.Usuarios
         case 'EDIT_USUARIO':
             return state.filter(usuario => {
-                return usuario.uid !== action.uid
+                return usuario.Id !== action.EditedUser.Id
             }).concat(action.EditedUser)
         default:
             return state
     }
 }
 
- 
+
 export default Usuarios

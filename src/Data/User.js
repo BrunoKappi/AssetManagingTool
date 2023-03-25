@@ -10,49 +10,76 @@ const Funcionario = { Id: '8c25a156-04b7-479f-874f-b16e63383cbd' }
 const TipoAdmin = { Id: '784c4def-b901-4883-b481-a4a6cf6dd070' }
 
 
+
+const DefaultCountry = {
+    currency: "BRL",
+    flag: "🇧🇷",
+    isoCode: "BR",
+    latitude: "-10.00000000",
+    longitude: "-55.00000000",
+    name: "Brazil",
+    phonecode: "55"
+}
+
+const DefaultEstate = {
+    countryCode: "BR",
+    isoCode: "RS",
+    latitude: "-30.03463160",
+    longitude: "-51.21769860",
+    name: "Rio Grande do Sul",
+}
+const DefaultCity = {
+    countryCode: "BR",
+    latitude: "-30.03283000",
+    longitude: "-51.23019000",
+    name: "Porto Alegre",
+    stateCode: "RS",
+}
+
+
 export const Users = [
-    { Id: uuid(), Phone: '5551991918181', Estate: 'RS', City: 'Porto Alegre', AccessToken: '1234', Name: 'Betina', LastName: 'Goldani', Email: 'betinagoldani@serranoautomacao.com.br', Type: { ...TipoAdmin }, Sector: { ...Admin } },
-    { Id: uuid(), Phone: '5551991918181', Estate: 'RS', City: 'Porto Alegre', AccessToken: '1234', Name: 'Bruno', LastName: 'Kappi', Email: 'brunokappi@serranoautomacao.com.br', Type: { ...TipoAdmin }, Sector: { ...Integracao } },
-    { Id: uuid(), Phone: '5551991918181', Estate: 'RS', City: 'Porto Alegre', AccessToken: '1234', Name: 'Cristiano', LastName: 'Melo', Email: 'cristianomelo@serranoautomacao.com.br', Type: { ...Funcionario }, Sector: { ...Projeto } },
-    { Id: uuid(), Phone: '5551991918181', Estate: 'RS', City: 'Porto Alegre', AccessToken: '1234', Name: 'Demétrius', LastName: 'Figueiredo', Email: 'demetriusfigueiredo@serranoautomacao.com.br', Type: { ...Funcionario }, Sector: { ...Integracao } },
-    { Id: uuid(), Phone: '5551991918181', Estate: 'RS', City: 'Porto Alegre', AccessToken: '1234', Name: 'Douglas', LastName: 'Pinheiro', Email: 'douglaspinheiro@serranoautomacao.com.br', Type: { ...Funcionario }, Sector: { ...Integracao } },
-    { Id: uuid(), Phone: '5551991918181', Estate: 'RS', City: 'Porto Alegre', AccessToken: '1234', Name: 'Ezequiel', LastName: 'Silva', Email: 'ezequielsilva@serranoautomacao.com.br', Type: { ...Funcionario }, Sector: { ...Integracao } },
-    { Id: uuid(), Phone: '5551991918181', Estate: 'RS', City: 'Porto Alegre', AccessToken: '1234', Name: 'Filipe', LastName: 'Dias', Email: 'filipedias@serranoautomacao.com.br', Type: { ...Funcionario }, Sector: { ...Integracao } },
-    { Id: uuid(), Phone: '5551991918181', Estate: 'RS', City: 'Porto Alegre', AccessToken: '1234', Name: 'Gabriel', LastName: 'Pedroso', Email: 'gabrielpedroso@serranoautomacao.com.br', Type: { ...Funcionario }, Sector: { ...Integracao } },
-    { Id: uuid(), Phone: '5551991918181', Estate: 'RS', City: 'Porto Alegre', AccessToken: '1234', Name: 'Gabrielle', LastName: 'Pintanel', Email: 'gabriellepintanel@serranoautomacao.com.br', Type: { ...Funcionario }, Sector: { ...Integracao } },
-    { Id: uuid(), Phone: '5551991918181', Estate: 'RS', City: 'Porto Alegre', AccessToken: '1234', Name: 'Henrique', LastName: 'Steigleder', Email: 'henriquesteigleder@serranoautomacao.com.br', Type: { ...Funcionario }, Sector: { ...Integracao } },
-    { Id: uuid(), Phone: '5551991918181', Estate: 'RS', City: 'Porto Alegre', AccessToken: '1234', Name: 'Júlia', LastName: 'Kist', Email: 'juliakist@serranoautomacao.com.br', Type: { ...Funcionario }, Sector: { ...Integracao } },
-    { Id: uuid(), Phone: '5551991918181', Estate: 'RS', City: 'Porto Alegre', AccessToken: '1234', Name: 'Júlia', LastName: 'Koch', Email: 'juliakoch@serranoautomacao.com.br', Type: { ...Funcionario }, Sector: { ...Integracao } },
-    { Id: uuid(), Phone: '5551991918181', Estate: 'RS', City: 'Porto Alegre', AccessToken: '1234', Name: 'Julio', LastName: 'Serrano', Email: 'julioserrano@serranoautomacao.com.br', Type: { ...TipoAdmin }, Sector: { ...Admin } },
-    { Id: uuid(), Phone: '5551991918181', Estate: 'RS', City: 'Porto Alegre', AccessToken: '1234', Name: 'Karen', LastName: 'Kist', Email: 'adm@serranoautomacao.com.br', Type: { ...TipoAdmin }, Sector: { ...RH } },
-    { Id: uuid(), Phone: '5551991918181', Estate: 'RS', City: 'Porto Alegre', AccessToken: '1234', Name: 'Lucas', LastName: 'Ferreira', Email: 'lucasferreira@serranoautomacao.com.br', Type: { ...Funcionario }, Sector: { ...Integracao } },
-    { Id: uuid(), Phone: '5551991918181', Estate: 'RS', City: 'Porto Alegre', AccessToken: '1234', Name: 'Lucas', LastName: 'Reis', Email: 'lucasreis@serranoautomacao.com.br', Type: { ...Funcionario }, Sector: { ...Integracao } },
-    { Id: uuid(), Phone: '5551991918181', Estate: 'RS', City: 'Porto Alegre', AccessToken: '1234', Name: 'Lucian', LastName: 'Silva', Email: 'luciansilva@serranoautomacao.com.br', Type: { ...Funcionario }, Sector: { ...Integracao } },
-    { Id: uuid(), Phone: '5551991918181', Estate: 'RS', City: 'Porto Alegre', AccessToken: '1234', Name: 'Luis', LastName: 'Pires', Email: 'luispires@serranoautomacao.com.br', Type: { ...Funcionario }, Sector: { ...Integracao } },
-    { Id: uuid(), Phone: '5551991918181', Estate: 'RS', City: 'Porto Alegre', AccessToken: '1234', Name: 'Luiz', LastName: 'Krug', Email: 'luizgustavokrug@serranoautomacao.com.br', Type: { ...Funcionario }, Sector: { ...Integracao } },
-    { Id: uuid(), Phone: '5551991918181', Estate: 'RS', City: 'Porto Alegre', AccessToken: '1234', Name: 'Marceli', LastName: 'Santos', Email: 'marcelisantos@serranoautomacao.com.br', Type: { ...Funcionario }, Sector: { ...Integracao } },
-    { Id: uuid(), Phone: '5551991918181', Estate: 'RS', City: 'Porto Alegre', AccessToken: '1234', Name: 'Marcelo', LastName: 'Eichenberg', Email: 'marceloeichenberg@serranoautomacao.com.br', Type: { ...TipoAdmin }, Sector: { ...Integracao } },
-    { Id: uuid(), Phone: '5551991918181', Estate: 'RS', City: 'Porto Alegre', AccessToken: '1234', Name: 'Marcelo', LastName: 'Silva', Email: 'marcelosilva@serranoautomacao.com.br', Type: { ...Funcionario }, Sector: { ...Integracao } },
-    { Id: uuid(), Phone: '5551991918181', Estate: 'RS', City: 'Porto Alegre', AccessToken: '1234', Name: 'Marcio', LastName: 'Wentz', Email: 'marciowentz@serranoautomacao.com.br', Type: { ...Funcionario }, Sector: { ...Integracao } },
-    { Id: uuid(), Phone: '5551991918181', Estate: 'RS', City: 'Porto Alegre', AccessToken: '1234', Name: 'Mariana', Email: 'marianacoronel@serranoautomacao.com.br', Type: { ...Funcionario }, Sector: { ...Integracao } },
-    { Id: uuid(), Phone: '5551991918181', Estate: 'RS', City: 'Porto Alegre', AccessToken: '1234', Name: 'Marina', LastName: 'Muller', Email: 'marinamuller@serranoautomacao.com.br', Type: { ...Funcionario }, Sector: { ...Integracao } },
-    { Id: uuid(), Phone: '5551991918181', Estate: 'RS', City: 'Porto Alegre', AccessToken: '1234', Name: 'Matheus', LastName: 'Brum', Email: 'matheusbrum@serranoautomacao.com.br', Type: { ...Funcionario }, Sector: { ...Projeto } },
-    { Id: uuid(), Phone: '5551991918181', Estate: 'RS', City: 'Porto Alegre', AccessToken: '1234', Name: 'Matheus', LastName: 'Pedroso', Email: 'matheuspedroso@serranoautomacao.com.br', Type: { ...Funcionario }, Sector: { ...Projeto } },
-    { Id: uuid(), Phone: '5551991918181', Estate: 'RS', City: 'Porto Alegre', AccessToken: '1234', Name: 'Michel', LastName: 'Fagundes', Email: 'michelfagundes@serranoautomacao.com.br', Type: { ...Funcionario }, Sector: { ...Projeto } },
-    { Id: uuid(), Phone: '5551991918181', Estate: 'RS', City: 'Porto Alegre', AccessToken: '1234', Name: 'Moisés', LastName: 'Beck', Email: 'moisesbeck@serranoautomacao.com.br', Type: { ...Funcionario }, Sector: { ...Integracao } },
-    { Id: uuid(), Phone: '5551991918181', Estate: 'RS', City: 'Porto Alegre', AccessToken: '1234', Name: 'Nathan', LastName: 'Lopes', Email: 'nathanlopes@serranoautomacao.com.br', Type: { ...Funcionario }, Sector: { ...Projeto } },
-    { Id: uuid(), Phone: '5551991918181', Estate: 'RS', City: 'Porto Alegre', AccessToken: '1234', Name: 'Octávio', LastName: 'Brandão', Email: 'octaviobrandao@serranoautomacao.com.br', Type: { ...Funcionario }, Sector: { ...Integracao } },
-    { Id: uuid(), Phone: '5551991918181', Estate: 'RS', City: 'Porto Alegre', AccessToken: '1234', Name: 'Patrick', LastName: 'Souza', Email: 'patricksouza@serranoautomacao.com.br', Type: { ...Funcionario }, Sector: { ...Integracao } },
-    { Id: uuid(), Phone: '5551991918181', Estate: 'RS', City: 'Porto Alegre', AccessToken: '1234', Name: 'Sergio', LastName: 'Dutra', Email: 'sergiodutra@serranoautomacao.com.br', Type: { ...TipoAdmin }, Sector: { ...Projeto } },
-    { Id: uuid(), Phone: '5551991918181', Estate: 'RS', City: 'Porto Alegre', AccessToken: '1234', Name: 'Silvia', LastName: 'Scheid', Email: 'silviascheid@serranoautomacao.com.br', Type: { ...Funcionario }, Sector: { ...Integracao } },
-    { Id: uuid(), Phone: '5551991918181', Estate: 'RS', City: 'Porto Alegre', AccessToken: '1234', Name: 'Susana', LastName: 'Santana', Email: 'susanasantana@serranoautomacao.com.br', Type: { ...Funcionario }, Sector: { ...Integracao } },
-    { Id: uuid(), Phone: '5551991918181', Estate: 'RS', City: 'Porto Alegre', AccessToken: '1234', Name: 'Tales', LastName: 'Calliero', Email: 'talescalliero@serranoautomacao.com.br', Type: { ...TipoAdmin }, Sector: { ...Integracao } },
-    { Id: uuid(), Phone: '5551991918181', Estate: 'RS', City: 'Porto Alegre', AccessToken: '1234', Name: 'Tiago', LastName: 'Silva', Email: 'tiagosilva@serranoautomacao.com.br', Type: { ...Funcionario }, Sector: { ...Integracao } },
-    { Id: uuid(), Phone: '5551991918181', Estate: 'RS', City: 'Porto Alegre', AccessToken: '1234', Name: 'Valéria', LastName: 'Rex', Email: 'valeriarex@serranoautomacao.com.br', Type: { ...Funcionario }, Sector: { ...Integracao } },
-    { Id: uuid(), Phone: '5551991918181', Estate: 'RS', City: 'Porto Alegre', AccessToken: '1234', Name: 'Vera', LastName: 'Lucia Santos', Email: 'verasantos@serranoautomacao.com.br', Type: { ...Funcionario }, Sector: { ...Integracao } },
+    { Id: uuid(), Phone: '5551991918181', Country: { ...DefaultCountry }, Estate: { ...DefaultEstate }, City: { ...DefaultCity }, AccessToken: '1234', Name: 'Betina', LastName: 'Goldani', Email: 'betinagoldani@serranoautomacao.com.br', Type: { ...TipoAdmin }, Sector: { ...Admin } },
+    { Id: uuid(), Phone: '5551991918181', Country: { ...DefaultCountry }, Estate: { ...DefaultEstate }, City: { ...DefaultCity }, AccessToken: '1234', Name: 'Bruno', LastName: 'Kappi', Email: 'brunokappi@serranoautomacao.com.br', Type: { ...TipoAdmin }, Sector: { ...Integracao } },
+    { Id: uuid(), Phone: '5551991918181', Country: { ...DefaultCountry }, Estate: { ...DefaultEstate }, City: { ...DefaultCity }, AccessToken: '1234', Name: 'Cristiano', LastName: 'Melo', Email: 'cristianomelo@serranoautomacao.com.br', Type: { ...Funcionario }, Sector: { ...Projeto } },
+    { Id: uuid(), Phone: '5551991918181', Country: { ...DefaultCountry }, Estate: { ...DefaultEstate }, City: { ...DefaultCity }, AccessToken: '1234', Name: 'Demétrius', LastName: 'Figueiredo', Email: 'demetriusfigueiredo@serranoautomacao.com.br', Type: { ...Funcionario }, Sector: { ...Integracao } },
+    { Id: uuid(), Phone: '5551991918181', Country: { ...DefaultCountry }, Estate: { ...DefaultEstate }, City: { ...DefaultCity }, AccessToken: '1234', Name: 'Douglas', LastName: 'Pinheiro', Email: 'douglaspinheiro@serranoautomacao.com.br', Type: { ...Funcionario }, Sector: { ...Integracao } },
+    { Id: uuid(), Phone: '5551991918181', Country: { ...DefaultCountry }, Estate: { ...DefaultEstate }, City: { ...DefaultCity }, AccessToken: '1234', Name: 'Ezequiel', LastName: 'Silva', Email: 'ezequielsilva@serranoautomacao.com.br', Type: { ...Funcionario }, Sector: { ...Integracao } },
+    { Id: uuid(), Phone: '5551991918181', Country: { ...DefaultCountry }, Estate: { ...DefaultEstate }, City: { ...DefaultCity }, AccessToken: '1234', Name: 'Filipe', LastName: 'Dias', Email: 'filipedias@serranoautomacao.com.br', Type: { ...Funcionario }, Sector: { ...Integracao } },
+    { Id: uuid(), Phone: '5551991918181', Country: { ...DefaultCountry }, Estate: { ...DefaultEstate }, City: { ...DefaultCity }, AccessToken: '1234', Name: 'Gabriel', LastName: 'Pedroso', Email: 'gabrielpedroso@serranoautomacao.com.br', Type: { ...Funcionario }, Sector: { ...Integracao } },
+    { Id: uuid(), Phone: '5551991918181', Country: { ...DefaultCountry }, Estate: { ...DefaultEstate }, City: { ...DefaultCity }, AccessToken: '1234', Name: 'Gabrielle', LastName: 'Pintanel', Email: 'gabriellepintanel@serranoautomacao.com.br', Type: { ...Funcionario }, Sector: { ...Integracao } },
+    { Id: uuid(), Phone: '5551991918181', Country: { ...DefaultCountry }, Estate: { ...DefaultEstate }, City: { ...DefaultCity }, AccessToken: '1234', Name: 'Henrique', LastName: 'Steigleder', Email: 'henriquesteigleder@serranoautomacao.com.br', Type: { ...Funcionario }, Sector: { ...Integracao } },
+    { Id: uuid(), Phone: '5551991918181', Country: { ...DefaultCountry }, Estate: { ...DefaultEstate }, City: { ...DefaultCity }, AccessToken: '1234', Name: 'Júlia', LastName: 'Kist', Email: 'juliakist@serranoautomacao.com.br', Type: { ...Funcionario }, Sector: { ...Integracao } },
+    { Id: uuid(), Phone: '5551991918181', Country: { ...DefaultCountry }, Estate: { ...DefaultEstate }, City: { ...DefaultCity }, AccessToken: '1234', Name: 'Júlia', LastName: 'Koch', Email: 'juliakoch@serranoautomacao.com.br', Type: { ...Funcionario }, Sector: { ...Integracao } },
+    { Id: uuid(), Phone: '5551991918181', Country: { ...DefaultCountry }, Estate: { ...DefaultEstate }, City: { ...DefaultCity }, AccessToken: '1234', Name: 'Julio', LastName: 'Serrano', Email: 'julioserrano@serranoautomacao.com.br', Type: { ...TipoAdmin }, Sector: { ...Admin } },
+    { Id: uuid(), Phone: '5551991918181', Country: { ...DefaultCountry }, Estate: { ...DefaultEstate }, City: { ...DefaultCity }, AccessToken: '1234', Name: 'Karen', LastName: 'Kist', Email: 'adm@serranoautomacao.com.br', Type: { ...TipoAdmin }, Sector: { ...RH } },
+    { Id: uuid(), Phone: '5551991918181', Country: { ...DefaultCountry }, Estate: { ...DefaultEstate }, City: { ...DefaultCity }, AccessToken: '1234', Name: 'Lucas', LastName: 'Ferreira', Email: 'lucasferreira@serranoautomacao.com.br', Type: { ...Funcionario }, Sector: { ...Integracao } },
+    { Id: uuid(), Phone: '5551991918181', Country: { ...DefaultCountry }, Estate: { ...DefaultEstate }, City: { ...DefaultCity }, AccessToken: '1234', Name: 'Lucas', LastName: 'Reis', Email: 'lucasreis@serranoautomacao.com.br', Type: { ...Funcionario }, Sector: { ...Integracao } },
+    { Id: uuid(), Phone: '5551991918181', Country: { ...DefaultCountry }, Estate: { ...DefaultEstate }, City: { ...DefaultCity }, AccessToken: '1234', Name: 'Lucian', LastName: 'Silva', Email: 'luciansilva@serranoautomacao.com.br', Type: { ...Funcionario }, Sector: { ...Integracao } },
+    { Id: uuid(), Phone: '5551991918181', Country: { ...DefaultCountry }, Estate: { ...DefaultEstate }, City: { ...DefaultCity }, AccessToken: '1234', Name: 'Luis', LastName: 'Pires', Email: 'luispires@serranoautomacao.com.br', Type: { ...Funcionario }, Sector: { ...Integracao } },
+    { Id: uuid(), Phone: '5551991918181', Country: { ...DefaultCountry }, Estate: { ...DefaultEstate }, City: { ...DefaultCity }, AccessToken: '1234', Name: 'Luiz', LastName: 'Krug', Email: 'luizgustavokrug@serranoautomacao.com.br', Type: { ...Funcionario }, Sector: { ...Integracao } },
+    { Id: uuid(), Phone: '5551991918181', Country: { ...DefaultCountry }, Estate: { ...DefaultEstate }, City: { ...DefaultCity }, AccessToken: '1234', Name: 'Marceli', LastName: 'Santos', Email: 'marcelisantos@serranoautomacao.com.br', Type: { ...Funcionario }, Sector: { ...Integracao } },
+    { Id: uuid(), Phone: '5551991918181', Country: { ...DefaultCountry }, Estate: { ...DefaultEstate }, City: { ...DefaultCity }, AccessToken: '1234', Name: 'Marcelo', LastName: 'Eichenberg', Email: 'marceloeichenberg@serranoautomacao.com.br', Type: { ...TipoAdmin }, Sector: { ...Integracao } },
+    { Id: uuid(), Phone: '5551991918181', Country: { ...DefaultCountry }, Estate: { ...DefaultEstate }, City: { ...DefaultCity }, AccessToken: '1234', Name: 'Marcelo', LastName: 'Silva', Email: 'marcelosilva@serranoautomacao.com.br', Type: { ...Funcionario }, Sector: { ...Integracao } },
+    { Id: uuid(), Phone: '5551991918181', Country: { ...DefaultCountry }, Estate: { ...DefaultEstate }, City: { ...DefaultCity }, AccessToken: '1234', Name: 'Marcio', LastName: 'Wentz', Email: 'marciowentz@serranoautomacao.com.br', Type: { ...Funcionario }, Sector: { ...Integracao } },
+    { Id: uuid(), Phone: '5551991918181', Country: { ...DefaultCountry }, Estate: { ...DefaultEstate }, City: { ...DefaultCity }, AccessToken: '1234', Name: 'Mariana', Email: 'marianacoronel@serranoautomacao.com.br', Type: { ...Funcionario }, Sector: { ...Integracao } },
+    { Id: uuid(), Phone: '5551991918181', Country: { ...DefaultCountry }, Estate: { ...DefaultEstate }, City: { ...DefaultCity }, AccessToken: '1234', Name: 'Marina', LastName: 'Muller', Email: 'marinamuller@serranoautomacao.com.br', Type: { ...Funcionario }, Sector: { ...Integracao } },
+    { Id: uuid(), Phone: '5551991918181', Country: { ...DefaultCountry }, Estate: { ...DefaultEstate }, City: { ...DefaultCity }, AccessToken: '1234', Name: 'Matheus', LastName: 'Brum', Email: 'matheusbrum@serranoautomacao.com.br', Type: { ...Funcionario }, Sector: { ...Projeto } },
+    { Id: uuid(), Phone: '5551991918181', Country: { ...DefaultCountry }, Estate: { ...DefaultEstate }, City: { ...DefaultCity }, AccessToken: '1234', Name: 'Matheus', LastName: 'Pedroso', Email: 'matheuspedroso@serranoautomacao.com.br', Type: { ...Funcionario }, Sector: { ...Projeto } },
+    { Id: uuid(), Phone: '5551991918181', Country: { ...DefaultCountry }, Estate: { ...DefaultEstate }, City: { ...DefaultCity }, AccessToken: '1234', Name: 'Michel', LastName: 'Fagundes', Email: 'michelfagundes@serranoautomacao.com.br', Type: { ...Funcionario }, Sector: { ...Projeto } },
+    { Id: uuid(), Phone: '5551991918181', Country: { ...DefaultCountry }, Estate: { ...DefaultEstate }, City: { ...DefaultCity }, AccessToken: '1234', Name: 'Moisés', LastName: 'Beck', Email: 'moisesbeck@serranoautomacao.com.br', Type: { ...Funcionario }, Sector: { ...Integracao } },
+    { Id: uuid(), Phone: '5551991918181', Country: { ...DefaultCountry }, Estate: { ...DefaultEstate }, City: { ...DefaultCity }, AccessToken: '1234', Name: 'Nathan', LastName: 'Lopes', Email: 'nathanlopes@serranoautomacao.com.br', Type: { ...Funcionario }, Sector: { ...Projeto } },
+    { Id: uuid(), Phone: '5551991918181', Country: { ...DefaultCountry }, Estate: { ...DefaultEstate }, City: { ...DefaultCity }, AccessToken: '1234', Name: 'Octávio', LastName: 'Brandão', Email: 'octaviobrandao@serranoautomacao.com.br', Type: { ...Funcionario }, Sector: { ...Integracao } },
+    { Id: uuid(), Phone: '5551991918181', Country: { ...DefaultCountry }, Estate: { ...DefaultEstate }, City: { ...DefaultCity }, AccessToken: '1234', Name: 'Patrick', LastName: 'Souza', Email: 'patricksouza@serranoautomacao.com.br', Type: { ...Funcionario }, Sector: { ...Integracao } },
+    { Id: uuid(), Phone: '5551991918181', Country: { ...DefaultCountry }, Estate: { ...DefaultEstate }, City: { ...DefaultCity }, AccessToken: '1234', Name: 'Sergio', LastName: 'Dutra', Email: 'sergiodutra@serranoautomacao.com.br', Type: { ...TipoAdmin }, Sector: { ...Projeto } },
+    { Id: uuid(), Phone: '5551991918181', Country: { ...DefaultCountry }, Estate: { ...DefaultEstate }, City: { ...DefaultCity }, AccessToken: '1234', Name: 'Silvia', LastName: 'Scheid', Email: 'silviascheid@serranoautomacao.com.br', Type: { ...Funcionario }, Sector: { ...Integracao } },
+    { Id: uuid(), Phone: '5551991918181', Country: { ...DefaultCountry }, Estate: { ...DefaultEstate }, City: { ...DefaultCity }, AccessToken: '1234', Name: 'Susana', LastName: 'Santana', Email: 'susanasantana@serranoautomacao.com.br', Type: { ...Funcionario }, Sector: { ...Integracao } },
+    { Id: uuid(), Phone: '5551991918181', Country: { ...DefaultCountry }, Estate: { ...DefaultEstate }, City: { ...DefaultCity }, AccessToken: '1234', Name: 'Tales', LastName: 'Calliero', Email: 'talescalliero@serranoautomacao.com.br', Type: { ...TipoAdmin }, Sector: { ...Integracao } },
+    { Id: uuid(), Phone: '5551991918181', Country: { ...DefaultCountry }, Estate: { ...DefaultEstate }, City: { ...DefaultCity }, AccessToken: '1234', Name: 'Tiago', LastName: 'Silva', Email: 'tiagosilva@serranoautomacao.com.br', Type: { ...Funcionario }, Sector: { ...Integracao } },
+    { Id: uuid(), Phone: '5551991918181', Country: { ...DefaultCountry }, Estate: { ...DefaultEstate }, City: { ...DefaultCity }, AccessToken: '1234', Name: 'Valéria', LastName: 'Rex', Email: 'valeriarex@serranoautomacao.com.br', Type: { ...Funcionario }, Sector: { ...Integracao } },
+    { Id: uuid(), Phone: '5551991918181', Country: { ...DefaultCountry }, Estate: { ...DefaultEstate }, City: { ...DefaultCity }, AccessToken: '1234', Name: 'Vera', LastName: 'Lucia Santos', Email: 'verasantos@serranoautomacao.com.br', Type: { ...Funcionario }, Sector: { ...Integracao } },
 ]
 
-//localStorage.setItem('AssetSenseUsers', JSON.stringify(Users)) 
+//localStorage.setItem('AssetSenseUsers', JSON.stringify(Users))
 
 export const UserRoles = [
     { Id: '8c25a156-04b7-479f-874f-b16e63383cbd', Value: 'Funcionário', IsAdmin: false },
@@ -77,16 +104,18 @@ export const DefaultUser =
 {
     Id: uuid(),
     Phone: '',
-    Estate: '',
-    City: '',
+    Estate: { name: '' },
+    City: { name: '' },
+    Country: { name: '' },
     AccessToken: '',
     Name: '',
     LastName: '',
     Email: '',
     Type: {
-        Id :'' 
+        Id: ''
     },
     Sector: {
-        Id :''
-    }
+        Id: ''
+    },
+
 }

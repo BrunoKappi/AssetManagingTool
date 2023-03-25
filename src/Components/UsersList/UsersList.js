@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import './UsersList.css'
-import { UserModal } from './User/UserModal'
+import UserModal from './User/UserModal'
 import Loading from '../LoadingForTabs/Loading';
 import User from './User/User';
 import { connect } from 'react-redux'
@@ -27,7 +27,7 @@ const UsersList = (props) => {
 
     const [modalShow, setModalShow] = useState(false);
 
-
+    const [CurrentUser,] = useState({ ...props.Usuarios.find(user => user.Email === props.LoggedUser.Email) })
 
 
     useEffect(() => {
@@ -43,8 +43,9 @@ const UsersList = (props) => {
 
     useEffect(() => {
         GetUsers().then((Lista) => {
-            setListaDeUsuarios(Lista)
+            setListaDeUsuarios(Lista.sort((a, b) => a.Name.localeCompare(b.Name)))
             setLoaded(true)
+            //console.log(Lista)
         }).catch(Erro => {
             console.error(Erro)
             setLoaded(true)
@@ -59,7 +60,7 @@ const UsersList = (props) => {
                 const SetorFilter = FiltroSetor === 'Todos' || FiltroSetor === '' || Usuario.Sector.Id === FiltroSetor
                 const TipoFilter = FiltroTipo === 'Todos' || FiltroTipo === '' || Usuario.Type.Id === FiltroTipo
                 return TextFilter && SetorFilter && TipoFilter
-            }))
+            }).sort((a, b) => a.Name.localeCompare(b.Name)))
         }).catch(Erro => {
             console.error(Erro)
             setLoaded(true)
@@ -86,7 +87,7 @@ const UsersList = (props) => {
 
 
     const handleUserClick = (UserClicked) => {
-        console.log("CLICKsa")
+        //console.log("CLICKsa")
         setModalShow(true);
         setSelectedUser({ ...UserClicked });
     }
@@ -94,7 +95,7 @@ const UsersList = (props) => {
     return (
         <div className='UsersListContainer'>
 
-            <UserModal User={SelectedUser} show={modalShow} onHide={() => setModalShow(false)} />
+            <UserModal Users={ListaDeUsuarios} CurrentUser={CurrentUser} User={SelectedUser} show={modalShow} onHide={() => setModalShow(false)} />
 
             <div className='UsersLisFormFilter'>
                 <input value={FiltroDeTexto} placeholder='Procurar Usuário...' onChange={e => setFiltroDeTexto(e.target.value)}></input>
@@ -181,6 +182,7 @@ const UsersList = (props) => {
 
 const ConnectedUsersList = connect((state) => {
     return {
+        LoggedUser: state.LoggedUser,
         Usuarios: state.Usuarios
     }
 })(UsersList)

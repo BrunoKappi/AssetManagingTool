@@ -1,6 +1,6 @@
 import Modal from 'react-bootstrap/Modal';
 import React, { useState, useEffect } from 'react'
-import './UserModal.css'
+import './ProfilePage.css'
 import UserPhoto from '../../../Images/SerranoLogoFuncoBranco.jpg'
 import { UilUserCircle, UilClipboardNotes, UilEnvelope, UilPhone, UilMap, UilMapMarker, UilPen, UilPuzzlePiece, UilListUl, UilSave, UilHistory, UilTimes, UilBuilding } from '@iconscout/react-unicons'
 import { EditUser, GetSetores, GetUserTipos } from '../../../Functions/Middleware'
@@ -14,7 +14,7 @@ import 'react-phone-input-2/lib/style.css'
 import { Country, State, City } from "country-state-city";
 import Select from "react-select";
 
-const UserModal = (props) => {
+const ProfilePage = (props) => {
 
     /////////// PAIS ESTADO CIDADE //////////   
 
@@ -23,7 +23,7 @@ const UserModal = (props) => {
     };
 
 
-    const UserModalSelectcustomStyles = {
+    const ProfilePageSelectcustomStyles = {
 
         option: (provided, state) => ({
             ...provided,
@@ -236,51 +236,52 @@ const UserModal = (props) => {
 
             <Modal.Body closeButton>
 
-                <div className='UserModal'>
-                    <div className='UserModalHeader'>
-                        <div className='UserModalHeader-Left'>
-                            <div className='UserModalHeader-Left-Photo'>
+                <div className='ProfilePage'>
+                    <div className='ProfilePageHeader'>
+                        <div className='ProfilePageHeader-Left'>
+                            <div className='ProfilePageHeader-Left-Photo'>
                                 <img src={UserPhoto} alt="User" />
                             </div>
                         </div>
-                        <div className='UserModalHeader-Right'>
-                            <div className='UserModalHeader-Right-Name'>
+                        <div className='ProfilePageHeader-Right'>
+                            <div className='ProfilePageHeader-Right-Name'>
                                 {User.Name + ' ' + User.LastName}
-                                <UilTimes className='UserModalHeader-Right-Close' onClick={props.onHide} />
+                                <UilTimes className='ProfilePageHeader-Right-Close' onClick={props.onHide} />
                             </div>
-                            <div className='UserModalHeader-Right-Setor'>
+                            <div className='ProfilePageHeader-Right-Setor'>
                                 {UserSetor.Value}
                             </div>
-                            <div className='UserModalHeader-Right-Tipo'>
+                            <div className='ProfilePageHeader-Right-Tipo'>
                                 {UserType.Value}
                             </div>
                         </div>
 
                     </div>
-                    <div className='UserModalBody'>
-                        <div className='UserModalBody-Sidebar'>
-                            <div className={Tab === 'UserInfo' ? 'UserModalBody-Sidebar-ActiveItem' : 'UserModalBody-Sidebar-Item'} onClick={e => setTab('UserInfo')}>
+                    <div className='ProfilePageBody'>
+                        <div className='ProfilePageBody-Sidebar'>
+                            <div className={Tab === 'UserInfo' ? 'ProfilePageBody-Sidebar-ActiveItem' : 'ProfilePageBody-Sidebar-Item'} onClick={e => setTab('UserInfo')}>
                                 <UilUserCircle />
                                 Informações Pessoais
                             </div>
-                            <div className={Tab === 'Ativos' ? 'UserModalBody-Sidebar-ActiveItem' : 'UserModalBody-Sidebar-Item'} onClick={e => setTab('Ativos')}>
+                            <div className={Tab === 'Ativos' ? 'ProfilePageBody-Sidebar-ActiveItem' : 'ProfilePageBody-Sidebar-Item'} onClick={e => setTab('Ativos')}>
                                 <UilClipboardNotes />
                                 Ativos
                             </div>
-                            <div className={Tab === 'Atividade' ? 'UserModalBody-Sidebar-ActiveItem' : 'UserModalBody-Sidebar-Item'} onClick={e => setTab('Atividade')}>
+                            <div className={Tab === 'Atividade' ? 'ProfilePageBody-Sidebar-ActiveItem' : 'ProfilePageBody-Sidebar-Item'} onClick={e => setTab('Atividade')}>
                                 <UilHistory />
                                 Atividade
                             </div>
                         </div>
-                        <div className='UserModalBody-UserInfo'>
-                            {Tab === 'UserInfo' && <div className='UserModalBody-UserInfoForm'>
+                        <div className='ProfilePageBody-UserInfo'>
+                            {Tab === 'UserInfo' && <div className='ProfilePageBody-UserInfoForm'>
                                 <form onSubmit={SaveEdit}>
 
-                                    <h4 className='UserModalBody-UserInfoForm-SectionTitle'>Dados Cadastrais</h4>
+                                    <h4 className='ProfilePageBody-UserInfoForm-SectionTitle'>Dados Cadastrais</h4>
 
                                    
-                                    <div className='UserModalBody-UserInfoForm-OneLine'>
-                                        <div className='UserModalBody-UserInfoForm-Group'>
+
+                                    <div className='ProfilePageBody-UserInfoForm-OneLine'>
+                                        <div className='ProfilePageBody-UserInfoForm-Group'>
                                             <span>
                                                 <UilEnvelope />
                                                 Email
@@ -290,15 +291,15 @@ const UserModal = (props) => {
                                     </div>
 
 
-                                    <div className='UserModalBody-UserInfoForm-TwoLine'>
-                                        <div className='UserModalBody-UserInfoForm-Group'>
+                                    <div className='ProfilePageBody-UserInfoForm-TwoLine'>
+                                        <div className='ProfilePageBody-UserInfoForm-Group'>
                                             <span>
                                                 <UilPen />
                                                 Nome
                                             </span>
                                             <input disabled={!CanEdit} value={CopyUserName} type="text" onChange={e => HandleChangeInfo('Name', e.target.value)} />
                                         </div>
-                                        <div className='UserModalBody-UserInfoForm-Group'>
+                                        <div className='ProfilePageBody-UserInfoForm-Group'>
                                             <span>
                                                 <UilPen />
                                                 Sobrenome
@@ -309,17 +310,17 @@ const UserModal = (props) => {
 
 
 
-                                    <div className='UserModalBody-UserInfoForm-OneLine'>
-                                        <div className='UserModalBody-UserInfoForm-Group'>
+                                    <div className='ProfilePageBody-UserInfoForm-OneLine'>
+                                        <div className='ProfilePageBody-UserInfoForm-Group'>
                                             <span>
                                                 <UilPhone />
                                                 Telefone
                                             </span>
                                             <PhoneInput
-                                                containerClass="UserModalBody-UserInfoForm-PhoneInput-Container"
-                                                inputClass="UserModalBody-UserInfoForm-PhoneInput"
-                                                buttonClass="UserModalBody-UserInfoForm-PhoneInput-Button"
-                                                dropdownClass="UserModalBody-UserInfoForm-PhoneInput-Dropdown"
+                                                containerClass="ProfilePageBody-UserInfoForm-PhoneInput-Container"
+                                                inputClass="ProfilePageBody-UserInfoForm-PhoneInput"
+                                                buttonClass="ProfilePageBody-UserInfoForm-PhoneInput-Button"
+                                                dropdownClass="ProfilePageBody-UserInfoForm-PhoneInput-Dropdown"
                                                 containerStyle={{ margin: '0', padding: '0', width: '100%', fontSize: '12px' }}
                                                 country={'br'}
                                                 value={CopyUserPhone}
@@ -333,20 +334,20 @@ const UserModal = (props) => {
 
 
 
-                                    <div className='UserModalBody-UserInfoForm-TwoLine'>
-                                        <div className='UserModalBody-UserInfoForm-Group'>
+                                    <div className='ProfilePageBody-UserInfoForm-TwoLine'>
+                                        <div className='ProfilePageBody-UserInfoForm-Group'>
                                             <span>
                                                 <UilMap />
                                                 País
                                             </span>
                                             <Select
-                                                className='UserModalBody-UserInfoForm-LocationSelect'
+                                                className='ProfilePageBody-UserInfoForm-LocationSelect'
                                                 placeholder="Selecione o País"
                                                 noOptionsMessage={noOptionsMessage}
                                                 options={Country.getAllCountries()}
                                                 getOptionLabel={(options) => { return options["name"]; }}
                                                 getOptionValue={(options) => { return options["name"]; }}
-                                                styles={UserModalSelectcustomStyles}
+                                                styles={ProfilePageSelectcustomStyles}
                                                 value={CopyUserCountry}
                                                 isDisabled={!CanEdit}
                                                 onChange={(item) => {
@@ -356,19 +357,19 @@ const UserModal = (props) => {
                                                 }}
                                             />
                                         </div>
-                                        <div className='UserModalBody-UserInfoForm-Group'>
+                                        <div className='ProfilePageBody-UserInfoForm-Group'>
                                             <span>
                                                 <UilMapMarker />
                                                 Estado
                                             </span>
                                             <Select
-                                                className='UserModalBody-UserInfoForm-LocationSelect'
+                                                className='ProfilePageBody-UserInfoForm-LocationSelect'
                                                 placeholder="Selecione o Estado"
                                                 noOptionsMessage={noOptionsMessage}
                                                 options={State?.getStatesOfCountry(CopyUserCountry?.isoCode)}
                                                 getOptionLabel={(options) => { return options["name"]; }}
                                                 getOptionValue={(options) => { return options["name"]; }}
-                                                styles={UserModalSelectcustomStyles}
+                                                styles={ProfilePageSelectcustomStyles}
                                                 isDisabled={!CanEdit}
                                                 value={CopyUserEstate}
                                                 onChange={(item) => {
@@ -380,14 +381,14 @@ const UserModal = (props) => {
                                     </div>
 
 
-                                    <div className='UserModalBody-UserInfoForm-OneLine'>
-                                        <div className='UserModalBody-UserInfoForm-Group'>
+                                    <div className='ProfilePageBody-UserInfoForm-OneLine'>
+                                        <div className='ProfilePageBody-UserInfoForm-Group'>
                                             <span>
                                                 <UilBuilding />
                                                 Cidade
                                             </span>
                                             <Select
-                                                className='UserModalBody-UserInfoForm-LocationSelect'
+                                                className='ProfilePageBody-UserInfoForm-LocationSelect'
                                                 placeholder="Selecione a Cidade"
                                                 noOptionsMessage={noOptionsMessage}
                                                 options={City.getCitiesOfState(
@@ -396,7 +397,7 @@ const UserModal = (props) => {
                                                 )}
                                                 getOptionLabel={(options) => { return options["name"]; }}
                                                 getOptionValue={(options) => { return options["name"]; }}
-                                                styles={UserModalSelectcustomStyles}
+                                                styles={ProfilePageSelectcustomStyles}
                                                 isDisabled={!CanEdit}
                                                 value={CopyUserCity}
                                                 onChange={(item) => {
@@ -418,19 +419,19 @@ const UserModal = (props) => {
 
 
 
-                                    <h4 className='UserModalBody-UserInfoForm-SectionTitle'>Na Empresa</h4>
+                                    <h4 className='ProfilePageBody-UserInfoForm-SectionTitle'>Na Empresa</h4>
 
-                                    <div className='UserModalBody-UserInfoForm-TwoLine'>
-                                        <div className='UserModalBody-UserInfoForm-Group'>
+                                    <div className='ProfilePageBody-UserInfoForm-TwoLine'>
+                                        <div className='ProfilePageBody-UserInfoForm-Group'>
 
-                                            <div className='UserModalBody-UserInfoForm-SetorList'>
-                                                <div className='UserModalBody-UserInfoForm-SetorList-Title'>
+                                            <div className='ProfilePageBody-UserInfoForm-SetorList'>
+                                                <div className='ProfilePageBody-UserInfoForm-SetorList-Title'>
                                                     <UilPuzzlePiece />
                                                     Setor
                                                 </div>
-                                                <div className='UserModalBody-UserInfoForm-SetorList-Itens'>
+                                                <div className='ProfilePageBody-UserInfoForm-SetorList-Itens'>
                                                     {Setores.map(Setor => {
-                                                        return <div className={'UserModalBody-UserInfoForm-SetorList-Item'} onClick={e => HandleChangeInfo('Sector', Setor.Id)}>
+                                                        return <div className={'ProfilePageBody-UserInfoForm-SetorList-Item'} onClick={e => HandleChangeInfo('Sector', Setor.Id)}>
                                                             {CopyUserSector.Id === Setor.Id ? <ImCheckboxChecked /> : <ImCheckboxUnchecked />}
                                                             {Setor.Value}
                                                         </div>
@@ -440,15 +441,15 @@ const UserModal = (props) => {
 
                                         </div>
 
-                                        <div className='UserModalBody-UserInfoForm-Group'>
-                                            <div className='UserModalBody-UserInfoForm-TiposUserList'>
-                                                <div className='UserModalBody-UserInfoForm-TiposUserList-Title'>
+                                        <div className='ProfilePageBody-UserInfoForm-Group'>
+                                            <div className='ProfilePageBody-UserInfoForm-TiposUserList'>
+                                                <div className='ProfilePageBody-UserInfoForm-TiposUserList-Title'>
                                                     <UilListUl />
                                                     Tipos de Usuario
                                                 </div>
-                                                <div className='UserModalBody-UserInfoForm-TiposUserList-Itens'>
+                                                <div className='ProfilePageBody-UserInfoForm-TiposUserList-Itens'>
                                                     {TiposUsuarios.map(TipoUser => {
-                                                        return <div className={'UserModalBody-UserInfoForm-TiposUserList-Item'} onClick={e => HandleChangeInfo('Type', TipoUser.Id)}>
+                                                        return <div className={'ProfilePageBody-UserInfoForm-TiposUserList-Item'} onClick={e => HandleChangeInfo('Type', TipoUser.Id)}>
                                                             {CopyUserType.Id === TipoUser.Id ? <ImCheckboxChecked /> : <ImCheckboxUnchecked />}
                                                             {TipoUser.Value}
                                                         </div>
@@ -458,7 +459,7 @@ const UserModal = (props) => {
                                         </div>
                                     </div>
                                 </form>
-                                <div className='UserModalBody-UserInfoForm-Button'>
+                                <div className='ProfilePageBody-UserInfoForm-Button'>
                                     {IsEdited &&
                                         <>
                                             <button onClick={CancelEditions}>
@@ -487,10 +488,10 @@ const UserModal = (props) => {
 
 
 
-const ConnectedUserModal = connect((state) => {
+const ConnectedProfilePage = connect((state) => {
     return {
         LoggedUser: state.LoggedUser
     }
-})(UserModal)
+})(ProfilePage)
 
-export default ConnectedUserModal
+export default ConnectedProfilePage

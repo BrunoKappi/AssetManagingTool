@@ -35,6 +35,8 @@
     border-top-right-radius: 1rem;
     border-bottom-right-radius: 1rem;
     border-radius: 1REM;
+    background-color: var(--PrimaryBackGroundFaded2);
+    border: 1px solid var(--PrimaryBackGroundFaded2);
 }
 
 .SidebarItem:hover {

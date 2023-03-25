@@ -41,7 +41,7 @@ const AtivosInTypes = (props) => {
 
 
     const HandleDrag = (Resultado) => {
-        console.log(Resultado)
+        //console.log(Resultado)
         if (!Resultado.destination) return;
 
         const TypeDestinationID = Resultado.destination.droppableId.split("/")[0];

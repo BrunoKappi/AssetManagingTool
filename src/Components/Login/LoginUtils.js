@@ -27,7 +27,7 @@ export const LoginSuccess = (message) => {
 
 
 export const HandleFirebaseEmailPasswordLogin = (ErrorMessage) => {
-    console.log(ErrorMessage)
+    //console.log(ErrorMessage)
     if (ErrorMessage.includes("found"))
         return 'Usuário não encontrado'
     else if (ErrorMessage.includes("wrong"))

@@ -114,7 +114,7 @@ export const getNotas = async (email) => {
   const q = query(notasCollectionRef, where("email", "==", email));
   const querySnapshot = await getDocs(q);
   const dados2 = querySnapshot.docs.map((doc) => ({ ...DefaultNota, ...doc.data(), docID: doc.id }));
-  ////console.log("DADOS", dados2)
+  //////console.log("DADOS", dados2)
   SetNotas(dados2)
   return dados2
 

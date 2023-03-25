@@ -7,7 +7,7 @@ export default function User(props) {
 
 
     const [UserType, setUserType] = useState({})
-    const [UserSetor, setUserSetor] = useState({})   
+    const [UserSetor, setUserSetor] = useState({})
 
     useEffect(() => {
         GetUserTipos().then((Lista) => {

@@ -41,7 +41,7 @@ const UsersInSetores = (props) => {
 
 
     const HandleDrag = (Resultado) => {
-        console.log(Resultado)
+        //console.log(Resultado)
         if (!Resultado.destination) return;
         const SectorDestinationID = Resultado.destination.droppableId.split("/")[0];
         const UserId = Resultado.draggableId
@@ -52,7 +52,7 @@ const UsersInSetores = (props) => {
 
         const copiedItems = [...props.Usuarios];
         copiedItems[IndexOfUser] = { ...User }
-        //console.log(copiedItems)
+        ////console.log(copiedItems)
         SaveUsers(copiedItems)
         //copiedItems.splice(IndexDestination, 0, removed);
     }

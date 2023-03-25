@@ -17,7 +17,7 @@ const TypesList = (props) => {
 
   const [ListaDeItens,] = useState([...props.Users.filter(User => User.Type.Id === props.TipoUsuario.Id)]);
 
-  //console.log([...props.Users.filter(User => User.Type.Id === props.TipoUsuario.Id)])
+  ////console.log([...props.Users.filter(User => User.Type.Id === props.TipoUsuario.Id)])
 
   const HandleSubmiChangePermit = (Type) => {
     var ItensCopy = [...props.UserTypes]
@@ -49,7 +49,7 @@ const TypesList = (props) => {
                 <div className={snapshot.isDraggingOver ? 'MarginBottom' : ''} {...provided.droppableProps} ref={provided.innerRef}>
                   {ListaDeItens.sort((a, b) => a.Name.localeCompare(b.Name)).map((Item, index) => {
                     const IsAdmin = props.UserTypes.find(UserType => UserType.Id === Item.Type.Id).IsAdmin
-                    //console.log(IsAdmin)
+                    ////console.log(IsAdmin)
                     return <Draggable action as="li" key={Item.Id} draggableId={Item.Id} index={index} >
                       {(DragProvided) => {
                         return (

@@ -17,6 +17,27 @@ export const DefaultLoggedUser = {
 
 
 
+export const UserModalSelectcustomStyles = {
+  option: (provided, state) => ({
+      ...provided,
+      backgroundColor: state.isFocused ? 'var(--ComplementaryColor)' : provided.backgroundColor,
+      ':hover': {
+          backgroundColor: 'var(--ComplementaryColor)',
+          color: 'var(--PrimaryColor)'
+      }
+  }),
+  input: (provided) => ({
+      ...provided,
+      border: 'none',
+      outline: 'none'
+  }),
+  control: (provided, state) => ({
+      ...provided,
+      borderRadius: '.5rem',
+      boxShadow: state.isFocused ? 'none' : 'none',
+      border: state.isFocused ? '1px solid var(--PrimaryBackGroundFaded50)' : '1px solid var(--PrimaryBackGroundFaded50)'
+  }),
+};
 
 
 

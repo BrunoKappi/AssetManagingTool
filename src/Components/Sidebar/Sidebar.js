@@ -35,7 +35,7 @@ const Sidebar = (props) => {
                     <UilUsersAlt />
                     <span>Usuarios</span>
                 </Link>
-                <Link to="/App/Profile" className={GetSidebarItemClass('Profile', props.LoggedUser.CurrentSidebarTab)} onClick={e => SetTab('Profile')}>
+                <Link to="/App/Profile" className={GetSidebarItemClass('Profile', props.LoggedUser.CurrentSidebarTab)} >
                     <UilUserCircle />
                     <span>Meu Perfil</span>
                 </Link>

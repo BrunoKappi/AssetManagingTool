@@ -30,7 +30,7 @@ const UsersInTypes = (props) => {
     }, [])
     
 
-    console.log("TESTE")
+    //console.log("TESTE")
 
     const [Options, setOptions] = useState({ ...DefaultTypesProps })
     const [TiposUsuarios, setTiposUsuarios] = useState([

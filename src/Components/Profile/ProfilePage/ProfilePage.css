@@ -1,4 +1,4 @@
-.UserModal {
+.ProfilePage {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -8,18 +8,18 @@
 }
 
 
-.UserModal::-webkit-scrollbar {
+.ProfilePage::-webkit-scrollbar {
     display: none;
 }
 
 @media (max-width: 1000px) {
 
-    .UserModal {
+    .ProfilePage {
         max-height: none;
         overflow-y: auto;
     }
 
-    .UserModal::-webkit-scrollbar {
+    .ProfilePage::-webkit-scrollbar {
         display: none;
     }
 }
@@ -28,7 +28,7 @@
 
 /* ======== HEADER  ============== */
 
-.UserModalHeader {
+.ProfilePageHeader {
     display: flex;
     flex-direction: row;
     align-items: stretch;
@@ -40,7 +40,7 @@
 }
 
 @media (max-width: 1000px) {
-    .UserModalHeader {
+    .ProfilePageHeader {
         padding: .3rem;
         margin-bottom: 2rem;
     }
@@ -49,7 +49,7 @@
 
 
 
-.UserModalHeader-Left {
+.ProfilePageHeader-Left {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -58,12 +58,12 @@
 }
 
 @media (max-width: 1000px) {
-    .UserModalHeader-Left {
+    .ProfilePageHeader-Left {
         width: 30%;
     }
 }
 
-.UserModalHeader-Left-Photo>img {
+.ProfilePageHeader-Left-Photo>img {
     width: 70%;
     border-radius: 50%;
     -webkit-box-shadow: 3px 2px 7px 0px rgba(0, 0, 0, 0.75);
@@ -72,7 +72,7 @@
 }
 
 
-.UserModalHeader-Right {
+.ProfilePageHeader-Right {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -84,7 +84,7 @@
 }
 
 
-.UserModalHeader-Right-Name {
+.ProfilePageHeader-Right-Name {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -95,19 +95,19 @@
     color: var(--ComplementaryColor);
 }
 
-.UserModalHeader-Right-Close {
+.ProfilePageHeader-Right-Close {
     position: absolute;
     top: 1rem;
     right: 1rem;
     cursor: pointer;
 }
 
-.UserModalHeader-Right-Close:hover {
+.ProfilePageHeader-Right-Close:hover {
     transform: scale(1.1);
 }
 
 
-.UserModalHeader-Right-Setor {
+.ProfilePageHeader-Right-Setor {
     background-color: antiquewhite;
     border-radius: 1rem;
     padding: .1rem 1rem;
@@ -120,7 +120,7 @@
     align-items: center;
 }
 
-.UserModalHeader-Right-Tipo {
+.ProfilePageHeader-Right-Tipo {
     background-color: antiquewhite;
     border-radius: 1rem;
     padding: .1rem 1rem;
@@ -135,11 +135,11 @@
 
 
 @media (max-width: 1000px) {
-    .UserModalHeader-Right-Tipo {
+    .ProfilePageHeader-Right-Tipo {
         font-size: .7rem;
     }
 
-    .UserModalHeader-Right-Setor {
+    .ProfilePageHeader-Right-Setor {
         font-size: .7rem;
     }
 }
@@ -163,7 +163,7 @@
 
 /* ======== BODY  ============== */
 
-.UserModalBody {
+.ProfilePageBody {
     display: flex;
     flex-direction: row;
     align-items: stretch;
@@ -175,7 +175,7 @@
 
 
 @media (max-width: 1000px) {
-    .UserModalBody {
+    .ProfilePageBody {
         flex-direction: column;
         align-items: stretch;
         justify-content: flex-start;
@@ -184,8 +184,7 @@
 
 }
 
-.UserModalBody-Sidebar {
-   
+.ProfilePageBody-Sidebar {
     display: flex;
     flex-direction: column;
     align-items: stretch;
@@ -196,7 +195,7 @@
 }
 
 @media (max-width: 1000px) {
-    .UserModalBody-Sidebar {
+    .ProfilePageBody-Sidebar {
         margin-bottom: 2.5rem;
         width: 100%;
     }
@@ -204,7 +203,7 @@
 }
 
 
-.UserModalBody-Sidebar-Item {
+.ProfilePageBody-Sidebar-Item {
     cursor: pointer;
     display: flex;
     flex-direction: row;
@@ -223,7 +222,7 @@
     border: 1px solid var(--PrimaryBackGroundFaded2);
 }
 
-.UserModalBody-Sidebar-ActiveItem {
+.ProfilePageBody-Sidebar-ActiveItem {
     cursor: pointer;
     display: flex;
     flex-direction: row;
@@ -242,7 +241,7 @@
     background-color: var(--PrimaryBackground);
 }
 
-.UserModalBody-Sidebar-Item:hover {
+.ProfilePageBody-Sidebar-Item:hover {
     border: 1px solid var(--ComplementaryColor);
     color: var(--PrimaryColor);
     background-color: var(--ComplementaryColor);
@@ -250,7 +249,7 @@
 
 
 
-.UserModalBody-UserInfo {}
+.ProfilePageBody-UserInfo {}
 
 
 
@@ -261,22 +260,21 @@
 
 /* ============== INFO FORM =================== */
 
-.UserModalBody-UserInfo {
+.ProfilePageBody-UserInfo {
     padding: 0rem 1rem 1rem 3rem;
     width: 100%;
-   
 }
 
 
 @media (max-width: 1000px) {
-    .UserModalBody-UserInfo {
+    .ProfilePageBody-UserInfo {
         padding: .3rem;
     }
 }
 
 
 
-.UserModalBody-UserInfoForm form {
+.ProfilePageBody-UserInfoForm form {
     display: flex;
     flex-direction: column;
     align-items: stretch;
@@ -285,11 +283,11 @@
 }
 
 
-.UserModalBody-UserInfoForm-OneLine {
+.ProfilePageBody-UserInfoForm-OneLine {
     width: 100%;
 }
 
-.UserModalBody-UserInfoForm-Group {
+.ProfilePageBody-UserInfoForm-Group {
     display: flex;
     flex-direction: column;
     align-items: stretch;
@@ -297,7 +295,7 @@
     gap: .1rem;
 }
 
-.UserModalBody-UserInfoForm-Group>span {
+.ProfilePageBody-UserInfoForm-Group>span {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -308,26 +306,26 @@
     font-size: .9rem;
 }
 
-.UserModalBody-UserInfoForm-Group>span>svg {
+.ProfilePageBody-UserInfoForm-Group>span>svg {
     width: 1rem;
 }
 
 @media (max-width: 1000px) {
-    .UserModalBody-UserInfoForm-Group>span {
+    .ProfilePageBody-UserInfoForm-Group>span {
         font-size: .8rem;
     }
 
-    .UserModalBody-UserInfoForm-Group>span>svg {
+    .ProfilePageBody-UserInfoForm-Group>span>svg {
         width: 1rem;
     }
 }
 
-.UserModalBody-UserInfoForm-SectionTitle {
+.ProfilePageBody-UserInfoForm-SectionTitle {
     font-family: var(--Fonte);
     color: var(--SecondaryBackground);
 }
 
-.UserModalBody-UserInfoForm-Group>input {
+.ProfilePageBody-UserInfoForm-Group>input {
     border-radius: .5rem;
     outline: none;
     border: 1px solid var(--PrimaryBackGroundFaded50);
@@ -337,7 +335,7 @@
     font-size: .9rem;
 }
 
-.UserModalBody-UserInfoForm-PhoneInput-Container {
+.ProfilePageBody-UserInfoForm-PhoneInput-Container {
     border-radius: .5rem !important;
     outline: none !important;
     border: 1px solid var(--PrimaryBackGroundFaded50) !important;
@@ -347,7 +345,7 @@
     box-shadow: none !important;
 }
 
-.UserModalBody-UserInfoForm-PhoneInput {
+.ProfilePageBody-UserInfoForm-PhoneInput {
     border-radius: .5rem !important;
     outline: none !important;
     border: none !important;
@@ -358,37 +356,37 @@
     box-shadow: none !important;
 }
 
-.UserModalBody-UserInfoForm-PhoneInput-Button {
+.ProfilePageBody-UserInfoForm-PhoneInput-Button {
     background-color: transparent !important;
     border: none !important;
 
 }
 
-.UserModalBody-UserInfoForm-LocationSelect {
+.ProfilePageBody-UserInfoForm-LocationSelect {
     flex-grow: 1 !important;
     font-family: var(--Fonte) !important;
     font-size: .9rem !important;
     width: 100% !important;
 }
 
-.UserModalBody-UserInfoForm-PhoneInput-Dropdown {
+.ProfilePageBody-UserInfoForm-PhoneInput-Dropdown {
 
     overflow-y: scroll !important;
 }
 
-.UserModalBody-UserInfoForm-PhoneInput-Dropdown::-webkit-scrollbar {
+.ProfilePageBody-UserInfoForm-PhoneInput-Dropdown::-webkit-scrollbar {
     display: none !important;
 
 }
 
 @media (max-width: 1000px) {
-    .UserModalBody-UserInfoForm-Group>input {
+    .ProfilePageBody-UserInfoForm-Group>input {
         font-size: .8rem;
     }
 }
 
 
-.UserModalBody-UserInfoForm-TwoLine {
+.ProfilePageBody-UserInfoForm-TwoLine {
     width: 100%;
     display: grid;
     grid-template-columns: 49% 49%;
@@ -396,19 +394,19 @@
 }
 
 @media (max-width: 1000px) {
-    .UserModalBody-UserInfoForm-TwoLine {
+    .ProfilePageBody-UserInfoForm-TwoLine {
         display: flex;
         flex-direction: column;
     }
 }
 
 
-.UserModalBody-UserInfoForm-TwoLine>.UserModalBody-UserInfoForm-Group {
+.ProfilePageBody-UserInfoForm-TwoLine>.ProfilePageBody-UserInfoForm-Group {
     flex-grow: 1;
 }
 
 
-.UserModalBody-UserInfoForm-Button {
+.ProfilePageBody-UserInfoForm-Button {
     display: flex;
     flex-direction: row;
     justify-content: flex-end;
@@ -417,7 +415,7 @@
     gap: 1rem;
 }
 
-.UserModalBody-UserInfoForm-Button>button {
+.ProfilePageBody-UserInfoForm-Button>button {
     padding: .5rem 1rem;
     font-family: var(--Fonte);
     background-color: var(--ComplementaryColor);
@@ -430,15 +428,15 @@
     align-items: center;
 }
 
-.UserModalBody-UserInfoForm-Button>button>svg {
+.ProfilePageBody-UserInfoForm-Button>button>svg {
     width: 1.2rem;
 }
 
-.UserModalBody-UserInfoForm-Button>button:hover {
+.ProfilePageBody-UserInfoForm-Button>button:hover {
     transform: scale(1.1);
 }
 
-.UserModalBody-UserInfoForm-Button>button:active {
+.ProfilePageBody-UserInfoForm-Button>button:active {
     transform: scale(.9);
 }
 
@@ -454,13 +452,13 @@
 
 /* ======================================== LISTA DE SETORES MODAL =========================================================================== */
 
-.UserModalBody-UserInfoForm-SetorList {
+.ProfilePageBody-UserInfoForm-SetorList {
 
     display: flex;
     flex-direction: column;
 }
 
-.UserModalBody-UserInfoForm-SetorList-Title {
+.ProfilePageBody-UserInfoForm-SetorList-Title {
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
@@ -473,12 +471,12 @@
     border-top-left-radius: .5rem;
 }
 
-.UserModalBody-UserInfoForm-SetorList-Item:last-child {
+.ProfilePageBody-UserInfoForm-SetorList-Item:last-child {
     border-bottom-right-radius: .5rem;
     border-bottom-left-radius: .5rem;
 }
 
-.UserModalBody-UserInfoForm-SetorList-Item {
+.ProfilePageBody-UserInfoForm-SetorList-Item {
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
@@ -494,7 +492,7 @@
     font-size: .9rem;
 }
 
-.UserModalBody-UserInfoForm-SetorList-ItemActive {
+.ProfilePageBody-UserInfoForm-SetorList-ItemActive {
     background-color: var(--ComplementaryColor);
     color: var(--PrimaryColor);
     border-bottom: 1px solid var(--ComplementaryColor);
@@ -503,7 +501,7 @@
 
 }
 
-.UserModalBody-UserInfoForm-SetorList-Item:hover {
+.ProfilePageBody-UserInfoForm-SetorList-Item:hover {
     background-color: var(--ComplementaryColor);
     color: var(--PrimaryColor);
     border-bottom: 1px solid var(--ComplementaryColor);
@@ -512,7 +510,7 @@
 
 }
 
-.UserModalBody-UserInfoForm-SetorList-Item>svg {
+.ProfilePageBody-UserInfoForm-SetorList-Item>svg {
     width: .9rem;
 }
 
@@ -544,13 +542,13 @@
 
 /* ======================================== LISTA DE TIPOS DE USUARIOS MODAL =========================================================================== */
 
-.UserModalBody-UserInfoForm-TiposUserList {
+.ProfilePageBody-UserInfoForm-TiposUserList {
 
     display: flex;
     flex-direction: column;
 }
 
-.UserModalBody-UserInfoForm-TiposUserList-Title {
+.ProfilePageBody-UserInfoForm-TiposUserList-Title {
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
@@ -563,12 +561,12 @@
     border-top-left-radius: .5rem;
 }
 
-.UserModalBody-UserInfoForm-TiposUserList-Item:last-child {
+.ProfilePageBody-UserInfoForm-TiposUserList-Item:last-child {
     border-bottom-right-radius: .5rem;
     border-bottom-left-radius: .5rem;
 }
 
-.UserModalBody-UserInfoForm-TiposUserList-Item {
+.ProfilePageBody-UserInfoForm-TiposUserList-Item {
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
@@ -584,7 +582,7 @@
     font-size: .9rem;
 }
 
-.UserModalBody-UserInfoForm-TiposUserList-ItemActive {
+.ProfilePageBody-UserInfoForm-TiposUserList-ItemActive {
     background-color: var(--ComplementaryColor);
     color: var(--PrimaryColor);
     border-bottom: 1px solid var(--ComplementaryColor);
@@ -593,7 +591,7 @@
 }
 
 
-.UserModalBody-UserInfoForm-TiposUserList-Item:hover {
+.ProfilePageBody-UserInfoForm-TiposUserList-Item:hover {
     background-color: var(--ComplementaryColor);
     color: var(--PrimaryColor);
     border-bottom: 1px solid var(--ComplementaryColor);
@@ -603,7 +601,7 @@
 
 
 
-.UserModalBody-UserInfoForm-TiposUserList-Item>svg {
+.ProfilePageBody-UserInfoForm-TiposUserList-Item>svg {
     width: 1rem;
 }
 

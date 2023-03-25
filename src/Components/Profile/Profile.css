@@ -4,6 +4,7 @@
     padding: 2rem;
     max-height: 100%;
     overflow-y: scroll;
+    background-color: var(--Background);
 }
 
 .ProfileContainer::-webkit-scrollbar {

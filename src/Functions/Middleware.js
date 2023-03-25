@@ -7,7 +7,7 @@ import { SetLocaisArmazenamento } from "../Config/store/actions/LocaisArmazename
 import { SetStatusAtivos } from "../Config/store/actions/AtivosStatusActions"
 import { SetTiposDeUso } from "../Config/store/actions/TiposDeUsoActions"
 import { SetAtivos } from "../Config/store/actions/AtivosActions"
-import { SetUsuarios } from "../Config/store/actions/UsuariosActions"
+import {  SetUsuarios } from "../Config/store/actions/UsuariosActions"
 
 
 export const LoginUtil = (email, password) => {
@@ -65,7 +65,7 @@ export async function SaveTipos(Tipos, gerarErro = false) {
             if (gerarErro) {
                 reject(new Error('Erro ao obter dados'));
             } else {
-                //console.log(Tipos)
+                ////console.log(Tipos)
                 localStorage.setItem('AssetSenseTipos', JSON.stringify(Tipos))
                 store.dispatch(SetTiposAtivos(Tipos))
                 resolve('Ok');
@@ -106,7 +106,7 @@ export async function SaveSetores(Setores, gerarErro = false) {
             if (gerarErro) {
                 reject(new Error('Erro ao obter dados'));
             } else {
-                //console.log(Setores)
+                ////console.log(Setores)
                 localStorage.setItem('AssetSenseSetores', JSON.stringify(Setores))
                 store.dispatch(SetSetores(Setores))
                 resolve('Ok');
@@ -152,7 +152,7 @@ export async function GetUserTipos(gerarErro = false) {
             } else {
                 if (localStorage.getItem('AssetSenseUsersTypes')) {
                     resolve(JSON.parse(localStorage.getItem('AssetSenseUsersTypes')))
-                    //console.log("TIPOS", JSON.parse(localStorage.getItem('AssetSenseUsersTypes')))
+                    ////console.log("TIPOS", JSON.parse(localStorage.getItem('AssetSenseUsersTypes')))
                 }
 
                 else
@@ -161,7 +161,7 @@ export async function GetUserTipos(gerarErro = false) {
         }, 50);
     });
 }
- 
+
 
 export async function SaveUserTipos(Tipos, gerarErro = false) {
     return new Promise((resolve, reject) => {
@@ -169,7 +169,7 @@ export async function SaveUserTipos(Tipos, gerarErro = false) {
             if (gerarErro) {
                 reject(new Error('Erro ao obter dados'));
             } else {
-                //console.log(Tipos)
+                ////console.log(Tipos)
                 localStorage.setItem('AssetSenseUsersTypes', JSON.stringify(Tipos))
                 store.dispatch(SetTiposUsuarios(Tipos))
                 resolve('Ok');
@@ -192,7 +192,7 @@ export async function GetUsersTypesSelect(gerarErro = false) {
                             label: item.Value,
                         };
                     });
-                    console.log(Types)
+                    //console.log(Types)
                     Types.push({ value: 'Todos', label: 'Todos' })
                     resolve(Types)
                 }
@@ -239,7 +239,7 @@ export async function SaveLocaisArmazenamento(Locais, gerarErro = false) {
             if (gerarErro) {
                 reject(new Error('Erro ao obter dados'));
             } else {
-                //console.log(Locais)
+                ////console.log(Locais)
                 localStorage.setItem('AssetSenseLocaisArmazenamento', JSON.stringify(Locais))
                 store.dispatch(SetLocaisArmazenamento(Locais))
                 resolve('Ok');
@@ -279,7 +279,7 @@ export async function SaveStatusAtivos(Locais, gerarErro = false) {
             if (gerarErro) {
                 reject(new Error('Erro ao obter dados'));
             } else {
-                //console.log(Locais)
+                ////console.log(Locais)
                 localStorage.setItem('AssetSenseStatusAtivos', JSON.stringify(Locais))
                 store.dispatch(SetStatusAtivos(Locais))
                 resolve('Ok');
@@ -315,7 +315,7 @@ export async function SaveTiposDeUso(Locais, gerarErro = false) {
             if (gerarErro) {
                 reject(new Error('Erro ao obter dados'));
             } else {
-                //console.log(Locais)
+                ////console.log(Locais)
                 localStorage.setItem('AssetSenseTiposDeUso', JSON.stringify(Locais))
                 store.dispatch(SetTiposDeUso(Locais))
                 resolve('Ok');
@@ -353,10 +353,10 @@ export async function SaveAtivos(Ativos, gerarErro = false) {
         if (gerarErro) {
             reject(new Error('Erro ao obter dados'));
         } else {
-            //console.log(Ativos)
+            ////console.log(Ativos)
             localStorage.setItem('AssetSenseAtivos', JSON.stringify(Ativos))
             store.dispatch(SetAtivos(Ativos))
-            console.log("Command Save ATIVOS")
+            //console.log("Command Save ATIVOS")
             resolve('Ok');
         }
 
@@ -400,7 +400,7 @@ export async function SaveUsers(Users, gerarErro = false) {
             if (gerarErro) {
                 reject(new Error('Erro ao obter dados'));
             } else {
-                //console.log(Users)
+                ////console.log(Users)
                 localStorage.setItem('AssetSenseUsers', JSON.stringify(Users))
                 store.dispatch(SetUsuarios(Users))
                 resolve('Ok');
@@ -409,4 +409,43 @@ export async function SaveUsers(Users, gerarErro = false) {
     });
 }
 
+
+
+export async function EditUser(EditedUser, gerarErro = false) {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            if (gerarErro) {
+                reject(new Error('Erro ao obter dados'));
+            } else {
+                GetUsers().then(Lista => {
+                    const NewUsers = Lista.filter(usuario => {
+                        return usuario.Id !== EditedUser.Id
+                    }).concat(EditedUser)
+
+                    SaveUsers(NewUsers)
+                    resolve('Ok');
+                })
+                //store.dispatch(EditUsuarioAction(EditedUser))
+            }
+        }, 50);
+    });
+}
+
     ////////////////////// USUARIOS  //////////////////////////
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
