@@ -103,6 +103,12 @@
     font-size: .9rem;
 }
 
+.NameColumn > span{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
 .NameColumnIcon {
     padding: 0;
     width: 1.5rem;
@@ -134,4 +140,28 @@
 
 .EmailColumn>svg {
     width: .9rem;
+}
+
+
+
+@media (max-width: 750px) {
+
+    .UserContainer {
+        display: grid;
+        grid-template-columns: 40% 30% 30%;
+    }
+
+
+
+    .NameColumn > svg{
+        display: none;
+    }
+
+    .EmailColumnContainer{
+        display: none;
+    }
+
+    .EmailColumn {
+        display: none;
+    }
 }

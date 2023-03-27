@@ -5,28 +5,13 @@ import './TypesList.css'
 import ListGroup from 'react-bootstrap/ListGroup';
 import { v4 } from 'uuid';
 import { Draggable, Droppable } from "react-beautiful-dnd";
-import { ImCheckboxUnchecked, ImCheckboxChecked } from 'react-icons/im';
 import { Tooltip } from 'react-tippy';
-import { NotificationSucesso } from '../../NotificationUtils';
-
 import { UilPuzzlePiece,UilShieldCheck,UilUser   } from '@iconscout/react-unicons'
-import { SaveUserTipos } from '../../Functions/Middleware';
 
 const TypesList = (props) => {
 
 
   const [ListaDeItens,] = useState([...props.Users.filter(User => User.Type.Id === props.TipoUsuario.Id)]);
-
-  ////console.log([...props.Users.filter(User => User.Type.Id === props.TipoUsuario.Id)])
-
-  const HandleSubmiChangePermit = (Type) => {
-    var ItensCopy = [...props.UserTypes]
-    const IndexOfType = ItensCopy.indexOf(Type)
-    ItensCopy[IndexOfType].IsAdmin = !ItensCopy[IndexOfType].IsAdmin
-    SaveUserTipos(ItensCopy).then(() => {
-      NotificationSucesso('Alteração', 'Permissões alteradas com sucesso!')
-    })
-  }
 
 
   return (
@@ -38,9 +23,7 @@ const TypesList = (props) => {
             <Tooltip title="Arraste e solte ítens nesta área" position="bottom" >
               <span className='UserTypesShowOnlyCustomGroupListTitleSpan'> <UilPuzzlePiece/> { props.TipoUsuario.Value }</span>
             </Tooltip>
-            <Tooltip title="Possui permissões de Administrador" position="bottom" >
-              {props.TipoUsuario.IsAdmin ? <ImCheckboxChecked className='UserTypesShowOnlyCustomGroupListCheckbox' onClick={e => HandleSubmiChangePermit(props.TipoUsuario)} /> : <ImCheckboxUnchecked className='UserTypesShowOnlyCustomGroupListCheckbox' onClick={e => HandleSubmiChangePermit(props.TipoUsuario)} />}
-            </Tooltip>
+           
           </ListGroup.Item>
 
           <Droppable droppableId={props.TipoUsuario.Id + '/' +  v4()} key={props.TipoUsuario.Id + '/' +  v4()}>

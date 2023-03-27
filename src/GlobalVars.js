@@ -29,7 +29,7 @@ export const UserModalSelectcustomStyles = {
   }),
   input: (provided) => ({
     ...provided,
-    border: 'none',
+    border: 'none', 
     outline: 'none'
   }),
   control: (provided, state) => ({

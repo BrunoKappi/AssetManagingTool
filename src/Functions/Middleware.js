@@ -467,7 +467,7 @@ export async function ToggleTema() {
 
 
 
-// GET CURRENT USER /////
+// GETTERS DA STORE /////
 
 export const GetCurrentUserEmailFromStore = () => {
     return store.getState().LoggedUser.Email
@@ -476,6 +476,10 @@ export const GetCurrentUserEmailFromStore = () => {
 export const GetUserTypesFromStore = () => {
     return store.getState().TiposUsuarios
 }
+
+export const GetSetoresFromStore = () => {
+    return store.getState().Setores
+}
 export const GetUsersFromStore = () => {
     return store.getState().Usuarios
 }
@@ -483,7 +487,7 @@ export const GetUsersFromStore = () => {
 export const GetCurrentUserTypeFromStore = () => {
     const Email = GetCurrentUserEmailFromStore()
     const Users = GetUsersFromStore()
-    const Types = GetUserTypesFromStore() 
+    const Types = GetUserTypesFromStore()
     const CurrentUser = Users.find(U => U.Email === Email)
     const CurrentUserType = Types.find(U => U.Id === CurrentUser.Type.Id)
     return CurrentUserType
@@ -492,7 +496,7 @@ export const GetCurrentUserTypeFromStore = () => {
 
 export const GetCurrentUserTypePermitFromStore = (Permit) => {
     const CurrentUserType = GetCurrentUserTypeFromStore()
-    return CurrentUserType.Permits[PermitIndexs[Permit]] 
+    return CurrentUserType.Permits[PermitIndexs[Permit]]
 }
 
 

@@ -165,7 +165,7 @@ const UsersList = (props) => {
                 return <div onClick={e => handleUserClick(Item)}>
                     <User User={Item} key={v4()} />
                 </div>
-            })}
+            })} 
 
             {ListaDeUsuarios.length === 0 && !Loaded && <Loading />}
 

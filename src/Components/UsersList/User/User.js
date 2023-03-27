@@ -1,31 +1,26 @@
 import React, { useState, useEffect } from 'react'
 import './User.css'
 import { UilEnvelope, UilUser } from '@iconscout/react-unicons'
-import { GetSetores, GetUserTipos } from '../../../Functions/Middleware'
+import { GetSetoresFromStore, GetUserTypesFromStore } from '../../../Functions/Middleware'
 
 export default function User(props) {
 
 
-    const [UserType, setUserType] = useState({})  
+    const [UserType, setUserType] = useState({})
     const [UserSetor, setUserSetor] = useState({})
 
 
 
     useEffect(() => {
-        GetUserTipos().then((Lista) => {
-            setUserType(Lista.find(U => U.Id === props.User.Type.Id))
-        }).catch(Erro => {
-            console.error(Erro)
-        })
+        const Tipos = GetUserTypesFromStore()
+        console.log("USER",Tipos.find(U => U.Id === props.User.Type.Id))
+        setUserType(Tipos.find(U => U.Id === props.User.Type.Id))
     }, [props.User.Type.Id])
 
 
     useEffect(() => {
-        GetSetores().then((Lista) => {
-            setUserSetor({ ...Lista.find(U => U.Id === props.User.Sector.Id) })
-        }).catch(Erro => {
-            console.error(Erro)
-        })
+        const Setores = GetSetoresFromStore()
+        setUserSetor({ ...Setores.find(U => U.Id === props.User.Sector.Id) })
     }, [props.User.Sector.Id])
 
 
@@ -37,24 +32,24 @@ export default function User(props) {
 
             <div className={localStorage.getItem('AssetSenseTema') === 'Escuro' ? 'UserContainerEscuro UserContainer' : 'UserContainerClaro UserContainer'} >
 
-                <span className='UserContainerColumn'>
+                <span className='UserContainerColumn NameColumnContainer'>
                     <span className='NameColumn'>
                         <UilUser />
-                        {props.User.Name + ' ' + props.User.LastName}
+                        <span> {props.User.Name + ' ' + props.User.LastName}</span>
                     </span>
                 </span>
-                <span className='UserContainerColumn'>
+                <span className='UserContainerColumn EmailColumnContainer'>
                     <span className='EmailColumn'>
                         <UilEnvelope />
                         {props.User.Email.charAt(0).toUpperCase() + props.User.Email.slice(1)}
                     </span>
                 </span>
-                <div className='UserContainerColumn'>
+                <div className='UserContainerColumn SetorColumnContainer'>
                     <span className='SetorColumn'>
                         {UserSetor.Value}
                     </span>
                 </div>
-                <span className='UserContainerColumn'>
+                <span className='UserContainerColumn TypeColumnContainer'>
                     <span className='TypeColumn'>
                         {UserType.Value}
                     </span>

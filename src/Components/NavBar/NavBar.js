@@ -23,7 +23,7 @@ import { GetNavbarSidebarItemClass, SetTab } from '../Sidebar/SidebarUtils';
 import { NotificationErro, NotificationSucesso } from '../../NotificationUtils';
 import User from '../../Images/User.png'
 import { useNavigate } from 'react-router-dom';
-import { UilChartPieAlt, UilListUl, UilUsersAlt, UilSetting, UilUserCircle, UilSignout, UilBars } from '@iconscout/react-unicons'
+import { UilChartPieAlt, UilListUl, UilUsersAlt, UilSetting, UilUserCircle, UilSignout, UilBars, UilMoon, UilBright } from '@iconscout/react-unicons'
 import { GetCurrentUserTypePermitFromStore, ToggleTema } from '../../Functions/Middleware';
 
 
@@ -101,7 +101,7 @@ const NavBar = (props) => {
                                 <div className='navDiv'>
                                     <Tooltip title="Alterar o Tema" position="bottom" >
                                         <button className='ChangeThemeButton' onClick={handleToggleTema}>
-                                            {localStorage.getItem('AssetSenseTema') === 'Escuro' ? 'Tema Escuro' : 'Tema Claro'}
+                                            {localStorage.getItem('AssetSenseTema') === 'Escuro' ? <UilMoon /> : <UilBright />}
                                         </button>
                                     </Tooltip>
                                     <NavDropdown title={<span className='ProfileNavLinkTitle' > {CurrentUser.Name + ' ' + CurrentUser.LastName}</span>}>

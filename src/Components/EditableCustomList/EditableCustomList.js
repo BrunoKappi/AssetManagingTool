@@ -15,6 +15,7 @@ import Loading from '../LoadingForTabs/Loading'
 
 import { UilLabel, UilPuzzlePiece, UilBox, UilPlay, UilPlus, UilTrashAlt, UilBackspace, UilPen } from '@iconscout/react-unicons'
 import { fetchFunctions, GetCurrentUserTypePermitFromStore, saveFunctions, SaveUserTipos } from '../../Functions/Middleware';
+import { DefaultUserRole } from '../../Data/User';
 
 const CustomListIcon = {
   TiposAtivos: <UilLabel />,
@@ -115,8 +116,16 @@ const EditableCustomList = (props) => {
 
       if (!Find && NewItemList) {
         var ItensCopy = [...ListaDeItens]
-        const NewItem = { ...DefaultItemType, Id: v4(), Value: NewItemList }
+        var NewItem
+
+        if (props.Module === 'TiposUsuarios')
+          NewItem = { ...DefaultUserRole, Id: v4(), Value: NewItemList }
+        else
+          NewItem = { ...DefaultItemType, Id: v4(), Value: NewItemList }
+
         ItensCopy.push(NewItem)
+
+
 
         //Chama a função de salvamento correta usando o objeto saveFunctions
         const saveFunction = saveFunctions[props.Module];

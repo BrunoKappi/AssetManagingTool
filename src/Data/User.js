@@ -94,23 +94,23 @@ if (!localStorage.getItem('AssetSenseUsers')) {
 
 
 
-const Permits = [true, true, true, true, true, true, false, false, true, true, true, true, true, true, true, true, true, true, true]
-const Permits2 = [true, true, true, true, true, true, false, false, true, true, true, true, true, true, true, true, true, true, true]
+const DefaultPermits = [false, true, false, false, false, false, false, true, false, false, false, false, false, false, false, false, false, false, false]
+const AdminPermis = [true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true]
 
 
 export const UserRoles = [
-    { Id: '8c25a156-04b7-479f-874f-b16e63383cbd', Value: 'Funcionário', IsAdmin: false, Permits: Permits },
-    { Id: uuid(), Value: 'Cliente', IsAdmin: false, Permits: Permits },
-    { Id: '784c4def-b901-4883-b481-a4a6cf6dd070', Value: 'Administrador', IsAdmin: true, Permits: Permits2 },
-    { Id: uuid(), Value: 'Gerente', IsAdmin: true, Permits: Permits2 }
+    { Id: '8c25a156-04b7-479f-874f-b16e63383cbd', Value: 'Funcionário', IsAdmin: false, Permits: DefaultPermits },
+    { Id: '0e296e6a-345f-47ff-91f1-34cd6c1f20e3', Value: 'Cliente', IsAdmin: false, Permits: DefaultPermits },
+    { Id: '784c4def-b901-4883-b481-a4a6cf6dd070', Value: 'Administrador', IsAdmin: true, Permits: AdminPermis },
+    { Id: '0624b310-4d7a-4423-a342-0cc272c39d80', Value: 'Gerente', IsAdmin: true, Permits: AdminPermis }
 ]
 
 export const UserRolesReset = [{ Id: '784c4def-b901-4883-b481-a4a6cf6dd070', Value: 'Administrador', IsAdmin: true }]
 
 
-export const DefaultUserRole = { Id: '', Role: '', IsAdmin: false }
+export const DefaultUserRole = { Id: '', Role: '', IsAdmin: false, Permits: [...DefaultPermits] }
 
-if (!localStorage.getItem('AssetSenseUsersTypes') ) {
+if (!localStorage.getItem('AssetSenseUsersTypes')) {
     localStorage.setItem('AssetSenseUsersTypes', JSON.stringify(UserRoles))
 }
 ////localStorage.setItem('AssetSenseUsersTypes', JSON.stringify(UserRolesReset)) //RESET

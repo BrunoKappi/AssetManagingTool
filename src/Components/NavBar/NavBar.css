@@ -70,7 +70,7 @@
 .ChangeThemeButton {
   border-radius: .5rem;
   border: none;
-  background-color: var(--ComplementaryColor);
+  background-color: transparent;
   font-size: .8rem !important;
   color: white;
   font-weight: 500;

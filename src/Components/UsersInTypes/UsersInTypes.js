@@ -11,6 +11,7 @@ import NumbersOfList from '../NumbersOfList/NumbersOfList';
 import { GetCurrentUserTypePermitFromStore, SaveUsers } from '../../Functions/Middleware';
 import { NotificationErro } from '../../NotificationUtils';
 
+
 const breakpointColumnsObj = {
     default: 4,
     1250: 3,
@@ -34,6 +35,7 @@ const UsersInTypes = (props) => {
 
 
     const [Options, setOptions] = useState({ ...DefaultTypesProps })
+
     const [TiposUsuarios, setTiposUsuarios] = useState([
         ...props.TiposUsuarios.map(element => {
             var Users = props.Usuarios.filter(el => el.Type.Id === element.Id).length
