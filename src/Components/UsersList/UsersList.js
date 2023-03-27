@@ -8,7 +8,7 @@ import { v4 } from 'uuid';
 import { MdFilterList } from 'react-icons/md';
 import Dropdown from 'react-bootstrap/Dropdown';
 import { UilExclamationCircle } from '@iconscout/react-unicons'
-import { GetSetoresSelect, GetUsers, GetUsersTypesSelect } from '../../Functions/Middleware';
+import { GetCurrentUserFromStore, GetSetoresSelect, GetUsersFromStore, GetUsersTypesSelect } from '../../Functions/Middleware';
 
 
 
@@ -26,45 +26,35 @@ const UsersList = (props) => {
     const [FiltroTipo, setFiltroTipo] = useState('Todos');
 
     const [modalShow, setModalShow] = useState(false);
+    const [AddmodalShow, setAddModalShow] = useState(false);
+    const [CurrentUser,] = useState(GetCurrentUserFromStore())
 
-    const [CurrentUser,] = useState({ ...props.Usuarios.find(user => user.Email === props.LoggedUser.Email) })
 
 
     useEffect(() => {
-        GetUsersTypesSelect().then(Options => {
-            setUserTypesOptions(Options)
-        })
-
-        GetSetoresSelect().then(Options => {
-            setSetoresOptions(Options)
-        })
+        GetUsersTypesSelect().then(Options => { setUserTypesOptions(Options) })
+        GetSetoresSelect().then(Options => { setSetoresOptions(Options) })
     }, [])
 
 
     useEffect(() => {
-        GetUsers().then((Lista) => {
-            setListaDeUsuarios(Lista.sort((a, b) => a.Name.localeCompare(b.Name)))
-            setLoaded(true)
-            //console.log(Lista)
-        }).catch(Erro => {
-            console.error(Erro)
-            setLoaded(true)
-        })
+        const Users = GetUsersFromStore()
+        setListaDeUsuarios(Users.sort((a, b) => a.Name.localeCompare(b.Name)))
+        setLoaded(true)
     }, [props.Usuarios])
 
 
     useEffect(() => {
-        GetUsers().then((Lista) => {
-            setListaDeUsuarios(Lista.filter(Usuario => {
-                const TextFilter = FiltroDeTexto === '' || (Usuario.Name.toLowerCase().includes(FiltroDeTexto.toLowerCase()) || Usuario.Email.toLowerCase().includes(FiltroDeTexto.toLowerCase()))
-                const SetorFilter = FiltroSetor === 'Todos' || FiltroSetor === '' || Usuario.Sector.Id === FiltroSetor
-                const TipoFilter = FiltroTipo === 'Todos' || FiltroTipo === '' || Usuario.Type.Id === FiltroTipo
-                return TextFilter && SetorFilter && TipoFilter
-            }).sort((a, b) => a.Name.localeCompare(b.Name)))
-        }).catch(Erro => {
-            console.error(Erro)
-            setLoaded(true)
-        })
+        const Users = GetUsersFromStore()
+        setListaDeUsuarios(Users.filter(Usuario => {
+            const TextFilter = FiltroDeTexto === '' || (Usuario.Name.toLowerCase().includes(FiltroDeTexto.toLowerCase()) || Usuario.Email.toLowerCase().includes(FiltroDeTexto.toLowerCase()))
+            const SetorFilter = FiltroSetor === 'Todos' || FiltroSetor === '' || Usuario.Sector.Id === FiltroSetor
+            const TipoFilter = FiltroTipo === 'Todos' || FiltroTipo === '' || Usuario.Type.Id === FiltroTipo
+            return TextFilter && SetorFilter && TipoFilter
+        }).sort((a, b) => a.Name.localeCompare(b.Name)))
+
+        setLoaded(true)
+
     }, [FiltroDeTexto, FiltroSetor, FiltroTipo])
 
 
@@ -93,9 +83,10 @@ const UsersList = (props) => {
     }
 
     return (
-        <div  className={localStorage.getItem('AssetSenseTema') === 'Escuro' ? 'UsersListContainerEscuro UsersListContainer' : 'UsersListContainerClaro UsersListContainer'}>
+        <div className={localStorage.getItem('AssetSenseTema') === 'Escuro' ? 'UsersListContainerEscuro UsersListContainer' : 'UsersListContainerClaro UsersListContainer'}>
 
-            <UserModal Users={ListaDeUsuarios} CurrentUser={CurrentUser} User={SelectedUser} show={modalShow} onHide={() => setModalShow(false)} />
+            <UserModal Users={ListaDeUsuarios} CurrentUser={CurrentUser} User={{ ...SelectedUser }} show={modalShow} onHide={() => setModalShow(false)} Function="View" />
+            <UserModal Users={ListaDeUsuarios} CurrentUser={CurrentUser} User={{ }} show={AddmodalShow} onHide={() => setAddModalShow(false)} Function="Add" />
 
             <div className='UsersLisFormFilter'>
                 <input value={FiltroDeTexto} placeholder='Procurar Usuário...' onChange={e => setFiltroDeTexto(e.target.value)}></input>
@@ -165,7 +156,7 @@ const UsersList = (props) => {
                 return <div onClick={e => handleUserClick(Item)}>
                     <User User={Item} key={v4()} />
                 </div>
-            })} 
+            })}
 
             {ListaDeUsuarios.length === 0 && !Loaded && <Loading />}
 
@@ -173,6 +164,11 @@ const UsersList = (props) => {
                 <UilExclamationCircle />
                 <h3>Nenhum Usuário encontrado</h3>
             </div>}
+
+            <button className='UsersListAddUserButton' onClick={e => setAddModalShow(true)}>
+                Adicionar Usuário
+
+            </button>
 
         </div>
     )

@@ -6,7 +6,7 @@ import { DragDropContext } from "react-beautiful-dnd";
 import { v4 } from 'uuid';
 import { connect } from 'react-redux'
 import NumbersOfList from '../NumbersOfList/NumbersOfList';
-import { GetCurrentUserTypePermitFromStore, SaveUsers } from '../../Functions/Middleware';
+import { GetCurrentUserTypePermitFromStore, GetSetoresFromStore, GetUsersFromStore, GetUserTypesFromStore, SaveUsers } from '../../Functions/Middleware';
 import { NotificationErro } from '../../NotificationUtils';
 
 const breakpointColumnsObj = {
@@ -19,43 +19,39 @@ const breakpointColumnsObj = {
 
 const UsersInSetores = (props) => {
 
-    const SetoresPermit = ( GetCurrentUserTypePermitFromStore('EDITAR_USUARIOS'))
+    const SetoresPermit = (GetCurrentUserTypePermitFromStore('EDITAR_USUARIOS'))
 
-    const [Setores, setSetores] = useState([
-        ...props.Setores.map(element => {
-            var Users = props.Usuarios.filter(el => el.Sector.Id === element.Id).length
-            return { Id: element.Id, Value: element.Value, Qtd: Users }
-        })])
+    const ListaSetores = GetSetoresFromStore()
+    const TiposUsuarios = GetUserTypesFromStore()
+    const Usuarios = GetUsersFromStore()
+
+    const [Setores, setSetores] = useState([GetSetoresFromStore()])
+
 
 
     useEffect(() => {
         setSetores([
-            ...props.Setores.map(element => {
-                var Users = props.Usuarios.filter(el => el.Sector.Id === element.Id).length
+            ...ListaSetores.map(element => {
+                var Users = Usuarios.filter(el => el.Sector.Id === element.Id).length
                 return { Id: element.Id, Value: element.Value, Qtd: Users }
             })])
-    }, [props.Usuarios, props.Setores])
+    }, [props.Usuarios, ListaSetores, Usuarios])
 
 
 
 
 
     const HandleDrag = (Resultado) => {
-        //console.log(Resultado)
         if (!Resultado.destination) return;
         if (SetoresPermit) {
             const SectorDestinationID = Resultado.destination.droppableId.split("/")[0];
             const UserId = Resultado.draggableId
-
-            const User = props.Usuarios.find(U => U.Id === UserId)
-            const IndexOfUser = props.Usuarios.indexOf(User)
+            const User = Usuarios.find(U => U.Id === UserId)
+            const IndexOfUser = Usuarios.indexOf(User)
             User.Sector.Id = SectorDestinationID
-
-            const copiedItems = [...props.Usuarios];
-            copiedItems[IndexOfUser] = { ...User }
-            ////console.log(copiedItems)
-            SaveUsers(copiedItems)
-            //copiedItems.splice(IndexDestination, 0, removed);
+            const copiedItems = [...Usuarios];
+            copiedItems[IndexOfUser] = { ...User }          
+            SaveUsers(copiedItems)          
         } else {
             NotificationErro("Ação não Autoriazada", 'Você não tem permissão para realizar essa ação, solicite autorização ao seu Administrador')
         }
@@ -71,8 +67,8 @@ const UsersInSetores = (props) => {
 
                 <Masonry breakpointCols={breakpointColumnsObj} className="my-masonry-grid" columnClassName="my-masonry-grid_column"   >
 
-                    {props.Setores.map((Setor, Index) => {
-                        return <SectorList key={v4()} Setor={Setor} Users={props.Usuarios} UserTypes={props.TiposUsuarios} />
+                    {ListaSetores.map((Setor, Index) => {
+                        return <SectorList key={v4()} Setor={Setor} Users={Usuarios} UserTypes={TiposUsuarios} />
                     })}
 
                 </Masonry>
@@ -87,9 +83,7 @@ const UsersInSetores = (props) => {
 
 const ConnectedUsersInSetores = connect((state) => {
     return {
-        Setores: state.Setores,
-        Usuarios: state.Usuarios,
-        TiposUsuarios: state.TiposUsuarios
+        Usuarios: state.Usuarios
     }
 })(UsersInSetores)
 

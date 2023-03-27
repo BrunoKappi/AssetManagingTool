@@ -3,7 +3,7 @@ import './NumbersOfList.css'
 
 export default function NumbersOfList(props) {
 
-    console.log("VALUES",props.Values)
+    //console.log("VALUES",props.Values)
 
     return (
         <div className='NumbersOfListContainer'>

@@ -4,7 +4,7 @@ const Usuarios = (state = [], action) => {
 
     switch (action.type) {
         case 'ADD_USUARIO':
-            return state.concat(action.novoUsuario)
+            return state.concat(action.NovoUsuario)
         case 'CLEAR_ALL':
             return []
         case 'SET_USUARIOS':

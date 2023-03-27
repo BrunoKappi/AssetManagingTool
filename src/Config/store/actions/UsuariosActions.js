@@ -1,10 +1,10 @@
 
 
-export const addUsuarioAction = (novoUsuario = {}) => {
+export const AddUsuarioAction = (NovoUsuario = {}) => {
 
     return ({
         type: 'ADD_USUARIO',
-        novoUsuario
+        NovoUsuario
     })
 }
 

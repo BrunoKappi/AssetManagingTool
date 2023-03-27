@@ -259,7 +259,7 @@ const UserTypesPermits = (props) => {
         var TiposCopy = [...props.TiposUsuarios]
         TiposCopy[TipoIndex].Permits[PermitIndex] = !TiposCopy[TipoIndex].Permits[PermitIndex]
 
-        console.log(PermitIndex === [PermitIndexs['USUARIOS']], PermitIndex, PermitIndexs['USUARIOS'])
+        //console.log(PermitIndex === [PermitIndexs['USUARIOS']], PermitIndex, PermitIndexs['USUARIOS'])
 
         TiposCopy = [...CheckUsuarioBlock(TiposCopy, TipoIndex, PermitIndex)]
         TiposCopy = [...CheckAtivosBlock(TiposCopy, TipoIndex, PermitIndex)]

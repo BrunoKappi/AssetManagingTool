@@ -8,7 +8,7 @@ import { connect } from 'react-redux'
 import Chart from 'react-apexcharts'
 import { DefaultTypesProps, GetOptionsAndSeries } from './UsersInTypesUtils';
 import NumbersOfList from '../NumbersOfList/NumbersOfList';
-import { GetCurrentUserTypePermitFromStore, SaveUsers } from '../../Functions/Middleware';
+import { GetCurrentUserTypePermitFromStore, GetUserTypesFromStore, SaveUsers } from '../../Functions/Middleware';
 import { NotificationErro } from '../../NotificationUtils';
 
 
@@ -25,32 +25,21 @@ const UsersInTypes = (props) => {
 
     const TiposPermit = (GetCurrentUserTypePermitFromStore('EDITAR_USUARIOS'))
 
-    const [Load, setLoad] = useState(false)
-
-    useEffect(() => {
-        setTimeout(() => {
-            setLoad(true)
-        }, 2000);
-    }, [])
-
 
     const [Options, setOptions] = useState({ ...DefaultTypesProps })
+    const Tipos = GetUserTypesFromStore()
 
-    const [TiposUsuarios, setTiposUsuarios] = useState([
-        ...props.TiposUsuarios.map(element => {
-            var Users = props.Usuarios.filter(el => el.Type.Id === element.Id).length
-            return { Id: element.Id, Value: element.Value, Qtd: Users }
-        })])
+    const [TiposUsuarios, setTiposUsuarios] = useState([])
 
 
     useEffect(() => {
-        setOptions(GetOptionsAndSeries(props.Usuarios, props.TiposUsuarios))
+        setOptions(GetOptionsAndSeries(props.Usuarios, Tipos))
         setTiposUsuarios([
-            ...props.TiposUsuarios.map(element => {
+            ...Tipos.map(element => {
                 var Users = props.Usuarios.filter(el => el.Type.Id === element.Id).length
                 return { Id: element.Id, Value: element.Value, Qtd: Users }
             })])
-    }, [props.Usuarios, props.TiposUsuarios])
+    }, [props.Usuarios, Tipos])
 
 
 
@@ -75,14 +64,14 @@ const UsersInTypes = (props) => {
     return (
         <DragDropContext onDragEnd={(result) => { HandleDrag(result) }}>
 
-            <div className={Load ? 'UsersInSetoresContainers Animate' : 'UsersInSetoresContainers'}>
+            <div className='UsersInSetoresContainers'>
 
                 <NumbersOfList Values={TiposUsuarios} />
 
                 <Masonry breakpointCols={breakpointColumnsObj} className="my-masonry-grid" columnClassName="my-masonry-grid_column"   >
 
-                    {props.TiposUsuarios.map((TipoUsuario, Index) => {
-                        return <TypesList key={v4()} TipoUsuario={TipoUsuario} Users={props.Usuarios} UserTypes={props.TiposUsuarios} />
+                    {Tipos.map((TipoUsuario, Index) => {
+                        return <TypesList key={v4()} TipoUsuario={TipoUsuario} Users={props.Usuarios} UserTypes={Tipos} />
                     })}
 
                 </Masonry>
@@ -97,10 +86,8 @@ const UsersInTypes = (props) => {
 
 
 const ConnectedUsersInTypes = connect((state) => {
-    return {
-        Setores: state.Setores,
-        Usuarios: state.Usuarios,
-        TiposUsuarios: state.TiposUsuarios
+    return {      
+        Usuarios: state.Usuarios       
     }
 })(UsersInTypes)
 

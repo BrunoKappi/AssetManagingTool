@@ -12,8 +12,7 @@ export default function User(props) {
 
 
     useEffect(() => {
-        const Tipos = GetUserTypesFromStore()
-        console.log("USER",Tipos.find(U => U.Id === props.User.Type.Id))
+        const Tipos = GetUserTypesFromStore()       
         setUserType(Tipos.find(U => U.Id === props.User.Type.Id))
     }, [props.User.Type.Id])
 

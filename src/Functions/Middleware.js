@@ -7,7 +7,7 @@ import { SetLocaisArmazenamento } from "../Config/store/actions/LocaisArmazename
 import { SetStatusAtivos } from "../Config/store/actions/AtivosStatusActions"
 import { SetTiposDeUso } from "../Config/store/actions/TiposDeUsoActions"
 import { SetAtivos } from "../Config/store/actions/AtivosActions"
-import { SetUsuarios } from "../Config/store/actions/UsuariosActions"
+import { AddUsuarioAction, SetUsuarios } from "../Config/store/actions/UsuariosActions"
 import { PermitIndexs } from "../GlobalVars"
 
 
@@ -410,6 +410,21 @@ export async function SaveUsers(Users, gerarErro = false) {
     });
 }
 
+export async function AddUser(User, gerarErro = false) {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            if (gerarErro) {
+                reject(new Error('Erro ao obter dados'));
+            } else {
+                ////console.log(Users)
+                //localStorage.setItem('AssetSenseUsers', JSON.stringify(Users))
+                store.dispatch(AddUsuarioAction(User))
+                resolve('Ok');
+            }
+        }, 50);
+    });
+}
+
 
 
 export async function EditUser(EditedUser, gerarErro = false) {
@@ -419,11 +434,15 @@ export async function EditUser(EditedUser, gerarErro = false) {
                 reject(new Error('Erro ao obter dados'));
             } else {
                 GetUsers().then(Lista => {
+
+
+
                     const NewUsers = Lista.filter(usuario => {
                         return usuario.Id !== EditedUser.Id
                     }).concat(EditedUser)
 
                     SaveUsers(NewUsers)
+                    console.log(NewUsers)
                     resolve('Ok');
                 })
                 //store.dispatch(EditUsuarioAction(EditedUser))
@@ -491,6 +510,45 @@ export const GetCurrentUserTypeFromStore = () => {
     const CurrentUser = Users.find(U => U.Email === Email)
     const CurrentUserType = Types.find(U => U.Id === CurrentUser.Type.Id)
     return CurrentUserType
+}
+
+
+export const GetCurrentUserTypeWithIdFromStore = (Id) => {
+    const Types = GetUserTypesFromStore()
+    const Type = Types.find(U => U.Id === Id)
+    return Type
+}
+
+
+
+
+export const GetCurrentUserSetorNameWithIdFromStore = (Id) => {
+    if (!Id) return 'Selecione um Setor'
+    const Setores = GetSetoresFromStore()
+    const Name = Setores.find(Setor => Setor.Id === Id).Value
+    return Name
+}
+export const GetCurrentUserTypeNameWithIdFromStore = (Id) => {
+    if (!Id) return 'Selecione um Tipo de Usuário'
+    const Types = GetUserTypesFromStore()
+    const Name = Types.find(Type => Type.Id === Id).Value
+    return Name
+}
+
+
+
+
+export const GetCurrentUserFromStore = () => {
+    const Email = GetCurrentUserEmailFromStore()
+    const Users = GetUsersFromStore()
+    const CurrentUser = Users.find(U => U.Email === Email)
+    return CurrentUser
+}
+
+export const GetUserWithIdFromStore = (Id) => {
+    const Users = GetUsersFromStore()
+    const User = Users.find(U => U.Id === Id)
+    return User
 }
 
 
