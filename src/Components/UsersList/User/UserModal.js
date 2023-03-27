@@ -2,7 +2,7 @@ import Modal from 'react-bootstrap/Modal';
 import React, { useState, useEffect, useRef } from 'react'
 import './UserModal.css'
 import UserPhoto from '../../../Images/SerranoLogoFuncoBranco.jpg'
-import { UilUserCircle, UilClipboardNotes, UilEnvelope, UilPhone, UilMap, UilMapMarker, UilPen, UilPuzzlePiece, UilListUl, UilSave, UilHistory, UilTimes, UilBuilding, UilKeySkeleton } from '@iconscout/react-unicons'
+import { UilUserCircle, UilClipboardNotes, UilEnvelope, UilPhone, UilMap, UilMapMarker, UilPen, UilPuzzlePiece, UilListUl, UilSave, UilHistory, UilTimes, UilBuilding, UilKeySkeleton, UilCheck, UilBackward } from '@iconscout/react-unicons'
 import { AddUser, EditUser, GetCurrentUserFromStore, GetCurrentUserSetorNameWithIdFromStore, GetCurrentUserTypeFromStore, GetCurrentUserTypeNameWithIdFromStore, GetCurrentUserTypeWithIdFromStore, GetSetoresFromStore, GetUserTypesFromStore, GetUserWithIdFromStore } from '../../../Functions/Middleware'
 import { DefaultUser } from '../../../Data/User';
 import { DefaultSetor, DefaultUserType } from '../../../Data/Items';
@@ -18,6 +18,8 @@ import { noOptionsMessage, UserModalSelectcustomStyles } from './UserModalUtils'
 import { v4 } from 'uuid';
 import { LoginFirebase, mudarSenha } from '../../../Config/firebase/auth';
 
+
+
 const UserModal = (props) => {
 
 
@@ -32,6 +34,8 @@ const UserModal = (props) => {
     const [UserSetor, setUserSetor] = useState({ ...DefaultSetor })
     const [Setores] = useState(GetSetoresFromStore())
     const [TiposUsuarios] = useState(GetUserTypesFromStore())
+    const [ConfirmEdit, SetConfirmEdit] = useState(false)
+    const [ConfirmAdd, SetConfirmAdd] = useState(false)
 
     //CURRENT USER
 
@@ -138,52 +142,58 @@ const UserModal = (props) => {
 
 
     //SAVLA ALTERAÇÔES
-    const SaveEdit = (e) => {
+    const SaveEdit = () => {
 
-        e.preventDefault()
+        if (((CanEdit || IsAdmin) || PermitToEditUsers)) {
 
+            const EditedUser = { ...User }
 
-        if ((CanEdit || IsAdmin) || PermitToEditUsers) {
-            if (CopyUserPhone.length < 11 && CopyUserPhone.length > 0) {
-                NotificationAlerta('Preenchimento inválido', 'O Telefone de ter um mínimo 12 digitos')
-            } else if (CopyUserPhone.length === 0) {
-                NotificationAlerta('Preenchimento inválido', 'O telefone não pode ser vazio')
-            } else if (CopyUserName.length === 0) {
-                NotificationAlerta('Preenchimento inválido', 'O nome não pode ser vazio')
-            } else if (CopyUserLastName.length === 0) {
-                NotificationAlerta('Preenchimento inválido', 'O sobrenome não pode ser vazio')
-            } else if (!CopyUserCountry.name) {
-                NotificationAlerta('Preenchimento inválido', 'O País não pode ser vazio')
-            } else if (!CopyUserEstate.name) {
-                NotificationAlerta('Preenchimento inválido', 'O Estado não pode ser vazio')
-            } else if (!CopyUserCity.name) {
-                NotificationAlerta('Preenchimento inválido', 'A Cidade não pode ser vazia')
-            } else {
+            EditedUser.Name = CopyUserName
+            EditedUser.LastName = CopyUserLastName
+            EditedUser.Phone = CopyUserPhone
+            EditedUser.Estate = CopyUserEstate
+            EditedUser.City = CopyUserCity
+            EditedUser.Country = CopyUserCountry
+            EditedUser.Type = CopyUserType
+            EditedUser.Sector = CopyUserSector
 
+            setUser({ ...EditedUser })
+            EditUser(EditedUser).then(() => {
+                FillCopyes(EditedUser)
+                NotificationSucesso('Alteração', 'Alterações salvas com sucesso!')
+            })
 
-                const EditedUser = { ...User }
+            SetConfirmEdit(false)
 
-                EditedUser.Name = CopyUserName
-                EditedUser.LastName = CopyUserLastName
-                EditedUser.Phone = CopyUserPhone
-                EditedUser.Estate = CopyUserEstate
-                EditedUser.City = CopyUserCity
-                EditedUser.Country = CopyUserCountry
-                EditedUser.Type = CopyUserType
-                EditedUser.Sector = CopyUserSector
-
-                setUser({ ...EditedUser })
-                EditUser(EditedUser).then(() => {
-                    FillCopyes(EditedUser)
-                    NotificationSucesso('Alteração', 'Alterações salvas com sucesso!')
-                })
-            }
         }
     }
 
     //SAVLA ADICIONAR USUARI ONOVO
     const AddNewUser = () => {
 
+        const NewUser = { ...User }
+
+        NewUser.Id = v4()
+        NewUser.Email = CopyUserEmail.toLocaleLowerCase()
+        NewUser.Name = CopyUserName
+        NewUser.LastName = CopyUserLastName
+        NewUser.Phone = CopyUserPhone
+        NewUser.Estate = CopyUserEstate
+        NewUser.City = CopyUserCity
+        NewUser.Country = CopyUserCountry
+        NewUser.Type = CopyUserType
+        NewUser.Sector = CopyUserSector
+        setUser({ ...NewUser })
+        AddUser(NewUser).then(() => {
+            CancelEditions()
+            props.onHide()
+            NotificationSucesso('Adição', 'Usuário Adicionado com Sucesso!')
+        })
+
+    }
+
+
+    const InitConfirmAdd = () => {
         if (CopyUserName.Email === 0)
             NotificationAlerta('Preenchimento inválido', 'O Email não pode ser vazio')
         else if (CopyUserPhone.length < 11 && CopyUserPhone.length > 0)
@@ -205,27 +215,8 @@ const UserModal = (props) => {
         else if (!CopyUserSector.Id)
             NotificationAlerta('Preenchimento inválido', 'Seleciona um Setor')
         else {
-            const NewUser = { ...User }
-
-            NewUser.Id = v4()
-            NewUser.Email = CopyUserEmail.toLocaleLowerCase()
-            NewUser.Name = CopyUserName
-            NewUser.LastName = CopyUserLastName
-            NewUser.Phone = CopyUserPhone
-            NewUser.Estate = CopyUserEstate
-            NewUser.City = CopyUserCity
-            NewUser.Country = CopyUserCountry
-            NewUser.Type = CopyUserType
-            NewUser.Sector = CopyUserSector
-            setUser({ ...NewUser })
-            AddUser(NewUser).then(() => {
-                CancelEditions()
-                props.onHide()
-                NotificationSucesso('Adição', 'Usuário Adicionado com Sucesso!')
-            })
-
+            SetConfirmAdd(true)
         }
-
     }
 
 
@@ -257,10 +248,43 @@ const UserModal = (props) => {
         }
     }
 
+    const InitSaveEdit = () => {
+        if ((CanEdit || IsAdmin) || PermitToEditUsers) {
+            if (CopyUserPhone.length < 11 && CopyUserPhone.length > 0) {
+                NotificationAlerta('Preenchimento inválido', 'O Telefone de ter um mínimo 12 digitos')
+            } else if (CopyUserPhone.length === 0) {
+                NotificationAlerta('Preenchimento inválido', 'O telefone não pode ser vazio')
+            } else if (CopyUserName.length === 0) {
+                NotificationAlerta('Preenchimento inválido', 'O nome não pode ser vazio')
+            } else if (CopyUserLastName.length === 0) {
+                NotificationAlerta('Preenchimento inválido', 'O sobrenome não pode ser vazio')
+            } else if (!CopyUserCountry.name) {
+                NotificationAlerta('Preenchimento inválido', 'O País não pode ser vazio')
+            } else if (!CopyUserEstate.name) {
+                NotificationAlerta('Preenchimento inválido', 'O Estado não pode ser vazio')
+            } else if (!CopyUserCity.name) {
+                NotificationAlerta('Preenchimento inválido', 'A Cidade não pode ser vazia')
+            } else {
+                SetConfirmEdit(true)
+            }
+        }
+    }
+
+
+    const EndSaveEdit = () => {
+        SetConfirmEdit(false)
+    }
+    const EndAddConfirm = () => {
+        SetConfirmAdd(false)
+    }
+
     return (
         <Modal {...props} size="xl" aria-labelledby="contained-modal-title-vcenter" centered fullscreen={'md-down'} className={localStorage.getItem('AssetSenseTema') === 'Escuro' ? 'UserModal-ModalEscuro UserModal-Modal' : 'UserModal-ModalClaro UserModal-Modal'}>
 
             <Modal.Body closeButton className="UserModal-Body">
+
+
+
 
                 <div className='UserModal'>
                     <div className='UserModalHeader'>
@@ -310,245 +334,279 @@ const UserModal = (props) => {
                                 </div>
                             }
                         </div>
-                        <div className='UserModalBody-UserInfo'>
-                            {Tab === 'UserInfo' && <div className='UserModalBody-UserInfoForm'>
-                                <form onSubmit={GetUserSubmit}>
+                        {!ConfirmEdit && !ConfirmAdd &&
+                            <div className='UserModalBody-UserInfo'>
+                                {Tab === 'UserInfo' && <div className='UserModalBody-UserInfoForm'>
+                                    <form onSubmit={GetUserSubmit}>
 
-                                    <h4 className='UserModalBody-UserInfoForm-SectionTitle'>Dados Cadastrais</h4>
+                                        <h4 className='UserModalBody-UserInfoForm-SectionTitle'>Dados Cadastrais</h4>
 
 
-                                    <div className='UserModalBody-UserInfoForm-OneLine'>
-                                        <div className='UserModalBody-UserInfoForm-Group'>
-                                            <span>
-                                                <UilEnvelope />
-                                                Email
-                                            </span>
-                                            {props.Function === 'Add' && <input value={CopyUserEmail} type="text" placeholder='Email' onChange={e => HandleChangeInfo('Email', e.target.value)} />}
-                                            {props.Function !== 'Add' && <input value={User.Email} type="text" placeholder='Email' />}
+                                        <div className='UserModalBody-UserInfoForm-OneLine'>
+                                            <div className='UserModalBody-UserInfoForm-Group'>
+                                                <span>
+                                                    <UilEnvelope />
+                                                    Email
+                                                </span>
+                                                {props.Function === 'Add' && <input value={CopyUserEmail} type="text" placeholder='Email' onChange={e => HandleChangeInfo('Email', e.target.value)} />}
+                                                {props.Function !== 'Add' && <input value={User.Email} type="text" placeholder='Email' />}
+                                            </div>
                                         </div>
-                                    </div>
 
 
-                                    <div className='UserModalBody-UserInfoForm-TwoLine'>
-                                        <div className='UserModalBody-UserInfoForm-Group'>
-                                            <span>
-                                                <UilPen />
-                                                Nome
-                                            </span>
-                                            <input disabled={!CanEdit} value={CopyUserName} type="text" onChange={e => HandleChangeInfo('Name', e.target.value)} />
-                                        </div>
-                                        <div className='UserModalBody-UserInfoForm-Group'>
-                                            <span>
-                                                <UilPen />
-                                                Sobrenome
-                                            </span>
-                                            <input disabled={!CanEdit} value={CopyUserLastName} type="text" onChange={e => HandleChangeInfo('LastName', e.target.value)} />
-                                        </div>
-                                    </div>
-
-
-
-                                    <div className='UserModalBody-UserInfoForm-OneLine'>
-                                        <div className='UserModalBody-UserInfoForm-Group'>
-                                            <span>
-                                                <UilPhone />
-                                                Telefone
-                                            </span>
-                                            <PhoneInput
-                                                containerClass="UserModalBody-UserInfoForm-PhoneInput-Container"
-                                                inputClass="UserModalBody-UserInfoForm-PhoneInput"
-                                                buttonClass="UserModalBody-UserInfoForm-PhoneInput-Button"
-                                                dropdownClass="UserModalBody-UserInfoForm-PhoneInput-Dropdown"
-                                                containerStyle={{ margin: '0', padding: '0', width: '100%', fontSize: '12px' }}
-                                                country={'br'}
-                                                value={CopyUserPhone}
-                                                disabled={!CanEdit}
-                                                onChange={e => HandleChangeInfo('Phone', e)}
-                                            />
-
-                                        </div>
-                                    </div>
-
-
-
-
-                                    <div className='UserModalBody-UserInfoForm-TwoLine'>
-                                        <div className='UserModalBody-UserInfoForm-Group'>
-                                            <span>
-                                                <UilMap />
-                                                País
-                                            </span>
-                                            <Select
-                                                className='UserModalBody-UserInfoForm-LocationSelect'
-                                                placeholder="Selecione o País"
-                                                noOptionsMessage={noOptionsMessage}
-                                                options={Country.getAllCountries()}
-                                                getOptionLabel={(options) => { return options["name"]; }}
-                                                getOptionValue={(options) => { return options["name"]; }}
-                                                styles={UserModalSelectcustomStyles}
-                                                value={CopyUserCountry}
-                                                isDisabled={!CanEdit}
-                                                onChange={(item) => {
-                                                    setCopyUserCountry(item);;
-                                                    setCopyUserEstate({ name: '' });
-                                                    setCopyUserCity({ name: '' });
-                                                }}
-                                            />
-                                        </div>
-                                        <div className='UserModalBody-UserInfoForm-Group'>
-                                            <span>
-                                                <UilMapMarker />
-                                                Estado
-                                            </span>
-                                            <Select
-                                                className='UserModalBody-UserInfoForm-LocationSelect'
-                                                placeholder="Selecione o Estado"
-                                                noOptionsMessage={noOptionsMessage}
-                                                options={State?.getStatesOfCountry(CopyUserCountry?.isoCode)}
-                                                getOptionLabel={(options) => { return options["name"]; }}
-                                                getOptionValue={(options) => { return options["name"]; }}
-                                                styles={UserModalSelectcustomStyles}
-                                                isDisabled={!CanEdit}
-                                                value={CopyUserEstate}
-                                                onChange={(item) => {
-                                                    setCopyUserEstate(item);
-                                                    setCopyUserCity({ name: '' });
-                                                }}
-                                            />
-                                        </div>
-                                    </div>
-
-
-                                    <div className='UserModalBody-UserInfoForm-OneLine'>
-                                        <div className='UserModalBody-UserInfoForm-Group'>
-                                            <span>
-                                                <UilBuilding />
-                                                Cidade
-                                            </span>
-                                            <Select
-                                                className='UserModalBody-UserInfoForm-LocationSelect'
-                                                placeholder="Selecione a Cidade"
-                                                noOptionsMessage={noOptionsMessage}
-                                                options={City.getCitiesOfState(
-                                                    CopyUserEstate?.countryCode,
-                                                    CopyUserEstate?.isoCode
-                                                )}
-                                                getOptionLabel={(options) => { return options["name"]; }}
-                                                getOptionValue={(options) => { return options["name"]; }}
-                                                styles={UserModalSelectcustomStyles}
-                                                isDisabled={!CanEdit}
-                                                value={CopyUserCity}
-                                                onChange={(item) => {
-                                                    setCopyUserCity(item);
-                                                }}
-                                                allowCreate={true}
-                                            />
-                                        </div>
-                                    </div>
-
-                                    {IsCurrentUser && <div className='UserModalBody-UserInfoForm-SectionTitle'></div>}
-                                    {IsCurrentUser && <h4 className='UserModalBody-UserInfoForm-SectionTitle'>Trocar de Senha</h4>}
-                                    {IsCurrentUser &&
                                         <div className='UserModalBody-UserInfoForm-TwoLine'>
                                             <div className='UserModalBody-UserInfoForm-Group'>
                                                 <span>
-                                                    <UilKeySkeleton />
-                                                    Senha Atual
+                                                    <UilPen />
+                                                    Nome
                                                 </span>
-                                                <input placeholder='Digite sua Senha' ref={SenhaAtual} type="password" />
+                                                <input disabled={!CanEdit} value={CopyUserName} type="text" onChange={e => HandleChangeInfo('Name', e.target.value)} />
                                             </div>
                                             <div className='UserModalBody-UserInfoForm-Group'>
                                                 <span>
-                                                    <UilKeySkeleton />
-                                                    Nova Senha
+                                                    <UilPen />
+                                                    Sobrenome
                                                 </span>
-                                                <input placeholder='Digite a nova Senha' ref={NovaSenha} type="password" />
+                                                <input disabled={!CanEdit} value={CopyUserLastName} type="text" onChange={e => HandleChangeInfo('LastName', e.target.value)} />
                                             </div>
                                         </div>
-                                    }
-
-                                    {IsCurrentUser &&
-                                        < div className='UserModalBody-UserInfoForm-Button'>
-                                            <button onClick={UpdatePassword}>
-                                                <UilPen />
-                                                Atualizar
-                                            </button>
-                                        </div>
-                                    }
 
 
 
-                                    <h4 className='UserModalBody-UserInfoForm-SectionTitle'>Na Empresa</h4>
+                                        <div className='UserModalBody-UserInfoForm-OneLine'>
+                                            <div className='UserModalBody-UserInfoForm-Group'>
+                                                <span>
+                                                    <UilPhone />
+                                                    Telefone
+                                                </span>
+                                                <PhoneInput
+                                                    containerClass="UserModalBody-UserInfoForm-PhoneInput-Container"
+                                                    inputClass="UserModalBody-UserInfoForm-PhoneInput"
+                                                    buttonClass="UserModalBody-UserInfoForm-PhoneInput-Button"
+                                                    dropdownClass="UserModalBody-UserInfoForm-PhoneInput-Dropdown"
+                                                    containerStyle={{ margin: '0', padding: '0', width: '100%', fontSize: '12px' }}
+                                                    country={'br'}
+                                                    value={CopyUserPhone}
+                                                    disabled={!CanEdit}
+                                                    onChange={e => HandleChangeInfo('Phone', e)}
+                                                />
 
-
-
-                                    <div className='UserModalBody-UserInfoForm-TwoLine'>
-                                        <div className='UserModalBody-UserInfoForm-Group'>
-
-                                            <div className='UserModalBody-UserInfoForm-SetorList'>
-                                                <div className='UserModalBody-UserInfoForm-SetorList-Title'>
-                                                    <UilPuzzlePiece />
-                                                    Setor
-                                                </div>
-                                                <div className='UserModalBody-UserInfoForm-SetorList-Itens'>
-                                                    {Setores.map(Setor => {
-                                                        return <div className={'UserModalBody-UserInfoForm-SetorList-Item'} onClick={e => HandleChangeInfo('Sector', Setor.Id)}>
-                                                            {CopyUserSector.Id === Setor.Id ? <ImCheckboxChecked /> : <ImCheckboxUnchecked />}
-                                                            {Setor?.Value}
-                                                        </div>
-                                                    })}
-                                                </div>
-                                            </div>
-
-                                        </div>
-
-                                        <div className='UserModalBody-UserInfoForm-Group'>
-                                            <div className='UserModalBody-UserInfoForm-TiposUserList'>
-                                                <div className='UserModalBody-UserInfoForm-TiposUserList-Title'>
-                                                    <UilListUl />
-                                                    Tipos de Usuario
-                                                </div>
-                                                <div className='UserModalBody-UserInfoForm-TiposUserList-Itens'>
-                                                    {TiposUsuarios.map(TipoUser => {
-                                                        return <div className={'UserModalBody-UserInfoForm-TiposUserList-Item'} onClick={e => HandleChangeInfo('Type', TipoUser.Id)}>
-                                                            {CopyUserType.Id === TipoUser.Id ? <ImCheckboxChecked /> : <ImCheckboxUnchecked />}
-                                                            {TipoUser?.Value}
-                                                        </div>
-                                                    })}
-                                                </div>
                                             </div>
                                         </div>
+
+
+
+
+                                        <div className='UserModalBody-UserInfoForm-TwoLine'>
+                                            <div className='UserModalBody-UserInfoForm-Group'>
+                                                <span>
+                                                    <UilMap />
+                                                    País
+                                                </span>
+                                                <Select
+                                                    className='UserModalBody-UserInfoForm-LocationSelect'
+                                                    placeholder="Selecione o País"
+                                                    noOptionsMessage={noOptionsMessage}
+                                                    options={Country.getAllCountries()}
+                                                    getOptionLabel={(options) => { return options["name"]; }}
+                                                    getOptionValue={(options) => { return options["name"]; }}
+                                                    styles={UserModalSelectcustomStyles}
+                                                    value={CopyUserCountry}
+                                                    isDisabled={!CanEdit}
+                                                    onChange={(item) => {
+                                                        setCopyUserCountry(item);;
+                                                        setCopyUserEstate({ name: '' });
+                                                        setCopyUserCity({ name: '' });
+                                                    }}
+                                                />
+                                            </div>
+                                            <div className='UserModalBody-UserInfoForm-Group'>
+                                                <span>
+                                                    <UilMapMarker />
+                                                    Estado
+                                                </span>
+                                                <Select
+                                                    className='UserModalBody-UserInfoForm-LocationSelect'
+                                                    placeholder="Selecione o Estado"
+                                                    noOptionsMessage={noOptionsMessage}
+                                                    options={State?.getStatesOfCountry(CopyUserCountry?.isoCode)}
+                                                    getOptionLabel={(options) => { return options["name"]; }}
+                                                    getOptionValue={(options) => { return options["name"]; }}
+                                                    styles={UserModalSelectcustomStyles}
+                                                    isDisabled={!CanEdit}
+                                                    value={CopyUserEstate}
+                                                    onChange={(item) => {
+                                                        setCopyUserEstate(item);
+                                                        setCopyUserCity({ name: '' });
+                                                    }}
+                                                />
+                                            </div>
+                                        </div>
+
+
+                                        <div className='UserModalBody-UserInfoForm-OneLine'>
+                                            <div className='UserModalBody-UserInfoForm-Group'>
+                                                <span>
+                                                    <UilBuilding />
+                                                    Cidade
+                                                </span>
+                                                <Select
+                                                    className='UserModalBody-UserInfoForm-LocationSelect'
+                                                    placeholder="Selecione a Cidade"
+                                                    noOptionsMessage={noOptionsMessage}
+                                                    options={City.getCitiesOfState(
+                                                        CopyUserEstate?.countryCode,
+                                                        CopyUserEstate?.isoCode
+                                                    )}
+                                                    getOptionLabel={(options) => { return options["name"]; }}
+                                                    getOptionValue={(options) => { return options["name"]; }}
+                                                    styles={UserModalSelectcustomStyles}
+                                                    isDisabled={!CanEdit}
+                                                    value={CopyUserCity}
+                                                    onChange={(item) => {
+                                                        setCopyUserCity(item);
+                                                    }}
+                                                    allowCreate={true}
+                                                />
+                                            </div>
+                                        </div>
+
+                                        {IsCurrentUser && <div className='UserModalBody-UserInfoForm-SectionTitle'></div>}
+                                        {IsCurrentUser && <h4 className='UserModalBody-UserInfoForm-SectionTitle'>Trocar de Senha</h4>}
+                                        {IsCurrentUser &&
+                                            <div className='UserModalBody-UserInfoForm-TwoLine'>
+                                                <div className='UserModalBody-UserInfoForm-Group'>
+                                                    <span>
+                                                        <UilKeySkeleton />
+                                                        Senha Atual
+                                                    </span>
+                                                    <input placeholder='Digite sua Senha' ref={SenhaAtual} type="password" />
+                                                </div>
+                                                <div className='UserModalBody-UserInfoForm-Group'>
+                                                    <span>
+                                                        <UilKeySkeleton />
+                                                        Nova Senha
+                                                    </span>
+                                                    <input placeholder='Digite a nova Senha' ref={NovaSenha} type="password" />
+                                                </div>
+                                            </div>
+                                        }
+
+                                        {IsCurrentUser &&
+                                            <div className='UserModalBody-UserInfoForm-Button'>
+                                                <button onClick={UpdatePassword}>
+                                                    <UilPen />
+                                                    Atualizar
+                                                </button>
+                                            </div>
+                                        }
+
+
+
+                                        <h4 className='UserModalBody-UserInfoForm-SectionTitle'>Na Empresa</h4>
+
+
+
+                                        <div className='UserModalBody-UserInfoForm-TwoLine'>
+                                            <div className='UserModalBody-UserInfoForm-Group'>
+
+                                                <div className='UserModalBody-UserInfoForm-SetorList'>
+                                                    <div className='UserModalBody-UserInfoForm-SetorList-Title'>
+                                                        <UilPuzzlePiece />
+                                                        Setor
+                                                    </div>
+                                                    <div className='UserModalBody-UserInfoForm-SetorList-Itens'>
+                                                        {Setores.map(Setor => {
+                                                            return <div className={'UserModalBody-UserInfoForm-SetorList-Item'} onClick={e => HandleChangeInfo('Sector', Setor.Id)}>
+                                                                {CopyUserSector.Id === Setor.Id ? <ImCheckboxChecked /> : <ImCheckboxUnchecked />}
+                                                                {Setor?.Value}
+                                                            </div>
+                                                        })}
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                            <div className='UserModalBody-UserInfoForm-Group'>
+                                                <div className='UserModalBody-UserInfoForm-TiposUserList'>
+                                                    <div className='UserModalBody-UserInfoForm-TiposUserList-Title'>
+                                                        <UilListUl />
+                                                        Tipos de Usuario
+                                                    </div>
+                                                    <div className='UserModalBody-UserInfoForm-TiposUserList-Itens'>
+                                                        {TiposUsuarios.map(TipoUser => {
+                                                            return <div className={'UserModalBody-UserInfoForm-TiposUserList-Item'} onClick={e => HandleChangeInfo('Type', TipoUser.Id)}>
+                                                                {CopyUserType.Id === TipoUser.Id ? <ImCheckboxChecked /> : <ImCheckboxUnchecked />}
+                                                                {TipoUser?.Value}
+                                                            </div>
+                                                        })}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                    <div className='UserModalBody-UserInfoForm-Button'>
+                                        {IsEdited &&
+                                            <>
+                                                <button onClick={CancelEditions}>
+                                                    <UilTimes />
+                                                    {props.Function === 'Add' ? 'Limpar Campos' : 'Cancelar'}
+                                                </button>
+
+                                                {props.Function === 'Add' &&
+                                                    <button onClick={InitConfirmAdd}>
+                                                        <UilSave />
+                                                        Adicionar
+                                                    </button>
+                                                }
+
+                                                {props.Function !== 'Add' &&
+                                                    <button onClick={InitSaveEdit}>
+                                                        <UilSave />
+                                                        Salvar
+                                                    </button>
+                                                }
+
+
+                                            </>
+
+                                        }
                                     </div>
-                                </form>
-                                <div className='UserModalBody-UserInfoForm-Button'>
-                                    {IsEdited &&
-                                        <>
-                                            <button onClick={CancelEditions}>
-                                                <UilTimes />
-                                                {props.Function === 'Add' ? 'Limpar Campos' : 'Cancelar'}
-                                            </button>
+                                </div>}
+                            </div>
+                        }
 
-                                            {props.Function === 'Add' &&
-                                                <button onClick={AddNewUser}>
-                                                    <UilSave />
-                                                    Adicionar
-                                                </button>
-                                            }
-
-                                            {props.Function !== 'Add' &&
-                                                <button onClick={SaveEdit}>
-                                                    <UilSave />
-                                                    Salvar
-                                                </button>
-                                            }
-
-
-                                        </>
-
-                                    }
-                                </div>
-                            </div>}
+                        {ConfirmEdit && <div className='UserModalBody-UserInfo'>
+                            <h4 className='UserModalBody-UserInfoForm-SectionTitle'>Você realmente deseja Atualizar as informações deste usuário?</h4>
+                            <div className='UserModalBody-UserInfoForm-Button'>
+                                <button className='UserModalBody-UserInfoForm-Button-Secondary' onClick={EndSaveEdit}>
+                                    <UilBackward />
+                                    Cancelar
+                                </button>
+                                <button onClick={SaveEdit}>
+                                    <UilCheck />
+                                    Atualizar
+                                </button>
+                            </div>
                         </div>
+                        }
+
+
+                        {ConfirmAdd && <div className='UserModalBody-UserInfo'>
+                            <h4 className='UserModalBody-UserInfoForm-SectionTitle'>Você realmente deseja Adicionar este Usuário?</h4>
+                            <div className='UserModalBody-UserInfoForm-Button'>
+                                <button className='UserModalBody-UserInfoForm-Button-Secondary' onClick={EndAddConfirm}>
+                                    <UilBackward />
+                                    Cancelar
+                                </button>
+                                <button onClick={AddNewUser}>
+                                    <UilCheck />
+                                    Adicionar
+                                </button>
+                            </div>
+                        </div>
+                        }
+
                     </div>
                 </div>
 

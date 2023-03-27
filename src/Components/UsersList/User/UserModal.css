@@ -34,6 +34,9 @@
     --UserModal-Sidebar-Item-Background-Hover: var(--PrimaryBackground);
     --UserModal-Sidebar-Item-Border-Hover: var(--PrimaryBackground);
     --UserModal-Sidebar-Item-Color-Hover: white;
+
+    --UserModal-Sidebar-Button-Secondary-Border: var(--ComplementaryColor);
+    --UserModal-Sidebar-Button-Secondary-Color: var(--ComplementaryColor);
 }
 
 
@@ -73,6 +76,12 @@
     --UserModal-Sidebar-Item-Background-Hover: var(--PrimaryBackground);
     --UserModal-Sidebar-Item-Border-Hover: var(--PrimaryBackground);
     --UserModal-Sidebar-Item-Color-Hover: white;
+
+
+    --UserModal-Sidebar-Button-Secondary-Border: var(--ComplementaryColor);
+    --UserModal-Sidebar-Button-Secondary-Color: var(--ComplementaryColor);
+
+
 }
 
 
@@ -541,6 +550,19 @@
     background-color: var(--ComplementaryColor);
     border: 1px solid var(--ComplementaryColor);
     color: var(--PrimaryColor);
+    border-radius: .5rem;
+    display: flex;
+    flex-direction: row;
+    gap: .5rem;
+    align-items: center;
+}
+
+.UserModalBody-UserInfoForm-Button>.UserModalBody-UserInfoForm-Button-Secondary {
+    padding: .5rem 1rem;
+    font-family: var(--Fonte);
+    background-color: transparent !important;
+    border: 1px solid var(--UserModal-Sidebar-Button-Secondary-Border);
+    color: var(--UserModal-Sidebar-Button-Secondary-Color);
     border-radius: .5rem;
     display: flex;
     flex-direction: row;
