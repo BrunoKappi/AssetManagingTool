@@ -6,6 +6,8 @@ import Tabs from 'react-bootstrap/Tabs';
 import UsersInSetores from '../UsersInSetores/UsersInSetores';
 import UsersInTypes from '../UsersInTypes/UsersInTypes';
 import UsersList from '../UsersList/UsersList';
+import { GetCurrentUserTypePermitFromStore } from '../../Functions/Middleware';
+import { NotificationErro } from '../../NotificationUtils';
 
 
 
@@ -13,18 +15,42 @@ import UsersList from '../UsersList/UsersList';
 
 export default function Users() {
 
-  const [key, setKey] = useState('Todos');
 
 
+  const TodosPermit = GetCurrentUserTypePermitFromStore('USUARIOS') || GetCurrentUserTypePermitFromStore('EDITAR_USUARIOS') || GetCurrentUserTypePermitFromStore('VISUALIZAR_USUARIOS')
+  const SetoresPermit = GetCurrentUserTypePermitFromStore('EDITAR_USUARIOS') || GetCurrentUserTypePermitFromStore('VISUALIZAR_USUARIOS')
+  const TiposPermit = GetCurrentUserTypePermitFromStore('EDITAR_USUARIOS') || GetCurrentUserTypePermitFromStore('VISUALIZAR_USUARIOS')
+
+  const getInitialTab = () => {
+    if (TodosPermit)
+      return 'Todos'
+    else if (SetoresPermit)
+      return 'Setores'
+    else if (TiposPermit)
+      return 'Tipos'
+  }
+
+  const [key, setKey] = useState(getInitialTab());
+
+  const SetKeyConfig = (Key) => {
+    if (Key === 'Todos' && TodosPermit)
+      setKey(Key)
+    else if (Key === 'Setores' && SetoresPermit)
+      setKey(Key)
+    else if (Key === 'Tipos' && TiposPermit)
+      setKey(Key)
+    else
+      NotificationErro("Não Autorizado", "Você não possui permissão para acessar essa aba, solicite acesso ao seu Administrador")
+  }
 
   return (
     <div className={localStorage.getItem('AssetSenseTema') === 'Escuro' ? 'UsersContainerEscuro UsersContainer' : 'UsersContainerClaro UsersContainer'}>
 
 
       <div className={localStorage.getItem('AssetSenseTema') === 'Escuro' ? 'TabsContainerEscuro TabsContainer' : 'TabsContainerClaro TabsContainer'}>
-        <button onClick={(k) => setKey('Todos')} className={key === 'Todos' ? 'TabsButtonActive' : ''}>{TodosTabTitle()}</button>
-        <button onClick={(k) => setKey('Setores')} className={key === 'Setores' ? 'TabsButtonActive' : ''}>{SetoresTabTitle()}</button>
-        <button onClick={(k) => setKey('Tipos')} className={key === 'Tipos' ? 'TabsButtonActive' : ''}>{TiposTabTitle()}</button>
+        <button onClick={(k) => SetKeyConfig('Todos')} className={key === 'Todos' ? 'TabsButtonActive' : ''}>{TodosTabTitle()}</button>
+        <button onClick={(k) => SetKeyConfig('Setores')} className={key === 'Setores' ? 'TabsButtonActive' : ''}>{SetoresTabTitle()}</button>
+        <button onClick={(k) => SetKeyConfig('Tipos')} className={key === 'Tipos' ? 'TabsButtonActive' : ''}>{TiposTabTitle()}</button>
       </div>
 
 

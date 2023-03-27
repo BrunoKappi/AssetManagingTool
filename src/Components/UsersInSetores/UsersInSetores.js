@@ -6,7 +6,8 @@ import { DragDropContext } from "react-beautiful-dnd";
 import { v4 } from 'uuid';
 import { connect } from 'react-redux'
 import NumbersOfList from '../NumbersOfList/NumbersOfList';
-import { SaveUsers } from '../../Functions/Middleware';
+import { GetCurrentUserTypePermitFromStore, SaveUsers } from '../../Functions/Middleware';
+import { NotificationErro } from '../../NotificationUtils';
 
 const breakpointColumnsObj = {
     default: 4,
@@ -18,14 +19,13 @@ const breakpointColumnsObj = {
 
 const UsersInSetores = (props) => {
 
+    const SetoresPermit = ( GetCurrentUserTypePermitFromStore('EDITAR_USUARIOS'))
+
     const [Setores, setSetores] = useState([
         ...props.Setores.map(element => {
             var Users = props.Usuarios.filter(el => el.Sector.Id === element.Id).length
             return { Id: element.Id, Value: element.Value, Qtd: Users }
         })])
-
-
-
 
 
     useEffect(() => {
@@ -43,18 +43,23 @@ const UsersInSetores = (props) => {
     const HandleDrag = (Resultado) => {
         //console.log(Resultado)
         if (!Resultado.destination) return;
-        const SectorDestinationID = Resultado.destination.droppableId.split("/")[0];
-        const UserId = Resultado.draggableId
+        if (SetoresPermit) {
+            const SectorDestinationID = Resultado.destination.droppableId.split("/")[0];
+            const UserId = Resultado.draggableId
 
-        const User = props.Usuarios.find(U => U.Id === UserId)
-        const IndexOfUser = props.Usuarios.indexOf(User)
-        User.Sector.Id = SectorDestinationID
+            const User = props.Usuarios.find(U => U.Id === UserId)
+            const IndexOfUser = props.Usuarios.indexOf(User)
+            User.Sector.Id = SectorDestinationID
 
-        const copiedItems = [...props.Usuarios];
-        copiedItems[IndexOfUser] = { ...User }
-        ////console.log(copiedItems)
-        SaveUsers(copiedItems)
-        //copiedItems.splice(IndexDestination, 0, removed);
+            const copiedItems = [...props.Usuarios];
+            copiedItems[IndexOfUser] = { ...User }
+            ////console.log(copiedItems)
+            SaveUsers(copiedItems)
+            //copiedItems.splice(IndexDestination, 0, removed);
+        } else {
+            NotificationErro("Ação não Autoriazada", 'Você não tem permissão para realizar essa ação, solicite autorização ao seu Administrador')
+        }
+
     }
 
     return (

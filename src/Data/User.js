@@ -94,14 +94,15 @@ if (!localStorage.getItem('AssetSenseUsers')) {
 
 
 
-
+const Permits = [true, true, true, true, true, true, false, false, true, true, true, true, true, true, true, true, true, true, true]
+const Permits2 = [true, true, true, true, true, true, false, false, true, true, true, true, true, true, true, true, true, true, true]
 
 
 export const UserRoles = [
-    { Id: '8c25a156-04b7-479f-874f-b16e63383cbd', Value: 'Funcionário', IsAdmin: false },
-    { Id: uuid(), Value: 'Cliente', IsAdmin: false },
-    { Id: '784c4def-b901-4883-b481-a4a6cf6dd070', Value: 'Administrador', IsAdmin: true },
-    { Id: uuid(), Value: 'Gerente', IsAdmin: true }
+    { Id: '8c25a156-04b7-479f-874f-b16e63383cbd', Value: 'Funcionário', IsAdmin: false, Permits: Permits },
+    { Id: uuid(), Value: 'Cliente', IsAdmin: false, Permits: Permits },
+    { Id: '784c4def-b901-4883-b481-a4a6cf6dd070', Value: 'Administrador', IsAdmin: true, Permits: Permits2 },
+    { Id: uuid(), Value: 'Gerente', IsAdmin: true, Permits: Permits2 }
 ]
 
 export const UserRolesReset = [{ Id: '784c4def-b901-4883-b481-a4a6cf6dd070', Value: 'Administrador', IsAdmin: true }]
@@ -109,7 +110,7 @@ export const UserRolesReset = [{ Id: '784c4def-b901-4883-b481-a4a6cf6dd070', Val
 
 export const DefaultUserRole = { Id: '', Role: '', IsAdmin: false }
 
-if (!localStorage.getItem('AssetSenseUsersTypes')) {
+if (!localStorage.getItem('AssetSenseUsersTypes') ) {
     localStorage.setItem('AssetSenseUsersTypes', JSON.stringify(UserRoles))
 }
 ////localStorage.setItem('AssetSenseUsersTypes', JSON.stringify(UserRolesReset)) //RESET

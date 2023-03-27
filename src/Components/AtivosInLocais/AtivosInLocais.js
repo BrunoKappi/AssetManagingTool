@@ -6,7 +6,8 @@ import { DragDropContext } from "react-beautiful-dnd";
 import { v4 } from 'uuid';
 import { connect } from 'react-redux'
 import NumbersOfList from '../NumbersOfList/NumbersOfList';
-import { SaveAtivos } from '../../Functions/Middleware';
+import { GetCurrentUserTypePermitFromStore, SaveAtivos } from '../../Functions/Middleware';
+import { NotificationErro } from '../../NotificationUtils';
 
 const breakpointColumnsObj = {
     default: 3,
@@ -17,7 +18,9 @@ const breakpointColumnsObj = {
 
 const AtivosInLocais = (props) => {
 
-    
+
+    const AtivosPermit = (GetCurrentUserTypePermitFromStore('EDITAR_ATIVOS'))
+
 
     const [LocaisArmazenamento, setLocaisArmazenamento] = useState([
         ...props.LocaisArmazenamento.map(element => {
@@ -28,7 +31,7 @@ const AtivosInLocais = (props) => {
 
 
     useEffect(() => {
-        
+
         setLocaisArmazenamento([
             ...props.LocaisArmazenamento.map(element => {
                 var Qtd = props.Ativos.filter(el => el.StorageLocation.Id === element.Id).length
@@ -37,34 +40,39 @@ const AtivosInLocais = (props) => {
     }, [props.Ativos, props.LocaisArmazenamento])
 
 
-    const onBeforeCapture = (Re) => { 
+    const onBeforeCapture = (Re) => {
         ////console.log("BEFORE", Re)
     };
 
     const HandleDrag = (Resultado) => {
         //console.log(Resultado)
 
-        if (!Resultado.destination) {           
+        if (!Resultado.destination) {
             return;
         }
 
+        if (AtivosPermit) {
+            const TypeDestinationID = Resultado.destination.droppableId.split("/")[0];
+            const ItemId = Resultado.draggableId
 
-        const TypeDestinationID = Resultado.destination.droppableId.split("/")[0];
-        const ItemId = Resultado.draggableId
+            const Ativo = props.Ativos.find(U => U.Id === ItemId)
+            const IndexOfAtivo = props.Ativos.indexOf(Ativo)
+            Ativo.StorageLocation.Id = TypeDestinationID
 
-        const Ativo = props.Ativos.find(U => U.Id === ItemId)
-        const IndexOfAtivo = props.Ativos.indexOf(Ativo)
-        Ativo.StorageLocation.Id = TypeDestinationID
+            const copiedItems = [...props.Ativos];
+            copiedItems[IndexOfAtivo] = { ...Ativo }
+            SaveAtivos(copiedItems)
+            //SaveUsers(copiedItems)
+        } else {
+            NotificationErro("Ação não Autoriazada", 'Você não tem permissão para realizar essa ação, solicite autorização ao seu Administrador')
+        }
 
-        const copiedItems = [...props.Ativos];
-        copiedItems[IndexOfAtivo] = { ...Ativo }
-        SaveAtivos(copiedItems)
-        //SaveUsers(copiedItems)
+
     }
 
     return (
         <DragDropContext onDragUpdate={(result) => { onBeforeCapture(result) }} onDragEnd={(result) => { HandleDrag(result) }}>
-            <div  className={localStorage.getItem('AssetSenseTema') === 'Escuro' ? 'AtivosInLocaisContainerEscuro AtivosInLocaisContainer' : 'AtivosInLocaisContainerClaro AtivosInLocaisContainer'}>
+            <div className={localStorage.getItem('AssetSenseTema') === 'Escuro' ? 'AtivosInLocaisContainerEscuro AtivosInLocaisContainer' : 'AtivosInLocaisContainerClaro AtivosInLocaisContainer'}>
 
                 <NumbersOfList Values={LocaisArmazenamento} />
 

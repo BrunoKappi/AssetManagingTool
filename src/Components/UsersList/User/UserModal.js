@@ -13,6 +13,7 @@ import PhoneInput from 'react-phone-input-2'
 import 'react-phone-input-2/lib/style.css'
 import { Country, State, City } from "country-state-city";
 import Select from "react-select";
+import { PermitIndexs } from '../../../GlobalVars'
 
 const UserModal = (props) => {
 
@@ -111,6 +112,11 @@ const UserModal = (props) => {
     }
 
     const HandleChangeInfo = (Info, Value) => {
+        var PermitToEditUsers = false
+        if (CurrentUserType?.Permits)
+            PermitToEditUsers = CurrentUserType?.Permits[PermitIndexs['EDITAR_USUARIOS']]
+
+
         if (CanEdit) {
             if (Info === 'Name')
                 setCopyUserName(Value)
@@ -125,7 +131,7 @@ const UserModal = (props) => {
             else if (Info === 'City')
                 setCopyUserCity(Value)
         }
-        if (CanEdit && IsAdmin) {
+        if ((CanEdit || IsAdmin) || PermitToEditUsers) {
             if (Info === 'Sector')
                 setCopyUserSector({ Id: Value })
             else if (Info === 'Type')
@@ -155,8 +161,12 @@ const UserModal = (props) => {
         } else
             setIsAdmin(false)
 
+        var PermitToEditUsers = false
+        if (CurrentUserType?.Permits)
+            PermitToEditUsers = CurrentUserType?.Permits[PermitIndexs['EDITAR_USUARIOS']]
+
         //CAN EDIT
-        if (IsCurrentUser || CurrentUserType.IsAdmin)
+        if (IsCurrentUser || CurrentUserType.IsAdmin || PermitToEditUsers)
             setCanEdit(true)
 
     }, [CurrentUserType, IsCurrentUser])
@@ -169,6 +179,7 @@ const UserModal = (props) => {
             if (User.Name !== '') {
                 setUserType(Lista.find(U => U.Id === User.Type.Id))
                 setCurrentUserType(Lista.find(U => U.Id === props.CurrentUser.Type.Id))
+
             }
         }).catch(Erro => {
             console.error(Erro)

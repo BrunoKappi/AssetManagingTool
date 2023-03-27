@@ -10,6 +10,10 @@
     --CustomGroupList-ListItem-Border-Hover: var(--ComplementaryColor);
     --CustomGroupList-ListItem-Color-Hover: white;
 
+    --CustomGroupList-ListItem-Background-Drag: var(--ComplementaryColor);
+    --CustomGroupList-ListItem-Border-Drag: var(--ComplementaryColor);
+    --CustomGroupList-ListItem-Color-Drag: white;
+
     --CustomGroupList-ListItem-Input-Background: transparent;
     --CustomGroupList-ListItem-Input-Color: var(--SecondaryBackground);
 
@@ -32,7 +36,7 @@
     --CustomGroupList-Title-Background: var(--PrimaryBackground);
     --CustomGroupList-Title-Color: white;
 
-    --CustomGroupList-ListItem-Background:  var(--PrimaryBackGroundFaded2);
+    --CustomGroupList-ListItem-Background: var(--PrimaryBackGroundFaded2);
     --CustomGroupList-ListItem-Border: rgb(211, 211, 211);
     --CustomGroupList-ListItem-Border-LR: rgb(211, 211, 211);
     --CustomGroupList-ListItem-Color: var(--ComplementaryColor);
@@ -40,9 +44,13 @@
     --CustomGroupList-ListItem-Border-Hover: var(--ComplementaryColor);
     --CustomGroupList-ListItem-Color-Hover: white;
 
+    --CustomGroupList-ListItem-Background-Drag: white;
+    --CustomGroupList-ListItem-Border-Drag: var(--ComplementaryColor);
+    --CustomGroupList-ListItem-Color-Drag: white;
+
     --CustomGroupList-ListItem-Input-Background: transparent;
     --CustomGroupList-ListItem-Input-Color: white;
-    
+
     --CustomGroupList-ListItem-Checkbox-Checked: var(--ComplementaryColor);
     --CustomGroupList-ListItem-Checkbox-UnChecked: var(--SecondaryBackground);
     --CustomGroupList-ListItem-Checkbox-Checked-Border: var(--ComplementaryColor);
@@ -215,6 +223,15 @@
     gap: .5rem;
 }
 
+.CustomGroupListItemDragging {
+    background-color: var(--CustomGroupList-ListItem-Background-Drag) !important;
+    border: 1px solid var(----CustomGroupList-ListItem-Border-Drag);
+    color: white !important;
+
+}
+
+
+
 /* ===================== CUSTOMGROUP LIST =================================*/
 
 
@@ -256,7 +273,7 @@
     border: 1px solid var(--CustomGroupList-ListItem-Checkbox-UnChecked-Border-Hover)
 }
 
-.checkmark { 
+.checkmark {
     position: relative;
     top: 0;
     left: 0;

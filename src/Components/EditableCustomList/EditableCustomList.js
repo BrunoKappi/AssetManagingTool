@@ -7,14 +7,14 @@ import ListGroup from 'react-bootstrap/ListGroup';
 import { v4 } from 'uuid';
 import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 import { DefaultItemType } from '../../Data/Items';
-import { NotificationSucesso } from '../../NotificationUtils';
+import { NotificationErro, NotificationSucesso } from '../../NotificationUtils';
 import { Tooltip } from 'react-tippy';
 import { GetNotificationErrorMessageDelete, GetNotificationSuccessMessageAdd, GetNotificationExistsMessageAdd, GetNotificationSuccessMessageDelete, GetNotificationSuccessMessageChangeName } from './EditableCustomListUtils';
 import Loading from '../LoadingForTabs/Loading'
 
 
 import { UilLabel, UilPuzzlePiece, UilBox, UilPlay, UilPlus, UilTrashAlt, UilBackspace, UilPen } from '@iconscout/react-unicons'
-import { fetchFunctions, saveFunctions, SaveUserTipos } from '../../Functions/Middleware';
+import { fetchFunctions, GetCurrentUserTypePermitFromStore, saveFunctions, SaveUserTipos } from '../../Functions/Middleware';
 
 const CustomListIcon = {
   TiposAtivos: <UilLabel />,
@@ -27,6 +27,23 @@ const CustomListIcon = {
 
 const EditableCustomList = (props) => {
 
+  const TiposAtvisoPermit = GetCurrentUserTypePermitFromStore('EDITAR_TIPOS_ATIVOS')
+  const LocaisPermit = GetCurrentUserTypePermitFromStore('EDITAR_LOCAIS')
+  const StatusAtivosPermit = GetCurrentUserTypePermitFromStore('EDITAR_STATUS_ATIVOS')
+  const TiposUsoPermit = GetCurrentUserTypePermitFromStore('EDITAR_TIPOS_DE_USO')
+  const SetoresPermit = GetCurrentUserTypePermitFromStore('EDITAR_SETORES')
+  const TiposUsuariosPermit = GetCurrentUserTypePermitFromStore('EDITAR_TIPOS_DE_USUARIO')
+
+  const CustomListPermits = {
+    TiposAtivos: TiposAtvisoPermit,
+    Setores: SetoresPermit,
+    TiposUsuarios: TiposUsuariosPermit,
+    Locais: LocaisPermit,
+    StatusAtivos: StatusAtivosPermit,
+    TiposUso: TiposUsoPermit
+  };
+
+
   const [ItemListSelected, setItemListSelected] = useState('');
   const [NewItemList, setNewItemList] = useState('');
   const [Loaded, setLoaded] = useState(false);
@@ -38,8 +55,6 @@ const EditableCustomList = (props) => {
 
 
   useEffect(() => {
-
-
     // Procura a função get correspondente com base no nome do módulo/prop
     const fetchFunction = fetchFunctions[props.Module] || (() => Promise.resolve());
 
@@ -56,98 +71,132 @@ const EditableCustomList = (props) => {
 
 
 
-
-
-
-  const InitEditing = () => { setEditingItem(true) }
-  const EndEditing = () => { setEditingItem(false) }
+  const InitEditing = () => {
+    if (CustomListPermits[props.Module])
+      setEditingItem(true)
+    else
+      NotificationErro("Não Autorizado", "Você não possui permissão para acessar essa aba, solicite acesso ao seu Administrador")
+  }
+  const EndEditing = () => {
+    setEditingItem(false)
+  }
 
 
 
   const HandleSubmiChangeItemName = (e, index, ID) => {
     e.preventDefault();
-    var ItensCopy = [...ListaDeItens];
-    ItensCopy[index].Value = document.getElementById(ID).value;
 
-    const saveFunction = saveFunctions[props.Module];
-    if (saveFunction) {
-      saveFunction(ItensCopy).then(() => {
-        setListaDeItens([...ItensCopy]);
-        EndEditing();
-        GetNotificationSuccessMessageChangeName(props.Module);
-      });
+    if (CustomListPermits[props.Module]) {
+      var ItensCopy = [...ListaDeItens];
+      if (!document.getElementById(ID).value) return
+      ItensCopy[index].Value = document.getElementById(ID).value;
+
+      const saveFunction = saveFunctions[props.Module];
+      if (saveFunction) {
+        setItemListSelected('')
+        saveFunction(ItensCopy).then(() => {
+          setListaDeItens([...ItensCopy]);
+          EndEditing();
+          GetNotificationSuccessMessageChangeName(props.Module);
+        });
+      } else {
+        NotificationErro("Não Autorizado", "Você não possui permissão para fazer essa alteração, solicite autorização para seu Administrador")
+      }
     }
+
+
   };
 
   const HandleSubmiAddItem = (e) => {
     e.preventDefault()
-    const Find = ListaDeItens.find(Item => Item.Value.toLocaleLowerCase() === NewItemList.toLocaleLowerCase())
 
-    if (!Find && NewItemList) {
-      var ItensCopy = [...ListaDeItens]
-      const NewItem = { ...DefaultItemType, Id: v4(), Value: NewItemList }
-      ItensCopy.push(NewItem)
+    if (CustomListPermits[props.Module]) {
+      const Find = ListaDeItens.find(Item => Item.Value.toLocaleLowerCase() === NewItemList.toLocaleLowerCase())
 
-      //Chama a função de salvamento correta usando o objeto saveFunctions
-      const saveFunction = saveFunctions[props.Module];
-      if (saveFunction) {
-        saveFunction(ItensCopy).then(() => {
-          setListaDeItens([...ItensCopy])
-          GetNotificationSuccessMessageAdd(props.Module)
-          setNewItemList('')
-        });
+      if (!Find && NewItemList) {
+        var ItensCopy = [...ListaDeItens]
+        const NewItem = { ...DefaultItemType, Id: v4(), Value: NewItemList }
+        ItensCopy.push(NewItem)
+
+        //Chama a função de salvamento correta usando o objeto saveFunctions
+        const saveFunction = saveFunctions[props.Module];
+        if (saveFunction) {
+          saveFunction(ItensCopy).then(() => {
+            setListaDeItens([...ItensCopy])
+            GetNotificationSuccessMessageAdd(props.Module)
+            setNewItemList('')
+          });
+        }
+
+      } else {
+        GetNotificationExistsMessageAdd(props.Module)
       }
-
+      setNewItemList('')
     } else {
-      GetNotificationExistsMessageAdd(props.Module)
+      NotificationErro("Não Autorizado", "Você não possui permissão para fazer essa alteração, solicite autorização para seu Administrador")
     }
-    setNewItemList('')
+
+
   }
 
 
   const HandleDeleteItem = (Index, Id) => {
-    var ItensCopy = [...ListaDeItens]
-    ItensCopy.splice(Index, 1)
 
-    var Associated
+    if (CustomListPermits[props.Module]) {
+      var ItensCopy = [...ListaDeItens]
+      ItensCopy.splice(Index, 1)
 
-    if (props.Module === "TiposAtivos")
-      Associated = props.Ativos.find(Ativo => Ativo.Type.Id === Id)
-    else if (props.Module === "Setores")
-      Associated = props.Usuarios.find(User => User.Sector.Id === Id)
-    else if (props.Module === "TiposUsuarios")
-      Associated = props.Usuarios.find(User => User.Type.Id === Id)
-    else if (props.Module === "Locais")
-      Associated = props.Ativos.find(Ativo => Ativo.StorageLocation.Id === Id)
-    else if (props.Module === "StatusAtivos")
-      Associated = props.Ativos.find(Ativo => Ativo.Status.Id === Id)
-    else if (props.Module === "TiposUso")
-      Associated = props.Ativos.find(Ativo => Ativo.Usage.Id === Id)
+      var Associated
 
-    const saveFunction = saveFunctions[props.Module]
+      if (props.Module === "TiposAtivos")
+        Associated = props.Ativos.find(Ativo => Ativo.Type.Id === Id)
+      else if (props.Module === "Setores")
+        Associated = props.Usuarios.find(User => User.Sector.Id === Id)
+      else if (props.Module === "TiposUsuarios")
+        Associated = props.Usuarios.find(User => User.Type.Id === Id)
+      else if (props.Module === "Locais")
+        Associated = props.Ativos.find(Ativo => Ativo.StorageLocation.Id === Id)
+      else if (props.Module === "StatusAtivos")
+        Associated = props.Ativos.find(Ativo => Ativo.Status.Id === Id)
+      else if (props.Module === "TiposUso")
+        Associated = props.Ativos.find(Ativo => Ativo.Usage.Id === Id)
 
-    if (Associated) {
-      GetNotificationErrorMessageDelete(props.Module)
+      const saveFunction = saveFunctions[props.Module]
+
+      if (Associated) {
+        GetNotificationErrorMessageDelete(props.Module)
+      } else {
+        saveFunction(ItensCopy).then(() => {
+          setListaDeItens([...ItensCopy])
+          GetNotificationSuccessMessageDelete(props.Module)
+        })
+      }
     } else {
-      saveFunction(ItensCopy).then(() => {
-        setListaDeItens([...ItensCopy])
-        GetNotificationSuccessMessageDelete(props.Module)
-      })
+      NotificationErro("Não Autorizado", "Você não possui permissão para fazer essa alteração, solicite autorização para seu Administrador")
     }
+
+
   }
 
 
   const HandleDrag = (Resultado) => {
     if (!Resultado.destination) return;
-    const IndexSource = Resultado.source.index;
-    const IndexDestination = Resultado.destination.index;
-    const copiedItems = [...ListaDeItens];
-    const [removed] = copiedItems.splice(IndexSource, 1);
-    copiedItems.splice(IndexDestination, 0, removed);
-    const saveFunction = saveFunctions[props.Module]
-    saveFunction(copiedItems).then(() => {
-      setListaDeItens([...copiedItems])
-    })
+
+    if (CustomListPermits[props.Module]) {
+      const IndexSource = Resultado.source.index;
+      const IndexDestination = Resultado.destination.index;
+      const copiedItems = [...ListaDeItens];
+      const [removed] = copiedItems.splice(IndexSource, 1);
+      copiedItems.splice(IndexDestination, 0, removed);
+      const saveFunction = saveFunctions[props.Module]
+      saveFunction(copiedItems).then(() => {
+        setListaDeItens([...copiedItems])
+      })
+    } else {
+      NotificationErro("Não Autorizado", "Você não possui permissão para fazer essa alteração, solicite autorização para seu Administrador")
+    }
+
+
   }
 
 
@@ -186,20 +235,20 @@ const EditableCustomList = (props) => {
                   return (
                     <div {...provided.droppableProps} ref={provided.innerRef}>
                       {ListaDeItens.map((Item, index) => {
-                        return <Draggable  key={Item.Id} draggableId={Item.Id} index={index} >
-                          {(DragProvided) => {
+                        return <Draggable key={Item.Id} draggableId={Item.Id} index={index} >
+                          {(DragProvided, Drag) => {
                             return (
-                              <div ref={DragProvided.innerRef} {...DragProvided.draggableProps} {...DragProvided.dragHandleProps}>
+                              <div className={Drag.isDragging ? ' CustomGroupListItemDragging' : ''} ref={DragProvided.innerRef} {...DragProvided.draggableProps} {...DragProvided.dragHandleProps}>
                                 <ListGroup.Item className='CustomGroupListItem' key={Item.Value + v4()} action as="li">
-                                  <div className='CustomGroupListTitleRow'>
-                                    {props.Module === "TiposUsuarios" && <Tooltip title="Permissões de Administrador" position="bottom" >
+                                  <div className='CustomGroupListTitleRow'  >
+                                    {props.Module === "TiposUsuarios" && false && <Tooltip title="Permissões de Administrador" position="bottom" >
                                       <label class="containerCheck">
                                         <input checked={Item.IsAdmin} onChange={e => HandleSubmiChangePermit(index)} type="checkbox"></input>
                                         <div class="checkmark"></div>
                                       </label>
                                     </Tooltip>
                                     }
-                                    <span className='CustomGroupListItem' onClick={e => { setItemListSelected(Item.Value); }}>
+                                    <span className='CustomGroupListItem' onClick={e => { if (CustomListPermits[props.Module]) { setItemListSelected(Item.Value); } }}>
 
                                       {EditingItem && ItemListSelected !== Item.Value && <span onClick={e => { setEditingItem(false); }}> {Item.Value}</span>}
 
@@ -257,7 +306,7 @@ const EditableCustomList = (props) => {
             <ListGroup.Item action as="li">
               <span className='CustomGroupListItem' >
                 <form onSubmit={HandleSubmiAddItem} className='CustomGroupListItem'>
-                  <input maxLength={50} type="text" placeholder='Novo Item' value={NewItemList} onChange={e => setNewItemList(e.target.value)} />
+                  <input maxLength={50} type="text" disabled={!CustomListPermits[props.Module]} placeholder='Novo Item' value={NewItemList} onChange={e => setNewItemList(e.target.value)} />
 
                   <Tooltip title="Adicionar Item" position="bottom" >
                     <button className='EditableCustomListAddButton'>
@@ -274,9 +323,9 @@ const EditableCustomList = (props) => {
 
 
 
-      </div>
+      </div >
 
-    </div>
+    </div >
   )
 }
 

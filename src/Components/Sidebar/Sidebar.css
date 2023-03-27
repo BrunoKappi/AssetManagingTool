@@ -80,6 +80,7 @@
     background-color: var(--Sidebar-Item-Background);
     border: 1px solid var(--Sidebar-Item-Border);
     color: var(--Sidebar-Item-Color);
+    cursor: pointer;
 }
 
 .SidebarItem:hover {

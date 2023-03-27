@@ -8,7 +8,8 @@ import { connect } from 'react-redux'
 import Chart from 'react-apexcharts'
 import { DefaultTypesProps, GetOptionsAndSeries } from './UsersInTypesUtils';
 import NumbersOfList from '../NumbersOfList/NumbersOfList';
-import { SaveUsers } from '../../Functions/Middleware';
+import { GetCurrentUserTypePermitFromStore, SaveUsers } from '../../Functions/Middleware';
+import { NotificationErro } from '../../NotificationUtils';
 
 const breakpointColumnsObj = {
     default: 4,
@@ -21,6 +22,8 @@ const breakpointColumnsObj = {
 
 const UsersInTypes = (props) => {
 
+    const TiposPermit = (GetCurrentUserTypePermitFromStore('EDITAR_USUARIOS'))
+
     const [Load, setLoad] = useState(false)
 
     useEffect(() => {
@@ -28,9 +31,7 @@ const UsersInTypes = (props) => {
             setLoad(true)
         }, 2000);
     }, [])
-    
 
-    //console.log("TESTE")
 
     const [Options, setOptions] = useState({ ...DefaultTypesProps })
     const [TiposUsuarios, setTiposUsuarios] = useState([
@@ -54,20 +55,25 @@ const UsersInTypes = (props) => {
 
     const HandleDrag = (Resultado) => {
         if (!Resultado.destination) return;
-        const TypeDestinationID = Resultado.destination.droppableId.split("/")[0];
-        const UserId = Resultado.draggableId
-        const User = props.Usuarios.find(U => U.Id === UserId)
-        const IndexOfUser = props.Usuarios.indexOf(User)
-        User.Type.Id = TypeDestinationID
-        const copiedItems = [...props.Usuarios];
-        copiedItems[IndexOfUser] = { ...User }
-        SaveUsers(copiedItems)
+        if (TiposPermit) {
+            const TypeDestinationID = Resultado.destination.droppableId.split("/")[0];
+            const UserId = Resultado.draggableId
+            const User = props.Usuarios.find(U => U.Id === UserId)
+            const IndexOfUser = props.Usuarios.indexOf(User)
+            User.Type.Id = TypeDestinationID
+            const copiedItems = [...props.Usuarios];
+            copiedItems[IndexOfUser] = { ...User }
+            SaveUsers(copiedItems)
+        } else {
+            NotificationErro("Ação não Autoriazada", 'Você não tem permissão para realizar essa ação, solicite autorização ao seu Administrador')
+        }
+
     }
 
     return (
         <DragDropContext onDragEnd={(result) => { HandleDrag(result) }}>
 
-            <div className={ Load ? 'UsersInSetoresContainers Animate' : 'UsersInSetoresContainers'}>
+            <div className={Load ? 'UsersInSetoresContainers Animate' : 'UsersInSetoresContainers'}>
 
                 <NumbersOfList Values={TiposUsuarios} />
 

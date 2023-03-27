@@ -10,10 +10,13 @@ import { Tooltip } from 'react-tippy';
 
 import { UilPuzzlePiece, UilShieldCheck, UilUser } from '@iconscout/react-unicons'
 
+
 const SectorList = (props) => {
 
 
   const [ListaDeItens,] = useState([...props.Users.filter(User => User.Sector.Id === props.Setor.Id)]);
+
+  
 
   return (
     <div>

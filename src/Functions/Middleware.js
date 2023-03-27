@@ -8,6 +8,7 @@ import { SetStatusAtivos } from "../Config/store/actions/AtivosStatusActions"
 import { SetTiposDeUso } from "../Config/store/actions/TiposDeUsoActions"
 import { SetAtivos } from "../Config/store/actions/AtivosActions"
 import { SetUsuarios } from "../Config/store/actions/UsuariosActions"
+import { PermitIndexs } from "../GlobalVars"
 
 
 export const LoginUtil = (email, password) => {
@@ -461,4 +462,37 @@ export async function ToggleTema() {
         localStorage.setItem('AssetSenseTema', 'Escuro')
 
 }
+
+
+
+
+
+// GET CURRENT USER /////
+
+export const GetCurrentUserEmailFromStore = () => {
+    return store.getState().LoggedUser.Email
+}
+
+export const GetUserTypesFromStore = () => {
+    return store.getState().TiposUsuarios
+}
+export const GetUsersFromStore = () => {
+    return store.getState().Usuarios
+}
+
+export const GetCurrentUserTypeFromStore = () => {
+    const Email = GetCurrentUserEmailFromStore()
+    const Users = GetUsersFromStore()
+    const Types = GetUserTypesFromStore() 
+    const CurrentUser = Users.find(U => U.Email === Email)
+    const CurrentUserType = Types.find(U => U.Id === CurrentUser.Type.Id)
+    return CurrentUserType
+}
+
+
+export const GetCurrentUserTypePermitFromStore = (Permit) => {
+    const CurrentUserType = GetCurrentUserTypeFromStore()
+    return CurrentUserType.Permits[PermitIndexs[Permit]] 
+}
+
 

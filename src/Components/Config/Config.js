@@ -5,19 +5,46 @@ import Masonry from "react-masonry-css";
 import EditableCustomList from '../EditableCustomList/EditableCustomList'
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
-import { AtivosTabTitle, SetoresEUsuáriosTabTitle } from './ConfigUtils';
+import { AtivosTabTitle, PermicoesTabTitle, SetoresEUsuáriosTabTitle } from './ConfigUtils';
+import UserTypesPermits from '../UserTypesPermits/UserTypesPermits';
+import { GetCurrentUserTypePermitFromStore } from '../../Functions/Middleware';
+import { NotificationErro } from '../../NotificationUtils';
+
+const breakpointColumnsObj = {
+  default: 3,
+  1250: 2,
+  950: 1
+};
 
 export default function Config() {
 
+  const AtivosPermit = GetCurrentUserTypePermitFromStore('CONFIGURACOES') || GetCurrentUserTypePermitFromStore('EDITAR_TIPOS_ATIVOS') || GetCurrentUserTypePermitFromStore('EDITAR_LOCAIS') || GetCurrentUserTypePermitFromStore('EDITAR_STATUS_ATIVOS') || GetCurrentUserTypePermitFromStore('EDITAR_TIPOS_DE_USO')
+  const SetoresUsuariosPermit = GetCurrentUserTypePermitFromStore('CONFIGURACOES') || GetCurrentUserTypePermitFromStore('EDITAR_SETORES') || GetCurrentUserTypePermitFromStore('EDITAR_TIPOS_DE_USUARIO')
+  const PermicoesPermit = GetCurrentUserTypePermitFromStore('CONFIGURACOES') || GetCurrentUserTypePermitFromStore('EDITAR_PERMICOES')
 
-  const [key, setKey] = useState('Ativos');
+  const getInitialTab = () => {
+    if (AtivosPermit)
+      return 'Ativos'
+    else if (SetoresUsuariosPermit)
+      return 'Setores e Usuários'
+    else if (PermicoesPermit)
+      return 'Permissoes'
+  }
 
-  const breakpointColumnsObj = {
-    default: 3,
-    1250: 2,
-    950: 1
-  };
+  const [key, setKey] = useState(getInitialTab());
 
+
+
+  const SetKeyConfig = (Key) => {
+    if (Key === 'Ativos' && AtivosPermit)
+      setKey(Key)
+    else if (Key === 'Setores e Usuários' && SetoresUsuariosPermit)
+      setKey(Key)
+    else if (Key === 'Permissoes' && PermicoesPermit)
+      setKey(Key)
+    else
+    NotificationErro("Não Autorizado", "Você não possui permissão para acessar essa aba, solicite autorização para seu Administrador")
+  }
 
 
   return (
@@ -28,8 +55,9 @@ export default function Config() {
 
 
       <div className={localStorage.getItem('AssetSenseTema') === 'Escuro' ? 'TabsContainerEscuro TabsContainer' : 'TabsContainerClaro TabsContainer'}>
-        <button onClick={(k) => setKey('Ativos')} className={key === 'Ativos' ? 'TabsButtonActive' : ''}>{AtivosTabTitle()}</button>
-        <button onClick={(k) => setKey('Setores e Usuários')} className={key === 'Setores e Usuários' ? 'TabsButtonActive' : ''}>{SetoresEUsuáriosTabTitle()}</button>
+        <button onClick={(k) => SetKeyConfig('Ativos')} className={key === 'Ativos' ? 'TabsButtonActive' : ''}>{AtivosTabTitle()}</button>
+        <button onClick={(k) => SetKeyConfig('Setores e Usuários')} className={key === 'Setores e Usuários' ? 'TabsButtonActive' : ''}>{SetoresEUsuáriosTabTitle()}</button>
+        <button onClick={(k) => SetKeyConfig('Permissoes')} className={key === 'Permissoes' ? 'TabsButtonActive' : ''}>{PermicoesTabTitle()}</button>
       </div>
 
 
@@ -51,6 +79,11 @@ export default function Config() {
               <EditableCustomList Title="Setores da Empresa" Module="Setores" />
               <EditableCustomList Title="Tipos de Usuários" Module="TiposUsuarios" />
             </Masonry>
+          </div>
+        </Tab>
+        <Tab eventKey="Permissoes"  >
+          <div className='ListItensContainer'>
+            <UserTypesPermits />
           </div>
         </Tab>
       </Tabs>
