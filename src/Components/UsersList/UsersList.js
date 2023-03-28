@@ -150,14 +150,6 @@ const UsersList = (props) => {
                     </Dropdown.Menu>
                 </Dropdown>
 
-
-
-
-
-
-
-
-
                 <button onClick={handleResetFiltros}>Limpar Filtro</button>
             </div>
 

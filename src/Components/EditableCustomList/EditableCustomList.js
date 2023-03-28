@@ -6,7 +6,7 @@ import './EditableCustomList.css'
 import ListGroup from 'react-bootstrap/ListGroup';
 import { v4 } from 'uuid';
 import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
-import { DefaultItemType } from '../../Data/Items';
+import { DefaultAtivoStatus, DefaultItemType } from '../../Data/Items';
 import { NotificationErro, NotificationSucesso } from '../../NotificationUtils';
 import { Tooltip } from 'react-tippy';
 import { GetNotificationErrorMessageDelete, GetNotificationSuccessMessageAdd, GetNotificationExistsMessageAdd, GetNotificationSuccessMessageDelete, GetNotificationSuccessMessageChangeName } from './EditableCustomListUtils';
@@ -14,7 +14,7 @@ import Loading from '../LoadingForTabs/Loading'
 
 
 import { UilLabel, UilPuzzlePiece, UilBox, UilPlay, UilPlus, UilTrashAlt, UilBackspace, UilPen } from '@iconscout/react-unicons'
-import { fetchFunctions, GetCurrentUserTypePermitFromStore, saveFunctions, SaveUserTipos } from '../../Functions/Middleware';
+import { fetchFunctions, GetCurrentUserTypePermitFromStore, saveFunctions, SaveStatusAtivos, SaveUserTipos } from '../../Functions/Middleware';
 import { DefaultUserRole } from '../../Data/User';
 
 const CustomListIcon = {
@@ -120,6 +120,8 @@ const EditableCustomList = (props) => {
 
         if (props.Module === 'TiposUsuarios')
           NewItem = { ...DefaultUserRole, Id: v4(), Value: NewItemList }
+        else if (props.Module === 'StatusAtivos')
+          NewItem = { ...DefaultAtivoStatus, Id: v4(), Value: NewItemList }
         else
           NewItem = { ...DefaultItemType, Id: v4(), Value: NewItemList }
 
@@ -210,13 +212,13 @@ const EditableCustomList = (props) => {
 
 
 
-  const HandleSubmiChangePermit = (index) => {
+  const HandleSubmiChangeCanTake = (index) => {
     var ItensCopy = [...ListaDeItens]
-    ItensCopy[index].IsAdmin = !ItensCopy[index].IsAdmin
-    SaveUserTipos(ItensCopy).then(() => {
+    ItensCopy[index].CanTake = !ItensCopy[index].CanTake
+    SaveStatusAtivos(ItensCopy).then(() => {
       setListaDeItens([...ItensCopy])
       EndEditing()
-      NotificationSucesso('Alteração', 'Permissões alteradas com sucesso!')
+      NotificationSucesso('Alteração', 'Status alterado com sucesso!')
     })
   }
 
@@ -250,13 +252,19 @@ const EditableCustomList = (props) => {
                               <div className={Drag.isDragging ? ' CustomGroupListItemDragging' : ''} ref={DragProvided.innerRef} {...DragProvided.draggableProps} {...DragProvided.dragHandleProps}>
                                 <ListGroup.Item className='CustomGroupListItem' key={Item.Value + v4()} action as="li">
                                   <div className='CustomGroupListTitleRow'  >
-                                    {props.Module === "TiposUsuarios" && false && <Tooltip title="Permissões de Administrador" position="bottom" >
+
+
+
+                                    {props.Module === "StatusAtivos" && <Tooltip title="Pode ser Utilizado" position="bottom" >
                                       <label class="containerCheck">
-                                        <input checked={Item.IsAdmin} onChange={e => HandleSubmiChangePermit(index)} type="checkbox"></input>
+                                        <input checked={Item.CanTake} type="checkbox" onChange={e => HandleSubmiChangeCanTake(index)} ></input>
                                         <div class="checkmark"></div>
                                       </label>
                                     </Tooltip>
                                     }
+
+
+
                                     <span className='CustomGroupListItem' onClick={e => { if (CustomListPermits[props.Module]) { setItemListSelected(Item.Value); } }}>
 
                                       {EditingItem && ItemListSelected !== Item.Value && <span onClick={e => { setEditingItem(false); }}> {Item.Value}</span>}

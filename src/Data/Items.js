@@ -11,7 +11,7 @@ const DefaultStorageLocation2 = { Id: '24d50296-fb80-473a-9eaa-f2745341b148' }
 
 
 //STATUS
-const DefautltAtivoStatus = { Id: '693ae26e-399e-4a2f-a646-d6315fb9a516' }
+const DefautltAtivoStatus1 = { Id: '693ae26e-399e-4a2f-a646-d6315fb9a516' }
 const DefautltAtivoStatus2 = { Id: '144febcf-6a34-4c60-9166-1751ff5e8e6b' }
 
 
@@ -20,53 +20,53 @@ const DefaultTipoUso = { Id: 'd0e718ac-9cdc-4d7a-ba00-711d68d2c108' }
 const DefaultTipoUso2 = { Id: 'a481167c-76f4-4412-a8ca-2e7c2569533b' }
 
 export const Items = [
-    { Id: uuid(), StorageLocation: { ...DefaultStorageLocation1 }, Item: 'CONVERSOR USB SERIAL', Type: { ...DefaultAtivoType }, Status: { ...DefautltAtivoStatus }, Records: [], Usage: { ...DefaultTipoUso } },
-    { Id: uuid(), StorageLocation: { ...DefaultStorageLocation1 }, Item: 'CABO PANEL VIEW PLUS 1000', Type: { ...DefaultAtivoType }, Status: { ...DefautltAtivoStatus }, Records: [], Usage: { ...DefaultTipoUso } },
-    { Id: uuid(), StorageLocation: { ...DefaultStorageLocation1 }, Item: '1747-NET-UIC', Type: { ...DefaultAtivoType }, Status: { ...DefautltAtivoStatus }, Records: [], Usage: { ...DefaultTipoUso } },
-    { Id: uuid(), StorageLocation: { ...DefaultStorageLocation1 }, Item: 'ROCKWELL SERIAL SLC-500/MICROLOGIX/CONTROLLOGIX', Type: { ...DefautltAtivoStatus2 }, Status: { ...DefautltAtivoStatus }, Records: [], Usage: { ...DefaultTipoUso } },
-    { Id: uuid(), StorageLocation: { ...DefaultStorageLocation1 }, Item: 'ROCKWELL SERIAL PLC-5', Type: { ...DefaultAtivoType }, Status: { ...DefautltAtivoStatus }, Records: [], Usage: { ...DefaultTipoUso } },
-    { Id: uuid(), StorageLocation: { ...DefaultStorageLocation }, Item: 'SIEMENS LOGO!', Type: { ...DefaultAtivoType }, Status: { ...DefautltAtivoStatus }, Records: [], Usage: { ...DefaultTipoUso } },
-    { Id: uuid(), StorageLocation: { ...DefaultStorageLocation1 }, Item: 'CABO MICROLOGIX DIN', Type: { ...DefaultAtivoType }, Status: { ...DefautltAtivoStatus }, Records: [], Usage: { ...DefaultTipoUso2 } },
-    { Id: uuid(), StorageLocation: { ...DefaultStorageLocation1 }, Item: 'SIEMENS S7-200 RS-232 - PPI', Type: { ...DefaultAtivoType }, Status: { ...DefautltAtivoStatus }, Records: [], Usage: { ...DefaultTipoUso } },
-    { Id: uuid(), StorageLocation: { ...DefaultStorageLocation1 }, Item: 'CABO S5 RS-232 - TTY', Type: { ...DefaultAtivoType }, Status: { ...DefautltAtivoStatus2 }, Records: [], Usage: { ...DefaultTipoUso } },
-    { Id: uuid(), StorageLocation: { ...DefaultStorageLocation1 }, Item: 'SIEMENS SINAMICS', Type: { ...DefaultAtivoType }, Status: { ...DefautltAtivoStatus }, Records: [], Usage: { ...DefaultTipoUso } },
-    { Id: uuid(), StorageLocation: { ...DefaultStorageLocation }, Item: 'SIEMENS S7-200/300 RS-232 - PPI/MPI', Type: { ...DefaultAtivoType }, Status: { ...DefautltAtivoStatus }, Records: [], Usage: { ...DefaultTipoUso } },
-    { Id: uuid(), StorageLocation: { ...DefaultStorageLocation1 }, Item: 'PC Adapter', Type: { ...DefaultAtivoType }, Status: { ...DefautltAtivoStatus }, Records: [], Usage: { ...DefaultTipoUso } },
-    { Id: uuid(), StorageLocation: { ...DefaultStorageLocation1 }, Item: 'FONTE PC ADAPTER', Type: { ...DefaultAtivoType }, Status: { ...DefautltAtivoStatus }, Records: [], Usage: { ...DefaultTipoUso } },
-    { Id: uuid(), StorageLocation: { ...DefaultStorageLocation1 }, Item: 'PC CABLE SIMOCODE', Type: { ...DefaultAtivoType }, Status: { ...DefautltAtivoStatus }, Records: [], Usage: { ...DefaultTipoUso } },
-    { Id: uuid(), StorageLocation: { ...DefaultStorageLocation }, Item: 'CONFIF PROSOFT', Type: { ...DefaultAtivoType }, Status: { ...DefautltAtivoStatus2 }, Records: [], Usage: { ...DefaultTipoUso } },
-    { Id: uuid(), StorageLocation: { ...DefaultStorageLocation1 }, Item: 'CABO ALTUS AL-1342', Type: { ...DefaultAtivoType }, Status: { ...DefautltAtivoStatus }, Records: [], Usage: { ...DefaultTipoUso } },
-    { Id: uuid(), StorageLocation: { ...DefaultStorageLocation1 }, Item: 'CABO ALTUS AL-1342', Type: { ...DefaultAtivoType }, Status: { ...DefautltAtivoStatus }, Records: [], Usage: { ...DefaultTipoUso } },
-    { Id: uuid(), StorageLocation: { ...DefaultStorageLocation1 }, Item: 'CABO PANEL VIEW 500/600', Type: { ...DefaultAtivoType }, Status: { ...DefautltAtivoStatus2 }, Records: [], Usage: { ...DefaultTipoUso } },
-    { Id: uuid(), StorageLocation: { ...DefaultStorageLocation1 }, Item: 'SIEMENS S7-200 RS-232 - PPI', Type: { ...DefaultAtivoType }, Status: { ...DefautltAtivoStatus }, Records: [], Usage: { ...DefaultTipoUso } },
-    { Id: uuid(), StorageLocation: { ...DefaultStorageLocation1 }, Item: 'SIEMENS S7-200/300 RS-232 - PPI/MPI', Type: { ...DefaultAtivoType }, Status: { ...DefautltAtivoStatus2 }, Records: [], Usage: { ...DefaultTipoUso } },
-    { Id: uuid(), StorageLocation: { ...DefaultStorageLocation1 }, Item: 'CABO PICCOLO', Type: { ...DefaultAtivoType }, Status: { ...DefautltAtivoStatus }, Records: [], Usage: { ...DefaultTipoUso } },
-    { Id: uuid(), StorageLocation: { ...DefaultStorageLocation1 }, Item: 'CABO TCI S5-USB', Type: { ...DefaultAtivoType }, Status: { ...DefautltAtivoStatus }, Records: [], Usage: { ...DefaultTipoUso2 } },
-    { Id: uuid(), StorageLocation: { ...DefaultStorageLocation1 }, Item: 'CONVERSOR USB - RS485', Type: { ...DefaultAtivoType }, Status: { ...DefautltAtivoStatus }, Records: [], Usage: { ...DefaultTipoUso } },
-    { Id: uuid(), StorageLocation: { ...DefaultStorageLocation1 }, Item: 'CONVERSOR UBS SERIAL TECNATRON', Type: { ...DefaultAtivoType }, Status: { ...DefautltAtivoStatus }, Records: [], Usage: { ...DefaultTipoUso } },
-    { Id: uuid(), StorageLocation: { ...DefaultStorageLocation1 }, Item: 'CONVERSOR UBS SERIAL TECNATRON', Type: { ...DefaultAtivoType }, Status: { ...DefautltAtivoStatus }, Records: [], Usage: { ...DefaultTipoUso2 } },
-    { Id: uuid(), StorageLocation: { ...DefaultStorageLocation2 }, Item: 'CONVERSOR USB SERIAL ICP COM', Type: { ...DefaultAtivoType }, Status: { ...DefautltAtivoStatus }, Records: [], Usage: { ...DefaultTipoUso } },
-    { Id: uuid(), StorageLocation: { ...DefaultStorageLocation1 }, Item: 'CABO OP7/17/27', Type: { ...DefaultAtivoType }, Status: { ...DefautltAtivoStatus }, Records: [], Usage: { ...DefaultTipoUso } },
-    { Id: uuid(), StorageLocation: { ...DefaultStorageLocation1 }, Item: 'CABO RS-232 IHM HT 60', Type: { ...DefaultAtivoType }, Status: { ...DefautltAtivoStatus }, Records: [], Usage: { ...DefaultTipoUso } },
-    { Id: uuid(), StorageLocation: { ...DefaultStorageLocation1 }, Item: 'CABO KLOCKNER MOELLER', Type: { ...DefaultAtivoType }, Status: { ...DefautltAtivoStatus }, Records: [], Usage: { ...DefaultTipoUso2 } },
-    { Id: uuid(), StorageLocation: { ...DefaultStorageLocation1 }, Item: 'Cabo HDMI', Type: { ...DefaultAtivoType }, Status: { ...DefautltAtivoStatus }, Records: [], Usage: { ...DefaultTipoUso } },
-    { Id: uuid(), StorageLocation: { ...DefaultStorageLocation1 }, Item: 'Adaptador VGA-DP', Type: { ...DefaultAtivoType }, Status: { ...DefautltAtivoStatus }, Records: [], Usage: { ...DefaultTipoUso } },
-    { Id: uuid(), StorageLocation: { ...DefaultStorageLocation1 }, Item: 'Patch Cord', Type: { ...DefaultAtivoType }, Status: { ...DefautltAtivoStatus }, Records: [], Usage: { ...DefaultTipoUso } },
-    { Id: uuid(), StorageLocation: { ...DefaultStorageLocation1 }, Item: 'HD Externo SA_HdE_Int01', Type: { ...DefaultAtivoType2 }, Status: { ...DefautltAtivoStatus }, Records: [], Usage: { ...DefaultTipoUso } },
-    { Id: uuid(), StorageLocation: { ...DefaultStorageLocation1 }, Item: 'HD Externo SA_HdE_Int02', Type: { ...DefaultAtivoType2 }, Status: { ...DefautltAtivoStatus }, Records: [], Usage: { ...DefaultTipoUso2 } },
-    { Id: uuid(), StorageLocation: { ...DefaultStorageLocation1 }, Item: 'HD Externo SA_HdE_Int03', Type: { ...DefaultAtivoType2 }, Status: { ...DefautltAtivoStatus }, Records: [], Usage: { ...DefaultTipoUso } },
-    { Id: uuid(), StorageLocation: { ...DefaultStorageLocation1 }, Item: 'HD Externo SA_HdE_Int04', Type: { ...DefaultAtivoType2 }, Status: { ...DefautltAtivoStatus }, Records: [], Usage: { ...DefaultTipoUso } },
-    { Id: uuid(), StorageLocation: { ...DefaultStorageLocation2 }, Item: 'HD Externo SA_HdE_Int05', Type: { ...DefaultAtivoType2 }, Status: { ...DefautltAtivoStatus2 }, Records: [], Usage: { ...DefaultTipoUso2 } },
-    { Id: uuid(), StorageLocation: { ...DefaultStorageLocation1 }, Item: 'HD Externo SA_HdE_Int06', Type: { ...DefaultAtivoType2 }, Status: { ...DefautltAtivoStatus }, Records: [], Usage: { ...DefaultTipoUso } },
-    { Id: uuid(), StorageLocation: { ...DefaultStorageLocation1 }, Item: 'HD Externo SA_HdE_Int07', Type: { ...DefaultAtivoType2 }, Status: { ...DefautltAtivoStatus }, Records: [], Usage: { ...DefaultTipoUso } },
-    { Id: uuid(), StorageLocation: { ...DefaultStorageLocation2 }, Item: 'HD Externo SA_HdE_Int08', Type: { ...DefaultAtivoType2 }, Status: { ...DefautltAtivoStatus2 }, Records: [], Usage: { ...DefaultTipoUso2 } },
-    { Id: uuid(), StorageLocation: { ...DefaultStorageLocation1 }, Item: 'HD Externo SA_HdE_Int09', Type: { ...DefaultAtivoType2 }, Status: { ...DefautltAtivoStatus }, Records: [], Usage: { ...DefaultTipoUso } },
-    { Id: uuid(), StorageLocation: { ...DefaultStorageLocation1 }, Item: 'HD Externo SA_HdE_Int10', Type: { ...DefaultAtivoType2 }, Status: { ...DefautltAtivoStatus }, Records: [], Usage: { ...DefaultTipoUso2 } },
-    { Id: uuid(), StorageLocation: { ...DefaultStorageLocation1 }, Item: 'HD Externo SA_HdE_Int11', Type: { ...DefaultAtivoType2 }, Status: { ...DefautltAtivoStatus }, Records: [], Usage: { ...DefaultTipoUso } },
-    { Id: uuid(), StorageLocation: { ...DefaultStorageLocation2 }, Item: 'HD Externo SA_HdE_Int12', Type: { ...DefaultAtivoType2 }, Status: { ...DefautltAtivoStatus }, Records: [], Usage: { ...DefaultTipoUso } },
-    { Id: uuid(), StorageLocation: { ...DefaultStorageLocation1 }, Item: 'HD Externo SA_HdE_Int13', Type: { ...DefaultAtivoType2 }, Status: { ...DefautltAtivoStatus }, Records: [], Usage: { ...DefaultTipoUso } },
-    { Id: uuid(), StorageLocation: { ...DefaultStorageLocation1 }, Item: 'Régua extensão', Type: { ...DefaultAtivoType2 }, Status: { ...DefautltAtivoStatus }, Records: [], Usage: { ...DefaultTipoUso } },
-    { Id: uuid(), StorageLocation: { ...DefaultStorageLocation2 }, Item: 'Case HD externo 3.0', Type: { ...DefaultAtivoType2 }, Status: { ...DefautltAtivoStatus }, Records: [], Usage: { ...DefaultTipoUso } },
+    { Id: uuid(), Qtd: 1, Brand: '', StorageLocation: { ...DefaultStorageLocation1 }, Item: 'CONVERSOR USB SERIAL', Type: { ...DefaultAtivoType }, Status: { ...DefautltAtivoStatus1 }, Records: [], Usage: { ...DefaultTipoUso } },
+    { Id: uuid(), Qtd: 1, Brand: '', StorageLocation: { ...DefaultStorageLocation1 }, Item: 'CABO PANEL VIEW PLUS 1000', Type: { ...DefaultAtivoType }, Status: { ...DefautltAtivoStatus1 }, Records: [], Usage: { ...DefaultTipoUso } },
+    { Id: uuid(), Qtd: 1, Brand: '', StorageLocation: { ...DefaultStorageLocation1 }, Item: '1747-NET-UIC', Type: { ...DefaultAtivoType }, Status: { ...DefautltAtivoStatus1 }, Records: [], Usage: { ...DefaultTipoUso } },
+    { Id: uuid(), Qtd: 1, Brand: '', StorageLocation: { ...DefaultStorageLocation1 }, Item: 'ROCKWELL SERIAL SLC-500/MICROLOGIX/CONTROLLOGIX', Type: { ...DefautltAtivoStatus2 }, Status: { ...DefautltAtivoStatus1 }, Records: [], Usage: { ...DefaultTipoUso } },
+    { Id: uuid(), Qtd: 1, Brand: '', StorageLocation: { ...DefaultStorageLocation1 }, Item: 'ROCKWELL SERIAL PLC-5', Type: { ...DefaultAtivoType }, Status: { ...DefautltAtivoStatus1 }, Records: [], Usage: { ...DefaultTipoUso } },
+    { Id: uuid(), Qtd: 1, Brand: '', StorageLocation: { ...DefaultStorageLocation }, Item: 'SIEMENS LOGO!', Type: { ...DefaultAtivoType }, Status: { ...DefautltAtivoStatus1 }, Records: [], Usage: { ...DefaultTipoUso } },
+    { Id: uuid(), Qtd: 1, Brand: '', StorageLocation: { ...DefaultStorageLocation1 }, Item: 'CABO MICROLOGIX DIN', Type: { ...DefaultAtivoType }, Status: { ...DefautltAtivoStatus1 }, Records: [], Usage: { ...DefaultTipoUso2 } },
+    { Id: uuid(), Qtd: 1, Brand: '', StorageLocation: { ...DefaultStorageLocation1 }, Item: 'SIEMENS S7-200 RS-232 - PPI', Type: { ...DefaultAtivoType }, Status: { ...DefautltAtivoStatus1 }, Records: [], Usage: { ...DefaultTipoUso } },
+    { Id: uuid(), Qtd: 1, Brand: '', StorageLocation: { ...DefaultStorageLocation1 }, Item: 'CABO S5 RS-232 - TTY', Type: { ...DefaultAtivoType }, Status: { ...DefautltAtivoStatus2 }, Records: [], Usage: { ...DefaultTipoUso } },
+    { Id: uuid(), Qtd: 1, Brand: '', StorageLocation: { ...DefaultStorageLocation1 }, Item: 'SIEMENS SINAMICS', Type: { ...DefaultAtivoType }, Status: { ...DefautltAtivoStatus1 }, Records: [], Usage: { ...DefaultTipoUso } },
+    { Id: uuid(), Qtd: 1, Brand: '', StorageLocation: { ...DefaultStorageLocation }, Item: 'SIEMENS S7-200/300 RS-232 - PPI/MPI', Type: { ...DefaultAtivoType }, Status: { ...DefautltAtivoStatus1 }, Records: [], Usage: { ...DefaultTipoUso } },
+    { Id: uuid(), Qtd: 1, Brand: '', StorageLocation: { ...DefaultStorageLocation1 }, Item: 'PC Adapter', Type: { ...DefaultAtivoType }, Status: { ...DefautltAtivoStatus1 }, Records: [], Usage: { ...DefaultTipoUso } },
+    { Id: uuid(), Qtd: 1, Brand: '', StorageLocation: { ...DefaultStorageLocation1 }, Item: 'FONTE PC ADAPTER', Type: { ...DefaultAtivoType }, Status: { ...DefautltAtivoStatus1 }, Records: [], Usage: { ...DefaultTipoUso } },
+    { Id: uuid(), Qtd: 1, Brand: '', StorageLocation: { ...DefaultStorageLocation1 }, Item: 'PC CABLE SIMOCODE', Type: { ...DefaultAtivoType }, Status: { ...DefautltAtivoStatus1 }, Records: [], Usage: { ...DefaultTipoUso } },
+    { Id: uuid(), Qtd: 1, Brand: '', StorageLocation: { ...DefaultStorageLocation }, Item: 'CONFIF PROSOFT', Type: { ...DefaultAtivoType }, Status: { ...DefautltAtivoStatus2 }, Records: [], Usage: { ...DefaultTipoUso } },
+    { Id: uuid(), Qtd: 1, Brand: '', StorageLocation: { ...DefaultStorageLocation1 }, Item: 'CABO ALTUS AL-1342', Type: { ...DefaultAtivoType }, Status: { ...DefautltAtivoStatus1 }, Records: [], Usage: { ...DefaultTipoUso } },
+    { Id: uuid(), Qtd: 1, Brand: '', StorageLocation: { ...DefaultStorageLocation1 }, Item: 'CABO ALTUS AL-1342', Type: { ...DefaultAtivoType }, Status: { ...DefautltAtivoStatus1 }, Records: [], Usage: { ...DefaultTipoUso } },
+    { Id: uuid(), Qtd: 1, Brand: '', StorageLocation: { ...DefaultStorageLocation1 }, Item: 'CABO PANEL VIEW 500/600', Type: { ...DefaultAtivoType }, Status: { ...DefautltAtivoStatus2 }, Records: [], Usage: { ...DefaultTipoUso } },
+    { Id: uuid(), Qtd: 1, Brand: '', StorageLocation: { ...DefaultStorageLocation1 }, Item: 'SIEMENS S7-200 RS-232 - PPI', Type: { ...DefaultAtivoType }, Status: { ...DefautltAtivoStatus1 }, Records: [], Usage: { ...DefaultTipoUso } },
+    { Id: uuid(), Qtd: 1, Brand: '', StorageLocation: { ...DefaultStorageLocation1 }, Item: 'SIEMENS S7-200/300 RS-232 - PPI/MPI', Type: { ...DefaultAtivoType }, Status: { ...DefautltAtivoStatus2 }, Records: [], Usage: { ...DefaultTipoUso } },
+    { Id: uuid(), Qtd: 1, Brand: '', StorageLocation: { ...DefaultStorageLocation1 }, Item: 'CABO PICCOLO', Type: { ...DefaultAtivoType }, Status: { ...DefautltAtivoStatus1 }, Records: [], Usage: { ...DefaultTipoUso } },
+    { Id: uuid(), Qtd: 1, Brand: '', StorageLocation: { ...DefaultStorageLocation1 }, Item: 'CABO TCI S5-USB', Type: { ...DefaultAtivoType }, Status: { ...DefautltAtivoStatus1 }, Records: [], Usage: { ...DefaultTipoUso2 } },
+    { Id: uuid(), Qtd: 1, Brand: '', StorageLocation: { ...DefaultStorageLocation1 }, Item: 'CONVERSOR USB - RS485', Type: { ...DefaultAtivoType }, Status: { ...DefautltAtivoStatus1 }, Records: [], Usage: { ...DefaultTipoUso } },
+    { Id: uuid(), Qtd: 1, Brand: '', StorageLocation: { ...DefaultStorageLocation1 }, Item: 'CONVERSOR UBS SERIAL TECNATRON', Type: { ...DefaultAtivoType }, Status: { ...DefautltAtivoStatus1 }, Records: [], Usage: { ...DefaultTipoUso } },
+    { Id: uuid(), Qtd: 1, Brand: '', StorageLocation: { ...DefaultStorageLocation1 }, Item: 'CONVERSOR UBS SERIAL TECNATRON', Type: { ...DefaultAtivoType }, Status: { ...DefautltAtivoStatus1 }, Records: [], Usage: { ...DefaultTipoUso2 } },
+    { Id: uuid(), Qtd: 1, Brand: '', StorageLocation: { ...DefaultStorageLocation2 }, Item: 'CONVERSOR USB SERIAL ICP COM', Type: { ...DefaultAtivoType }, Status: { ...DefautltAtivoStatus1 }, Records: [], Usage: { ...DefaultTipoUso } },
+    { Id: uuid(), Qtd: 1, Brand: '', StorageLocation: { ...DefaultStorageLocation1 }, Item: 'CABO OP7/17/27', Type: { ...DefaultAtivoType }, Status: { ...DefautltAtivoStatus1 }, Records: [], Usage: { ...DefaultTipoUso } },
+    { Id: uuid(), Qtd: 1, Brand: '', StorageLocation: { ...DefaultStorageLocation1 }, Item: 'CABO RS-232 IHM HT 60', Type: { ...DefaultAtivoType }, Status: { ...DefautltAtivoStatus1 }, Records: [], Usage: { ...DefaultTipoUso } },
+    { Id: uuid(), Qtd: 1, Brand: '', StorageLocation: { ...DefaultStorageLocation1 }, Item: 'CABO KLOCKNER MOELLER', Type: { ...DefaultAtivoType }, Status: { ...DefautltAtivoStatus1 }, Records: [], Usage: { ...DefaultTipoUso2 } },
+    { Id: uuid(), Qtd: 1, Brand: '', StorageLocation: { ...DefaultStorageLocation1 }, Item: 'Cabo HDMI', Type: { ...DefaultAtivoType }, Status: { ...DefautltAtivoStatus1 }, Records: [], Usage: { ...DefaultTipoUso } },
+    { Id: uuid(), Qtd: 1, Brand: '', StorageLocation: { ...DefaultStorageLocation1 }, Item: 'Adaptador VGA-DP', Type: { ...DefaultAtivoType }, Status: { ...DefautltAtivoStatus1 }, Records: [], Usage: { ...DefaultTipoUso } },
+    { Id: uuid(), Qtd: 1, Brand: '', StorageLocation: { ...DefaultStorageLocation1 }, Item: 'Patch Cord', Type: { ...DefaultAtivoType }, Status: { ...DefautltAtivoStatus1 }, Records: [], Usage: { ...DefaultTipoUso } },
+    { Id: uuid(), Qtd: 1, Brand: '', StorageLocation: { ...DefaultStorageLocation1 }, Item: 'HD Externo SA_HdE_Int01', Type: { ...DefaultAtivoType2 }, Status: { ...DefautltAtivoStatus1 }, Records: [], Usage: { ...DefaultTipoUso } },
+    { Id: uuid(), Qtd: 1, Brand: '', StorageLocation: { ...DefaultStorageLocation1 }, Item: 'HD Externo SA_HdE_Int02', Type: { ...DefaultAtivoType2 }, Status: { ...DefautltAtivoStatus1 }, Records: [], Usage: { ...DefaultTipoUso2 } },
+    { Id: uuid(), Qtd: 1, Brand: '', StorageLocation: { ...DefaultStorageLocation1 }, Item: 'HD Externo SA_HdE_Int03', Type: { ...DefaultAtivoType2 }, Status: { ...DefautltAtivoStatus1 }, Records: [], Usage: { ...DefaultTipoUso } },
+    { Id: uuid(), Qtd: 1, Brand: '', StorageLocation: { ...DefaultStorageLocation1 }, Item: 'HD Externo SA_HdE_Int04', Type: { ...DefaultAtivoType2 }, Status: { ...DefautltAtivoStatus1 }, Records: [], Usage: { ...DefaultTipoUso } },
+    { Id: uuid(), Qtd: 1, Brand: '', StorageLocation: { ...DefaultStorageLocation2 }, Item: 'HD Externo SA_HdE_Int05', Type: { ...DefaultAtivoType2 }, Status: { ...DefautltAtivoStatus2 }, Records: [], Usage: { ...DefaultTipoUso2 } },
+    { Id: uuid(), Qtd: 1, Brand: '', StorageLocation: { ...DefaultStorageLocation1 }, Item: 'HD Externo SA_HdE_Int06', Type: { ...DefaultAtivoType2 }, Status: { ...DefautltAtivoStatus1 }, Records: [], Usage: { ...DefaultTipoUso } },
+    { Id: uuid(), Qtd: 1, Brand: '', StorageLocation: { ...DefaultStorageLocation1 }, Item: 'HD Externo SA_HdE_Int07', Type: { ...DefaultAtivoType2 }, Status: { ...DefautltAtivoStatus1 }, Records: [], Usage: { ...DefaultTipoUso } },
+    { Id: uuid(), Qtd: 1, Brand: '', StorageLocation: { ...DefaultStorageLocation2 }, Item: 'HD Externo SA_HdE_Int08', Type: { ...DefaultAtivoType2 }, Status: { ...DefautltAtivoStatus2 }, Records: [], Usage: { ...DefaultTipoUso2 } },
+    { Id: uuid(), Qtd: 1, Brand: '', StorageLocation: { ...DefaultStorageLocation1 }, Item: 'HD Externo SA_HdE_Int09', Type: { ...DefaultAtivoType2 }, Status: { ...DefautltAtivoStatus1 }, Records: [], Usage: { ...DefaultTipoUso } },
+    { Id: uuid(), Qtd: 1, Brand: '', StorageLocation: { ...DefaultStorageLocation1 }, Item: 'HD Externo SA_HdE_Int10', Type: { ...DefaultAtivoType2 }, Status: { ...DefautltAtivoStatus1 }, Records: [], Usage: { ...DefaultTipoUso2 } },
+    { Id: uuid(), Qtd: 1, Brand: '', StorageLocation: { ...DefaultStorageLocation1 }, Item: 'HD Externo SA_HdE_Int11', Type: { ...DefaultAtivoType2 }, Status: { ...DefautltAtivoStatus1 }, Records: [], Usage: { ...DefaultTipoUso } },
+    { Id: uuid(), Qtd: 1, Brand: '', StorageLocation: { ...DefaultStorageLocation2 }, Item: 'HD Externo SA_HdE_Int12', Type: { ...DefaultAtivoType2 }, Status: { ...DefautltAtivoStatus1 }, Records: [], Usage: { ...DefaultTipoUso } },
+    { Id: uuid(), Qtd: 1, Brand: '', StorageLocation: { ...DefaultStorageLocation1 }, Item: 'HD Externo SA_HdE_Int13', Type: { ...DefaultAtivoType2 }, Status: { ...DefautltAtivoStatus1 }, Records: [], Usage: { ...DefaultTipoUso } },
+    { Id: uuid(), Qtd: 1, Brand: '', StorageLocation: { ...DefaultStorageLocation1 }, Item: 'Régua extensão', Type: { ...DefaultAtivoType2 }, Status: { ...DefautltAtivoStatus1 }, Records: [], Usage: { ...DefaultTipoUso } },
+    { Id: uuid(), Qtd: 1, Brand: '', StorageLocation: { ...DefaultStorageLocation2 }, Item: 'Case HD externo 3.0', Type: { ...DefaultAtivoType2 }, Status: { ...DefautltAtivoStatus1 }, Records: [], Usage: { ...DefaultTipoUso } },
 ]
 
 
@@ -139,10 +139,12 @@ if (!localStorage.getItem('AssetSenseLocaisArmazenamento')) {
 
 //STATUS
 export const AtivosStatus = [
-    { Id: '693ae26e-399e-4a2f-a646-d6315fb9a516', Value: 'Disponível' },
-    { Id: '144febcf-6a34-4c60-9166-1751ff5e8e6b', Value: 'Em uso' },
-    { Id: v4(), Value: 'Em Manutenção' }
+    { Id: '693ae26e-399e-4a2f-a646-d6315fb9a516', Value: 'Em Funcionamento', CanTake: true },
+    { Id: '144febcf-6a34-4c60-9166-1751ff5e8e6b', Value: 'Em Manutenção', CanTake: false }
 ]
+
+export const DefaultAtivoStatus = { Id: '', Value: '', CanTake: true }
+
 export const AtivosStatusReset = [
     { Id: '693ae26e-399e-4a2f-a646-d6315fb9a516', Value: 'Disponível' },
     { Id: '144febcf-6a34-4c60-9166-1751ff5e8e6b', Value: 'Em uso' },
