@@ -8,6 +8,14 @@ export const AddUsuarioAction = (NovoUsuario = {}) => {
     })
 }
 
+export const DeleteUsuarioAction = (UsuarioToDelete = {}) => {
+
+    return ({
+        type: 'DELETE_USUARIO',
+        UsuarioToDelete
+    })
+}
+
 
 export const EditUsuarioAction = (EditedUser = {}) => {
     return ({

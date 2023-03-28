@@ -122,10 +122,13 @@ if (!localStorage.getItem('AssetSenseUsersTypes')) {
 
 
 
+//////////// ================================== DEFAULT ITENS ======================== ////////
+
+
 // DEFAULT USER 
 export const DefaultUser =
 {
-    Id: uuid(),
+    Id: '',
     Phone: '',
     Estate: { name: '' },
     City: { name: '' },

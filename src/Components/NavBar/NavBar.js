@@ -150,23 +150,23 @@ const NavBar = (props) => {
                                 </div>
 
                                 <ul className='NavBarListSidebar'>
-                                    <span to="/App/Dash" className={GetNavbarSidebarItemClass('Dash', props.LoggedUser.CurrentSidebarTab)} onClick={e => SetTabNavBar('Dash', 'App/', 'App/')}>
+                                    <span to="/App/Dash" className={GetNavbarSidebarItemClass('Dash', props.LoggedUser.CurrentSidebarTab)} onClick={e => SetTabNavBar('Dash', 'App/')}>
                                         <UilChartPieAlt />
                                         <span>Dashboard</span>
                                     </span>
-                                    <span to="/App/Ativos" className={GetNavbarSidebarItemClass('Ativos', props.LoggedUser.CurrentSidebarTab)} onClick={e => SetTabNavBar('Ativos', 'App/Ativos')}>
+                                    <span to="/App/Ativos" className={GetNavbarSidebarItemClass('Ativos', props.LoggedUser.CurrentSidebarTab)} onClick={e => SetTabNavBar('Ativos', '/App/Ativos')}>
                                         <UilListUl />
                                         <span>Ativos</span>
                                     </span>
-                                    <span to="/App/Users" className={GetNavbarSidebarItemClass('Users', props.LoggedUser.CurrentSidebarTab)} onClick={e => SetTabNavBar('Users', 'App/Users')}>
+                                    <span to="/App/Users" className={GetNavbarSidebarItemClass('Users', props.LoggedUser.CurrentSidebarTab)} onClick={e => SetTabNavBar('Users', '/App/Users')}>
                                         <UilUsersAlt />
                                         <span>Usuarios</span>
                                     </span>
-                                    <span to="/App/Profile" className={GetNavbarSidebarItemClass('Profile', props.LoggedUser.CurrentSidebarTab)} onClick={e => SetTabNavBar('Profile', 'App/Profile')}>
+                                    <span to="/App/Profile" className={GetNavbarSidebarItemClass('Profile', props.LoggedUser.CurrentSidebarTab)} onClick={e => SetTabNavBar('Profile', '/App/Profile')}>
                                         <UilUserCircle />
                                         <span>Meu Perfil</span>
                                     </span>
-                                    <span to="/App/Config" className={GetNavbarSidebarItemClass('Config', props.LoggedUser.CurrentSidebarTab)} onClick={e => SetTabNavBar('Config', 'App/Config')}>
+                                    <span to="/App/Config" className={GetNavbarSidebarItemClass('Config', props.LoggedUser.CurrentSidebarTab)} onClick={e => SetTabNavBar('Config', '/App/Config')}>
                                         <UilSetting />
                                         <span>Configurações</span>
                                     </span>

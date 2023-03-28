@@ -13,6 +13,10 @@ const Usuarios = (state = [], action) => {
             return state.filter(usuario => {
                 return usuario.Id !== action.EditedUser.Id
             }).concat(action.EditedUser)
+        case 'DELETE_USUARIO':
+            return state.filter(usuario => {
+                return usuario.Id !== action.UsuarioToDelete.Id
+            })
         default:
             return state
     }

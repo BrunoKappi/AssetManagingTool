@@ -37,6 +37,10 @@
 
     --UserModal-Sidebar-Button-Secondary-Border: var(--ComplementaryColor);
     --UserModal-Sidebar-Button-Secondary-Color: var(--ComplementaryColor);
+
+    --UserModal-Sidebar-Button-Delete-Background: #d9534f;
+    --UserModal-Sidebar-Button-Delete-Border: #d9534f;
+    --UserModal-Sidebar-Button-Delete-Color: white;
 }
 
 
@@ -80,6 +84,10 @@
 
     --UserModal-Sidebar-Button-Secondary-Border: var(--ComplementaryColor);
     --UserModal-Sidebar-Button-Secondary-Color: var(--ComplementaryColor);
+
+    --UserModal-Sidebar-Button-Delete-Background: #d9534f;
+    --UserModal-Sidebar-Button-Delete-Border: #d9534f;
+    --UserModal-Sidebar-Button-Delete-Color: white;
 
 
 }
@@ -204,6 +212,15 @@
     font-family: var(--Fonte);
     font-size: 1.3rem;
     color: var(--UserModal-Header-Name-Color);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.UserModalHeader-Right-Name span {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .UserModalHeader-Right-Close {
@@ -443,6 +460,12 @@
     color: var(--UserModal-SectionTitleColor);
 }
 
+.UserModalBody-UserInfoForm-ConfirMessage {
+    font-family: var(--Fonte);
+    color: var(--UserModal-SectionTitleColor);
+    text-align: center;
+}
+
 .UserModalBody-UserInfoForm-Group>input {
     border-radius: .5rem;
     outline: none;
@@ -555,6 +578,19 @@
     flex-direction: row;
     gap: .5rem;
     align-items: center;
+}
+
+@media (max-width: 760px) {
+    .UserModalBody-UserInfoForm-Button>button {
+        font-size: .8rem;
+    }
+}
+
+
+.UserModalBody-UserInfoForm-Button-Delete {
+    background-color: var(--UserModal-Sidebar-Button-Delete-Background) !important;
+    border: 1px solid var(--UserModal-Sidebar-Button-Delete-Border) !important;
+    color: var(--UserModal-Sidebar-Button-Delete-Color) !important;
 }
 
 .UserModalBody-UserInfoForm-Button>.UserModalBody-UserInfoForm-Button-Secondary {

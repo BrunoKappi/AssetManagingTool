@@ -8,7 +8,8 @@ import { v4 } from 'uuid';
 import { MdFilterList } from 'react-icons/md';
 import Dropdown from 'react-bootstrap/Dropdown';
 import { UilExclamationCircle } from '@iconscout/react-unicons'
-import { GetCurrentUserFromStore, GetSetoresSelect, GetUsersFromStore, GetUsersTypesSelect } from '../../Functions/Middleware';
+import { GetCurrentUserFromStore, GetCurrentUserTypeFromStore, GetSetoresSelect, GetUsersFromStore, GetUsersTypesSelect } from '../../Functions/Middleware';
+import { PermitIndexs } from '../../GlobalVars';
 
 
 
@@ -28,6 +29,11 @@ const UsersList = (props) => {
     const [modalShow, setModalShow] = useState(false);
     const [AddmodalShow, setAddModalShow] = useState(false);
     const [CurrentUser,] = useState(GetCurrentUserFromStore())
+
+    //PERMITS E USER TYPE
+    const [CurrentUserType] = useState(GetCurrentUserTypeFromStore())    
+    var PermitToAddUsers = CurrentUserType?.Permits[PermitIndexs['ADICIONAR_USUARIOS']]
+
 
 
 
@@ -82,11 +88,18 @@ const UsersList = (props) => {
         setSelectedUser({ ...UserClicked });
     }
 
+    const ResetSelectedUser = (UserClicked) => {
+        setModalShow(false);
+        setSelectedUser({});
+    }
+
+
+
     return (
         <div className={localStorage.getItem('AssetSenseTema') === 'Escuro' ? 'UsersListContainerEscuro UsersListContainer' : 'UsersListContainerClaro UsersListContainer'}>
 
-            <UserModal Users={ListaDeUsuarios} CurrentUser={CurrentUser} User={{ ...SelectedUser }} show={modalShow} onHide={() => setModalShow(false)} Function="View" />
-            <UserModal Users={ListaDeUsuarios} CurrentUser={CurrentUser} User={{ }} show={AddmodalShow} onHide={() => setAddModalShow(false)} Function="Add" />
+            <UserModal Users={ListaDeUsuarios} CurrentUser={CurrentUser} User={{ ...SelectedUser }} show={modalShow} onHide={() => setModalShow(false)} Function="View" onDelete={ResetSelectedUser} />
+            <UserModal Users={ListaDeUsuarios} CurrentUser={CurrentUser} User={{}} show={AddmodalShow} onHide={() => setAddModalShow(false)} Function="Add" />
 
             <div className='UsersLisFormFilter'>
                 <input value={FiltroDeTexto} placeholder='Procurar Usuário...' onChange={e => setFiltroDeTexto(e.target.value)}></input>
@@ -165,10 +178,12 @@ const UsersList = (props) => {
                 <h3>Nenhum Usuário encontrado</h3>
             </div>}
 
-            <button className='UsersListAddUserButton' onClick={e => setAddModalShow(true)}>
-                Adicionar Usuário
 
-            </button>
+            {PermitToAddUsers &&
+                <button className='UsersListAddUserButton' onClick={e => setAddModalShow(true)}>
+                    Adicionar Usuário
+                </button>
+            }
 
         </div>
     )

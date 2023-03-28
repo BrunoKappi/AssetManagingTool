@@ -139,6 +139,12 @@
     border-radius: .5rem;
 }
 
+@media (max-width: 750px) {
+    .UsersLisFormFilter>button {
+        flex-grow: 1;
+    }
+}
+
 .UsersListAddUserButton {
     position: absolute;
     right: 1rem;

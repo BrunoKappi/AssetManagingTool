@@ -103,7 +103,7 @@
     font-size: .9rem;
 }
 
-.NameColumn > span{
+.NameColumn>span {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -148,16 +148,22 @@
 
     .UserContainer {
         display: grid;
-        grid-template-columns: 40% 30% 30%;
+        grid-template-columns: 50% 25% 25%;
     }
 
+    .SetorColumn {
+        font-size: .6rem;
+    }
 
+    .TypeColumn {
+        font-size: .6rem;
+    }
 
-    .NameColumn > svg{
+    .NameColumn>svg {
         display: none;
     }
 
-    .EmailColumnContainer{
+    .EmailColumnContainer {
         display: none;
     }
 

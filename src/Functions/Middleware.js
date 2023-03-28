@@ -7,7 +7,7 @@ import { SetLocaisArmazenamento } from "../Config/store/actions/LocaisArmazename
 import { SetStatusAtivos } from "../Config/store/actions/AtivosStatusActions"
 import { SetTiposDeUso } from "../Config/store/actions/TiposDeUsoActions"
 import { SetAtivos } from "../Config/store/actions/AtivosActions"
-import { AddUsuarioAction, SetUsuarios } from "../Config/store/actions/UsuariosActions"
+import { AddUsuarioAction, DeleteUsuarioAction, SetUsuarios } from "../Config/store/actions/UsuariosActions"
 import { PermitIndexs } from "../GlobalVars"
 
 
@@ -415,12 +415,24 @@ export async function AddUser(User, gerarErro = false) {
         setTimeout(() => {
             if (gerarErro) {
                 reject(new Error('Erro ao obter dados'));
-            } else {
-                ////console.log(Users)
-                //localStorage.setItem('AssetSenseUsers', JSON.stringify(Users))
+            } else {              
                 store.dispatch(AddUsuarioAction(User))
                 resolve('Ok');
             }
+        }, 50);
+    });
+}
+export async function DeleteUser(User, gerarErro = false) {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            if (gerarErro) {
+                reject(new Error('Erro ao obter dados'));
+            } else {
+                ////console.log(Users)
+                //localStorage.setItem('AssetSenseUsers', JSON.stringify(Users))
+                store.dispatch(DeleteUsuarioAction(User))
+                resolve('Ok');
+            } 
         }, 50);
     });
 }

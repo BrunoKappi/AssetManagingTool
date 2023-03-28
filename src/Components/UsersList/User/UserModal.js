@@ -2,8 +2,8 @@ import Modal from 'react-bootstrap/Modal';
 import React, { useState, useEffect, useRef } from 'react'
 import './UserModal.css'
 import UserPhoto from '../../../Images/SerranoLogoFuncoBranco.jpg'
-import { UilUserCircle, UilClipboardNotes, UilEnvelope, UilPhone, UilMap, UilMapMarker, UilPen, UilPuzzlePiece, UilListUl, UilSave, UilHistory, UilTimes, UilBuilding, UilKeySkeleton, UilCheck, UilBackward } from '@iconscout/react-unicons'
-import { AddUser, EditUser, GetCurrentUserFromStore, GetCurrentUserSetorNameWithIdFromStore, GetCurrentUserTypeFromStore, GetCurrentUserTypeNameWithIdFromStore, GetCurrentUserTypeWithIdFromStore, GetSetoresFromStore, GetUserTypesFromStore, GetUserWithIdFromStore } from '../../../Functions/Middleware'
+import { UilUserCircle, UilClipboardNotes, UilEnvelope, UilPhone, UilMap, UilMapMarker, UilPen, UilPuzzlePiece, UilListUl, UilSave, UilHistory, UilTimes, UilBuilding, UilKeySkeleton, UilCheck, UilBackward, UilTrash } from '@iconscout/react-unicons'
+import { AddUser, DeleteUser, EditUser, GetCurrentUserFromStore, GetCurrentUserSetorNameWithIdFromStore, GetCurrentUserTypeFromStore, GetCurrentUserTypeNameWithIdFromStore, GetCurrentUserTypeWithIdFromStore, GetSetoresFromStore, GetUserTypesFromStore, GetUserWithIdFromStore } from '../../../Functions/Middleware'
 import { DefaultUser } from '../../../Data/User';
 import { DefaultSetor, DefaultUserType } from '../../../Data/Items';
 import { ImCheckboxChecked, ImCheckboxUnchecked } from 'react-icons/im'
@@ -22,23 +22,24 @@ import { LoginFirebase, mudarSenha } from '../../../Config/firebase/auth';
 
 const UserModal = (props) => {
 
-
-
-
-    /////////// PAIS ESTADO CIDADE //////////
-
     const [Tab, setTab] = useState('UserInfo')
+
+
 
     const [UserType, setUserType] = useState({ ...DefaultUserType })
     const [User, setUser] = useState({ ...DefaultUser })
     const [UserSetor, setUserSetor] = useState({ ...DefaultSetor })
     const [Setores] = useState(GetSetoresFromStore())
     const [TiposUsuarios] = useState(GetUserTypesFromStore())
-    const [ConfirmEdit, SetConfirmEdit] = useState(false)
-    const [ConfirmAdd, SetConfirmAdd] = useState(false)
 
-    //CURRENT USER
+    //Confirm 
+    const [ConfirmAction, SetConfirmAction] = useState('')
+    const [Confirm, SetConfirm] = useState(false)
+    const [ConfirmMessage, SetConfirmMessage] = useState('')
+    const [ConfirmBtAction, SetConfirmBtAction] = useState('')
+    const [ConfirmBtBack, SetConfirmBtBack] = useState('')
 
+    //CURRENT USER AND PERMITS
     const [CurrentUserType] = useState(GetCurrentUserTypeFromStore())
     var IsCurrentUser = false
     var IsAdmin = false
@@ -64,21 +65,22 @@ const UserModal = (props) => {
 
 
     //PERMISSOES
-    IsAdmin = CurrentUserType.IsAdmin
+    IsAdmin = CurrentUserType?.IsAdmin
     var PermitToEditUsers = CurrentUserType?.Permits[PermitIndexs['EDITAR_USUARIOS']]
-    IsCurrentUser = props.User?.Id === GetCurrentUserFromStore().Id
+    var PermitToDeleteUsers = CurrentUserType?.Permits[PermitIndexs['EXCLUIR_USUARIOS']]
+    IsCurrentUser = props.User?.Id === GetCurrentUserFromStore()?.Id
     CanEdit = IsCurrentUser || IsAdmin || PermitToEditUsers
     //PERMISSOES
 
     const FillCopyes = (UserCopy) => {
-        setCopyUserName(UserCopy.Name)
-        setCopyUserLastName(UserCopy.LastName)
-        setCopyUserPhone(UserCopy.Phone)
-        setCopyUserCountry(UserCopy.Country)
-        setCopyUserEstate(UserCopy.Estate)
-        setCopyUserCity(UserCopy.City)
-        setCopyUserSector(UserCopy.Sector)
-        setCopyUserType(UserCopy.Type)
+        setCopyUserName(UserCopy?.Name)
+        setCopyUserLastName(UserCopy?.LastName)
+        setCopyUserPhone(UserCopy?.Phone)
+        setCopyUserCountry(UserCopy?.Country)
+        setCopyUserEstate(UserCopy?.Estate)
+        setCopyUserCity(UserCopy?.City)
+        setCopyUserSector(UserCopy?.Sector)
+        setCopyUserType(UserCopy?.Type)
     }
 
     const CancelEditions = () => {
@@ -116,9 +118,9 @@ const UserModal = (props) => {
 
     // QUANDO TEM UM USER VALIDO PASSADO PELA PROP
     useEffect(() => {
-        if (!props.User.Name) return
-        setUser(GetUserWithIdFromStore(props.User.Id))
-        FillCopyes(GetUserWithIdFromStore(props.User.Id))
+        if (!props.User?.Name) return
+        setUser(GetUserWithIdFromStore(props.User?.Id))
+        FillCopyes(GetUserWithIdFromStore(props.User?.Id))
         setIsEdited(false)
         setTab('UserInfo')
     }, [props.User, props.CurrentUser, CurrentUserType])
@@ -126,14 +128,14 @@ const UserModal = (props) => {
 
 
     useEffect(() => {
-        setUserType(GetCurrentUserTypeWithIdFromStore(User.Type.Id))
-        setUserSetor({ ...GetSetoresFromStore().find(U => U.Id === User.Sector.Id) })
+        setUserType(GetCurrentUserTypeWithIdFromStore(User?.Type?.Id))
+        setUserSetor({ ...GetSetoresFromStore().find(U => U.Id === User?.Sector?.Id) })
     }, [User, props.CurrentUser])
 
 
     // QUANDO ALGUMA INFORMAÇÂO MUDA
     useEffect(() => {
-        if (CopyUserName !== User.Name || CopyUserLastName !== User.LastName || CopyUserPhone !== User.Phone || CopyUserEstate.name !== User.Estate.name || CopyUserCity.name !== User.City.name || CopyUserCountry.name !== User.Country.name || CopyUserSector.Id !== User.Sector.Id || CopyUserType.Id !== User.Type.Id)
+        if (CopyUserName !== User?.Name || CopyUserLastName !== User?.LastName || CopyUserPhone !== User?.Phone || CopyUserEstate?.name !== User?.Estate?.name || CopyUserCity?.name !== User?.City?.name || CopyUserCountry?.name !== User?.Country?.name || CopyUserSector?.Id !== User?.Sector?.Id || CopyUserType?.Id !== User?.Type?.Id)
             setIsEdited(true)
         else
             setIsEdited(false)
@@ -141,89 +143,113 @@ const UserModal = (props) => {
 
 
 
-    //SAVLA ALTERAÇÔES
-    const SaveEdit = () => {
+    const Submit = () => {
+        if (ConfirmAction === 'Edit') {
+            if (((CanEdit || IsAdmin) || PermitToEditUsers)) {
 
-        if (((CanEdit || IsAdmin) || PermitToEditUsers)) {
+                const EditedUser = { ...User }
 
-            const EditedUser = { ...User }
+                EditedUser.Name = CopyUserName
+                EditedUser.LastName = CopyUserLastName
+                EditedUser.Phone = CopyUserPhone
+                EditedUser.Estate = CopyUserEstate
+                EditedUser.City = CopyUserCity
+                EditedUser.Country = CopyUserCountry
+                EditedUser.Type = CopyUserType
+                EditedUser.Sector = CopyUserSector
 
-            EditedUser.Name = CopyUserName
-            EditedUser.LastName = CopyUserLastName
-            EditedUser.Phone = CopyUserPhone
-            EditedUser.Estate = CopyUserEstate
-            EditedUser.City = CopyUserCity
-            EditedUser.Country = CopyUserCountry
-            EditedUser.Type = CopyUserType
-            EditedUser.Sector = CopyUserSector
+                setUser({ ...EditedUser })
+                EditUser(EditedUser).then(() => {
+                    FillCopyes(EditedUser)
+                    NotificationSucesso('Alteração', 'Alterações salvas com sucesso!')
+                })
 
-            setUser({ ...EditedUser })
-            EditUser(EditedUser).then(() => {
-                FillCopyes(EditedUser)
-                NotificationSucesso('Alteração', 'Alterações salvas com sucesso!')
+                EndConfirming()
+
+            }
+        } else if (ConfirmAction === 'Add') {
+            const NewUser = { ...User }
+
+            NewUser.Id = v4()
+            NewUser.Email = CopyUserEmail.toLocaleLowerCase()
+            NewUser.Name = CopyUserName
+            NewUser.LastName = CopyUserLastName
+            NewUser.Phone = CopyUserPhone
+            NewUser.Estate = CopyUserEstate
+            NewUser.City = CopyUserCity
+            NewUser.Country = CopyUserCountry
+            NewUser.Type = CopyUserType
+            NewUser.Sector = CopyUserSector
+            setUser({ ...NewUser })
+            AddUser(NewUser).then(() => {
+                CancelEditions()
+                props.onHide()
+                NotificationSucesso('Adição', 'Usuário Adicionado com Sucesso!')
             })
+            EndConfirming()
+        } else if (ConfirmAction === 'Delete') {
+            const UserToDelete = { ...User }
+            EndConfirming()
+            props.onDelete()
+            DeleteUser(UserToDelete).then(() => {
+                NotificationSucesso('Exclusão', 'Usuário Deletado com Sucesso!')
 
-            SetConfirmEdit(false)
-
-        }
-    }
-
-    //SAVLA ADICIONAR USUARI ONOVO
-    const AddNewUser = () => {
-
-        const NewUser = { ...User }
-
-        NewUser.Id = v4()
-        NewUser.Email = CopyUserEmail.toLocaleLowerCase()
-        NewUser.Name = CopyUserName
-        NewUser.LastName = CopyUserLastName
-        NewUser.Phone = CopyUserPhone
-        NewUser.Estate = CopyUserEstate
-        NewUser.City = CopyUserCity
-        NewUser.Country = CopyUserCountry
-        NewUser.Type = CopyUserType
-        NewUser.Sector = CopyUserSector
-        setUser({ ...NewUser })
-        AddUser(NewUser).then(() => {
-            CancelEditions()
-            props.onHide()
-            NotificationSucesso('Adição', 'Usuário Adicionado com Sucesso!')
-        })
-
-    }
-
-
-    const InitConfirmAdd = () => {
-        if (CopyUserName.Email === 0)
-            NotificationAlerta('Preenchimento inválido', 'O Email não pode ser vazio')
-        else if (CopyUserPhone.length < 11 && CopyUserPhone.length > 0)
-            NotificationAlerta('Preenchimento inválido', 'O Telefone de ter um mínimo 12 digitos')
-        else if (CopyUserPhone.length === 0)
-            NotificationAlerta('Preenchimento inválido', 'O telefone não pode ser vazio')
-        else if (CopyUserName.length === 0)
-            NotificationAlerta('Preenchimento inválido', 'O nome não pode ser vazio')
-        else if (CopyUserLastName.length === 0)
-            NotificationAlerta('Preenchimento inválido', 'O sobrenome não pode ser vazio')
-        else if (!CopyUserCountry.name)
-            NotificationAlerta('Preenchimento inválido', 'O País não pode ser vazio')
-        else if (!CopyUserEstate.name)
-            NotificationAlerta('Preenchimento inválido', 'O Estado não pode ser vazio')
-        else if (!CopyUserCity.name)
-            NotificationAlerta('Preenchimento inválido', 'A Cidade não pode ser vazia')
-        else if (!CopyUserType.Id)
-            NotificationAlerta('Preenchimento inválido', 'Seleciona um Tipo de Usuário')
-        else if (!CopyUserSector.Id)
-            NotificationAlerta('Preenchimento inválido', 'Seleciona um Setor')
-        else {
-            SetConfirmAdd(true)
+            })
         }
     }
 
 
-    const GetUserSubmit = (e) => {
-        e.preventDefault()
-    }
+    const InitConfirm = (Action) => {
+        if (Action !== 'Delete') {
+            //ADD AND EDIT
+            if (CopyUserName.Email === 0 && Action === 'Add')
+                NotificationAlerta('Preenchimento inválido', 'O Email não pode ser vazio')
+            else if (CopyUserPhone.length < 11 && CopyUserPhone.length > 0)
+                NotificationAlerta('Preenchimento inválido', 'O Telefone de ter um mínimo 12 digitos')
+            else if (CopyUserPhone.length === 0)
+                NotificationAlerta('Preenchimento inválido', 'O telefone não pode ser vazio')
+            else if (CopyUserName.length === 0)
+                NotificationAlerta('Preenchimento inválido', 'O nome não pode ser vazio')
+            else if (CopyUserLastName.length === 0)
+                NotificationAlerta('Preenchimento inválido', 'O sobrenome não pode ser vazio')
+            else if (!CopyUserCountry.name)
+                NotificationAlerta('Preenchimento inválido', 'O País não pode ser vazio')
+            else if (!CopyUserEstate.name)
+                NotificationAlerta('Preenchimento inválido', 'O Estado não pode ser vazio')
+            else if (!CopyUserCity.name)
+                NotificationAlerta('Preenchimento inválido', 'A Cidade não pode ser vazia')
+            else if (!CopyUserType?.Id)
+                NotificationAlerta('Preenchimento inválido', 'Seleciona um Tipo de Usuário')
+            else if (!CopyUserSector.Id)
+                NotificationAlerta('Preenchimento inválido', 'Seleciona um Setor')
+            else {
+                SetConfirm(true)
+                if (Action === 'Add') {
+                    SetConfirmAction(Action)
+                    SetConfirmMessage('Tem certeza que quer adicionar este usuário?')
+                    SetConfirmBtAction('Adicionar')
+                    SetConfirmBtBack('Voltar')
+                }
+                if (Action === 'Edit') {
+                    SetConfirmAction(Action)
+                    if (IsCurrentUser)
+                        SetConfirmMessage('Tem certeza que quer alterar as suas informações?')
+                    else
+                        SetConfirmMessage('Tem certeza que quer alterar as informações deste usuário?')
+                    SetConfirmBtAction('Alterar')
+                    SetConfirmBtBack('Voltar')
+                }
 
+            }
+        } else {
+            //DELETE
+            SetConfirm(true)
+            SetConfirmAction(Action)
+            SetConfirmMessage('Tem certeza que quer deletar este usuário?')
+            SetConfirmBtAction('Deletar')
+            SetConfirmBtBack('Voltar')
+        }
+    }
 
 
     const UpdatePassword = () => {
@@ -248,35 +274,20 @@ const UserModal = (props) => {
         }
     }
 
-    const InitSaveEdit = () => {
-        if ((CanEdit || IsAdmin) || PermitToEditUsers) {
-            if (CopyUserPhone.length < 11 && CopyUserPhone.length > 0) {
-                NotificationAlerta('Preenchimento inválido', 'O Telefone de ter um mínimo 12 digitos')
-            } else if (CopyUserPhone.length === 0) {
-                NotificationAlerta('Preenchimento inválido', 'O telefone não pode ser vazio')
-            } else if (CopyUserName.length === 0) {
-                NotificationAlerta('Preenchimento inválido', 'O nome não pode ser vazio')
-            } else if (CopyUserLastName.length === 0) {
-                NotificationAlerta('Preenchimento inválido', 'O sobrenome não pode ser vazio')
-            } else if (!CopyUserCountry.name) {
-                NotificationAlerta('Preenchimento inválido', 'O País não pode ser vazio')
-            } else if (!CopyUserEstate.name) {
-                NotificationAlerta('Preenchimento inválido', 'O Estado não pode ser vazio')
-            } else if (!CopyUserCity.name) {
-                NotificationAlerta('Preenchimento inválido', 'A Cidade não pode ser vazia')
-            } else {
-                SetConfirmEdit(true)
-            }
-        }
+
+    const EndConfirming = () => {
+        SetConfirm(false)
+        SetConfirmMessage('')
+        SetConfirmBtAction('')
+        SetConfirmBtBack('')
+        SetConfirmAction('')
+    }
+
+    const GetUserSubmit = (e) => {
+        e.preventDefault()
     }
 
 
-    const EndSaveEdit = () => {
-        SetConfirmEdit(false)
-    }
-    const EndAddConfirm = () => {
-        SetConfirmAdd(false)
-    }
 
     return (
         <Modal {...props} size="xl" aria-labelledby="contained-modal-title-vcenter" centered fullscreen={'md-down'} className={localStorage.getItem('AssetSenseTema') === 'Escuro' ? 'UserModal-ModalEscuro UserModal-Modal' : 'UserModal-ModalClaro UserModal-Modal'}>
@@ -293,16 +304,16 @@ const UserModal = (props) => {
                                 <img src={UserPhoto} alt="User" />
                             </div>
                         </div>
-                        <div className='UserModalHeader-Right'>
+                        <div className='UserModalHeader-Right'> 
                             <div className='UserModalHeader-Right-Name'>
 
-                                {props.Function === 'Add' && <div>
+                                {props.Function === 'Add' && <span>
                                     {(props.Function === 'Add' && (!CopyUserName)) ? 'Nome ' : CopyUserName}
                                     {(props.Function === 'Add' && (!CopyUserLastName)) ? ' Sobrenome' : ' ' + CopyUserLastName}
-                                </div>
+                                </span>
                                 }
 
-                                {(props.Function !== 'Add') ? User.Name + ' ' + User.LastName : ''}
+                                {(props.Function !== 'Add') ? User?.Name + ' ' + User?.LastName : ''}
                                 <UilTimes className='UserModalHeader-Right-Close' onClick={props.onHide} />
                             </div>
                             <div className='UserModalHeader-Right-Setor'>
@@ -334,7 +345,7 @@ const UserModal = (props) => {
                                 </div>
                             }
                         </div>
-                        {!ConfirmEdit && !ConfirmAdd &&
+                        {!Confirm &&
                             <div className='UserModalBody-UserInfo'>
                                 {Tab === 'UserInfo' && <div className='UserModalBody-UserInfoForm'>
                                     <form onSubmit={GetUserSubmit}>
@@ -348,8 +359,8 @@ const UserModal = (props) => {
                                                     <UilEnvelope />
                                                     Email
                                                 </span>
-                                                {props.Function === 'Add' && <input value={CopyUserEmail} type="text" placeholder='Email' onChange={e => HandleChangeInfo('Email', e.target.value)} />}
-                                                {props.Function !== 'Add' && <input value={User.Email} type="text" placeholder='Email' />}
+                                                {props.Function === 'Add' && <input value={CopyUserEmail} type="text" placeholder='Digite o Email' onChange={e => HandleChangeInfo('Email', e.target.value)} />}
+                                                {props.Function !== 'Add' && <input value={User?.Email} type="text" placeholder='Digite o Email' />}
                                             </div>
                                         </div>
 
@@ -360,14 +371,14 @@ const UserModal = (props) => {
                                                     <UilPen />
                                                     Nome
                                                 </span>
-                                                <input disabled={!CanEdit} value={CopyUserName} type="text" onChange={e => HandleChangeInfo('Name', e.target.value)} />
+                                                <input placeholder='Digite o Nome' disabled={!CanEdit} value={CopyUserName} type="text" onChange={e => HandleChangeInfo('Name', e.target.value)} />
                                             </div>
                                             <div className='UserModalBody-UserInfoForm-Group'>
                                                 <span>
                                                     <UilPen />
                                                     Sobrenome
                                                 </span>
-                                                <input disabled={!CanEdit} value={CopyUserLastName} type="text" onChange={e => HandleChangeInfo('LastName', e.target.value)} />
+                                                <input placeholder='Digite o Sobrenome' disabled={!CanEdit} value={CopyUserLastName} type="text" onChange={e => HandleChangeInfo('LastName', e.target.value)} />
                                             </div>
                                         </div>
 
@@ -517,8 +528,8 @@ const UserModal = (props) => {
                                                     </div>
                                                     <div className='UserModalBody-UserInfoForm-SetorList-Itens'>
                                                         {Setores.map(Setor => {
-                                                            return <div className={'UserModalBody-UserInfoForm-SetorList-Item'} onClick={e => HandleChangeInfo('Sector', Setor.Id)}>
-                                                                {CopyUserSector.Id === Setor.Id ? <ImCheckboxChecked /> : <ImCheckboxUnchecked />}
+                                                            return <div className={'UserModalBody-UserInfoForm-SetorList-Item'} onClick={e => HandleChangeInfo('Sector', Setor?.Id)}>
+                                                                {CopyUserSector?.Id === Setor?.Id ? <ImCheckboxChecked /> : <ImCheckboxUnchecked />}
                                                                 {Setor?.Value}
                                                             </div>
                                                         })}
@@ -535,8 +546,8 @@ const UserModal = (props) => {
                                                     </div>
                                                     <div className='UserModalBody-UserInfoForm-TiposUserList-Itens'>
                                                         {TiposUsuarios.map(TipoUser => {
-                                                            return <div className={'UserModalBody-UserInfoForm-TiposUserList-Item'} onClick={e => HandleChangeInfo('Type', TipoUser.Id)}>
-                                                                {CopyUserType.Id === TipoUser.Id ? <ImCheckboxChecked /> : <ImCheckboxUnchecked />}
+                                                            return <div className={'UserModalBody-UserInfoForm-TiposUserList-Item'} onClick={e => HandleChangeInfo('Type', TipoUser?.Id)}>
+                                                                {CopyUserType?.Id === TipoUser?.Id ? <ImCheckboxChecked /> : <ImCheckboxUnchecked />}
                                                                 {TipoUser?.Value}
                                                             </div>
                                                         })}
@@ -546,6 +557,12 @@ const UserModal = (props) => {
                                         </div>
                                     </form>
                                     <div className='UserModalBody-UserInfoForm-Button'>
+                                        {!IsEdited && !IsCurrentUser && PermitToDeleteUsers && (props.Function !== 'Add') &&
+                                            <button className='UserModalBody-UserInfoForm-Button-Delete' onClick={e => InitConfirm('Delete')}>
+                                                <UilTrash />
+                                                Excluir Usuário
+                                            </button>
+                                        }
                                         {IsEdited &&
                                             <>
                                                 <button onClick={CancelEditions}>
@@ -554,14 +571,14 @@ const UserModal = (props) => {
                                                 </button>
 
                                                 {props.Function === 'Add' &&
-                                                    <button onClick={InitConfirmAdd}>
+                                                    <button onClick={e => InitConfirm('Add')}>
                                                         <UilSave />
                                                         Adicionar
                                                     </button>
                                                 }
 
                                                 {props.Function !== 'Add' &&
-                                                    <button onClick={InitSaveEdit}>
+                                                    <button onClick={e => InitConfirm('Edit')}>
                                                         <UilSave />
                                                         Salvar
                                                     </button>
@@ -576,32 +593,22 @@ const UserModal = (props) => {
                             </div>
                         }
 
-                        {ConfirmEdit && <div className='UserModalBody-UserInfo'>
-                            <h4 className='UserModalBody-UserInfoForm-SectionTitle'>Você realmente deseja Atualizar as informações deste usuário?</h4>
-                            <div className='UserModalBody-UserInfoForm-Button'>
-                                <button className='UserModalBody-UserInfoForm-Button-Secondary' onClick={EndSaveEdit}>
-                                    <UilBackward />
-                                    Cancelar
-                                </button>
-                                <button onClick={SaveEdit}>
-                                    <UilCheck />
-                                    Atualizar
-                                </button>
-                            </div>
-                        </div>
-                        }
 
 
-                        {ConfirmAdd && <div className='UserModalBody-UserInfo'>
-                            <h4 className='UserModalBody-UserInfoForm-SectionTitle'>Você realmente deseja Adicionar este Usuário?</h4>
+
+
+
+
+                        {Confirm && <div className='UserModalBody-UserInfo'>
+                            <h4 className='UserModalBody-UserInfoForm-ConfirMessage'>{ConfirmMessage}</h4>
                             <div className='UserModalBody-UserInfoForm-Button'>
-                                <button className='UserModalBody-UserInfoForm-Button-Secondary' onClick={EndAddConfirm}>
+                                <button className='UserModalBody-UserInfoForm-Button-Secondary' onClick={EndConfirming}>
                                     <UilBackward />
-                                    Cancelar
+                                    {ConfirmBtBack}
                                 </button>
-                                <button onClick={AddNewUser}>
+                                <button onClick={Submit}>
                                     <UilCheck />
-                                    Adicionar
+                                    {ConfirmBtAction}
                                 </button>
                             </div>
                         </div>
