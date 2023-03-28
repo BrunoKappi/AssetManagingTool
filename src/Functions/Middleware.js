@@ -6,7 +6,7 @@ import { SetTiposUsuarios } from "../Config/store/actions/TiposUsuariosActions"
 import { SetLocaisArmazenamento } from "../Config/store/actions/LocaisArmazenamentoActions"
 import { SetStatusAtivos } from "../Config/store/actions/AtivosStatusActions"
 import { SetTiposDeUso } from "../Config/store/actions/TiposDeUsoActions"
-import { SetAtivos } from "../Config/store/actions/AtivosActions"
+import { AddAtivoAction, DeleteAtivoAction, SetAtivos } from "../Config/store/actions/AtivosActions"
 import { AddUsuarioAction, DeleteUsuarioAction, SetUsuarios } from "../Config/store/actions/UsuariosActions"
 import { PermitIndexs } from "../GlobalVars"
 
@@ -66,7 +66,7 @@ export async function SaveTipos(Tipos, gerarErro = false) {
             if (gerarErro) {
                 reject(new Error('Erro ao obter dados'));
             } else {
-                ////console.log(Tipos)
+                //////console.log(Tipos)
                 localStorage.setItem('AssetSenseTipos', JSON.stringify(Tipos))
                 store.dispatch(SetTiposAtivos(Tipos))
                 resolve('Ok');
@@ -131,7 +131,7 @@ export async function SaveSetores(Setores, gerarErro = false) {
             if (gerarErro) {
                 reject(new Error('Erro ao obter dados'));
             } else {
-                ////console.log(Setores)
+                //////console.log(Setores)
                 localStorage.setItem('AssetSenseSetores', JSON.stringify(Setores))
                 store.dispatch(SetSetores(Setores))
                 resolve('Ok');
@@ -177,7 +177,7 @@ export async function GetUserTipos(gerarErro = false) {
             } else {
                 if (localStorage.getItem('AssetSenseUsersTypes')) {
                     resolve(JSON.parse(localStorage.getItem('AssetSenseUsersTypes')))
-                    ////console.log("TIPOS", JSON.parse(localStorage.getItem('AssetSenseUsersTypes')))
+                    //////console.log("TIPOS", JSON.parse(localStorage.getItem('AssetSenseUsersTypes')))
                 }
 
                 else
@@ -194,7 +194,7 @@ export async function SaveUserTipos(Tipos, gerarErro = false) {
             if (gerarErro) {
                 reject(new Error('Erro ao obter dados'));
             } else {
-                ////console.log(Tipos)
+                //////console.log(Tipos)
                 localStorage.setItem('AssetSenseUsersTypes', JSON.stringify(Tipos))
                 store.dispatch(SetTiposUsuarios(Tipos))
                 resolve('Ok');
@@ -217,7 +217,7 @@ export async function GetUsersTypesSelect(gerarErro = false) {
                             label: item.Value,
                         };
                     });
-                    //console.log(Types)
+                    ////console.log(Types)
                     Types.push({ value: 'Todos', label: 'Todos' })
                     resolve(Types)
                 }
@@ -264,7 +264,7 @@ export async function SaveLocaisArmazenamento(Locais, gerarErro = false) {
             if (gerarErro) {
                 reject(new Error('Erro ao obter dados'));
             } else {
-                ////console.log(Locais)
+                //////console.log(Locais)
                 localStorage.setItem('AssetSenseLocaisArmazenamento', JSON.stringify(Locais))
                 store.dispatch(SetLocaisArmazenamento(Locais))
                 resolve('Ok');
@@ -327,7 +327,7 @@ export async function SaveStatusAtivos(Locais, gerarErro = false) {
             if (gerarErro) {
                 reject(new Error('Erro ao obter dados'));
             } else {
-                ////console.log(Locais)
+                //////console.log(Locais)
                 localStorage.setItem('AssetSenseStatusAtivos', JSON.stringify(Locais))
                 store.dispatch(SetStatusAtivos(Locais))
                 resolve('Ok');
@@ -363,7 +363,7 @@ export async function SaveTiposDeUso(Locais, gerarErro = false) {
             if (gerarErro) {
                 reject(new Error('Erro ao obter dados'));
             } else {
-                ////console.log(Locais)
+                //////console.log(Locais)
                 localStorage.setItem('AssetSenseTiposDeUso', JSON.stringify(Locais))
                 store.dispatch(SetTiposDeUso(Locais))
                 resolve('Ok');
@@ -401,16 +401,68 @@ export async function SaveAtivos(Ativos, gerarErro = false) {
         if (gerarErro) {
             reject(new Error('Erro ao obter dados'));
         } else {
-            ////console.log(Ativos)
+            //////console.log(Ativos)
             localStorage.setItem('AssetSenseAtivos', JSON.stringify(Ativos))
             store.dispatch(SetAtivos(Ativos))
-            //console.log("Command Save ATIVOS")
+            ////console.log("Command Save ATIVOS")
             resolve('Ok');
         }
 
     });
 }
 
+
+export async function AddAtivo(Ativo, gerarErro = false) {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            if (gerarErro) {
+                reject(new Error('Erro ao obter dados'));
+            } else {
+                store.dispatch(AddAtivoAction(Ativo))
+                resolve('Ok');
+            }
+        }, 50);
+    });
+}
+
+
+export async function DeleteAtivo(Ativo, gerarErro = false) {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            if (gerarErro) {
+                reject(new Error('Erro ao obter dados'));
+            } else {
+                //////console.log(Ativos)
+                //localStorage.setItem('AssetSenseAtivos', JSON.stringify(Ativos))
+                store.dispatch(DeleteAtivoAction(Ativo))
+                resolve('Ok');
+            }
+        }, 50);
+    });
+}
+
+
+export async function EditAtivo(EditedAtivo, gerarErro = false) {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            if (gerarErro) {
+                reject(new Error('Erro ao obter dados'));
+            } else {
+                GetAtivos().then(Lista => {
+
+                    const NewAtivos = Lista.filter(ativo => {
+                        return ativo.Id !== EditedAtivo.Id
+                    }).concat(EditedAtivo)
+
+                    SaveAtivos(NewAtivos)
+                    //console.log(NewAtivos)
+                    resolve('Ok');
+                })
+                //store.dispatch(EditUsuarioAction(EditedUser))
+            }
+        }, 50);
+    });
+}
 
 ////////////////////// ATIVOS //////////////////////////
 
@@ -448,7 +500,7 @@ export async function SaveUsers(Users, gerarErro = false) {
             if (gerarErro) {
                 reject(new Error('Erro ao obter dados'));
             } else {
-                ////console.log(Users)
+                //////console.log(Users)
                 localStorage.setItem('AssetSenseUsers', JSON.stringify(Users))
                 store.dispatch(SetUsuarios(Users))
                 resolve('Ok');
@@ -462,7 +514,7 @@ export async function AddUser(User, gerarErro = false) {
         setTimeout(() => {
             if (gerarErro) {
                 reject(new Error('Erro ao obter dados'));
-            } else {              
+            } else {
                 store.dispatch(AddUsuarioAction(User))
                 resolve('Ok');
             }
@@ -475,11 +527,11 @@ export async function DeleteUser(User, gerarErro = false) {
             if (gerarErro) {
                 reject(new Error('Erro ao obter dados'));
             } else {
-                ////console.log(Users)
+                //////console.log(Users)
                 //localStorage.setItem('AssetSenseUsers', JSON.stringify(Users))
                 store.dispatch(DeleteUsuarioAction(User))
                 resolve('Ok');
-            } 
+            }
         }, 50);
     });
 }
@@ -494,14 +546,12 @@ export async function EditUser(EditedUser, gerarErro = false) {
             } else {
                 GetUsers().then(Lista => {
 
-
-
                     const NewUsers = Lista.filter(usuario => {
                         return usuario.Id !== EditedUser.Id
                     }).concat(EditedUser)
 
                     SaveUsers(NewUsers)
-                    console.log(NewUsers)
+                    //console.log(NewUsers)
                     resolve('Ok');
                 })
                 //store.dispatch(EditUsuarioAction(EditedUser))
@@ -545,26 +595,38 @@ export async function ToggleTema() {
 
 
 
-// GETTERS DA STORE /////
+///// GETTERS DA STORE /////
 
 export const GetCurrentUserEmailFromStore = () => {
     return store.getState().LoggedUser.Email
 }
-
 export const GetUserTypesFromStore = () => {
     return store.getState().TiposUsuarios
 }
-
+export const GetLocaisArmazenamentoFromStore = () => {
+    return store.getState().LocaisArmazenamento
+}
+export const GetTiposAtivosFromStore = () => {
+    return store.getState().TiposAtivos
+}
+export const GetTiposDeUsoFromStore = () => {
+    return store.getState().TiposDeUso
+}
 export const GetAtivosFromStore = () => {
     return store.getState().Ativos
 }
-
+export const GetStatusAtivosFromStore = () => {
+    return store.getState().StatusAtivos
+}
 export const GetSetoresFromStore = () => {
     return store.getState().Setores
 }
 export const GetUsersFromStore = () => {
     return store.getState().Usuarios
 }
+
+///// GETTERS DA STORE /////
+
 
 export const GetCurrentUserTypeFromStore = () => {
     const Email = GetCurrentUserEmailFromStore()
@@ -576,20 +638,57 @@ export const GetCurrentUserTypeFromStore = () => {
 }
 
 
+
+/// GET WITH ID
+
 export const GetCurrentUserTypeWithIdFromStore = (Id) => {
     const Types = GetUserTypesFromStore()
     const Type = Types.find(U => U.Id === Id)
     return Type
 }
+export const GetAtivoTypeWithIdFromStore = (Id) => {
+    const Types = GetTiposAtivosFromStore()
+    const Type = Types.find(U => U.Id === Id)
+    return Type
+}
+export const GetLocalArmazenamentoWithIdFromStore = (Id) => {
+    const Locais = GetLocaisArmazenamentoFromStore()
+    const Local = Locais.find(U => U.Id === Id)
+    return Local
+}
+export const GetAtivoStatusWithIdFromStore = (Id) => {
+    const Statuses = GetStatusAtivosFromStore()
+    const Status = Statuses.find(U => U.Id === Id)
+    return Status
+}
+export const GetTipoDeUsoWithIdFromStore = (Id) => {
+    const TiposDeUso = GetTiposDeUsoFromStore()
+    const TipoDeUso = TiposDeUso.find(U => U.Id === Id)
+    return TipoDeUso
+}
 
 
-
+export const GetLocalArmazenamentoNameWithIdFromStore = (Id) => {
+    const Locais = GetLocaisArmazenamentoFromStore()
+    const LocalName = Locais.find(U => U.Id === Id)?.Value
+    return LocalName
+}
+export const GetTipoAtivoNameWithIdFromStore = (Id) => {
+    const Tipos = GetTiposAtivosFromStore()
+    const TiposName = Tipos.find(U => U.Id === Id)?.Value
+    return TiposName ? TiposName : ''
+}
+export const GetTipoDeUsoNameWithIdFromStore = (Id) => {
+    const Tipos = GetTiposDeUsoFromStore()
+    const TiposName = Tipos.find(U => U.Id === Id)?.Value
+    return TiposName ? TiposName : ''
+}
 
 export const GetCurrentUserSetorNameWithIdFromStore = (Id) => {
     if (!Id) return 'Selecione um Setor'
     const Setores = GetSetoresFromStore()
     const Name = Setores.find(Setor => Setor.Id === Id).Value
-    return Name
+    return Name ? Name : ''
 }
 export const GetCurrentUserTypeNameWithIdFromStore = (Id) => {
     if (!Id) return 'Selecione um Tipo de Usuário'
@@ -612,6 +711,11 @@ export const GetUserWithIdFromStore = (Id) => {
     const Users = GetUsersFromStore()
     const User = Users.find(U => U.Id === Id)
     return User
+}
+export const GetAtivoWithIdFromStore = (Id) => {
+    const Ativos = GetAtivosFromStore()
+    const Ativo = Ativos.find(U => U.Id === Id)
+    return Ativo ? Ativo : {}
 }
 
 

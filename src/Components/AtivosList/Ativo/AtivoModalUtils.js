@@ -4,8 +4,8 @@ export const noOptionsMessage = ({ inputValue }) => {
     return inputValue ? 'Nenhuma opção encontrada para "' + inputValue + '"' : 'Nenhuma opção disponível';
 };
 
-export const UserModalSelectcustomStyles = {
-
+export const AtivoModalSelectcustomStyles = {
+ 
     option: (provided, state) => ({
         ...provided,
         backgroundColor: state.isFocused ? 'var(--ComplementaryColor)' : provided.backgroundColor,
@@ -19,9 +19,9 @@ export const UserModalSelectcustomStyles = {
         ...provided,
         border: 'none',
         outline: 'none',
-        color: 'var(--UserModal-Color-Input)',
+        color: 'var(--AtivoModal-Color-Input)',
         ':placeholder': {
-            color: 'var(--UserModal-Color-Input)',
+            color: 'var(--AtivoModal-Color-Input)',
         }
     }),
     control: (provided, state) => ({
@@ -29,12 +29,12 @@ export const UserModalSelectcustomStyles = {
         borderRadius: '.5rem',
         boxShadow: state.isFocused ? 'none' : 'none',
         border: state.isFocused ? '1px solid var(--PrimaryBackGroundFaded50)' : '1px solid var(--PrimaryBackGroundFaded50)',
-        backgroundColor: 'var(--UserModal-Background-Input)',
-        color: 'var(--UserModal-Color-Input)'
+        backgroundColor: 'var(--AtivoModal-Background-Input)',
+        color: 'var(--AtivoModal-Color-Input)'
     }),
     singleValue: (provided) => ({
         ...provided,
-        color: 'var(--UserModal-Color-Input)'
+        color: 'var(--AtivoModal-Color-Input)'
     }),
 };
 

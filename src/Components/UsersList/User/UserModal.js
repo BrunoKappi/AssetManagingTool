@@ -202,7 +202,7 @@ const UserModal = (props) => {
     const InitConfirm = (Action) => {
         if (Action !== 'Delete') {
             //ADD AND EDIT
-            if (CopyUserName.Email === 0 && Action === 'Add')
+            if (CopyUserEmail.length === 0 && Action === 'Add')
                 NotificationAlerta('Preenchimento inválido', 'O Email não pode ser vazio')
             else if (CopyUserPhone.length < 11 && CopyUserPhone.length > 0)
                 NotificationAlerta('Preenchimento inválido', 'O Telefone de ter um mínimo 12 digitos')
@@ -556,6 +556,7 @@ const UserModal = (props) => {
                                             </div>
                                         </div>
                                     </form>
+                                    
                                     <div className='UserModalBody-UserInfoForm-Button'>
                                         {!IsEdited && !IsCurrentUser && PermitToDeleteUsers && (props.Function !== 'Add') &&
                                             <button className='UserModalBody-UserInfoForm-Button-Delete' onClick={e => InitConfirm('Delete')}>

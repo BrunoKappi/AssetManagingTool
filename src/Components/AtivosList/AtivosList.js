@@ -5,9 +5,11 @@ import { connect } from 'react-redux'
 import { MdFilterList } from 'react-icons/md';
 import Dropdown from 'react-bootstrap/Dropdown';
 import { UilExclamationCircle } from '@iconscout/react-unicons'
-import { GetAtivosFromStore, GetCurrentUserFromStore, GetCurrentUserTypeFromStore, GetLocaisSelect, GetTiposAtivosSelect } from '../../Functions/Middleware';
+import { GetAtivosFromStore, GetCurrentUserFromStore, GetCurrentUserTypeFromStore, GetLocaisSelect, GetLocalArmazenamentoNameWithIdFromStore, GetTipoAtivoNameWithIdFromStore, GetTipoDeUsoNameWithIdFromStore, GetTiposAtivosSelect } from '../../Functions/Middleware';
 import { PermitIndexs } from '../../GlobalVars';
-
+import Ativo from './Ativo/Ativo';
+import { v4 } from 'uuid';
+import AtivoModal from './Ativo/AtivoModal'
 
 
 const AtivosList = (props) => {
@@ -42,16 +44,18 @@ const AtivosList = (props) => {
 
     useEffect(() => {
         const Ativos = GetAtivosFromStore()
-        console.log(Ativos) 
+        console.log(Ativos)
         setListaDeAtivos(Ativos.sort((a, b) => a.Item.localeCompare(b.Item)))
         setLoaded(true)
     }, [props.Ativos])
 
 
+    
+
     useEffect(() => {
         const Ativos = GetAtivosFromStore()
         setListaDeAtivos(Ativos.filter(Ativo => {
-            const TextFilter = FiltroDeTexto === '' || (Ativo.Item.toLowerCase().includes(FiltroDeTexto.toLowerCase()) || Ativo.Brand.toLowerCase().includes(FiltroDeTexto.toLowerCase()) )
+            const TextFilter = FiltroDeTexto === '' || (Ativo.Item.toLowerCase().includes(FiltroDeTexto.toLowerCase()) || Ativo.Brand.toLowerCase().includes(FiltroDeTexto.toLowerCase()) || GetLocalArmazenamentoNameWithIdFromStore(Ativo.StorageLocation.Id).toLowerCase().includes(FiltroDeTexto.toLowerCase()) || GetTipoAtivoNameWithIdFromStore(Ativo.Type.Id).toLowerCase().includes(FiltroDeTexto.toLowerCase()) || GetTipoDeUsoNameWithIdFromStore(Ativo.Usage.Id).toLowerCase().includes(FiltroDeTexto.toLowerCase()))
             const TipoAtivoFiler = FiltroDeTipoAtivo === 'Todos' || FiltroDeTipoAtivo === '' || Ativo.Type.Id === FiltroDeTipoAtivo
             const LocalArmazenamentoFilter = FiltroLocal === 'Todos' || FiltroLocal === '' || Ativo.StorageLocation.Id === FiltroLocal
             return TextFilter && TipoAtivoFiler && LocalArmazenamentoFilter
@@ -94,25 +98,28 @@ const AtivosList = (props) => {
 
 
     return (
-        <div className={localStorage.getItem('AssetSenseTema') === 'Escuro' ? 'UsersListContainerEscuro UsersListContainer' : 'UsersListContainerClaro UsersListContainer'}>
+        <div className={localStorage.getItem('AssetSenseTema') === 'Escuro' ? 'AtivosListContainerEscuro AtivosListContainer' : 'AtivosListContainerClaro AtivosListContainer'}>
+
+            <AtivoModal CurrentUser={CurrentUser} Ativo={{ ...SelectedAtivo }} show={modalShow} onHide={() => setModalShow(false)} Function="View" onDelete={ResetSelectedAtivo} />
+            <AtivoModal CurrentUser={CurrentUser} Ativo={{}} show={AddmodalShow} onHide={() => setAddModalShow(false)} Function="Add" />
 
 
-            <div className='UsersLisFormFilter'>
-                <input value={FiltroDeTexto} placeholder='Procurar Usuário...' onChange={e => setFiltroDeTexto(e.target.value)}></input>
+            <div className='AtivosListFormFilter'>
+                <input value={FiltroDeTexto} placeholder='Procurar Item...' onChange={e => setFiltroDeTexto(e.target.value)}></input>
                 <Dropdown autoClose="outside">
-                    <Dropdown.Toggle id="Filtros">
-                        <div className='FiltrosTitle'>
+                    <Dropdown.Toggle id="AtivosList-Filtros">
+                        <div className='AtivosList-FiltrosTitle'>
                             Filtros
                             <MdFilterList />
                         </div>
                     </Dropdown.Toggle>
                     <Dropdown.Menu>
 
-                        <Dropdown.Item id='FiltrosItem'>
+                        <Dropdown.Item id='AtivosList-FiltrosItem'>
 
                             <Dropdown>
-                                <Dropdown.Toggle id="FiltroDeSetor">
-                                    <div className='FiltroDeSetorTitle'>
+                                <Dropdown.Toggle id="FiltroDeTipoDeAtivo">
+                                    <div className='FiltroDeTipoDeAtivoTitle'>
                                         {(FiltroDeTipoAtivo !== 'Todos' && FiltroDeTipoAtivo) ? TipoAtivoLabel : 'Filtro de Tipo'}
                                         <MdFilterList />
                                     </div>
@@ -127,8 +134,8 @@ const AtivosList = (props) => {
 
 
                             <Dropdown>
-                                <Dropdown.Toggle id="FiltroDeTipo">
-                                    <div className='FiltroDeTipoTitle'>
+                                <Dropdown.Toggle id="FiltroLocalDeAtivo">
+                                    <div className='FiltroLocalDeAtivoTitle'>
                                         {(FiltroLocal !== 'Todos' && FiltroLocal) ? LocalLabel : 'Local Armazenamento'}
                                         <MdFilterList />
                                     </div>
@@ -155,20 +162,20 @@ const AtivosList = (props) => {
 
             {(ListaDeAtivos.length !== 0 || Loaded) && ListaDeAtivos.map((Item, Index) => {
                 return <div onClick={e => handleUserClick(Item)}>
-                    {Item.Item}
+                    <Ativo key={v4()} Ativo={Item} />
                 </div>
             })}
 
             {ListaDeAtivos.length === 0 && !Loaded && <Loading />}
 
-            {ListaDeAtivos.length === 0 && Loaded && <div className='FilterNoResultsContainer'>
+            {ListaDeAtivos.length === 0 && Loaded && <div className='AtivosList-FilterNoResultsContainer'>
                 <UilExclamationCircle />
                 <h3>Nenhum Ativo encontrado</h3>
             </div>}
 
 
             {PermitToAddAtivos &&
-                <button className='UsersListAddUserButton' onClick={e => setAddModalShow(true)}>
+                <button className='AtivosListAddButton' onClick={e => setAddModalShow(true)}>
                     Adicionar Ativo
                 </button>
             }

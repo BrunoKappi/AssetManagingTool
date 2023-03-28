@@ -17,6 +17,22 @@ export const editNotaAction = (docID, editedNota = {}) => {
     })
 }
 
+export const AddAtivoAction = (NovoAtivo = {}) => {
+
+    return ({
+        type: 'ADD_ATIVO',
+        NovoAtivo
+    })
+}
+
+export const DeleteAtivoAction = (AtivoToDelete = {}) => {
+
+    return ({
+        type: 'DELETE_ATIVO',
+        AtivoToDelete
+    })
+}
+
 
 export const clearAllNotas = () => {
     return ({

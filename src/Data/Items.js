@@ -191,13 +191,39 @@ if (!localStorage.getItem('AssetSenseTiposDeUso')) {
 
 
 
-export const DefaultUserType = { Id: uuid(), Value: '' }
-export const DefaultSetor = { Id: uuid(), Value: '' }
-export const DefaultLocal = { Id: uuid(), Value: '' }
-export const DefaultItemType = { Id: uuid(), Value: '' }
+export const DefaultUserType = { Id: '', Value: '' }
+export const DefaultSetor = { Id: '', Value: '' }
+export const DefaultLocal = { Id: '', Value: '' }
+export const DefaultItemType = { Id: '', Value: '' }
+export const DefaultAtivosType = { Id: '', Value: '' }
+
+
+export const DefaultAtivo = {
+    Id: uuid(),
+    Item:'',
+    Qtd:1,
+    Brand:'',
+    StorageLocation: {
+        Id: ''      
+    },
+    Type: {
+        Id: ''      
+    },
+    Status: {
+        Id: ''      
+    },
+    Usage: {
+        Id: ''      
+    },
+   
+}
+
+
+
+
 
 export const DefaultRecord = {
-    Id: uuid(),
+    Id:'',
     Date: '',
     User: {
         Name: '',
