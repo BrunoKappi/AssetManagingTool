@@ -1,31 +1,43 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import './Ativos.css'
 import { ArmazenamentoTabTitle, TiposTabTitle, TodosTabTitle } from './AtivosUtils';
-import Loading from '../LoadingForTabs/Loading';
-import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
-import ListGroup from 'react-bootstrap/ListGroup';
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
 import AtivosInTypes from '../AtivosInTypes/AtivosInTypes'
 import AtivosInLocais from '../AtivosInLocais/AtivosInLocais'
-import { GetAtivos } from '../../Functions/Middleware';
-
+import { GetCurrentUserTypePermitFromStore } from '../../Functions/Middleware';
+import { NotificationErro } from '../../NotificationUtils';
+import AtivosList from '../AtivosList/AtivosList'
 
 const Ativos = (props) => {
 
-  const [ListaDeAtivos, setListaDeAtivos] = useState([])
-  const [Loaded, setLoaded] = useState(false);
-  const [key, setKey] = useState('Todos');
+  const TodosPermit = GetCurrentUserTypePermitFromStore('USUARIOS') || GetCurrentUserTypePermitFromStore('EDITAR_ATIVOS') || GetCurrentUserTypePermitFromStore('VISUALIZAR_ATIVOS')
+  const LocaisPermit = GetCurrentUserTypePermitFromStore('EDITAR_ATIVOS') || GetCurrentUserTypePermitFromStore('VISUALIZAR_ATIVOS')
+  const TiposPermit = GetCurrentUserTypePermitFromStore('EDITAR_ATIVOS') || GetCurrentUserTypePermitFromStore('VISUALIZAR_ATIVOS')
 
-  useEffect(() => {
-    GetAtivos().then((Lista) => {
-      setListaDeAtivos(Lista)
-      setLoaded(true)
-    }).catch(Erro => {
-      console.error(Erro)
-      setLoaded(true)
-    })
-  }, [])
+  const getInitialTab = () => {
+    if (TodosPermit)
+      return 'Todos'
+    else if (LocaisPermit)
+      return 'Armazenamento'
+    else if (TiposPermit)
+      return 'Tipos'
+  }
+
+
+
+  const [key, setKey] = useState(getInitialTab());
+
+  const SetKeyAtivos = (Key) => {
+    if (Key === 'Todos' && TodosPermit)
+      setKey(Key)
+    else if (Key === 'Armazenamento' && LocaisPermit)
+      setKey(Key)
+    else if (Key === 'Tipos' && TiposPermit)
+      setKey(Key)
+    else
+      NotificationErro("Não Autorizado", "Você não possui permissão para acessar essa aba, solicite acesso ao seu Administrador")
+  }
 
 
 
@@ -36,52 +48,18 @@ const Ativos = (props) => {
 
 
       <div className={localStorage.getItem('AssetSenseTema') === 'Escuro' ? 'TabsContainerEscuro TabsContainer' : 'TabsContainerClaro TabsContainer'}>
-        <button onClick={(k) => setKey('Todos')} className={key === 'Todos' ? 'TabsButtonActive' : ''}>{TodosTabTitle()}</button>
-        <button onClick={(k) => setKey('Armazenamento')} className={key === 'Armazenamento' ? 'TabsButtonActive' : ''}>{ArmazenamentoTabTitle()}</button>
-        <button onClick={(k) => setKey('Tipos')} className={key === 'Tipos' ? 'TabsButtonActive' : ''}>{TiposTabTitle()}</button>
+        <button onClick={(k) => SetKeyAtivos('Todos')} className={key === 'Todos' ? 'TabsButtonActive' : ''}>{TodosTabTitle()}</button>
+        <button onClick={(k) => SetKeyAtivos('Armazenamento')} className={key === 'Armazenamento' ? 'TabsButtonActive' : ''}>{ArmazenamentoTabTitle()}</button>
+        <button onClick={(k) => SetKeyAtivos('Tipos')} className={key === 'Tipos' ? 'TabsButtonActive' : ''}>{TiposTabTitle()}</button>
       </div>
 
 
       <Tabs id="UsersTabs" activeKey={key} onSelect={(k) => setKey(k)} className="mb-3">
 
         <Tab eventKey="Todos" >
-          <div className='ListItensContainer'>
-            {(ListaDeAtivos.length !== 0 || Loaded) &&
-              <ListGroup>
-                <DragDropContext onDragEnd={(result) => { console.log(result) }}>
-                  <Droppable droppableId={'AtivosLista'} key={'AtivosLista'}>
-                    {(provided) => {
-                      return (
-                        <div {...provided.droppableProps} ref={provided.innerRef}>
-
-
-                          {ListaDeAtivos.map((Item, Index) => {
-                            return <Draggable key={Item.Id} draggableId={Item.Id} index={Index} >
-                              {(DragProvided) => {
-                                return (
-                                  <div ref={DragProvided.innerRef} {...DragProvided.draggableProps} {...DragProvided.dragHandleProps}>
-                                    <ListGroup.Item>{Item.Item}</ListGroup.Item>
-                                  </div>
-                                )
-                              }}
-                            </Draggable>
-
-
-                          })}
-
-
-                        </div>
-                      );
-                    }}
-                  </Droppable>
-                </DragDropContext>
-              </ListGroup>}
-            {ListaDeAtivos.length === 0 && !Loaded && <Loading />}
-            {ListaDeAtivos.length === 0 && Loaded && <div className='NoAtivosRegistered'>
-              <p>Não há nenhum Ativo cadastrado</p>
-            </div>}
-
-          </div>
+        
+            <AtivosList />
+         
         </Tab>
         <Tab eventKey="Tipos" >
           <div className='ListItensContainer'>

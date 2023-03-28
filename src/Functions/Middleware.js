@@ -76,6 +76,30 @@ export async function SaveTipos(Tipos, gerarErro = false) {
 }
 
 
+export async function GetTiposAtivosSelect(gerarErro = false) {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            if (gerarErro) {
+                reject(new Error('Erro ao obter dados'));
+            } else {
+                if (localStorage.getItem('AssetSenseTipos')) {
+                    const Types = JSON.parse(localStorage.getItem('AssetSenseTipos')).map((item) => {
+                        return {
+                            value: item.Id,
+                            label: item.Value,
+                        };
+                    });
+                    Types.push({ value: 'Todos', label: 'Todos' })
+                    resolve(Types)
+                }
+
+                else
+                    resolve([])
+            }
+        }, 5);
+    });
+}
+
 export async function AddTipo(TipoAtivo) {
     store.dispatch(AddTipoAtivo(TipoAtivo))
 }
@@ -249,6 +273,29 @@ export async function SaveLocaisArmazenamento(Locais, gerarErro = false) {
     });
 }
 
+export async function GetLocaisSelect(gerarErro = false) {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            if (gerarErro) {
+                reject(new Error('Erro ao obter dados'));
+            } else {
+                if (localStorage.getItem('AssetSenseLocaisArmazenamento')) {
+                    const Types = JSON.parse(localStorage.getItem('AssetSenseLocaisArmazenamento')).map((item) => {
+                        return {
+                            value: item.Id,
+                            label: item.Value,
+                        };
+                    });
+                    Types.push({ value: 'Todos', label: 'Todos' })
+                    resolve(Types)
+                }
+
+                else
+                    resolve([])
+            }
+        }, 5);
+    });
+}
 
 
 
@@ -506,6 +553,10 @@ export const GetCurrentUserEmailFromStore = () => {
 
 export const GetUserTypesFromStore = () => {
     return store.getState().TiposUsuarios
+}
+
+export const GetAtivosFromStore = () => {
+    return store.getState().Ativos
 }
 
 export const GetSetoresFromStore = () => {

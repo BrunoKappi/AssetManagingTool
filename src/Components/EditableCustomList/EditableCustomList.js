@@ -14,7 +14,7 @@ import Loading from '../LoadingForTabs/Loading'
 
 
 import { UilLabel, UilPuzzlePiece, UilBox, UilPlay, UilPlus, UilTrashAlt, UilBackspace, UilPen } from '@iconscout/react-unicons'
-import { fetchFunctions, GetCurrentUserTypePermitFromStore, saveFunctions, SaveStatusAtivos, SaveUserTipos } from '../../Functions/Middleware';
+import { fetchFunctions, GetCurrentUserTypePermitFromStore, saveFunctions, SaveStatusAtivos } from '../../Functions/Middleware';
 import { DefaultUserRole } from '../../Data/User';
 
 const CustomListIcon = {

@@ -15,8 +15,6 @@ import { NotificationErro } from '../../NotificationUtils';
 
 export default function Users() {
 
-
-
   const TodosPermit = GetCurrentUserTypePermitFromStore('USUARIOS') || GetCurrentUserTypePermitFromStore('EDITAR_USUARIOS') || GetCurrentUserTypePermitFromStore('VISUALIZAR_USUARIOS')
   const SetoresPermit = GetCurrentUserTypePermitFromStore('EDITAR_USUARIOS') || GetCurrentUserTypePermitFromStore('VISUALIZAR_USUARIOS')
   const TiposPermit = GetCurrentUserTypePermitFromStore('EDITAR_USUARIOS') || GetCurrentUserTypePermitFromStore('VISUALIZAR_USUARIOS')
@@ -59,7 +57,7 @@ export default function Users() {
           <UsersList />
         </Tab>
         <Tab eventKey="Setores" >
-          <UsersInSetores />
+          <UsersInSetores />  
         </Tab>
         <Tab eventKey="Tipos"  >
           <UsersInTypes />
